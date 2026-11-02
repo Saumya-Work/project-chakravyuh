@@ -1,0 +1,1021 @@
+"use client";
+
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import {
+  UserRole,
+  ModuleId,
+  CaseRecord,
+  DeviceRecord,
+  CctvCamera,
+  CctvFootageRequest,
+  VideoObservation,
+  VehicleRecord,
+  VehicleVerificationComparison,
+  InvestigativeLead,
+  TimelineEvent,
+  DigitalEvidenceItem,
+  GraphNode,
+  GraphEdge,
+  CollaborationTask,
+  AuditLogEntry,
+} from '@/types/sentinel';
+import {
+  INITIAL_CASES,
+  INITIAL_DEVICES,
+  INITIAL_CAMERAS,
+  INITIAL_CCTV_REQUESTS,
+  INITIAL_VEHICLES,
+  INITIAL_LEADS,
+  INITIAL_TIMELINE_EVENTS,
+  INITIAL_EVIDENCE,
+  INITIAL_GRAPH_NODES,
+  INITIAL_GRAPH_EDGES,
+  INITIAL_COLLABORATION_TASKS,
+  INITIAL_AUDIT_LOGS,
+  GUIDED_STAGES,
+} from '@/data/syntheticData';
+
+interface ToastNotification {
+  id: string;
+  title: string;
+  message: string;
+  type: 'info' | 'success' | 'warning';
+}
+
+interface SentinelContextType {
+  activeModule: ModuleId;
+  setActiveModule: (m: ModuleId) => void;
+  currentRole: UserRole;
+  setCurrentRole: (r: UserRole) => void;
+  // Executive Focus / Simplified Mode to prevent clutter
+  isExecutiveFocusMode: boolean;
+  setIsExecutiveFocusMode: (v: boolean) => void;
+  // Audio Commentary Engine
+  isAudioEnabled: boolean;
+  setIsAudioEnabled: (v: boolean) => void;
+  isSpeaking: boolean;
+  speechRate: number;
+  setSpeechRate: (r: number) => void;
+  currentSpokenSentence: string;
+  speakStageCommentary: (stageIdx?: number) => void;
+  stopSpeaking: () => void;
+  // Data & Actions
+  cases: CaseRecord[];
+  selectedCaseId: string;
+  setSelectedCaseId: (id: string) => void;
+  registerCase: (newCase: Omit<CaseRecord, 'evidenceCount' | 'leadsCount' | 'pendingRequestsCount'>) => void;
+  devices: DeviceRecord[];
+  selectedDeviceId: string;
+  setSelectedDeviceId: (id: string) => void;
+  cameras: CctvCamera[];
+  selectedCameraId: string;
+  setSelectedCameraId: (id: string) => void;
+  cctvRequests: CctvFootageRequest[];
+  generateCctvRequests: (cameraIds: string[], date: string, timeRange: string, priority: 'Critical Preservation' | 'High' | 'Standard') => void;
+  updateCctvRequestStatus: (requestId: string, status: 'Submitted' | 'Pending' | 'Received' | 'Unavailable') => void;
+  addVideoObservation: (obs: Omit<VideoObservation, 'id'>) => void;
+  updateVideoObservationStatus: (cameraId: string, obsId: string, status: VideoObservation['reviewClassification'], note?: string, linkedVehicleId?: string) => void;
+  vehicles: VehicleRecord[];
+  selectedVehicleId: string;
+  setSelectedVehicleId: (id: string) => void;
+  updateVehicleVerification: (vehicleId: string, status: VehicleVerificationComparison, note?: string) => void;
+  leads: InvestigativeLead[];
+  selectedLeadId: string;
+  setSelectedLeadId: (id: string) => void;
+  updateLeadStatus: (leadId: string, status: InvestigativeLead['reviewStatus'], rejectionReason?: string) => void;
+  addLeadNote: (leadId: string, note: string) => void;
+  timelineEvents: TimelineEvent[];
+  addTimelineEvent: (ev: Omit<TimelineEvent, 'id'>) => void;
+  evidenceItems: DigitalEvidenceItem[];
+  uploadDigitalEvidence: (item: {
+    title: string;
+    evidenceType: DigitalEvidenceItem['evidenceType'];
+    source: string;
+    originalFilename: string;
+    fileSize: string;
+    sha256Hash: string;
+    notes: string;
+  }) => void;
+  verifyEvidenceHash: (evidenceId: string) => void;
+  graphNodes: GraphNode[];
+  graphEdges: GraphEdge[];
+  collaborationTasks: CollaborationTask[];
+  updateCollaborationTaskStatus: (taskId: string, status: CollaborationTask['status'], notes?: string) => void;
+  createCollaborationTask: (task: Omit<CollaborationTask, 'id' | 'createdAt'>) => void;
+  auditLogs: AuditLogEntry[];
+  logAudit: (module: string, action: string, targetRef: string, details: string) => void;
+  // Guided Investigation & Presentation Mode
+  isGuidedActive: boolean;
+  isPresentationMode: boolean;
+  guidedStageIndex: number;
+  isGuidedPlaying: boolean;
+  guidedProgress: number;
+  startGuidedInvestigation: (withPresentationMode?: boolean, withAudio?: boolean) => void;
+  pauseGuided: () => void;
+  resumeGuided: () => void;
+  nextGuidedStage: () => void;
+  prevGuidedStage: () => void;
+  goToGuidedStage: (idx: number) => void;
+  restartGuided: () => void;
+  skipGuidedAnimation: () => void;
+  stopGuidedInvestigation: () => void;
+  togglePresentationMode: () => void;
+  // Reset & Toast
+  resetDemoData: () => void;
+  toasts: ToastNotification[];
+  dismissToast: (id: string) => void;
+  triggerToast: (title: string, message: string, type?: 'info' | 'success' | 'warning') => void;
+}
+
+const SentinelContext = createContext<SentinelContextType | undefined>(undefined);
+
+const ROLE_ACTORS: Record<UserRole, string> = {
+  Investigator: 'Inspector Vikram Rao',
+  'Senior Officer': 'ACP Meera Nair',
+  'Forensic Officer': 'Dr. Priya Krishnan',
+  'System Administrator': 'Arjun Hegde (SysAdmin)',
+};
+
+export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [activeModule, setActiveModuleState] = useState<ModuleId>('command-centre');
+  const [currentRole, setCurrentRoleState] = useState<UserRole>('Investigator');
+  const [isExecutiveFocusMode, setIsExecutiveFocusMode] = useState<boolean>(true);
+
+  // Audio Commentary State
+  const [isAudioEnabled, setIsAudioEnabledState] = useState<boolean>(true);
+  const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
+  const [speechRate, setSpeechRate] = useState<number>(1.0);
+  const [currentSpokenSentence, setCurrentSpokenSentence] = useState<string>('');
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const speechSessionIdRef = useRef<number>(0);
+  const isSpeakingRef = useRef<boolean>(false);
+  const speechCompletedForStageRef = useRef<boolean>(false);
+
+  const [cases, setCases] = useState<CaseRecord[]>(INITIAL_CASES);
+  const [selectedCaseId, setSelectedCaseId] = useState<string>('CASE-SNT-2026-0042');
+  const [devices, setDevices] = useState<DeviceRecord[]>(INITIAL_DEVICES);
+  const [selectedDeviceId, setSelectedDeviceId] = useState<string>('DEV-001');
+  const [cameras, setCameras] = useState<CctvCamera[]>(INITIAL_CAMERAS);
+  const [selectedCameraId, setSelectedCameraId] = useState<string>('CAM-014');
+  const [cctvRequests, setCctvRequests] = useState<CctvFootageRequest[]>(INITIAL_CCTV_REQUESTS);
+  const [vehicles, setVehicles] = useState<VehicleRecord[]>(INITIAL_VEHICLES);
+  const [selectedVehicleId, setSelectedVehicleId] = useState<string>('VEH-001');
+  const [leads, setLeads] = useState<InvestigativeLead[]>(INITIAL_LEADS);
+  const [selectedLeadId, setSelectedLeadId] = useState<string>('LEAD-001');
+  const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>(INITIAL_TIMELINE_EVENTS);
+  const [evidenceItems, setEvidenceItems] = useState<DigitalEvidenceItem[]>(INITIAL_EVIDENCE);
+  const [graphNodes, setGraphNodes] = useState<GraphNode[]>(INITIAL_GRAPH_NODES);
+  const [graphEdges, setGraphEdges] = useState<GraphEdge[]>(INITIAL_GRAPH_EDGES);
+  const [collaborationTasks, setCollaborationTasks] = useState<CollaborationTask[]>(INITIAL_COLLABORATION_TASKS);
+  const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>(INITIAL_AUDIT_LOGS);
+
+  // Guided tour state
+  const [isGuidedActive, setIsGuidedActive] = useState<boolean>(false);
+  const [isPresentationMode, setIsPresentationMode] = useState<boolean>(false);
+  const [guidedStageIndex, setGuidedStageIndex] = useState<number>(0);
+  const [isGuidedPlaying, setIsGuidedPlaying] = useState<boolean>(false);
+  const [guidedProgress, setGuidedProgress] = useState<number>(0);
+
+  // Toasts
+  const [toasts, setToasts] = useState<ToastNotification[]>([]);
+
+  const stopSpeaking = useCallback(() => {
+    speechSessionIdRef.current += 1;
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    utteranceRef.current = null;
+    isSpeakingRef.current = false;
+    setIsSpeaking(false);
+  }, []);
+
+  const speakStageCommentary = useCallback(
+    (stageIdx?: number) => {
+      const idx = stageIdx !== undefined ? stageIdx : guidedStageIndex;
+      const stage = GUIDED_STAGES[idx] || GUIDED_STAGES[0];
+      const sentences =
+        stage.voiceScript && stage.voiceScript.length > 0
+          ? stage.voiceScript
+          : [stage.presenterScript, stage.narration];
+
+      setCurrentSpokenSentence(sentences[0] || stage.presenterScript);
+
+      if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+        speechCompletedForStageRef.current = true;
+        return;
+      }
+
+      // Increment session ID so any previous cancelled utterance callbacks are ignored
+      speechSessionIdRef.current += 1;
+      const currentSessionId = speechSessionIdRef.current;
+      speechCompletedForStageRef.current = false;
+
+      window.speechSynthesis.cancel();
+
+      const voices = window.speechSynthesis.getVoices();
+      const preferredVoice =
+        voices.find((v) => (v.lang.includes('en-IN') || v.name.includes('India')) && v.name.includes('Natural')) ||
+        voices.find((v) => v.lang.includes('en-IN') || v.name.includes('India')) ||
+        voices.find((v) => v.lang.includes('en-GB') && v.name.includes('Natural')) ||
+        voices.find((v) => v.lang.startsWith('en'));
+
+      const speakSentenceAt = (sIndex: number) => {
+        if (speechSessionIdRef.current !== currentSessionId) return;
+
+        if (sIndex >= sentences.length) {
+          isSpeakingRef.current = false;
+          speechCompletedForStageRef.current = true;
+          setIsSpeaking(false);
+          return;
+        }
+
+        const text = sentences[sIndex];
+        setCurrentSpokenSentence(text);
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = speechRate;
+        utterance.pitch = 1.0;
+        if (preferredVoice) {
+          utterance.voice = preferredVoice;
+        }
+
+        utterance.onstart = () => {
+          if (speechSessionIdRef.current !== currentSessionId) return;
+          isSpeakingRef.current = true;
+          setIsSpeaking(true);
+          // Sync progress bar smoothly with sentence progress
+          const basePct = Math.round((sIndex / sentences.length) * 85);
+          setGuidedProgress((prev) => Math.max(prev, basePct));
+        };
+
+        utterance.onend = () => {
+          if (speechSessionIdRef.current !== currentSessionId) return;
+          const completedPct = Math.round(((sIndex + 1) / sentences.length) * 90);
+          setGuidedProgress((prev) => Math.max(prev, completedPct));
+          speakSentenceAt(sIndex + 1);
+        };
+
+        utterance.onerror = () => {
+          if (speechSessionIdRef.current !== currentSessionId) return;
+          // Advance to next sentence so a transient browser glitch never hangs the tour
+          speakSentenceAt(sIndex + 1);
+        };
+
+        // Store in ref so Chromium garbage collection never drops an active utterance
+        utteranceRef.current = utterance;
+        window.speechSynthesis.speak(utterance);
+      };
+
+      // Small 60ms delay after cancel() prevents Chromium from dropping the first sentence
+      setTimeout(() => {
+        if (speechSessionIdRef.current === currentSessionId) {
+          speakSentenceAt(0);
+        }
+      }, 60);
+    },
+    [guidedStageIndex, speechRate]
+  );
+
+  // Keep-alive for Chromium speechSynthesis so it never pauses mid-sentence
+  useEffect(() => {
+    if (!isSpeaking) return;
+    const keepAlive = setInterval(() => {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window && window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
+    }, 2500);
+    return () => clearInterval(keepAlive);
+  }, [isSpeaking]);
+
+  const setIsAudioEnabled = useCallback(
+    (enabled: boolean) => {
+      setIsAudioEnabledState(enabled);
+      if (!enabled) {
+        stopSpeaking();
+        speechCompletedForStageRef.current = true;
+      } else if (isGuidedActive) {
+        speakStageCommentary(guidedStageIndex);
+      }
+    },
+    [guidedStageIndex, isGuidedActive, speakStageCommentary, stopSpeaking]
+  );
+
+  // Single source of truth: automatically speak stage commentary when Guided Stage or Play state changes
+  useEffect(() => {
+    if (isGuidedActive && isAudioEnabled && isGuidedPlaying) {
+      speakStageCommentary(guidedStageIndex);
+    } else if (!isGuidedPlaying || !isGuidedActive) {
+      stopSpeaking();
+    }
+  }, [isGuidedActive, guidedStageIndex, isAudioEnabled, isGuidedPlaying, speakStageCommentary, stopSpeaking]);
+
+  const triggerToast = useCallback(
+    (title: string, message: string, type: 'info' | 'success' | 'warning' = 'info') => {
+      const id = `toast-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+      setToasts((prev) => [...prev.slice(-3), { id, title, message, type }]);
+      setTimeout(() => {
+        setToasts((prev) => prev.filter((t) => t.id !== id));
+      }, 4500);
+    },
+    []
+  );
+
+  const dismissToast = useCallback((id: string) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
+
+  const logAudit = useCallback(
+    (module: string, action: string, targetRef: string, details: string) => {
+      const now = new Date();
+      const timeStr = now.toTimeString().slice(0, 8);
+      const entry: AuditLogEntry = {
+        id: `AUD-${1000 + auditLogs.length + Math.floor(Math.random() * 900)}`,
+        timestamp: `02 Nov 2026, ${timeStr} IST`,
+        actor: ROLE_ACTORS[currentRole],
+        role: currentRole,
+        module,
+        action,
+        targetRef,
+        details,
+        ipSimulated: '10.24.18.104 (Demo Intranet)',
+      };
+      setAuditLogs((prev) => [entry, ...prev]);
+    },
+    [currentRole, auditLogs.length]
+  );
+
+  const setActiveModule = useCallback((m: ModuleId) => {
+    setActiveModuleState(m);
+  }, []);
+
+  const setCurrentRole = useCallback(
+    (r: UserRole) => {
+      setCurrentRoleState(r);
+      triggerToast('Role Switched (Demo Simulation)', `Now viewing Project Sentinel as ${r} (${ROLE_ACTORS[r]})`, 'info');
+      const now = new Date().toTimeString().slice(0, 8);
+      setAuditLogs((prev) => [
+        {
+          id: `AUD-${1000 + prev.length + 1}`,
+          timestamp: `02 Nov 2026, ${now} IST`,
+          actor: ROLE_ACTORS[r],
+          role: r,
+          module: 'Role Management',
+          action: 'ROLE_SWITCHED',
+          targetRef: r,
+          details: `Switched active demonstration role to ${r}.`,
+          ipSimulated: '10.24.18.104 (Demo Intranet)',
+        },
+        ...prev,
+      ]);
+    },
+    [triggerToast]
+  );
+
+  // Synchronize active module when guided stage changes
+  useEffect(() => {
+    if (isGuidedActive) {
+      const stage = GUIDED_STAGES[guidedStageIndex];
+      if (stage && stage.targetModule) {
+        setActiveModuleState(stage.targetModule as ModuleId);
+      }
+    }
+  }, [isGuidedActive, guidedStageIndex]);
+
+  // Timer for Guided Investigation Playback — waits for voice completion when Audio is ON
+  useEffect(() => {
+    if (!isGuidedActive || !isGuidedPlaying) return;
+    const stage = GUIDED_STAGES[guidedStageIndex];
+    const stepMs = 250;
+    const baseIncrement = (100 / ((stage?.durationSeconds || 40) * 1000)) * stepMs;
+
+    const timer = setInterval(() => {
+      setGuidedProgress((prev) => {
+        // When voice audio is enabled and still speaking, never cut off speech to switch steps
+        if (isAudioEnabled && !speechCompletedForStageRef.current) {
+          return Math.min(92, prev + baseIncrement * 0.65);
+        }
+
+        // Once speech has completed (or when muted), advance smoothly to 100% and switch steps
+        const finishIncrement = isAudioEnabled ? 2.0 : baseIncrement;
+        if (prev + finishIncrement >= 100) {
+          if (guidedStageIndex < GUIDED_STAGES.length - 1) {
+            speechCompletedForStageRef.current = false;
+            setGuidedStageIndex((s) => s + 1);
+            return 0;
+          } else {
+            setIsGuidedPlaying(false);
+            return 100;
+          }
+        }
+        return prev + finishIncrement;
+      });
+    }, stepMs);
+
+    return () => clearInterval(timer);
+  }, [isGuidedActive, isGuidedPlaying, guidedStageIndex, isAudioEnabled]);
+
+  const startGuidedInvestigation = useCallback(
+    (withPresentationMode = false, withAudio = true) => {
+      speechCompletedForStageRef.current = false;
+      setGuidedStageIndex(0);
+      setGuidedProgress(0);
+      setIsGuidedActive(true);
+      setIsGuidedPlaying(true);
+      setIsAudioEnabledState(withAudio);
+      setIsExecutiveFocusMode(true);
+      if (withPresentationMode) {
+        setIsPresentationMode(true);
+      }
+      setActiveModuleState(GUIDED_STAGES[0].targetModule as ModuleId);
+      logAudit('Guided Presentation', 'GUIDED_DEMO_STARTED', 'CASE-SNT-2026-0042', 'Launched 8-stage Voice-Guided Investigation Walkthrough.');
+      triggerToast('Voice-Guided Investigation Active', 'Continuous audio commentary and Executive Focus Mode enabled.', 'info');
+    },
+    [logAudit, triggerToast]
+  );
+
+  const pauseGuided = useCallback(() => {
+    setIsGuidedPlaying(false);
+    stopSpeaking();
+  }, [stopSpeaking]);
+
+  const resumeGuided = useCallback(() => {
+    setIsGuidedPlaying(true);
+  }, []);
+
+  const nextGuidedStage = useCallback(() => {
+    speechCompletedForStageRef.current = false;
+    setGuidedProgress(0);
+    setGuidedStageIndex((prev) => Math.min(GUIDED_STAGES.length - 1, prev + 1));
+  }, []);
+
+  const prevGuidedStage = useCallback(() => {
+    speechCompletedForStageRef.current = false;
+    setGuidedProgress(0);
+    setGuidedStageIndex((prev) => Math.max(0, prev - 1));
+  }, []);
+
+  const goToGuidedStage = useCallback((idx: number) => {
+    const target = Math.max(0, Math.min(GUIDED_STAGES.length - 1, idx));
+    speechCompletedForStageRef.current = false;
+    setGuidedProgress(0);
+    setGuidedStageIndex(target);
+  }, []);
+
+  const restartGuided = useCallback(() => {
+    speechCompletedForStageRef.current = false;
+    setGuidedStageIndex(0);
+    setGuidedProgress(0);
+    setIsGuidedPlaying(true);
+  }, []);
+
+  const skipGuidedAnimation = useCallback(() => {
+    stopSpeaking();
+    speechCompletedForStageRef.current = true;
+    setGuidedProgress(100);
+    setIsGuidedPlaying(false);
+  }, [stopSpeaking]);
+
+  const stopGuidedInvestigation = useCallback(() => {
+    stopSpeaking();
+    setIsGuidedPlaying(false);
+    setIsGuidedActive(false);
+    setIsPresentationMode(false);
+  }, [stopSpeaking]);
+
+  const togglePresentationMode = useCallback(() => {
+    setIsPresentationMode((prev) => {
+      const next = !prev;
+      if (next && !isGuidedActive) {
+        speechCompletedForStageRef.current = false;
+        setIsGuidedActive(true);
+        setIsGuidedPlaying(true);
+        setGuidedStageIndex(0);
+        setGuidedProgress(0);
+        setActiveModuleState(GUIDED_STAGES[0].targetModule as ModuleId);
+      }
+      return next;
+    });
+  }, [isGuidedActive]);
+
+  // Case Registration
+  const registerCase = useCallback(
+    (newCaseData: Omit<CaseRecord, 'evidenceCount' | 'leadsCount' | 'pendingRequestsCount'>) => {
+      const fullCase: CaseRecord = {
+        ...newCaseData,
+        evidenceCount: 1,
+        leadsCount: 0,
+        pendingRequestsCount: 0,
+      };
+      setCases((prev) => [fullCase, ...prev.filter((c) => c.id !== fullCase.id)]);
+      setSelectedCaseId(fullCase.id);
+      logAudit('Case Management', 'CASE_REGISTERED', fullCase.id, `Registered case: ${fullCase.title}`);
+      triggerToast('Incident Registered', `Case ${fullCase.id} created and added to Investigation Workspace.`, 'success');
+    },
+    [logAudit, triggerToast]
+  );
+
+  // CCTV Requests
+  const generateCctvRequests = useCallback(
+    (
+      cameraIds: string[],
+      date: string,
+      timeRange: string,
+      priority: 'Critical Preservation' | 'High' | 'Standard'
+    ) => {
+      if (cameraIds.length === 0) return;
+      const newRequests: CctvFootageRequest[] = cameraIds.map((camId, idx) => {
+        const cam = cameras.find((c) => c.id === camId);
+        return {
+          requestId: `REQ-CCTV-2026-${106 + cctvRequests.length + idx}`,
+          cameraId: camId,
+          cameraName: cam?.name || camId,
+          ownerEstablishment: cam?.ownerEstablishment || 'Registered Custodian',
+          requestedDate: date,
+          requestedTimeRange: timeRange,
+          priority,
+          status: 'Submitted',
+          preservationDeadline: '04 Nov 2026, 12:00 IST',
+          requestedBy: ROLE_ACTORS[currentRole],
+          createdAt: '02 Nov 2026, 22:30 IST',
+          authorisationRef: 'AUTH-BLR-SYN-2026-8841',
+        };
+      });
+
+      setCctvRequests((prev) => [...newRequests, ...prev]);
+      setCameras((prev) =>
+        prev.map((cam) =>
+          cameraIds.includes(cam.id) && cam.footageStatus !== 'Footage received'
+            ? { ...cam, requestStatus: 'Request Submitted' }
+            : cam
+        )
+      );
+
+      logAudit(
+        'CCTV Intelligence',
+        'CCTV_REQUESTS_GENERATED',
+        cameraIds.join(', '),
+        `Generated ${cameraIds.length} CCTV preservation request(s) for window ${timeRange}.`
+      );
+      triggerToast(
+        'CCTV Preservation Requests Generated',
+        `Dispatched ${cameraIds.length} request(s) with preservation deadlines.`,
+        'success'
+      );
+    },
+    [cameras, cctvRequests.length, currentRole, logAudit, triggerToast]
+  );
+
+  const updateCctvRequestStatus = useCallback(
+    (requestId: string, status: 'Submitted' | 'Pending' | 'Received' | 'Unavailable') => {
+      let targetCameraId = '';
+      setCctvRequests((prev) =>
+        prev.map((r) => {
+          if (r.requestId === requestId) {
+            targetCameraId = r.cameraId;
+            return { ...r, status };
+          }
+          return r;
+        })
+      );
+
+      if (targetCameraId) {
+        setCameras((prev) =>
+          prev.map((c) => {
+            if (c.id !== targetCameraId) return c;
+            if (status === 'Received') {
+              return { ...c, footageStatus: 'Footage received', requestStatus: 'Received & Hashed' };
+            }
+            if (status === 'Pending') {
+              return { ...c, footageStatus: 'Request pending', requestStatus: 'Pending Custodian Action' };
+            }
+            return c;
+          })
+        );
+      }
+
+      logAudit('CCTV Intelligence', 'CCTV_REQUEST_STATUS_UPDATED', requestId, `Updated request status to ${status}.`);
+      triggerToast('Request Status Updated', `${requestId} marked as ${status}.`, 'info');
+    },
+    [logAudit, triggerToast]
+  );
+
+  // Video Observations
+  const addVideoObservation = useCallback(
+    (obs: Omit<VideoObservation, 'id'>) => {
+      const newObs: VideoObservation = {
+        ...obs,
+        id: `VOBS-${Date.now().toString().slice(-4)}`,
+      };
+      setCameras((prev) =>
+        prev.map((c) =>
+          c.id === obs.cameraId
+            ? {
+                ...c,
+                videoReviewStatus: 'Reviewed — Observation Logged',
+                extractedObservations: [...c.extractedObservations, newObs],
+              }
+            : c
+        )
+      );
+
+      const cam = cameras.find((c) => c.id === obs.cameraId);
+      const [hh, mm] = (obs.timestamp || '19:10').split(':').map(Number);
+      const timeMinutes = (hh || 19) * 60 + (mm || 10);
+
+      const newTlEvent: TimelineEvent = {
+        id: `TLE-OBS-${Date.now().toString().slice(-4)}`,
+        timestamp: obs.timestamp,
+        timeMinutes,
+        date: '02 Nov 2026',
+        title: `${obs.cameraId} Video Observation: ${obs.objectType}`,
+        description: obs.description,
+        sourceType: 'CCTV Observation',
+        categoryType: 'Observation (Source Recorded)',
+        entityIds: [obs.cameraId, ...(obs.linkedVehicleId ? [obs.linkedVehicleId] : [])],
+        locationName: cam?.locationName || 'Corridor Camera Location',
+        coordinates: cam?.coordinates,
+        evidenceRef: obs.evidenceRef,
+        provenance: `Investigator Video Review (${obs.cameraId})`,
+        authorisationRef: 'AUTH-BLR-SYN-2026-8841',
+        verificationStatus:
+          obs.reviewClassification === 'Relevant — Requires Verification'
+            ? 'Pending Verification'
+            : 'Inconclusive',
+        limitationsNote: obs.notes || 'Manual video observation logged by investigator; requires corroboration.',
+      };
+
+      setTimelineEvents((prev) => [...prev, newTlEvent].sort((a, b) => a.timeMinutes - b.timeMinutes));
+      logAudit('CCTV Footage Review', 'VIDEO_OBSERVATION_LOGGED', obs.cameraId, `Added observation at ${obs.timestamp}: ${obs.description}`);
+      triggerToast('Observation Added to Timeline', `Logged ${obs.cameraId} observation at ${obs.timestamp} and synced to Unified Timeline.`, 'success');
+    },
+    [cameras, logAudit, triggerToast]
+  );
+
+  const updateVideoObservationStatus = useCallback(
+    (
+      cameraId: string,
+      obsId: string,
+      status: VideoObservation['reviewClassification'],
+      note?: string,
+      linkedVehicleId?: string
+    ) => {
+      setCameras((prev) =>
+        prev.map((cam) => {
+          if (cam.id !== cameraId) return cam;
+          return {
+            ...cam,
+            extractedObservations: cam.extractedObservations.map((o) =>
+              o.id === obsId
+                ? {
+                    ...o,
+                    reviewClassification: status,
+                    notes: note !== undefined ? note : o.notes,
+                    linkedVehicleId: linkedVehicleId !== undefined ? linkedVehicleId : o.linkedVehicleId,
+                  }
+                : o
+            ),
+          };
+        })
+      );
+      logAudit('CCTV Footage Review', 'VIDEO_OBS_UPDATED', `${cameraId}/${obsId}`, `Marked observation as "${status}".`);
+      triggerToast('Video Observation Updated', `Observation ${obsId} classification updated to "${status}".`, 'info');
+    },
+    [logAudit, triggerToast]
+  );
+
+  // Vehicle Verification
+  const updateVehicleVerification = useCallback(
+    (vehicleId: string, status: VehicleVerificationComparison, note?: string) => {
+      setVehicles((prev) =>
+        prev.map((v) =>
+          v.id === vehicleId
+            ? {
+                ...v,
+                verificationStatus: status,
+                summaryNotes: note ? `${v.summaryNotes} [Investigator Note: ${note}]` : v.summaryNotes,
+              }
+            : v
+        )
+      );
+      logAudit('Vehicle Intelligence', 'VEHICLE_COMPARISON_UPDATED', vehicleId, `Marked ${vehicleId} verification status as "${status}".`);
+      triggerToast('Vehicle Status Updated', `${vehicleId} marked as "${status}".`, 'success');
+    },
+    [logAudit, triggerToast]
+  );
+
+  // AI Leads Review
+  const updateLeadStatus = useCallback(
+    (leadId: string, status: InvestigativeLead['reviewStatus'], rejectionReason?: string) => {
+      const now = new Date().toTimeString().slice(0, 5);
+      setLeads((prev) =>
+        prev.map((l) =>
+          l.id === leadId
+            ? {
+                ...l,
+                reviewStatus: status,
+                rejectionReason: status === 'Rejected by Investigator' ? rejectionReason : l.rejectionReason,
+                reviewedBy: ROLE_ACTORS[currentRole],
+                reviewedAt: `02 Nov 2026, ${now} IST`,
+              }
+            : l
+        )
+      );
+      logAudit(
+        'AI Investigation Engine',
+        status === 'Rejected by Investigator' ? 'LEAD_REJECTED' : 'LEAD_REVIEW_UPDATED',
+        leadId,
+        `Updated ${leadId} to "${status}"${rejectionReason ? ` (Reason: ${rejectionReason})` : ''}.`
+      );
+      triggerToast('Lead Review Recorded', `${leadId} status set to "${status}".`, status === 'Rejected by Investigator' ? 'warning' : 'success');
+    },
+    [currentRole, logAudit, triggerToast]
+  );
+
+  const addLeadNote = useCallback(
+    (leadId: string, note: string) => {
+      if (!note.trim()) return;
+      setLeads((prev) =>
+        prev.map((l) =>
+          l.id === leadId
+            ? {
+                ...l,
+                investigatorNotes: [...l.investigatorNotes, `[${ROLE_ACTORS[currentRole]}]: ${note.trim()}`],
+              }
+            : l
+        )
+      );
+      logAudit('AI Investigation Engine', 'LEAD_NOTE_ADDED', leadId, `Added investigator note to ${leadId}.`);
+      triggerToast('Note Added', `Investigator note appended to ${leadId}.`, 'info');
+    },
+    [currentRole, logAudit, triggerToast]
+  );
+
+  const addTimelineEvent = useCallback(
+    (ev: Omit<TimelineEvent, 'id'>) => {
+      const newEv: TimelineEvent = {
+        ...ev,
+        id: `TLE-${Date.now().toString().slice(-4)}`,
+      };
+      setTimelineEvents((prev) => [...prev, newEv].sort((a, b) => a.timeMinutes - b.timeMinutes));
+      logAudit('Unified Timeline', 'TIMELINE_EVENT_ADDED', newEv.id, `Added timeline entry: ${newEv.title}`);
+      triggerToast('Timeline Updated', `Added "${newEv.title}" to Unified Investigation Timeline.`, 'success');
+    },
+    [logAudit, triggerToast]
+  );
+
+  // Digital Evidence Upload & SHA-256
+  const uploadDigitalEvidence = useCallback(
+    (item: {
+      title: string;
+      evidenceType: DigitalEvidenceItem['evidenceType'];
+      source: string;
+      originalFilename: string;
+      fileSize: string;
+      sha256Hash: string;
+      notes: string;
+    }) => {
+      const newId = `EVD-${String(evidenceItems.length + 1).padStart(3, '0')}`;
+      const nowStr = `02 Nov 2026, ${new Date().toTimeString().slice(0, 5)} IST`;
+      const newEvd: DigitalEvidenceItem = {
+        id: newId,
+        caseId: selectedCaseId,
+        title: item.title,
+        evidenceType: item.evidenceType,
+        source: item.source,
+        originalFilename: item.originalFilename,
+        fileSize: item.fileSize,
+        collectionDateTime: nowStr,
+        uploadDateTime: nowStr,
+        collector: ROLE_ACTORS[currentRole],
+        sha256Hash: item.sha256Hash,
+        originalFileRef: `vault://immutable/2026/0042/${newId}-${item.originalFilename}`,
+        workingCopyRef: `vault://working/2026/0042/${newId}-working-copy`,
+        artifactClassification: 'Original Evidence (Immutable)',
+        reviewStatus: 'Integrity Verified',
+        authorisationRef: 'AUTH-BLR-SYN-2026-8841',
+        notes: item.notes,
+        chainOfCustody: [
+          {
+            id: `COC-${newId}-1`,
+            timestamp: nowStr,
+            action: 'File Uploaded & Cryptographic SHA-256 Computed in Browser',
+            actor: ROLE_ACTORS[currentRole],
+            role: currentRole,
+            hashVerified: true,
+            notes: `Original sealed (${item.sha256Hash.slice(0, 16)}...); working copy created.`,
+          },
+        ],
+        accessHistory: [
+          {
+            id: `ACC-${newId}-1`,
+            timestamp: nowStr,
+            user: ROLE_ACTORS[currentRole],
+            role: currentRole,
+            operation: 'Verified SHA-256',
+          },
+        ],
+      };
+
+      setEvidenceItems((prev) => [newEvd, ...prev]);
+      logAudit('Digital Evidence', 'EVIDENCE_UPLOADED_HASHED', newId, `Uploaded ${item.originalFilename} with SHA-256: ${item.sha256Hash}`);
+      triggerToast('Evidence Sealed with SHA-256', `${newId} (${item.originalFilename}) preserved in immutable vault.`, 'success');
+    },
+    [currentRole, evidenceItems.length, logAudit, selectedCaseId, triggerToast]
+  );
+
+  const verifyEvidenceHash = useCallback(
+    (evidenceId: string) => {
+      const nowStr = `02 Nov 2026, ${new Date().toTimeString().slice(0, 5)} IST`;
+      setEvidenceItems((prev) =>
+        prev.map((e) =>
+          e.id === evidenceId
+            ? {
+                ...e,
+                reviewStatus: 'Integrity Verified',
+                chainOfCustody: [
+                  ...e.chainOfCustody,
+                  {
+                    id: `COC-${evidenceId}-${e.chainOfCustody.length + 1}`,
+                    timestamp: nowStr,
+                    action: 'On-Demand SHA-256 Checksum Re-Verification Passed',
+                    actor: ROLE_ACTORS[currentRole],
+                    role: currentRole,
+                    hashVerified: true,
+                    notes: 'Bit-for-bit match against immutable intake hash.',
+                  },
+                ],
+                accessHistory: [
+                  ...e.accessHistory,
+                  {
+                    id: `ACC-${evidenceId}-${e.accessHistory.length + 1}`,
+                    timestamp: nowStr,
+                    user: ROLE_ACTORS[currentRole],
+                    role: currentRole,
+                    operation: 'Verified SHA-256',
+                  },
+                ],
+              }
+            : e
+        )
+      );
+      logAudit('Digital Evidence', 'HASH_REVERIFIED', evidenceId, `Re-verified SHA-256 integrity of ${evidenceId}.`);
+      triggerToast('SHA-256 Integrity Verified', `${evidenceId} matches original intake hash bit-for-bit.`, 'success');
+    },
+    [currentRole, logAudit, triggerToast]
+  );
+
+  // Collaboration Tasks
+  const updateCollaborationTaskStatus = useCallback(
+    (taskId: string, status: CollaborationTask['status'], notes?: string) => {
+      setCollaborationTasks((prev) =>
+        prev.map((t) =>
+          t.id === taskId
+            ? { ...t, status, notes: notes ? `${t.notes} | [${ROLE_ACTORS[currentRole]}]: ${notes}` : t.notes }
+            : t
+        )
+      );
+      logAudit('Agency Collaboration', 'WORKFLOW_TASK_UPDATED', taskId, `Task ${taskId} marked as "${status}".`);
+      triggerToast('Collaboration Workflow Updated', `${taskId} updated to "${status}".`, 'success');
+    },
+    [currentRole, logAudit, triggerToast]
+  );
+
+  const createCollaborationTask = useCallback(
+    (task: Omit<CollaborationTask, 'id' | 'createdAt'>) => {
+      const newTask: CollaborationTask = {
+        ...task,
+        id: `TASK-2026-0${collaborationTasks.length + 1}`,
+        createdAt: `02 Nov 2026, ${new Date().toTimeString().slice(0, 5)} IST`,
+      };
+      setCollaborationTasks((prev) => [newTask, ...prev]);
+      logAudit('Agency Collaboration', 'WORKFLOW_TASK_CREATED', newTask.id, `Created approval request: ${newTask.title}`);
+      triggerToast('Inter-Unit Request Submitted', `${newTask.id} routed to ${newTask.assignedRole}.`, 'success');
+    },
+    [collaborationTasks.length, logAudit, triggerToast]
+  );
+
+  // Reset Demo Data
+  const resetDemoData = useCallback(() => {
+    stopSpeaking();
+    setCases(INITIAL_CASES);
+    setSelectedCaseId('CASE-SNT-2026-0042');
+    setDevices(INITIAL_DEVICES);
+    setSelectedDeviceId('DEV-001');
+    setCameras(INITIAL_CAMERAS);
+    setSelectedCameraId('CAM-014');
+    setCctvRequests(INITIAL_CCTV_REQUESTS);
+    setVehicles(INITIAL_VEHICLES);
+    setSelectedVehicleId('VEH-001');
+    setLeads(INITIAL_LEADS);
+    setSelectedLeadId('LEAD-001');
+    setTimelineEvents(INITIAL_TIMELINE_EVENTS);
+    setEvidenceItems(INITIAL_EVIDENCE);
+    setGraphNodes(INITIAL_GRAPH_NODES);
+    setGraphEdges(INITIAL_GRAPH_EDGES);
+    setCollaborationTasks(INITIAL_COLLABORATION_TASKS);
+    setIsGuidedActive(false);
+    setIsPresentationMode(false);
+    setIsGuidedPlaying(false);
+    setGuidedStageIndex(0);
+    setGuidedProgress(0);
+    setAuditLogs([
+      {
+        id: `AUD-RESET-${Date.now().toString().slice(-4)}`,
+        timestamp: `02 Nov 2026, ${new Date().toTimeString().slice(0, 8)} IST`,
+        actor: ROLE_ACTORS[currentRole],
+        role: currentRole,
+        module: 'System Administration',
+        action: 'DEMO_DATA_RESET',
+        targetRef: 'ALL_SYNTHETIC_DATASETS',
+        details: 'Restored Project Sentinel demonstration state to baseline CASE-SNT-2026-0042 scenario.',
+        ipSimulated: '10.24.18.104 (Demo Intranet)',
+      },
+      ...INITIAL_AUDIT_LOGS,
+    ]);
+    triggerToast('Demonstration Environment Reset', 'All synthetic records, leads, and timelines restored to baseline.', 'info');
+  }, [currentRole, stopSpeaking, triggerToast]);
+
+  return (
+    <SentinelContext.Provider
+      value={{
+        activeModule,
+        setActiveModule,
+        currentRole,
+        setCurrentRole,
+        isExecutiveFocusMode,
+        setIsExecutiveFocusMode,
+        isAudioEnabled,
+        setIsAudioEnabled,
+        isSpeaking,
+        speechRate,
+        setSpeechRate,
+        currentSpokenSentence,
+        speakStageCommentary,
+        stopSpeaking,
+        cases,
+        selectedCaseId,
+        setSelectedCaseId,
+        registerCase,
+        devices,
+        selectedDeviceId,
+        setSelectedDeviceId,
+        cameras,
+        selectedCameraId,
+        setSelectedCameraId,
+        cctvRequests,
+        generateCctvRequests,
+        updateCctvRequestStatus,
+        addVideoObservation,
+        updateVideoObservationStatus,
+        vehicles,
+        selectedVehicleId,
+        setSelectedVehicleId,
+        updateVehicleVerification,
+        leads,
+        selectedLeadId,
+        setSelectedLeadId,
+        updateLeadStatus,
+        addLeadNote,
+        timelineEvents,
+        addTimelineEvent,
+        evidenceItems,
+        uploadDigitalEvidence,
+        verifyEvidenceHash,
+        graphNodes,
+        graphEdges,
+        collaborationTasks,
+        updateCollaborationTaskStatus,
+        createCollaborationTask,
+        auditLogs,
+        logAudit,
+        isGuidedActive,
+        isPresentationMode,
+        guidedStageIndex,
+        isGuidedPlaying,
+        guidedProgress,
+        startGuidedInvestigation,
+        pauseGuided,
+        resumeGuided,
+        nextGuidedStage,
+        prevGuidedStage,
+        goToGuidedStage,
+        restartGuided,
+        skipGuidedAnimation,
+        stopGuidedInvestigation,
+        togglePresentationMode,
+        resetDemoData,
+        toasts,
+        dismissToast,
+        triggerToast,
+      }}
+    >
+      {children}
+    </SentinelContext.Provider>
+  );
+};
+
+export const useSentinel = () => {
+  const ctx = useContext(SentinelContext);
+  if (!ctx) throw new Error('useSentinel must be used within SentinelProvider');
+  return ctx;
+};

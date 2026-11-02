@@ -1,0 +1,406 @@
+"use client";
+
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Play,
+  Pause,
+  SkipForward,
+  SkipBack,
+  RotateCcw,
+  FastForward,
+  Maximize2,
+  Minimize2,
+  X,
+  Sparkles,
+  BookOpen,
+  CheckCircle2,
+  ChevronRight,
+  Radio,
+  Volume2,
+  VolumeX,
+  Eye,
+} from 'lucide-react';
+import { useSentinel } from '@/context/SentinelContext';
+import { GUIDED_STAGES } from '@/data/syntheticData';
+
+export const GuidedPresentationBar: React.FC = () => {
+  const {
+    isGuidedActive,
+    isPresentationMode,
+    guidedStageIndex,
+    isGuidedPlaying,
+    guidedProgress,
+    pauseGuided,
+    resumeGuided,
+    nextGuidedStage,
+    prevGuidedStage,
+    goToGuidedStage,
+    restartGuided,
+    skipGuidedAnimation,
+    stopGuidedInvestigation,
+    togglePresentationMode,
+    isAudioEnabled,
+    setIsAudioEnabled,
+    isSpeaking,
+    speechRate,
+    setSpeechRate,
+    currentSpokenSentence,
+    speakStageCommentary,
+    isExecutiveFocusMode,
+    setIsExecutiveFocusMode,
+  } = useSentinel();
+
+  const [showScriptDrawer, setShowScriptDrawer] = useState(false);
+
+  if (!isGuidedActive && !isPresentationMode) return null;
+
+  const currentStage = GUIDED_STAGES[guidedStageIndex] || GUIDED_STAGES[0];
+
+  const handleFullScreen = () => {
+    if (typeof document !== 'undefined') {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+    togglePresentationMode();
+  };
+
+  return (
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        className="bg-gradient-to-r from-[#0B1528] via-[#112240] to-[#0B1528] border-b-2 border-sky-500/60 shadow-2xl px-4 py-3 relative z-30"
+      >
+        <div className="max-w-[1800px] mx-auto flex flex-col gap-3">
+          {/* Top Row: Stage Indicator + Audio Voice Controls + Playback Controls */}
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-sky-500/20 border border-sky-400/50 text-sky-300 text-xs font-mono font-bold tracking-wider uppercase">
+                <Radio className="w-3.5 h-3.5 text-sky-400 animate-pulse" />
+                Step {currentStage.stageNumber} of {GUIDED_STAGES.length}
+              </span>
+              <h2 className="text-sm md:text-base font-extrabold text-white tracking-tight">
+                {currentStage.title}
+              </h2>
+              <span className="hidden xl:inline-block text-xs text-teal-300 font-medium border-l border-slate-700 pl-3">
+                {currentStage.subtitle}
+              </span>
+            </div>
+
+            {/* Playback + Voice Audio Commentary Controls */}
+            <div className="flex flex-wrap items-center gap-1.5 bg-[#090D16]/95 border border-slate-700/90 rounded-xl p-1.5">
+              {/* VOICE COMMENTARY TOGGLE + ANIMATED WAVEFORM */}
+              <button
+                onClick={() => setIsAudioEnabled(!isAudioEnabled)}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+                  isAudioEnabled
+                    ? 'bg-sky-500 text-slate-950 shadow-md shadow-sky-500/20'
+                    : 'bg-slate-800 text-slate-300 hover:text-white'
+                }`}
+                title="Toggle Voice Audio Commentary"
+              >
+                {isAudioEnabled ? (
+                  <>
+                    <Volume2 className="w-4 h-4" />
+                    <span>Voice Audio: ON</span>
+                    {isSpeaking && (
+                      <span className="flex items-end gap-0.5 h-3 ml-1">
+                        <span className="w-0.5 h-3 bg-slate-950 animate-bounce" />
+                        <span className="w-0.5 h-2 bg-slate-950 animate-pulse" />
+                        <span className="w-0.5 h-3.5 bg-slate-950 animate-bounce" />
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <VolumeX className="w-4 h-4 text-rose-400" />
+                    <span>Voice Muted</span>
+                  </>
+                )}
+              </button>
+
+              <button
+                onClick={() => {
+                  setIsAudioEnabled(true);
+                  speakStageCommentary(guidedStageIndex);
+                }}
+                title="Replay Voice Commentary for This Stage"
+                className="px-2.5 py-1.5 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-sky-300 text-xs font-medium transition"
+              >
+                🔊 Replay Voice
+              </button>
+
+              {/* Speed Selector */}
+              <select
+                aria-label="Voice Commentary Speed"
+                value={speechRate}
+                onChange={(e) => setSpeechRate(Number(e.target.value))}
+                className="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-[11px] font-mono text-slate-300 outline-none"
+              >
+                <option value={0.9}>Voice 0.9x</option>
+                <option value={1}>Voice 1.0x</option>
+                <option value={1.1}>Voice 1.1x</option>
+              </select>
+
+              <div className="h-4 w-px bg-slate-700 mx-1" />
+
+              {/* Stage Playback Controls */}
+              <button
+                onClick={prevGuidedStage}
+                disabled={guidedStageIndex === 0}
+                title="Previous Stage"
+                className="p-1.5 rounded hover:bg-slate-800 disabled:opacity-40 text-slate-300 hover:text-white transition"
+              >
+                <SkipBack className="w-4 h-4" />
+              </button>
+
+              {isGuidedPlaying ? (
+                <button
+                  onClick={pauseGuided}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-300 hover:bg-amber-500/30 text-xs font-bold transition"
+                >
+                  <Pause className="w-3.5 h-3.5" />
+                  Pause
+                </button>
+              ) : (
+                <button
+                  onClick={resumeGuided}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/30 text-xs font-bold transition"
+                >
+                  <Play className="w-3.5 h-3.5" />
+                  {guidedProgress > 0 && guidedProgress < 100 ? 'Resume' : 'Play'}
+                </button>
+              )}
+
+              <button
+                onClick={nextGuidedStage}
+                disabled={guidedStageIndex === GUIDED_STAGES.length - 1}
+                title="Next Stage"
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-sky-500/20 border border-sky-500/40 hover:bg-sky-500/30 disabled:opacity-40 text-sky-200 text-xs font-bold transition"
+              >
+                Next Step
+                <SkipForward className="w-3.5 h-3.5" />
+              </button>
+
+              <button
+                onClick={skipGuidedAnimation}
+                title="Skip Stage Animation"
+                className="p-1.5 rounded hover:bg-slate-800 text-slate-400 hover:text-white text-xs transition"
+              >
+                <FastForward className="w-3.5 h-3.5" />
+              </button>
+
+              <button
+                onClick={restartGuided}
+                title="Restart Guided Tour"
+                className="p-1.5 rounded hover:bg-slate-800 text-slate-400 hover:text-white text-xs transition"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+              </button>
+
+              <div className="h-4 w-px bg-slate-700 mx-1" />
+
+              {/* Executive Focus / Declutter Toggle */}
+              <button
+                onClick={() => setIsExecutiveFocusMode(!isExecutiveFocusMode)}
+                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition ${
+                  isExecutiveFocusMode
+                    ? 'bg-emerald-500/20 border-emerald-400/50 text-emerald-300'
+                    : 'bg-slate-800 border-slate-700 text-slate-300'
+                }`}
+                title="Simplified Mode hides secondary clutter so viewers can focus on the story"
+              >
+                <Eye className="w-3.5 h-3.5" />
+                <span>{isExecutiveFocusMode ? 'Simplified View: ON' : 'Full Analyst View'}</span>
+              </button>
+
+              <button
+                onClick={() => setShowScriptDrawer((s) => !s)}
+                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition ${
+                  showScriptDrawer
+                    ? 'bg-sky-500 text-slate-950 font-bold'
+                    : 'bg-slate-800/80 text-sky-300 hover:bg-slate-700'
+                }`}
+              >
+                <BookOpen className="w-3.5 h-3.5" />
+                <span className="hidden md:inline">Full Script</span>
+              </button>
+
+              <button
+                onClick={handleFullScreen}
+                title="Toggle Full-Screen Presentation Mode"
+                className="p-1.5 rounded-lg bg-teal-500/20 border border-teal-500/40 text-teal-300 hover:bg-teal-500/30 text-xs transition"
+              >
+                {isPresentationMode ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+              </button>
+
+              <button
+                onClick={stopGuidedInvestigation}
+                title="Exit Guided Mode"
+                className="p-1.5 rounded-lg hover:bg-rose-500/20 text-slate-400 hover:text-rose-300 transition"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* 8-Stage Interactive Step Progress Bar */}
+          <div className="grid grid-cols-4 sm:grid-cols-8 gap-1.5">
+            {GUIDED_STAGES.map((stg, idx) => {
+              const isCurrent = idx === guidedStageIndex;
+              const isCompleted = idx < guidedStageIndex;
+              return (
+                <button
+                  key={stg.id}
+                  onClick={() => goToGuidedStage(idx)}
+                  className={`group text-left rounded-lg p-2 border transition relative overflow-hidden ${
+                    isCurrent
+                      ? 'bg-sky-950/90 border-sky-400 text-white shadow-lg'
+                      : isCompleted
+                      ? 'bg-emerald-950/30 border-emerald-500/30 text-emerald-300 hover:border-emerald-400/60'
+                      : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:border-slate-700'
+                  }`}
+                >
+                  <div className="flex items-center justify-between text-[10px] font-mono mb-0.5">
+                    <span className="font-bold">STEP {stg.stageNumber}</span>
+                    {isCompleted && <CheckCircle2 className="w-3 h-3 text-emerald-400" />}
+                  </div>
+                  <div className="text-[11px] font-semibold truncate">
+                    {stg.title.replace(/^STAGE \d+ — /, '')}
+                  </div>
+                  {isCurrent && (
+                    <div className="w-full h-1.5 bg-slate-800 rounded-full mt-1.5 overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-sky-400 to-teal-400 transition-all duration-200"
+                        style={{ width: `${guidedProgress}%` }}
+                      />
+                    </div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* LIVE AUDIO COMMENTARY & SUBTITLE TELEPROMPTER PANEL */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 bg-[#070C15] border-2 border-sky-500/40 rounded-xl p-4 shadow-inner">
+            <div className="lg:col-span-8 flex items-start gap-3.5">
+              <div
+                className={`p-3 rounded-xl border shrink-0 mt-0.5 ${
+                  isSpeaking
+                    ? 'bg-sky-500/25 border-sky-400 text-sky-300 animate-pulse'
+                    : 'bg-slate-900 border-slate-700 text-slate-400'
+                }`}
+              >
+                <Volume2 className="w-5 h-5" />
+              </div>
+              <div className="space-y-1.5">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-mono uppercase tracking-wider text-sky-400 font-bold">
+                    {isSpeaking ? '🔊 LIVE AUDIO COMMENTARY PLAYING' : 'STAGE COMMENTARY & EXPLANATION'}
+                  </span>
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold">
+                    {currentStage.systemBanner}
+                  </span>
+                </div>
+
+                {/* Live Spoken Subtitle Line (when audio is active) */}
+                {isSpeaking && currentSpokenSentence && (
+                  <div className="px-3 py-2 rounded-lg bg-sky-950/70 border border-sky-400/40 text-sky-100 text-sm md:text-base font-semibold leading-relaxed">
+                    🎙️ “{currentSpokenSentence}”
+                  </div>
+                )}
+
+                {/* Clear Spoken Story Explanation */}
+                <p className="text-sm md:text-base text-white leading-relaxed font-medium">
+                  {currentStage.presenterScript}
+                </p>
+
+                {/* Key Takeaway Quote */}
+                <p className="text-xs md:text-sm text-teal-300 font-semibold italic pt-1">
+                  Key Takeaway: “{currentStage.narration}”
+                </p>
+              </div>
+            </div>
+
+            <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-slate-800 pt-3 lg:pt-0 lg:pl-4 flex flex-col justify-center">
+              <div className="text-[11px] font-mono uppercase tracking-wider text-amber-300 font-bold mb-1.5 flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>What to Notice on This Screen:</span>
+              </div>
+              <ul className="space-y-1.5">
+                {currentStage.highlights.map((h, i) => (
+                  <li key={i} className="text-xs text-slate-200 flex items-start gap-1.5 leading-snug">
+                    <ChevronRight className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Complete 5-7 Minute Government Presentation Script Drawer */}
+      <AnimatePresence>
+        {showScriptDrawer && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="bg-[#0B1220] border-b border-sky-500/40 px-6 py-4 shadow-2xl relative z-30 max-h-[65vh] overflow-y-auto"
+          >
+            <div className="max-w-6xl mx-auto">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                <div>
+                  <h3 className="text-base font-bold text-white flex items-center gap-2">
+                    <BookOpen className="w-4 h-4 text-sky-400" />
+                    GOVERNMENT PARTNERSHIP DEMONSTRATION SCRIPT (5–7 MINUTE VOICEOVER)
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Click any stage below to jump directly to that screen and play its voice commentary aloud.
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowScriptDrawer(false)}
+                  className="px-3 py-1 rounded bg-slate-800 text-slate-300 hover:text-white text-xs"
+                >
+                  Close Script
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {GUIDED_STAGES.map((stg, idx) => (
+                  <div
+                    key={stg.id}
+                    onClick={() => goToGuidedStage(idx)}
+                    className={`p-3 rounded-lg border cursor-pointer transition ${
+                      idx === guidedStageIndex
+                        ? 'bg-sky-950/50 border-sky-400'
+                        : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-xs font-bold text-sky-300">{stg.title}</span>
+                      <span className="text-[11px] font-mono text-emerald-400">🔊 Click to Speak</span>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed mb-2">
+                      {stg.presenterScript}
+                    </p>
+                    <div className="text-[11px] text-teal-300 italic border-l-2 border-teal-500 pl-2">
+                      Narration: “{stg.narration}”
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
