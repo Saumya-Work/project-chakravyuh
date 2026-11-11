@@ -21,6 +21,9 @@ npm install --legacy-peer-deps
 # 2. Start the development server on http://localhost:3050
 npm run dev
 
+# Or on Windows, double-click "run sentinel demo.bat" to start the server
+# and open the demo page in your browser.
+
 # Or build and run in production mode:
 npm run build
 npm start
@@ -76,4 +79,3 @@ Click **`Reset Demo`** in the top-right navigation bar (or inside **Administrati
 11. **Investigation Reports (Stage 8):** Unified Investigation Timeline with 5 filters + 15-section structured Investigation Dossier with real **PDF Export (`jsPDF`)**, Print, and Download.
 12. **Agency Collaboration (Part 9):** Role capability matrix and interactive inter-unit approval workflow queue.
 13. **Administration & Audit (Part 12 & 16):** Live session audit log, Simulated vs. Future Authorised Integrations matrix, and Sovereign Production Roadmap.
-
