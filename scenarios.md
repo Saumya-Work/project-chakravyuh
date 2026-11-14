@@ -87,10 +87,10 @@ flowchart LR
 ### Scenario 8: "Cross-Jurisdiction Fragmentation" (Splitting Dry-Runs Across 4 Cases)
 * **How the Criminal Thinks:** *"Police stations work in silos. Traffic police handle Hit-and-Runs (`Case 0040`), Cyber Cell handles Extortion (`Case 0041`), Mahadevapura police handle Warehouse Burglaries (`Case 0039`), and East Division handles Missing Persons (`Case 0042`). None of them share raw tower dumps."*
 * **The Evasion Move:**
-  1. **24 Oct (`CASE-SNT-2026-0039` — SP Road & Peenya Electronics Hub (Bengaluru–Tumakuru NH-48)):** Steals RF shielding pouches and GPS jammers from a Mahadevapura warehouse.
-  2. **29 Oct (`CASE-SNT-2026-0040` — Outer Ring Road (Marathahalli–Silk Board–Hosur) Hit & Run):** Tests corridor escape timing along the service road.
-  3. **31 Oct (`CASE-SNT-2026-0041` — Manyata Tech Park (Hebbal) & Whitefield FinTech Hub Escrow):** Tests encrypted VoIP drop-point coordination.
-  4. **02 Nov (`CASE-SNT-2026-0042` — Aarav Sharma Abduction):** Executes the primary operation using the stolen RF pouch and rehearsed route.
+  1. **24 Oct (`CASE-CKV-2026-0039` — SP Road & Peenya Electronics Hub (Bengaluru–Tumakuru NH-48)):** Steals RF shielding pouches and GPS jammers from a Mahadevapura warehouse.
+  2. **29 Oct (`CASE-CKV-2026-0040` — Outer Ring Road (Marathahalli–Silk Board–Hosur) Hit & Run):** Tests corridor escape timing along the service road.
+  3. **31 Oct (`CASE-CKV-2026-0041` — Manyata Tech Park (Hebbal) & Whitefield FinTech Hub Escrow):** Tests encrypted VoIP drop-point coordination.
+  4. **02 Nov (`CASE-CKV-2026-0042` — Aarav Sharma Abduction):** Executes the primary operation using the stolen RF pouch and rehearsed route.
 
 ---
 ---
@@ -129,7 +129,7 @@ flowchart TD
 ### Trap 1: The "Rehearsal Mistake & Sleep/Wake Shadow Trap" (Catching the Real Identity Behind Burner `DEV-004`)
 * **Criminal’s Blind Spot:** A smart criminal remembers to leave their personal phone at home on the **day of the crime (02 Nov)**—but almost always carried their **real personal phone** during the **reconnaissance dry-run (24 Oct)** or when buying/activating the burner phone!
 * **How Project Chakravyuh Catches Them:**
-  1. **Cross-Date Companion Pairing:** Chakravyuh queries where burner phone `DEV-004` appeared on **24 Oct 2026** (`CASE-SNT-2026-0039` SP Road & Peenya Electronics Hub (Bengaluru–Tumakuru NH-48) dump) and checks which personal phones traveled through the **exact same sector sequence within 90 seconds**. It catches **`DEV-019` (Karan Malhotra’s Personal Phone)**, which moved alongside `DEV-004` on 24 Oct!
+  1. **Cross-Date Companion Pairing:** Chakravyuh queries where burner phone `DEV-004` appeared on **24 Oct 2026** (`CASE-CKV-2026-0039` SP Road & Peenya Electronics Hub (Bengaluru–Tumakuru NH-48) dump) and checks which personal phones traveled through the **exact same sector sequence within 90 seconds**. It catches **`DEV-019` (Karan Malhotra’s Personal Phone)**, which moved alongside `DEV-004` on 24 Oct!
   2. **Sleep/Wake Handshake Anomaly on 02 Nov:** On 02 Nov (crime day), Chakravyuh notices that `DEV-019` (Karan Malhotra’s real phone) suddenly entered **zero-handover static status** at **18:15 IST**—and just **3 minutes later at 18:18 IST**, burner phone `DEV-004` powered on in Indiranagar 100Ft Road!
   3. **Fake Home Alibi Exposed:** While `DEV-019` streamed video at home to fake activity, its **Timing Advance (TA) and cell-sector azimuth had zero micro-variance** for 3 hours, proving the phone was sitting untouched on a table while its owner was in the field.
 
@@ -192,7 +192,7 @@ flowchart TD
 * **Criminal’s Blind Spot:** Even if an offender uses encrypted VoIP over public Wi-Fi or a prepaid burner, both the **device radio** and the **SIM recharge** leave physical-world anchors.
 * **How Project Chakravyuh Catches Them:**
   1. **Retail Recharge & CCTV Anchor:** Every prepaid burner SIM (`DEV-004`) must be activated or recharged at a point-of-sale terminal. Chakravyuh correlates the **timestamp of `DEV-004`’s recharge** with nearby shop CCTV / UPI logs.
-  2. **Public Wi-Fi / Hotspot BSSID Correlation:** In `CASE-SNT-2026-0041` (Manyata Tech Park (Hebbal) & Whitefield FinTech Hub Drop) and along 2nd Cross (`Rameshwaram Cafe & Glen’s Bakehouse (12th Main, Indiranagar)`), Chakravyuh correlates router DHCP/MAC probe timestamps with passing CCTV silhouettes.
+  2. **Public Wi-Fi / Hotspot BSSID Correlation:** In `CASE-CKV-2026-0041` (Manyata Tech Park (Hebbal) & Whitefield FinTech Hub Drop) and along 2nd Cross (`Rameshwaram Cafe & Glen’s Bakehouse (12th Main, Indiranagar)`), Chakravyuh correlates router DHCP/MAC probe timestamps with passing CCTV silhouettes.
 
 ---
 
@@ -201,7 +201,7 @@ flowchart TD
 * **How Project Chakravyuh Catches Them:**
   1. **Automatic Cross-Case Entity Indexing:** Every time any police station uploads a tower dump, ANPR log, or witness report into Project Chakravyuh, the **Global Entity Graph** checks for overlapping devices, vehicle prefixes, and Modus Operandi across all open inquiries.
   2. **The Multi-Case Match:** Chakravyuh automatically surfaces **`LEAD-006`**, revealing that:
-     - Burner phone **`DEV-004`** and partial plate **`KA-01-MX-4XX?`** appeared in **both** the 24 Oct Mahadevapura Warehouse burglary (`CASE-SNT-2026-0039`, where RF Faraday pouches were stolen!) and the 02 Nov Aarav Sharma abduction (`CASE-SNT-2026-0042`)!
+     - Burner phone **`DEV-004`** and partial plate **`KA-01-MX-4XX?`** appeared in **both** the 24 Oct Mahadevapura Warehouse burglary (`CASE-CKV-2026-0039`, where RF Faraday pouches were stolen!) and the 02 Nov Aarav Sharma abduction (`CASE-CKV-2026-0042`)!
      - Companion personal phone **`DEV-019` (Karan Malhotra)** traveled with `DEV-004` during the 24 Oct warehouse incident, giving investigators a **high-priority human verification lead** while still preserving strict human-in-the-loop safeguards.
 
 ---

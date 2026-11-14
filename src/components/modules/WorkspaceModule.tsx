@@ -19,7 +19,7 @@ import {
   ShieldCheck,
   Clock,
 } from 'lucide-react';
-import { useSentinel } from '@/context/SentinelContext';
+import { useChakravyuh } from '@/context/ChakravyuhContext';
 
 interface IngestionStream {
   id: string;
@@ -145,7 +145,7 @@ export const WorkspaceModule: React.FC = () => {
     setActiveModule,
     isGuidedActive,
     guidedStageIndex,
-  } = useSentinel();
+  } = useChakravyuh();
 
   const [activeStreamId, setActiveStreamId] = useState<string>('STR-MOBILE');
   const [ingestionProgress, setIngestionProgress] = useState<number>(100);
@@ -324,7 +324,7 @@ export const WorkspaceModule: React.FC = () => {
             <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-sky-500/25 to-teal-500/25 border-2 border-sky-400 flex flex-col items-center justify-center text-center p-2 shadow-xl shadow-sky-500/10">
               <ShieldCheck className="w-7 h-7 text-sky-400 mb-1" />
               <span className="text-[10px] font-mono font-bold text-white leading-tight">
-                SENTINEL INGESTION ENGINE
+                CHAKRAVYUH INGESTION ENGINE
               </span>
             </div>
             <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden mt-3 relative">

@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { useSentinel } from '@/context/SentinelContext';
+import { useChakravyuh } from '@/context/ChakravyuhContext';
 import { AppShell } from '@/components/layout/AppShell';
 import { CommandCentreModule } from '@/components/modules/CommandCentreModule';
 import { CasesModule } from '@/components/modules/CasesModule';
@@ -17,8 +17,8 @@ import { ReportsModule } from '@/components/modules/ReportsModule';
 import { CollaborationModule } from '@/components/modules/CollaborationModule';
 import { AdminAuditModule } from '@/components/modules/AdminAuditModule';
 
-export default function ProjectSentinelPage() {
-  const { activeModule } = useSentinel();
+export default function ProjectChakravyuhPage() {
+  const { activeModule } = useChakravyuh();
 
   const renderActiveModule = () => {
     switch (activeModule) {

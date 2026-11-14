@@ -16,7 +16,7 @@ import {
   Sparkles,
   RotateCcw,
 } from 'lucide-react';
-import { useSentinel } from '@/context/SentinelContext';
+import { useChakravyuh } from '@/context/ChakravyuhContext';
 
 export const CasesModule: React.FC = () => {
   const {
@@ -27,7 +27,7 @@ export const CasesModule: React.FC = () => {
     setActiveModule,
     isGuidedActive,
     guidedStageIndex,
-  } = useSentinel();
+  } = useChakravyuh();
 
   // Stage 1 6-Step Animated Sequence State
   const [animStep, setAnimStep] = useState<number>(6);
@@ -67,7 +67,7 @@ export const CasesModule: React.FC = () => {
 
   const handleCreateCustomCase = (e: React.FormEvent) => {
     e.preventDefault();
-    const newId = `CASE-SNT-2026-00${43 + cases.length - 4}`;
+    const newId = `CASE-CKV-2026-00${43 + cases.length - 4}`;
     registerCase({
       id: newId,
       title: formTitle,
@@ -134,7 +134,7 @@ export const CasesModule: React.FC = () => {
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-sky-400" />
             <h2 className="text-sm font-bold text-white uppercase tracking-wide">
-              STAGE 1 — INCIDENT REGISTRATION SEQUENCE (CASE-SNT-2026-0042)
+              STAGE 1 — INCIDENT REGISTRATION SEQUENCE (CASE-CKV-2026-0042)
             </h2>
           </div>
           {animStep >= 6 ? (
@@ -192,7 +192,7 @@ export const CasesModule: React.FC = () => {
                 </span>
                 {animStep >= 6 && (
                   <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
-                    REF: CASE-SNT-2026-0042
+                    REF: CASE-CKV-2026-0042
                   </span>
                 )}
               </div>
@@ -307,7 +307,7 @@ export const CasesModule: React.FC = () => {
                         Kaveri Sector-4 (18:30 Sighting)
                       </text>
                       <text x="158" y="115" fill="#94A3B8" fontSize="9">
-                        CASE-SNT-2026-0042 Anchor
+                        CASE-CKV-2026-0042 Anchor
                       </text>
                     </>
                   )}
@@ -363,7 +363,7 @@ export const CasesModule: React.FC = () => {
                   </div>
                   <span
                     className={`text-[11px] font-mono px-2 py-0.5 rounded ${
-                      c.id === 'CASE-SNT-2026-0042'
+                      c.id === 'CASE-CKV-2026-0042'
                         ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
                         : 'bg-slate-800 text-slate-400'
                     }`}

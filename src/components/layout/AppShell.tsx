@@ -33,8 +33,8 @@ import {
   Eye,
   Languages,
 } from 'lucide-react';
-import { useSentinel } from '@/context/SentinelContext';
-import { ModuleId, UserRole } from '@/types/sentinel';
+import { useChakravyuh } from '@/context/ChakravyuhContext';
+import { ModuleId, UserRole } from '@/types/chakravyuh';
 import { GuidedPresentationBar } from '@/components/guided/GuidedPresentationBar';
 
 interface NavItem {
@@ -268,7 +268,7 @@ const ROLE_PROFILES: Record<UserRole, { name: string; badgeId: string; unit: str
   Investigator: { name: 'Inspector Vikram Rao', badgeId: 'INV-BLR-01', unit: 'Special Investigation Team (Demo)' },
   'Senior Officer': { name: 'ACP Meera Nair', badgeId: 'SUP-BLR-04', unit: 'East Division Command (Demo)' },
   'Forensic Officer': { name: 'Dr. Priya Krishnan', badgeId: 'DFIR-BLR-02', unit: 'Digital Evidence Lab (Demo)' },
-  'System Administrator': { name: 'Arjun Hegde (SysAdmin)', badgeId: 'ADM-SNT-01', unit: 'Platform Governance Cell' },
+  'System Administrator': { name: 'Arjun Hegde (SysAdmin)', badgeId: 'ADM-CKV-01', unit: 'Platform Governance Cell' },
 };
 
 export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -304,7 +304,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     resetDemoData,
     toasts,
     dismissToast,
-  } = useSentinel();
+  } = useChakravyuh();
 
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -449,7 +449,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
           <span>DEMONSTRATION ENVIRONMENT — SYNTHETIC DATA ONLY</span>
         </div>
         <div className="hidden md:flex items-center gap-4 text-[11px] text-slate-400 font-mono">
-          <span>Active Scenario: CASE-SNT-2026-0042 (Bengaluru (Indiranagar, Koramangala, Domlur, Marathahalli, Whitefield & Hosur/Kolar/Tumakuru/Mysuru))</span>
+          <span>Active Scenario: CASE-CKV-2026-0042 (Bengaluru (Indiranagar, Koramangala, Domlur, Marathahalli, Whitefield & Hosur/Kolar/Tumakuru/Mysuru))</span>
           <span>•</span>
           <span className="text-sky-300">🔊 Voice Audio Commentary & Simplified Briefing Mode Available</span>
         </div>
@@ -872,7 +872,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
             </div>
             <p className="text-xs text-slate-300 leading-relaxed mb-4">
               This will restore all synthetic cases, CCTV footage requests, extracted video observations, vehicle comparisons, and AI investigative lead statuses back to the initial baseline for{' '}
-              <span className="font-mono text-sky-300">CASE-SNT-2026-0042</span>.
+              <span className="font-mono text-sky-300">CASE-CKV-2026-0042</span>.
             </p>
             <div className="flex items-center justify-end gap-2">
               <button

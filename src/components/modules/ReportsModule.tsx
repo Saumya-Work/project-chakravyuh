@@ -15,8 +15,8 @@ import {
   Sparkles,
   Eye,
 } from 'lucide-react';
-import { useSentinel } from '@/context/SentinelContext';
-import { TimelineEvent } from '@/types/sentinel';
+import { useChakravyuh } from '@/context/ChakravyuhContext';
+import { TimelineEvent } from '@/types/chakravyuh';
 
 export const ReportsModule: React.FC = () => {
   const {
@@ -32,7 +32,7 @@ export const ReportsModule: React.FC = () => {
     auditLogs,
     logAudit,
     triggerToast,
-  } = useSentinel();
+  } = useChakravyuh();
 
   const currentCase = cases.find((c) => c.id === selectedCaseId) || cases[0];
 
@@ -139,9 +139,9 @@ export const ReportsModule: React.FC = () => {
       addLine(`${evd.id} (${evd.originalFilename}) — SHA-256: ${evd.sha256Hash}`, 8.5);
     });
 
-    doc.save(`Project_Sentinel_Report_${currentCase.id}.pdf`);
+    doc.save(`Project_Chakravyuh_Report_${currentCase.id}.pdf`);
     logAudit('Investigation Reports', 'REPORT_PDF_EXPORTED', currentCase.id, 'Exported 15-section traceable PDF investigation report.');
-    triggerToast('PDF Report Exported', `Downloaded Project_Sentinel_Report_${currentCase.id}.pdf`, 'success');
+    triggerToast('PDF Report Exported', `Downloaded Project_Chakravyuh_Report_${currentCase.id}.pdf`, 'success');
   };
 
   const handleDownloadDossierHtml = () => {
@@ -173,11 +173,11 @@ ${evidenceItems.map((e) => `- ${e.id}: ${e.originalFilename} | SHA-256: ${e.sha2
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `Sentinel_Dossier_${currentCase.id}.txt`;
+    a.download = `Chakravyuh_Dossier_${currentCase.id}.txt`;
     a.click();
     URL.revokeObjectURL(url);
     logAudit('Investigation Reports', 'REPORT_DOWNLOADED', currentCase.id, 'Downloaded structured text dossier.');
-    triggerToast('Dossier Downloaded', `Saved Sentinel_Dossier_${currentCase.id}.txt`, 'info');
+    triggerToast('Dossier Downloaded', `Saved Chakravyuh_Dossier_${currentCase.id}.txt`, 'info');
   };
 
   return (

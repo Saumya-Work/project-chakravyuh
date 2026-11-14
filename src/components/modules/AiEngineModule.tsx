@@ -17,7 +17,7 @@ import {
   Sparkles,
   Scale,
 } from 'lucide-react';
-import { useSentinel } from '@/context/SentinelContext';
+import { useChakravyuh } from '@/context/ChakravyuhContext';
 
 const PIPELINE_STEPS = [
   '1. Multi-Source Evidence Intake',
@@ -39,7 +39,7 @@ export const AiEngineModule: React.FC = () => {
     setActiveModule,
     isGuidedActive,
     guidedStageIndex,
-  } = useSentinel();
+  } = useChakravyuh();
 
   const [pipelineStep, setPipelineStep] = useState<number>(7);
   const [noteInput, setNoteInput] = useState<string>('');

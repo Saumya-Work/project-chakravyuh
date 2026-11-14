@@ -19,7 +19,7 @@
 ---
 
 ## Stage 1 — Incident Registration (00:45 – 01:25)
-- **Visual Action:** Watch the 6-step registration sequence for **`CASE-SNT-2026-0042`** (Missing Person / Suspected Abduction, Indiranagar 100 Feet Road (HAL 2nd Stage), Bengaluru Fictional Zone).
+- **Visual Action:** Watch the 6-step registration sequence for **`CASE-CKV-2026-0042`** (Missing Person / Suspected Abduction, Indiranagar 100 Feet Road (HAL 2nd Stage), Bengaluru Fictional Zone).
 - **Key Point:** The last confirmed sighting (`18:30 IST` at the Community Library walkway) and formal complaint receipt (`21:15 IST`) are immediately anchored on the spatial grid and unified timeline.
 - **Official Narration:** *"An investigation begins with a documented incident. Project Chakravyuh creates a structured case workspace where all subsequent evidence and investigative observations can be brought together."*
 

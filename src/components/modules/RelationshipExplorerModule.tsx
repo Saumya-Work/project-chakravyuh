@@ -13,8 +13,8 @@ import {
   Info,
   Link2,
 } from 'lucide-react';
-import { useSentinel } from '@/context/SentinelContext';
-import { GraphNode, GraphEdge } from '@/types/sentinel';
+import { useChakravyuh } from '@/context/ChakravyuhContext';
+import { GraphNode, GraphEdge } from '@/types/chakravyuh';
 
 function getNodeColor(type: GraphNode['type']): { bg: string; border: string; text: string } {
   switch (type) {
@@ -51,10 +51,10 @@ function getEdgeStyle(classification: GraphEdge['classification']) {
 }
 
 export const RelationshipExplorerModule: React.FC = () => {
-  const { graphNodes, graphEdges, setActiveModule } = useSentinel();
+  const { graphNodes, graphEdges, setActiveModule } = useChakravyuh();
 
   const [nodes, setNodes] = useState<GraphNode[]>(graphNodes);
-  const [selectedNodeId, setSelectedNodeId] = useState<string>('CASE-SNT-2026-0042');
+  const [selectedNodeId, setSelectedNodeId] = useState<string>('CASE-CKV-2026-0042');
   const [selectedEdgeId, setSelectedEdgeId] = useState<string | null>('EDGE-06');
   const [filterClassification, setFilterClassification] = useState<string>('ALL');
   const [zoom, setZoom] = useState<number>(1);

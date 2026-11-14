@@ -11,11 +11,11 @@ import {
   GraphEdge,
   CollaborationTask,
   AuditLogEntry,
-} from '@/types/sentinel';
+} from '@/types/chakravyuh';
 
 export const INITIAL_CASES: CaseRecord[] = [
   {
-    id: 'CASE-SNT-2026-0042',
+    id: 'CASE-CKV-2026-0042',
     title: 'Aarav Sharma — Missing Person & Suspected Abduction (Indiranagar 100Ft Road Corridor)',
     category: 'Missing Person / Suspected Abduction',
     status: 'Active — Priority Verification',
@@ -38,7 +38,7 @@ export const INITIAL_CASES: CaseRecord[] = [
     pendingRequestsCount: 4,
   },
   {
-    id: 'CASE-SNT-2026-0039',
+    id: 'CASE-CKV-2026-0039',
     title: 'SP Road & Peenya Electronics Hub (Bengaluru–Tumakuru NH-48) — Unauthorised Night Entry Inquiry',
     category: 'Commercial Burglary / Intrusion',
     status: 'Under Review',
@@ -61,7 +61,7 @@ export const INITIAL_CASES: CaseRecord[] = [
     pendingRequestsCount: 1,
   },
   {
-    id: 'CASE-SNT-2026-0040',
+    id: 'CASE-CKV-2026-0040',
     title: 'Tech Park Shuttle Corridor — Hit-and-Run Vehicle Verification',
     category: 'Traffic Incident / Hit & Run',
     status: 'Evidence Preservation',
@@ -84,7 +84,7 @@ export const INITIAL_CASES: CaseRecord[] = [
     pendingRequestsCount: 2,
   },
   {
-    id: 'CASE-SNT-2026-0041',
+    id: 'CASE-CKV-2026-0041',
     title: 'Manyata Tech Park (Hebbal) & Whitefield FinTech Hub Escrow — Cyber-Extortion & Drop-Point Surveillance',
     category: 'Extortion / Digital Fraud',
     status: 'Under Review',
@@ -1402,12 +1402,12 @@ export const INITIAL_LEADS: InvestigativeLead[] = [
   {
     id: 'LEAD-001',
     title: 'TRAP 1 & 2: Burner Phone (DEV-004) Linked to Karan Malhotra’s Fake Home Alibi (DEV-019) & Faraday Drop',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     priority: 'Priority 1 — Immediate Verification',
     category: 'Device Correlation',
     observationSummary:
       'Sovereign Telecom + BESCOM Smart-Grid Fusion: Burner handset DEV-004 moved across all 4 eastbound corridor sectors (18:28 to 19:19) while Aarav Sharma’s iPhone suffered an abrupt -40 dBm RF Faraday drop at 18:48 (zero IMSI-detach). Cross-checking 24 Oct dry-run records links Burner DEV-004 to Karan Malhotra’s personal phone (DEV-019), which was left at home on a static video loop at 18:15 (BESCOM Smart Meter flat 138W standby draw, 0.0m Timing Advance drift) just 3 minutes before Burner DEV-004 powered on.',
-    relatedEntities: ['DEV-004', 'DEV-019', 'DEV-001', 'CASE-SNT-2026-0042'],
+    relatedEntities: ['DEV-004', 'DEV-019', 'DEV-001', 'CASE-CKV-2026-0042'],
     supportingEvidence: [
       'EVD-002 (C-DOT Baseband Log): Aarav Sharma’s iPhone lost -40 dBm in <200ms at 18:48 with zero IMSI-Detach packet—signature of an RF Faraday pouch.',
       'EVD-003 (Sleep/Wake Shadow): Karan Malhotra’s personal phone (DEV-019) went motionless at 18:15; Burner DEV-004 powered on 3 minutes later at 18:18.',
@@ -1435,7 +1435,7 @@ export const INITIAL_LEADS: InvestigativeLead[] = [
   {
     id: 'LEAD-002',
     title: 'TRAP 4: White SUV Matched via 433MHz Tyre Sensors (TPMS) & FASTag Ghost-Tag Exception',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     priority: 'Priority 1 — Immediate Verification',
     category: 'Vehicle Corridor',
     observationSummary:
@@ -1465,7 +1465,7 @@ export const INITIAL_LEADS: InvestigativeLead[] = [
   {
     id: 'LEAD-003',
     title: 'TRAP 6: Witness Color Conflict Resolved via Clinic CCTV & Sightline Geometry',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     priority: 'Priority 2 — High Analytical Value',
     category: 'Witness Discrepancy',
     observationSummary:
@@ -1492,7 +1492,7 @@ export const INITIAL_LEADS: InvestigativeLead[] = [
   {
     id: 'LEAD-004',
     title: 'TRAP 5: 16-Minute Shadow Stop Pinpointed to Canal Culvert via 3-Tower AoA & Burner Pause',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     priority: 'Priority 1 — Immediate Verification',
     category: 'Timeline Anomaly',
     observationSummary:
@@ -1519,7 +1519,7 @@ export const INITIAL_LEADS: InvestigativeLead[] = [
   {
     id: 'LEAD-005',
     title: 'TRAP 3: CAM-008 Blind Spot Defeated via BMTC Bus #335E Roving Dashcam & Flanking Ring',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     priority: 'Priority 1 — Immediate Verification',
     category: 'Coverage Gap',
     observationSummary:
@@ -1546,12 +1546,12 @@ export const INITIAL_LEADS: InvestigativeLead[] = [
   {
     id: 'LEAD-006',
     title: 'TRAP 8: Cross-Jurisdiction Graph Links All 4 Cases (Faraday Theft, Route Trial, VoIP & Abduction)',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     priority: 'Priority 1 — Immediate Verification',
     category: 'Cross-Case Pattern',
     observationSummary:
       'Offender split preparation across 4 police jurisdictions hoping stations would not share data. Chakravyuh’s ICJS/CCTNS Cross-Case Graph links: (1) Case 0039 (24 Oct Nandi Electronics burglary where RF Faraday pouches were stolen — Burner DEV-004 + Karan Malhotra’s DEV-019 both present); (2) Case 0040 (29 Oct Outer Ring Road (Marathahalli–Silk Board–Hosur) corridor escape timing trial); (3) Case 0041 (31 Oct encrypted Wi-Fi VoIP drop test); and (4) Case 0042 (02 Nov Aarav Sharma abduction).',
-    relatedEntities: ['CASE-SNT-2026-0042', 'CASE-SNT-2026-0039', 'DEV-004', 'DEV-019', 'VEH-001'],
+    relatedEntities: ['CASE-CKV-2026-0042', 'CASE-CKV-2026-0039', 'DEV-004', 'DEV-019', 'VEH-001'],
     supportingEvidence: [
       'Case 0039 Inventory + Tower Dump (24 Oct): 4 RF Faraday signal-blocking pouches stolen from SP Road & Peenya Electronics Hub (Bengaluru–Tumakuru NH-48); Burner DEV-004 and Karan Malhotra’s phone DEV-019 moved together in Sector 09C.',
       'Case 0040 & 0041 Logs (29 & 31 Oct): Same OUI Wi-Fi probe prefix and corridor timing pattern recorded.',
@@ -1583,7 +1583,7 @@ export const INITIAL_TIMELINE_EVENTS: TimelineEvent[] = [
     description: 'Routine packet data session recorded on DEV-001 in Micro-Sector BLR-KVR-04A while Aarav Sharma was inside the Indiranagar 100 Feet Road (HAL 2nd Stage) Community Library.',
     sourceType: 'Mobile Intelligence',
     categoryType: 'Observation (Source Recorded)',
-    entityIds: ['DEV-001', 'CASE-SNT-2026-0042'],
+    entityIds: ['DEV-001', 'CASE-CKV-2026-0042'],
     locationName: 'Indiranagar 100 Feet Road (HAL 2nd Stage) Library (Sector 04A)',
     coordinates: [12.9682, 77.6398],
     evidenceRef: 'EVD-002',
@@ -1637,7 +1637,7 @@ export const INITIAL_TIMELINE_EVENTS: TimelineEvent[] = [
     description: 'CAM-001 captures Aarav Sharma exiting the State Central Library, Indiranagar 100Ft Road main gate alone, carrying a dark messenger bag and walking east.',
     sourceType: 'Incident Report',
     categoryType: 'Fact (Verified)',
-    entityIds: ['CASE-SNT-2026-0042', 'CAM-001', 'DEV-001'],
+    entityIds: ['CASE-CKV-2026-0042', 'CAM-001', 'DEV-001'],
     locationName: 'State Central Library, Indiranagar 100Ft Road Walkway',
     coordinates: [12.9685, 77.6412],
     evidenceRef: 'EVD-004',
@@ -1673,7 +1673,7 @@ export const INITIAL_TIMELINE_EVENTS: TimelineEvent[] = [
     description: 'Apollo Pharmacy (100Ft Road, Indiranagar) frontage camera (CAM-003) records pedestrian matching Aarav Sharma silhouette and bag walking eastbound toward 80ft Link Road.',
     sourceType: 'CCTV Observation',
     categoryType: 'Observation (Source Recorded)',
-    entityIds: ['CAM-003', 'CASE-SNT-2026-0042'],
+    entityIds: ['CAM-003', 'CASE-CKV-2026-0042'],
     locationName: 'Sector-4 2nd Cross Commercial Strip',
     coordinates: [12.9689, 77.6434],
     evidenceRef: 'EVD-005',
@@ -1904,10 +1904,10 @@ export const INITIAL_TIMELINE_EVENTS: TimelineEvent[] = [
     timeMinutes: 1275,
     date: '02 Nov 2026',
     title: 'INCIDENT COMPLAINT RECEIVED — Missing Person / Suspected Abduction',
-    description: 'Formal complaint received from Aarav Sharma’s family at 21:15 IST. Case CASE-SNT-2026-0042 registered and assigned to Inspector Vikram Rao.',
+    description: 'Formal complaint received from Aarav Sharma’s family at 21:15 IST. Case CASE-CKV-2026-0042 registered and assigned to Inspector Vikram Rao.',
     sourceType: 'Incident Report',
     categoryType: 'Fact (Verified)',
-    entityIds: ['CASE-SNT-2026-0042'],
+    entityIds: ['CASE-CKV-2026-0042'],
     locationName: 'East Metro Synthetic Division Station',
     coordinates: [12.9685, 77.6412],
     evidenceRef: 'EVD-001',
@@ -1925,7 +1925,7 @@ export const INITIAL_TIMELINE_EVENTS: TimelineEvent[] = [
     description: 'Authorised telecom tower records (EVD-002, EVD-003) and priority CCTV preservation requests (REQ-CCTV-2026-101 to 105) ingested into Project Chakravyuh.',
     sourceType: 'Evidence Ingestion',
     categoryType: 'Fact (Verified)',
-    entityIds: ['CASE-SNT-2026-0042', 'CAM-001', 'CAM-014', 'CAM-019'],
+    entityIds: ['CASE-CKV-2026-0042', 'CAM-001', 'CAM-014', 'CAM-019'],
     locationName: 'Project Chakravyuh Evidence Vault',
     evidenceRef: 'EVD-002',
     provenance: 'System Ingestion Audit Log',
@@ -1956,7 +1956,7 @@ export const INITIAL_TIMELINE_EVENTS: TimelineEvent[] = [
 export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
   {
     id: 'EVD-001',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     title: 'Incident Registration & Family Complaint Statement (Aarav Sharma)',
     evidenceType: 'Case Registration FIR-SYN',
     source: 'East Metro Synthetic Station Desk',
@@ -2004,7 +2004,7 @@ export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
   },
   {
     id: 'EVD-002',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     title: 'Authorised Subscriber CDR & Sector Handover Log — DEV-001',
     evidenceType: 'Telecom CDR / Tower Dump',
     source: 'Synthetic Telecom Nodal Gateway',
@@ -2052,7 +2052,7 @@ export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
   },
   {
     id: 'EVD-003',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     title: 'Authorised Multi-Sector Tower Observation Log (04A, 04B, 02A, 09C)',
     evidenceType: 'Telecom CDR / Tower Dump',
     source: 'Synthetic Telecom Nodal Gateway',
@@ -2083,7 +2083,7 @@ export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
   },
   {
     id: 'EVD-004',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     title: 'CCTV Footage Container — CAM-001 (Kaveri Library Main Gate)',
     evidenceType: 'CCTV Video Container (.MP4)',
     source: 'Kaveri Civic Welfare Trust',
@@ -2114,7 +2114,7 @@ export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
   },
   {
     id: 'EVD-005',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     title: 'CCTV Footage Container — CAM-003 (Apollo Pharmacy (100Ft Road, Indiranagar) Frontage)',
     evidenceType: 'CCTV Video Container (.MP4)',
     source: 'Apex Healthcare Retail Pvt Ltd',
@@ -2145,7 +2145,7 @@ export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
   },
   {
     id: 'EVD-006',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     title: 'CCTV & ANPR Package — CAM-014 (Sony World Signal (Indiranagar–Koramangala) East Corridor Junction)',
     evidenceType: 'CCTV Video Container (.MP4)',
     source: 'Municipal SafeCity Grid',
@@ -2176,7 +2176,7 @@ export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
   },
   {
     id: 'EVD-007',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     title: 'CCTV Package — CAM-019 (Domlur–Marathahalli Flyover (Old Airport Road) Up-Ramp)',
     evidenceType: 'CCTV Video Container (.MP4)',
     source: 'Metro Highway Concessionaire',
@@ -2207,7 +2207,7 @@ export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
   },
   {
     id: 'EVD-008',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     title: 'CCTV Package — CAM-006 (Domlur TTMC Bus Stand (Old Airport Road))',
     evidenceType: 'CCTV Video Container (.MP4)',
     source: 'Metro Transit Infrastructure',
@@ -2238,7 +2238,7 @@ export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
   },
   {
     id: 'EVD-009',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     title: 'ANPR South Corridor Exclusion Log — CAM-015 (HSR Link Approach)',
     evidenceType: 'ANPR Corridor Log (.CSV)',
     source: 'Municipal SafeCity Grid',
@@ -2259,7 +2259,7 @@ export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
   },
   {
     id: 'EVD-010',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     title: 'Field Witness Statements — Suresh Babu (Tea Stall Owner) & Aditi Rao (Evening Jogger)',
     evidenceType: 'Witness Audio / Transcript (.PDF)',
     source: 'Field Canvass Team-01',
@@ -2280,7 +2280,7 @@ export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
   },
   {
     id: 'EVD-011',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     title: 'Prestige Leela Residences, Old Airport Road West RFID Gate Entry Log (Exculpatory for DEV-007)',
     evidenceType: 'ANPR Corridor Log (.CSV)',
     source: 'Palm Grove RWA Security',
@@ -2301,7 +2301,7 @@ export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
   },
   {
     id: 'EVD-012',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     title: 'AI Scenario Engine Correlation Snapshot (Unverified Leads Output)',
     evidenceType: 'Forensic Field Extraction (.UFED-SYN)',
     source: 'Project Chakravyuh Deterministic Correlation Engine',
@@ -2325,7 +2325,7 @@ export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
 // Relationship Explorer Graph Nodes & Edges
 export const INITIAL_GRAPH_NODES: GraphNode[] = [
   {
-    id: 'CASE-SNT-2026-0042',
+    id: 'CASE-CKV-2026-0042',
     label: 'Aarav Sharma Case',
     subLabel: 'Missing Person / Abduction Inquiry',
     type: 'Case',
@@ -2468,7 +2468,7 @@ export const INITIAL_GRAPH_NODES: GraphNode[] = [
     limitations: 'Dusk sodium lighting affects colour accuracy.',
   },
   {
-    id: 'CASE-SNT-2026-0039',
+    id: 'CASE-CKV-2026-0039',
     label: 'Nandi Electronics Inquiry',
     subLabel: 'Mahadevapura Depot Case',
     type: 'Case',
@@ -2484,7 +2484,7 @@ export const INITIAL_GRAPH_EDGES: GraphEdge[] = [
   {
     id: 'EDGE-01',
     source: 'PERSON-A',
-    target: 'CASE-SNT-2026-0042',
+    target: 'CASE-CKV-2026-0042',
     relationshipType: 'Referenced in',
     classification: 'Verified relationship',
     sourceEvidence: 'EVD-001 (FIR-SYN-2026-0042)',
@@ -2616,7 +2616,7 @@ export const INITIAL_GRAPH_EDGES: GraphEdge[] = [
   {
     id: 'EDGE-13',
     source: 'DEV-004',
-    target: 'CASE-SNT-2026-0039',
+    target: 'CASE-CKV-2026-0039',
     relationshipType: 'Investigative lead',
     classification: 'AI-suggested relationship',
     sourceEvidence: 'EVD-003 & Case-0039 Archive (LEAD-006)',
@@ -2630,7 +2630,7 @@ export const INITIAL_COLLABORATION_TASKS: CollaborationTask[] = [
   {
     id: 'TASK-2026-01',
     title: 'Approve Emergency Preservation Order for 80ft Road, Metro Pillar & Zenith Gate Cameras',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     requestType: 'CCTV Preservation Order',
     requestedBy: 'Inspector Vikram Rao (Investigator)',
     assignedRole: 'Senior Officer',
@@ -2642,7 +2642,7 @@ export const INITIAL_COLLABORATION_TASKS: CollaborationTask[] = [
   {
     id: 'TASK-2026-02',
     title: 'Forensic Optical & Metadata Examination of Domlur–Marathahalli Flyover (Old Airport Road) Glare Segment (EVD-007)',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     requestType: 'Forensic Hash Verification',
     requestedBy: 'Inspector Vikram Rao (Investigator)',
     assignedRole: 'Forensic Officer',
@@ -2654,7 +2654,7 @@ export const INITIAL_COLLABORATION_TASKS: CollaborationTask[] = [
   {
     id: 'TASK-2026-03',
     title: 'Supervisory Sign-off on Lead Shortlist (Prepaid Phone & White SUV Verification Plan)',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     requestType: 'Lead Verification Sign-off',
     requestedBy: 'Inspector Vikram Rao (Investigator)',
     assignedRole: 'Senior Officer',
@@ -2666,7 +2666,7 @@ export const INITIAL_COLLABORATION_TASKS: CollaborationTask[] = [
   {
     id: 'TASK-2026-04',
     title: 'Cross-Unit Query with Sub-Inspector Nikhil Gowda Regarding SP Road & Peenya Electronics Hub (Bengaluru–Tumakuru NH-48) Dump',
-    caseId: 'CASE-SNT-2026-0042',
+    caseId: 'CASE-CKV-2026-0042',
     requestType: 'Cross-Unit Query Approval',
     requestedBy: 'Inspector Vikram Rao (Investigator)',
     assignedRole: 'Investigator',
@@ -2685,7 +2685,7 @@ export const INITIAL_AUDIT_LOGS: AuditLogEntry[] = [
     role: 'Investigator',
     module: 'Case Management',
     action: 'CASE_REGISTERED',
-    targetRef: 'CASE-SNT-2026-0042',
+    targetRef: 'CASE-CKV-2026-0042',
     details: 'Registered Missing Person / Suspected Abduction case for Aarav Sharma (Indiranagar 100 Feet Road (HAL 2nd Stage)).',
     ipSimulated: '10.24.18.104 (Demo Intranet)',
   },
@@ -2753,8 +2753,8 @@ export interface GuidedStageDefinition {
   voiceScriptHinglish: string[];
   criminalMoveEn: string;
   criminalMoveHi: string;
-  sentinelTrapEn: string;
-  sentinelTrapHi: string;
+  chakravyuhTrapEn: string;
+  chakravyuhTrapHi: string;
   systemBanner: string;
   systemBannerHi: string;
   highlights: string[];
@@ -2804,9 +2804,9 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
       'Split preparation across 4 police stations: stole Faraday bags in Mahadevapura (24 Oct), tested escape route on Outer Ring Road (Marathahalli–Silk Board–Hosur) (29 Oct), tested Wi-Fi call drop in Ulsoor (31 Oct), and kidnapped Aarav in Indiranagar 100Ft Road (02 Nov).',
     criminalMoveHi:
       'अपराधी की चाल: पुलिस को चकमा देने के लिए 4 अलग-अलग थानों के इलाकों में तैयारी की—24 अक्टूबर को सिग्नल-ब्लॉकिंग बैग चुराया, 29 को रास्ता परखा, और 2 नवंबर को अपहरण किया।',
-    sentinelTrapEn:
+    chakravyuhTrapEn:
       'Sovereign ICJS / CCTNS National Graph automatically connects all 4 police stations the instant Case 0042 is registered.',
-    sentinelTrapHi:
+    chakravyuhTrapHi:
       'चक्रव्यूह का जाल: सरकारी नेशनल ग्रिड (ICJS/CCTNS) केस दर्ज होते ही चारों थानों के सुरागों को अपने-आप एक साथ जोड़ देता है।',
     systemBanner: 'Incident Registered — Aarav Sharma Workspace & 4-Station Sovereign Grid Active',
     systemBannerHi: 'केस पंजीकृत — आरव शर्मा जांच वर्कस्पेस और 4-थाना सरकारी ग्रिड सक्रिय',
@@ -2860,9 +2860,9 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
       'Dropped Aarav’s phone into a signal-blocking Faraday bag at 6:48 PM so police would think the phone battery simply died.',
     criminalMoveHi:
       'अपराधी की चाल: शाम 6:48 बजे आरव का फ़ोन सिग्नल-ब्लॉकिंग (Faraday) बैग में डाल दिया ताकि पुलिस को लगे कि फ़ोन की बैटरी खत्म हो गई है।',
-    sentinelTrapEn:
+    chakravyuhTrapEn:
       'Telecom Baseband Trap detects an instant -40 dBm signal drop with zero "Good-Bye" power-off packet—proving the phone was forced into a signal-blocking bag at 6:48 PM.',
-    sentinelTrapHi:
+    chakravyuhTrapHi:
       'चक्रव्यूह का जाल: जब फ़ोन सामान्य रूप से बंद होता है तो टावर को अंतिम संदेश भेजता है। आरव का सिग्नल 6:48 पर बिना संदेश के अचानक कटा—जिससे साबित हो गया कि फ़ोन को सिग्नल-ब्लॉकिंग बैग में डाला गया।',
     systemBanner: 'Sovereign Grid Ingestion Complete — 12 Evidence Packages Sealed with SHA-256',
     systemBannerHi: 'सरकारी ग्रिड डेटा एकीकरण पूर्ण — 12 सबूत पैकेज डिजिटल सील (SHA-256) के साथ सुरक्षित',
@@ -2925,9 +2925,9 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
       'Left personal phone (DEV-019) at home streaming video to fake an alibi, and carried an unlinked burner phone (DEV-004) with zero calls to the victim.',
     criminalMoveHi:
       'अपराधी की चाल: अपना असली फ़ोन घर पर वीडियो चलाकर छोड़ दिया ताकि घर पर होने का सबूत बने, और बिना कॉल किए फर्जी सिम (DEV-004) का इस्तेमाल किया।',
-    sentinelTrapEn:
+    chakravyuhTrapEn:
       'BESCOM Smart Meter (flat 138W draw) + 0.0m Tower Drift proves nobody was home, while 24 Oct dry-run logs link Burner DEV-004 directly to Karan Malhotra’s phone!',
-    sentinelTrapHi:
+    chakravyuhTrapHi:
       'चक्रव्यूह का जाल: घर के स्मार्ट बिजली मीटर (सिर्फ 138W) ने साबित किया कि घर खाली था, और 24 अक्टूबर के रिकॉर्ड ने फर्जी सिम को करण मल्होत्रा के असली फ़ोन से जोड़ दिया!',
     systemBanner: 'FAKE HOME ALIBI EXPOSED — BURNER PHONE LINKED TO KARAN MALHOTRA',
     systemBannerHi: 'नकली अलीबी बेनकाब — फर्जी प्रीपेड फ़ोन का संबंध करण मल्होत्रा से जुड़ा',
@@ -2987,9 +2987,9 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
       'Exploited scheduled UPS battery outage on Camera 008 (6:15–7:30 PM) to stage the pickup in a camera blind spot at 6:45 PM.',
     criminalMoveHi:
       'अपराधी की चाल: कैमरा 008 की बैटरी मरम्मत (6:15–7:30 PM) का फायदा उठाकर ठीक 6:45 बजे कैमरे के ब्लाइंड-स्पॉट में अपहरण किया।',
-    sentinelTrapEn:
+    chakravyuhTrapEn:
       'Queries Government Transit Bus Grid: BMTC Bus #335E drove past 12th Main Service Lane (Indiranagar) at 6:44:50 PM and its ADAS side-camera filmed the White SUV inside the blind spot!',
-    sentinelTrapHi:
+    chakravyuhTrapHi:
       'चक्रव्यूह का जाल: सरकारी बस ग्रिड की जांच से पता चला कि BMTC बस 335E ठीक 6:44:50 पर वहां से गुजरी और बस के साइड कैमरे ने ब्लाइंड-स्पॉट में खड़ी सफेद SUV को रिकॉर्ड कर लिया!',
     systemBanner: 'BLIND SPOT DEFEATED — BMTC BUS #335E DASHCAM + 20 FLANKING CAMERAS LOCKED',
     systemBannerHi: 'ब्लाइंड-स्पॉट विफल — सरकारी बस #335E डैशकैम और 20 घेराबंदी कैमरों से पहचान',
@@ -3049,9 +3049,9 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
       'Used mud on the rear plate, high-beam glare on the flyover camera, and peeled off the windshield FASTag sticker so ANPR could not read the vehicle.',
     criminalMoveHi:
       'अपराधी की चाल: नंबर प्लेट पर कीचड़ लगाया, कैमरे पर तेज हेडलाइट की चमक मारी और फास्टैग स्टीकर उखाड़ दिया ताकि गाड़ी पहचान में न आए।',
-    sentinelTrapEn:
+    chakravyuhTrapEn:
       'Smart Poles capture the SUV’s 433MHz wireless wheel sensors (TPMS-HEX-88A4) at both junctions, and the Flyover gantry flags the ONLY car with a missing FASTag ("Ghost Tag Alert")!',
-    sentinelTrapHi:
+    chakravyuhTrapHi:
       'चक्रव्यूह का जाल: स्मार्ट खंभों ने गाड़ी के पहियों के वायरलेस सेंसर (TPMS) को दोनों चौराहों पर पकड़ लिया और फ्लाईओवर एंटीना ने बिना फास्टैग वाली इकलौती गाड़ी को तुरंत फ्लैग कर दिया!',
     systemBanner: 'CHAMELEON SUV MATCHED — WHEEL TPMS SENSORS & GHOST-FASTAG ALERT VERIFIED',
     systemBannerHi: 'सफेद एसयूवी की पहचान पक्की — टायर सेंसर (TPMS) और घोस्ट-फास्टैग अलर्ट से मिलान',
@@ -3108,9 +3108,9 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
       'Stopped for 12 minutes in an unmonitored canal culvert so a 4-minute drive took 16 minutes (7:02–7:18 PM), hoping to break time-distance tracking.',
     criminalMoveHi:
       'अपराधी की चाल: 4 मिनट के रास्ते में 12 मिनट नहर की गली में छिपकर 16 मिनट लगाए (7:02–7:18 PM), ताकि समय के अंतर से पुलिस भ्रमित हो जाए।',
-    sentinelTrapEn:
+    chakravyuhTrapEn:
       '3-Tower Signal Triangulation proves Burner Phone DEV-004 paused stationary at the exact Challaghatta Lake Culvert (Domlur–Yemlur Service Road) from 7:04 to 7:16 PM!',
-    sentinelTrapHi:
+    chakravyuhTrapHi:
       'चक्रव्यूह का जाल: 3 टावरों के ट्रायंगुलेशन ने पकड़ लिया कि फर्जी फ़ोन (DEV-004) भी शाम 7:04 से 7:16 तक ठीक उसी चल्लाघट्टा झील और येमलूर सर्विस रोड (डोमलूर) पर रुका था!',
     systemBanner: '16-MIN CANAL STOP PINPOINTED — INNOCENT CAB & CLINIC CAR CLEARED',
     systemBannerHi: '16 मिनट के नहर स्टॉप की सटीक पहचान — निर्दोष कैब और क्लिनिक कार को क्लीन चिट',
@@ -3164,9 +3164,9 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
       'Hoped that fragmented clues across electricity meters, tyre sensors, bus cameras, and 4 police stations would be too complex for humans to connect in time.',
     criminalMoveHi:
       'अपराधी की चाल: सोचा था कि बिजली मीटर, टायर सेंसर, बस कैमरे और 4 थानों के बिखरे हुए डेटा को पुलिस समय रहते कभी जोड़ नहीं पाएगी।',
-    sentinelTrapEn:
+    chakravyuhTrapEn:
       'Deterministic Correlation Engine fuses all 8 layers in seconds into 6 explainable, court-auditable leads with strict human-in-the-loop sign-off.',
-    sentinelTrapHi:
+    chakravyuhTrapHi:
       'चक्रव्यूह का जाल: कोरिलेशन इंजन सेकंडों में सभी 8 सरकारी परतों को जोड़कर 6 पारदर्शी सुराग तैयार करता है, जिन पर अधिकारी अपनी मुहर लगाते हैं।',
     systemBanner: '6 Sovereign-Grid Leads Ready — Human Officer Review & Sign-Off Active',
     systemBannerHi: '6 सरकारी-ग्रिड सुराग तैयार — पुलिस अधिकारी की समीक्षा और मंजूरी सक्रिय',
@@ -3220,9 +3220,9 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
       'Counted on investigation delays so CCTV loops would overwrite and witnesses would forget details before a coherent report could be built.',
     criminalMoveHi:
       'अपराधी की चाल: सोचा था कि पुलिस को कड़ियां जोड़ने में कई दिन लग जाएंगे और तब तक सीसीटीवी फुटेज मिट जाएंगे।',
-    sentinelTrapEn:
+    chakravyuhTrapEn:
       'Within 60 minutes of the 9:15 PM complaint, Chakravyuh preserves all cameras, links all 4 stations, and generates a court-traceable SHA-256 dossier.',
-    sentinelTrapHi:
+    chakravyuhTrapHi:
       'चक्रव्यूह का जाल: रात 9:15 पर शिकायत मिलने के महज 60 मिनट के भीतर सभी कैमरे सुरक्षित कर लिए गए, चारों थाने जुड़ गए और डिजिटल-सील युक्त रिपोर्ट तैयार हो गई!',
     systemBanner: 'Court-Ready 15-Section Dossier Complete — English & Hindi Walkthrough Verified',
     systemBannerHi: '15-भागों की कोर्ट-रेडी रिपोर्ट तैयार — हिंदी और अंग्रेजी विवरण उपलब्ध',

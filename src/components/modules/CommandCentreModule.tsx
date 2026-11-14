@@ -38,7 +38,7 @@ import {
   Crosshair,
   Languages,
 } from 'lucide-react';
-import { useSentinel } from '@/context/SentinelContext';
+import { useChakravyuh } from '@/context/ChakravyuhContext';
 import { GUIDED_STAGES } from '@/data/syntheticData';
 
 const CRIME_CATEGORY_DATA = [
@@ -82,7 +82,7 @@ export const CommandCentreModule: React.FC = () => {
     setNarrationLanguage,
     isExecutiveFocusMode,
     setIsExecutiveFocusMode,
-  } = useSentinel();
+  } = useChakravyuh();
 
   const [showDetailedCharts, setShowDetailedCharts] = useState(false);
   const [showAllTraps, setShowAllTraps] = useState(true);
@@ -196,7 +196,7 @@ export const CommandCentreModule: React.FC = () => {
         </div>
       </div>
 
-      {/* SMART CRIMINAL vs. SOVEREIGN SENTINEL — 8-STAGE INTERACTIVE CAT-AND-MOUSE MATRIX */}
+      {/* SMART CRIMINAL vs. SOVEREIGN CHAKRAVYUH — 8-STAGE INTERACTIVE CAT-AND-MOUSE MATRIX */}
       <div className="bg-[#111A2E] border-2 border-emerald-500/35 rounded-2xl p-5 space-y-4 shadow-xl">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
@@ -266,7 +266,7 @@ export const CommandCentreModule: React.FC = () => {
                       <Crosshair className="w-3 h-3 shrink-0" />
                       <span>{isHi ? 'चक्रव्यूह का सरकारी जाल:' : 'Chakravyuh’s Sovereign Trap:'}</span>
                     </div>
-                    {isHi ? stg.sentinelTrapHi : stg.sentinelTrapEn}
+                    {isHi ? stg.chakravyuhTrapHi : stg.chakravyuhTrapEn}
                   </div>
                 </div>
               </div>
@@ -289,8 +289,8 @@ export const CommandCentreModule: React.FC = () => {
           </div>
           <h3 className="text-base font-bold text-white">
             {isHi
-              ? 'CASE-SNT-2026-0042: आरव शर्मा अपहरण केस'
-              : 'CASE-SNT-2026-0042: Missing Person (Aarav Sharma)'}
+              ? 'CASE-CKV-2026-0042: आरव शर्मा अपहरण केस'
+              : 'CASE-CKV-2026-0042: Missing Person (Aarav Sharma)'}
           </h3>
           <p className="text-xs text-slate-300 leading-relaxed">
             {isHi ? (

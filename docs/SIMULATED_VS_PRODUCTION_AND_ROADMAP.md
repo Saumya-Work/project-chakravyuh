@@ -8,7 +8,7 @@
 
 | Capability Domain | What is Simulated in v1.0 Demo | Future Authorised Production Integration |
 | :--- | :--- | :--- |
-| **Case & FIR Intake** | Interactive synthetic intake form (`CASE-SNT-2026-0042`) with local state persistence. | Read-only statutory integration with CCTNS / ICJS via state-approved secure API gateway. |
+| **Case & FIR Intake** | Interactive synthetic intake form (`CASE-CKV-2026-0042`) with local state persistence. | Read-only statutory integration with CCTNS / ICJS via state-approved secure API gateway. |
 | **Telecom & Cell-Sector Analysis** | Pre-seeded synthetic records (`DEV-001` to `DEV-030`) with approximate sector footprints (`450m–800m`). | Authorised Nodal Officer intake portal requiring digitally signed statutory orders (e.g., Section 94 BNSS / lawful interception). |
 | **CCTV Discovery & Requests** | 20 fictional Bengaluru corridor cameras (`CAM-001` to `CAM-020`) with simulated custodian status updates. | Municipal SafeCity GIS registry integration + encrypted custodian upload link with automatic retention alerts. |
 | **Video Footage Review** | Synthetic illustrative SVG/Canvas video feeds with non-biometric object bounding boxes. | Hardware-accelerated frame-accurate player operating on bit-verified working proxies in a sovereign cloud / FSL storage cluster. |

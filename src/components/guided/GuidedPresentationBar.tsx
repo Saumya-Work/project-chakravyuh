@@ -24,7 +24,7 @@ import {
   ShieldAlert,
   Crosshair,
 } from 'lucide-react';
-import { useSentinel, NarrationLanguage, GeminiVoiceName } from '@/context/SentinelContext';
+import { useChakravyuh, NarrationLanguage, GeminiVoiceName } from '@/context/ChakravyuhContext';
 import { GUIDED_STAGES } from '@/data/syntheticData';
 
 export const GuidedPresentationBar: React.FC = () => {
@@ -57,7 +57,7 @@ export const GuidedPresentationBar: React.FC = () => {
     speakStageCommentary,
     isExecutiveFocusMode,
     setIsExecutiveFocusMode,
-  } = useSentinel();
+  } = useChakravyuh();
 
   const [showScriptDrawer, setShowScriptDrawer] = useState(false);
 
@@ -459,7 +459,7 @@ export const GuidedPresentationBar: React.FC = () => {
                       </span>
                     </div>
                     <p className="text-emerald-100/90 leading-snug">
-                      {isHi ? currentStage.sentinelTrapHi : currentStage.sentinelTrapEn}
+                      {isHi ? currentStage.chakravyuhTrapHi : currentStage.chakravyuhTrapEn}
                     </p>
                   </div>
                 </div>
@@ -545,7 +545,7 @@ export const GuidedPresentationBar: React.FC = () => {
                       <b>🕵️ Criminal:</b> {isHi ? stg.criminalMoveHi : stg.criminalMoveEn}
                     </div>
                     <div className="text-[11px] text-emerald-300 border-l-2 border-emerald-500 pl-2">
-                      <b>🪤 Chakravyuh Trap:</b> {isHi ? stg.sentinelTrapHi : stg.sentinelTrapEn}
+                      <b>🪤 Chakravyuh Trap:</b> {isHi ? stg.chakravyuhTrapHi : stg.chakravyuhTrapEn}
                     </div>
                   </div>
                 ))}

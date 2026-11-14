@@ -8,7 +8,7 @@ import {
   VehicleRecord,
   DeviceRecord,
   TimelineEvent,
-} from '@/types/sentinel';
+} from '@/types/chakravyuh';
 
 interface TacticalMapProps {
   cameras: CctvCamera[];
@@ -206,7 +206,7 @@ export const TacticalLeafletMap: React.FC<TacticalMapProps> = ({
     `;
     const incidentIcon = L.divIcon({
       html: incidentHtml,
-      className: 'sentinel-incident-marker',
+      className: 'chakravyuh-incident-marker',
       iconSize: [30, 30],
       iconAnchor: [15, 15],
     });
@@ -215,7 +215,7 @@ export const TacticalLeafletMap: React.FC<TacticalMapProps> = ({
       .bindPopup(
         `<div style="font-family:sans-serif;font-size:12px;color:#0F172A;min-width:210px;">
           <b style="color:#DC2626;">INCIDENT & LAST SIGHTING ANCHOR</b><br/>
-          <b>Case:</b> CASE-SNT-2026-0042<br/>
+          <b>Case:</b> CASE-CKV-2026-0042<br/>
           <b>Location:</b> Indiranagar 100 Feet Road (HAL 2nd Stage) Library Walkway (Fictional)<br/>
           <b>Last Sighting:</b> 18:30 IST (CAM-001 Verified)<br/>
           <b>Complaint:</b> 21:15 IST
@@ -290,7 +290,7 @@ export const TacticalLeafletMap: React.FC<TacticalMapProps> = ({
 
       const camIcon = L.divIcon({
         html: camHtml,
-        className: 'sentinel-cam-marker',
+        className: 'chakravyuh-cam-marker',
         iconSize: [64, 24],
         iconAnchor: [32, 12],
       });
@@ -350,7 +350,7 @@ export const TacticalLeafletMap: React.FC<TacticalMapProps> = ({
 
           const vehIcon = L.divIcon({
             html: vehHtml,
-            className: 'sentinel-veh-marker',
+            className: 'chakravyuh-veh-marker',
             iconSize: [96, 20],
             iconAnchor: [48, 10],
           });

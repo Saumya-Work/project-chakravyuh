@@ -12,7 +12,7 @@ import {
   KeyRound,
   Layers,
 } from 'lucide-react';
-import { useSentinel } from '@/context/SentinelContext';
+import { useChakravyuh } from '@/context/ChakravyuhContext';
 
 const SIMULATED_VS_PRODUCTION = [
   {
@@ -78,7 +78,7 @@ const PRODUCTION_ROADMAP_REQUIREMENTS = [
 ];
 
 export const AdminAuditModule: React.FC = () => {
-  const { auditLogs, resetDemoData, currentRole, setCurrentRole } = useSentinel();
+  const { auditLogs, resetDemoData, currentRole, setCurrentRole } = useChakravyuh();
   const [moduleFilter, setModuleFilter] = useState<string>('ALL');
 
   const filteredLogs = auditLogs.filter(
@@ -127,7 +127,7 @@ export const AdminAuditModule: React.FC = () => {
               { role: 'Investigator' as const, user: 'Inspector Vikram Rao', id: 'INV-BLR-01', desc: 'Case Lead — Full workspace, timeline & lead review' },
               { role: 'Senior Officer' as const, user: 'ACP Meera Nair', id: 'SUP-BLR-04', desc: 'Supervisory approvals & audit oversight' },
               { role: 'Forensic Officer' as const, user: 'Dr. Priya Krishnan', id: 'DFIR-BLR-02', desc: 'SHA-256 verification & chain of custody' },
-              { role: 'System Administrator' as const, user: 'Arjun Hegde (SysAdmin)', id: 'ADM-SNT-01', desc: 'System health, audit logs & scenario reset' },
+              { role: 'System Administrator' as const, user: 'Arjun Hegde (SysAdmin)', id: 'ADM-CKV-01', desc: 'System health, audit logs & scenario reset' },
             ].map((cred) => (
               <div
                 key={cred.id}
@@ -158,7 +158,7 @@ export const AdminAuditModule: React.FC = () => {
 
           <div className="space-y-2 text-xs">
             {[
-              { label: 'Synthetic Dataset Integrity', val: '100% Consistent (CASE-SNT-2026-0042)' },
+              { label: 'Synthetic Dataset Integrity', val: '100% Consistent (CASE-CKV-2026-0042)' },
               { label: 'External Telecom / Govt Connections', val: '0 Connected (Air-Gapped Demo Mode)' },
               { label: 'Facial Recognition / Biometrics', val: 'Disabled by Policy' },
               { label: 'Automated Guilt / Suspect Scoring', val: 'Disabled by Policy' },

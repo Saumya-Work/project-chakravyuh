@@ -12,15 +12,15 @@ import {
   FileCode2,
   Sparkles,
 } from 'lucide-react';
-import { useSentinel } from '@/context/SentinelContext';
-import { DigitalEvidenceItem } from '@/types/sentinel';
+import { useChakravyuh } from '@/context/ChakravyuhContext';
+import { DigitalEvidenceItem } from '@/types/chakravyuh';
 
 export const DigitalEvidenceModule: React.FC = () => {
   const {
     evidenceItems,
     uploadDigitalEvidence,
     verifyEvidenceHash,
-  } = useSentinel();
+  } = useChakravyuh();
 
   const [selectedEvdId, setSelectedEvdId] = useState<string>('EVD-006');
   const [uploading, setUploading] = useState<boolean>(false);
@@ -67,7 +67,7 @@ export const DigitalEvidenceModule: React.FC = () => {
   // Or one-click synthetic sample file hash computation
   const handleSimulateSampleFile = async () => {
     setUploading(true);
-    const sampleContent = `PROJECT-SENTINEL-SYNTHETIC-EVIDENCE-${Date.now()}`;
+    const sampleContent = `PROJECT-CHAKRAVYUH-SYNTHETIC-EVIDENCE-${Date.now()}`;
     const encoder = new TextEncoder();
     const data = encoder.encode(sampleContent);
     const hashBuffer = await crypto.subtle.digest('SHA-256', data);

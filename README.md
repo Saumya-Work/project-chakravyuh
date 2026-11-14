@@ -51,23 +51,23 @@ Presenters can switch roles instantaneously using the **Role Selector** in the t
 
 | Role | Demo Officer Name | Badge ID | Primary Demonstration Capabilities |
 | :--- | :--- | :--- | :--- |
-| **Investigator** | `Officer Demo-01` | `INV-BLR-01` | Primary case lead for `CASE-SNT-2026-0042`; evidence review, CCTV requests, lead verification |
+| **Investigator** | `Officer Demo-01` | `INV-BLR-01` | Primary case lead for `CASE-CKV-2026-0042`; evidence review, CCTV requests, lead verification |
 | **Senior Officer** | `ACP Demo-Supervisor-04` | `SUP-BLR-04` | Supervisory progress review, priority lead sign-off, CCTV preservation order approvals |
 | **Forensic Officer** | `Specialist Demo-F02` | `DFIR-BLR-02` | Digital evidence intake, real-time SHA-256 checksum verification, chain of custody |
-| **System Administrator** | `SysAdmin Demo-Root-01` | `ADM-SNT-01` | Platform governance, tamper-evident audit logs, system health, demo scenario reset |
+| **System Administrator** | `SysAdmin Demo-Root-01` | `ADM-CKV-01` | Platform governance, tamper-evident audit logs, system health, demo scenario reset |
 
 ---
 
 ## 4. How to Reset Demo Data
 
-Click **`Reset Demo`** in the top-right navigation bar (or inside **Administration & Audit**) and confirm. All synthetic cases, CCTV requests, extracted video observations, vehicle comparisons, and AI investigative lead statuses are immediately restored to the clean baseline state for `CASE-SNT-2026-0042`.
+Click **`Reset Demo`** in the top-right navigation bar (or inside **Administration & Audit**) and confirm. All synthetic cases, CCTV requests, extracted video observations, vehicle comparisons, and AI investigative lead statuses are immediately restored to the clean baseline state for `CASE-CKV-2026-0042`.
 
 ---
 
 ## 5. Complete Module Architecture (13 Functional Modules)
 
 1. **Command Centre:** Executive KPIs, 6 analytical charts, and one-click Guided Demo launch.
-2. **Cases (Stage 1):** Case registry (`CASE-SNT-2026-0042`, `0039`, `0040`, `0041`) + 6-step animated Incident Registration sequence and custom case creation.
+2. **Cases (Stage 1):** Case registry (`CASE-CKV-2026-0042`, `0039`, `0040`, `0041`) + 6-step animated Incident Registration sequence and custom case creation.
 3. **Investigation Workspace (Stage 2):** Animated 7-stream Multi-Source Evidence Ingestion Engine with provenance validation and timeline normalisation.
 4. **Mobile Intelligence (Stage 3):** 30 synthetic device records (`DEV-001` to `DEV-030`), horizontal correlation timeline, approximate cell-sector footprints (`450m–800m`), exculpatory contradiction (`DEV-007`), and shared fleet filtering (`DEV-012`).
 5. **Location Intelligence (Stage 4 & Part 6):** Interactive Leaflet map of fictional Bengaluru corridor, 20 CCTV cameras (`CAM-001` to `CAM-020`) with directional FOV cones, radius search boundary, **`PLAY INVESTIGATION TIMELINE ON MAP`**, and batch CCTV Preservation Request generation.

@@ -19,8 +19,8 @@ import {
   CheckCircle2,
   AlertTriangle,
 } from 'lucide-react';
-import { useSentinel } from '@/context/SentinelContext';
-import { CameraStatus } from '@/types/sentinel';
+import { useChakravyuh } from '@/context/ChakravyuhContext';
+import { CameraStatus } from '@/types/chakravyuh';
 
 const TacticalLeafletMap = dynamic(
   () => import('@/components/map/TacticalLeafletMap').then((mod) => mod.TacticalLeafletMap),
@@ -46,7 +46,7 @@ export const LocationIntelligenceModule: React.FC = () => {
     devices,
     timelineEvents,
     setActiveModule,
-  } = useSentinel();
+  } = useChakravyuh();
 
   // Discovery Controls State
   const [viewMode, setViewMode] = useState<'All' | 'Relevant'>('All');

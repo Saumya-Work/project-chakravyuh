@@ -11,8 +11,8 @@ import {
   ArrowUpRight,
   FileCheck,
 } from 'lucide-react';
-import { useSentinel } from '@/context/SentinelContext';
-import { UserRole, CollaborationTask } from '@/types/sentinel';
+import { useChakravyuh } from '@/context/ChakravyuhContext';
+import { UserRole, CollaborationTask } from '@/types/chakravyuh';
 
 const ROLE_CAPABILITIES: Array<{
   role: UserRole;
@@ -25,7 +25,7 @@ const ROLE_CAPABILITIES: Array<{
     badge: 'INV-BLR-01',
     actor: 'Inspector Vikram Rao',
     permissions: [
-      'Access assigned cases (CASE-SNT-2026-0042)',
+      'Access assigned cases (CASE-CKV-2026-0042)',
       'Review multi-source evidence & CCTV segments',
       'Review candidate AI leads & record verification notes',
       'Extract timeline observations & submit approval requests',
@@ -55,7 +55,7 @@ const ROLE_CAPABILITIES: Array<{
   },
   {
     role: 'System Administrator',
-    badge: 'ADM-SNT-01',
+    badge: 'ADM-CKV-01',
     actor: 'Arjun Hegde (SysAdmin)',
     permissions: [
       'Manage demonstration user profiles & role assignments',
@@ -74,7 +74,7 @@ export const CollaborationModule: React.FC = () => {
     updateCollaborationTaskStatus,
     createCollaborationTask,
     selectedCaseId,
-  } = useSentinel();
+  } = useChakravyuh();
 
   const [newTaskTitle, setNewTaskTitle] = useState(
     'Request Nodal Provenance Check for Field Handset DEV-004'

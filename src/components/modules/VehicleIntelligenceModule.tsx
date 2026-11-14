@@ -14,8 +14,8 @@ import {
   GitCompare,
   MapPin,
 } from 'lucide-react';
-import { useSentinel } from '@/context/SentinelContext';
-import { VehicleVerificationComparison } from '@/types/sentinel';
+import { useChakravyuh } from '@/context/ChakravyuhContext';
+import { VehicleVerificationComparison } from '@/types/chakravyuh';
 
 const VERIFICATION_OPTIONS: VehicleVerificationComparison[] = [
   'Confirmed same vehicle',
@@ -32,7 +32,7 @@ export const VehicleIntelligenceModule: React.FC = () => {
     updateVehicleVerification,
     setActiveModule,
     setSelectedCameraId,
-  } = useSentinel();
+  } = useChakravyuh();
 
   const [comparisonNote, setComparisonNote] = useState('');
   const selectedVehicle = vehicles.find((v) => v.id === selectedVehicleId) || vehicles[0];

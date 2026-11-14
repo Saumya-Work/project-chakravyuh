@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        sentinel: {
+        chakravyuh: {
           bg: "#090D16",
           surface: "#0F1624",
           card: "#141D2F",

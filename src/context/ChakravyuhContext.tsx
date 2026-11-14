@@ -18,7 +18,7 @@ import {
   GraphEdge,
   CollaborationTask,
   AuditLogEntry,
-} from '@/types/sentinel';
+} from '@/types/chakravyuh';
 import {
   INITIAL_CASES,
   INITIAL_DEVICES,
@@ -46,7 +46,7 @@ interface ToastNotification {
   type: 'info' | 'success' | 'warning';
 }
 
-interface SentinelContextType {
+interface ChakravyuhContextType {
   activeModule: ModuleId;
   setActiveModule: (m: ModuleId) => void;
   currentRole: UserRole;
@@ -147,7 +147,7 @@ interface SentinelContextType {
   triggerToast: (title: string, message: string, type?: 'info' | 'success' | 'warning') => void;
 }
 
-const SentinelContext = createContext<SentinelContextType | undefined>(undefined);
+const ChakravyuhContext = createContext<ChakravyuhContextType | undefined>(undefined);
 
 const ROLE_ACTORS: Record<UserRole, string> = {
   Investigator: 'Inspector Vikram Rao',
@@ -156,7 +156,7 @@ const ROLE_ACTORS: Record<UserRole, string> = {
   'System Administrator': 'Arjun Hegde (SysAdmin)',
 };
 
-export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const ChakravyuhProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [activeModule, setActiveModuleState] = useState<ModuleId>('command-centre');
   const [currentRole, setCurrentRoleState] = useState<UserRole>('Investigator');
   const [isExecutiveFocusMode, setIsExecutiveFocusMode] = useState<boolean>(true);
@@ -206,7 +206,7 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   const [cases, setCases] = useState<CaseRecord[]>(INITIAL_CASES);
-  const [selectedCaseId, setSelectedCaseId] = useState<string>('CASE-SNT-2026-0042');
+  const [selectedCaseId, setSelectedCaseId] = useState<string>('CASE-CKV-2026-0042');
   const [devices, setDevices] = useState<DeviceRecord[]>(INITIAL_DEVICES);
   const [selectedDeviceId, setSelectedDeviceId] = useState<string>('DEV-001');
   const [cameras, setCameras] = useState<CctvCamera[]>(INITIAL_CAMERAS);
@@ -797,7 +797,7 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       logAudit(
         'Guided Presentation',
         'GUIDED_DEMO_STARTED',
-        'CASE-SNT-2026-0042',
+        'CASE-CKV-2026-0042',
         `Launched Stage ${targetStageIdx + 1} of Voice-Guided Investigation Walkthrough (${activeLang === 'hi' ? 'Hindi' : activeLang === 'bilingual' ? 'Bilingual' : 'English'}).`
       );
       triggerToast(
@@ -1276,7 +1276,7 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const resetDemoData = useCallback(() => {
     stopSpeaking();
     setCases(INITIAL_CASES);
-    setSelectedCaseId('CASE-SNT-2026-0042');
+    setSelectedCaseId('CASE-CKV-2026-0042');
     setDevices(INITIAL_DEVICES);
     setSelectedDeviceId('DEV-001');
     setCameras(INITIAL_CAMERAS);
@@ -1305,7 +1305,7 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         module: 'System Administration',
         action: 'DEMO_DATA_RESET',
         targetRef: 'ALL_SYNTHETIC_DATASETS',
-        details: 'Restored Project Chakravyuh demonstration state to baseline CASE-SNT-2026-0042 scenario.',
+        details: 'Restored Project Chakravyuh demonstration state to baseline CASE-CKV-2026-0042 scenario.',
         ipSimulated: '10.24.18.104 (Demo Intranet)',
       },
       ...INITIAL_AUDIT_LOGS,
@@ -1314,7 +1314,7 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, [currentRole, stopSpeaking, triggerToast]);
 
   return (
-    <SentinelContext.Provider
+    <ChakravyuhContext.Provider
       value={{
         activeModule,
         setActiveModule,
@@ -1394,12 +1394,12 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       }}
     >
       {children}
-    </SentinelContext.Provider>
+    </ChakravyuhContext.Provider>
   );
 };
 
-export const useSentinel = () => {
-  const ctx = useContext(SentinelContext);
-  if (!ctx) throw new Error('useSentinel must be used within SentinelProvider');
+export const useChakravyuh = () => {
+  const ctx = useContext(ChakravyuhContext);
+  if (!ctx) throw new Error('useChakravyuh must be used within ChakravyuhProvider');
   return ctx;
 };

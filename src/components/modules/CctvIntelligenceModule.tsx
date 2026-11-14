@@ -18,7 +18,7 @@ import {
   FileLock2,
   Clock,
 } from 'lucide-react';
-import { useSentinel } from '@/context/SentinelContext';
+import { useChakravyuh } from '@/context/ChakravyuhContext';
 
 export const CctvIntelligenceModule: React.FC = () => {
   const {
@@ -29,7 +29,7 @@ export const CctvIntelligenceModule: React.FC = () => {
     addVideoObservation,
     updateVideoObservationStatus,
     setActiveModule,
-  } = useSentinel();
+  } = useChakravyuh();
 
   // Focus on cameras with received footage first, while allowing any camera to be selected
   const reviewableCameras = cameras.filter((c) =>

@@ -15,7 +15,7 @@ import {
   Sparkles,
   Link2,
 } from 'lucide-react';
-import { useSentinel } from '@/context/SentinelContext';
+import { useChakravyuh } from '@/context/ChakravyuhContext';
 
 export const MobileIntelligenceModule: React.FC = () => {
   const {
@@ -26,7 +26,7 @@ export const MobileIntelligenceModule: React.FC = () => {
     setSelectedLeadId,
     triggerToast,
     logAudit,
-  } = useSentinel();
+  } = useChakravyuh();
 
   const [filterMode, setFilterMode] = useState<'PrioritySubset' | 'All30'>('PrioritySubset');
   const [highlightConnections, setHighlightConnections] = useState<boolean>(true);
