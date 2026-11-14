@@ -19,21 +19,41 @@ import {
   Clock,
 } from 'lucide-react';
 import { useChakravyuh } from '@/context/ChakravyuhContext';
+import { ScenarioCctvVideoDeck } from '@/components/guided/ScenarioCctvVideoDeck';
 
 export const CctvIntelligenceModule: React.FC = () => {
   const {
     cameras,
     selectedCameraId,
     setSelectedCameraId,
+    selectedCaseId,
+    setSelectedCaseId,
+    narrationLanguage,
     vehicles,
     addVideoObservation,
     updateVideoObservationStatus,
     setActiveModule,
   } = useChakravyuh();
 
-  // Focus on cameras with received footage first, while allowing any camera to be selected
+  const isHi = narrationLanguage === 'hi' || narrationLanguage === 'bilingual';
+
+  // Focus on cameras with received footage first across all 3 flagship cases (0042, 0043, 0044)
   const reviewableCameras = cameras.filter((c) =>
-    ['CAM-014', 'CAM-019', 'CAM-006', 'CAM-001', 'CAM-003', 'CAM-015', 'CAM-008'].includes(c.id)
+    [
+      'CAM-014',
+      'CAM-019',
+      'CAM-008',
+      'CAM-006',
+      'CAM-001',
+      'CAM-003',
+      'CAM-015',
+      'CAM-021',
+      'CAM-022',
+      'CAM-023',
+      'CAM-024',
+      'CAM-025',
+      'CAM-026',
+    ].includes(c.id)
   );
 
   const activeCam =
@@ -159,6 +179,53 @@ export const CctvIntelligenceModule: React.FC = () => {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* 3-CASE CCTV & FORENSIC VIDEO EVIDENCE DECK SWITCHER */}
+      <div className="bg-[#141D2F] border-2 border-amber-500/40 rounded-2xl p-4 space-y-3 shadow-xl">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="text-xs font-mono font-bold text-amber-300 uppercase">
+            {isHi
+              ? '🎥 3 प्रमुख केस — लाइव CCTV और फॉरेंसिक वीडियो साक्ष्य (केस चुनें):'
+              : '🎥 3 FLAGSHIP CASES — LIVE CCTV & FORENSIC VIDEO EVIDENCE FEEDS (SELECT CASE):'}
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            {[
+              { id: 'CASE-CKV-2026-0042', label: 'Case 1: Indiranagar Kidnapping (0042)', defaultCam: 'CAM-008' },
+              { id: 'CASE-CKV-2026-0043', label: 'Case 2: Chickpet ₹4.2Cr Gold Heist (0043)', defaultCam: 'CAM-021' },
+              { id: 'CASE-CKV-2026-0044', label: 'Case 3: Devanahalli Defence Leak (0044)', defaultCam: 'CAM-025' },
+            ].map((cs) => {
+              const active =
+                selectedCaseId === cs.id ||
+                (!['CASE-CKV-2026-0042', 'CASE-CKV-2026-0043', 'CASE-CKV-2026-0044'].includes(selectedCaseId) &&
+                  cs.id === 'CASE-CKV-2026-0042');
+              return (
+                <button
+                  key={cs.id}
+                  onClick={() => {
+                    setSelectedCaseId(cs.id);
+                    setSelectedCameraId(cs.defaultCam);
+                  }}
+                  className={`px-3 py-1.5 rounded-xl font-mono text-xs font-bold border transition ${
+                    active
+                      ? 'bg-amber-500 text-slate-950 border-amber-300 shadow-lg'
+                      : 'bg-[#090D16] text-slate-300 border-slate-700 hover:border-amber-400/60'
+                  }`}
+                >
+                  {cs.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        <ScenarioCctvVideoDeck
+          caseId={
+            ['CASE-CKV-2026-0042', 'CASE-CKV-2026-0043', 'CASE-CKV-2026-0044'].includes(selectedCaseId)
+              ? selectedCaseId
+              : 'CASE-CKV-2026-0042'
+          }
+          isHi={isHi}
+        />
       </div>
 
       {/* MULTI-CAMERA SELECTOR TABS */}
@@ -304,8 +371,147 @@ export const CctvIntelligenceModule: React.FC = () => {
                   </g>
                 )}
 
+                {/* CAM-021: Chickpet Bullion Vault 532nm Green Laser Attack (Case 0043) */}
+                {activeCam.id === 'CAM-021' && (
+                  <g>
+                    <rect x="85" y="45" width="230" height="175" rx="8" fill="#1E293B" stroke="#475569" strokeWidth="3" />
+                    <circle cx="200" cy="132" r="38" fill="#0F172A" stroke="#F59E0B" strokeWidth="3" />
+                    <text x="125" y="72" fill="#FDE68A" fontSize="10" fontFamily="monospace" fontWeight="bold">
+                      SRI LAKSHMI BULLION VAULT #04 (52 KG GOLD)
+                    </text>
+                    <g transform={`translate(${370 - (playbackProgress % 50) * 1.1}, 145)`}>
+                      <rect x="0" y="0" width="38" height="62" rx="6" fill="#334155" stroke="#10B981" strokeWidth="1.5" />
+                      <rect x="46" y="6" width="38" height="58" rx="6" fill="#334155" stroke="#10B981" strokeWidth="1.5" />
+                      <rect x="-28" y="25" width="42" height="22" rx="3" fill="#F59E0B" stroke="#FEF08A" strokeWidth="1.5" />
+                    </g>
+                    <polygon
+                      points={`${395 - (playbackProgress % 50) * 1.1},155 0,0 130,0`}
+                      fill="#22C55E"
+                      opacity={0.35 + ((playbackProgress % 20) / 50)}
+                    />
+                    <text x="20" y="34" fill="#4ADE80" fontSize="10.5" fontFamily="monospace" fontWeight="bold">
+                      ⚠️ 532nm GREEN LASER BLINDING LENS | C-DOT SDR: 446.09 MHz RF BURST LOGGED
+                    </text>
+                  </g>
+                )}
+
+                {/* CAM-022: Lalbagh Parking EV Scooter to Fake Ambulance Relay (Case 0043) */}
+                {activeCam.id === 'CAM-022' && (
+                  <g>
+                    <g transform="translate(95, 168)">
+                      <rect x="-8" y="-22" width="160" height="68" fill="none" stroke="#38BDF8" strokeWidth="1.5" strokeDasharray="4 2" />
+                      <text x="-4" y="-27" fill="#7DD3FC" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
+                        EV SCOOTERS KA-01-EM-2XX9 | BMS-PACK-9921
+                      </text>
+                      <rect x="8" y="12" width="48" height="18" rx="6" fill="#0284C7" />
+                      <rect x="78" y="12" width="48" height="18" rx="6" fill="#0284C7" />
+                    </g>
+                    <g transform={`translate(${245 + (playbackProgress % 60) * 1.8}, 168)`}>
+                      <rect x="0" y="0" width="40" height="22" rx="3" fill="#F59E0B" stroke="#FEF08A" strokeWidth="1.5" />
+                      <text x="4" y="14" fill="#090D16" fontSize="8.5" fontFamily="monospace" fontWeight="bold">
+                        52KG AU
+                      </text>
+                    </g>
+                    <g transform="translate(415, 142)">
+                      <rect x="-10" y="-24" width="210" height="86" fill="none" stroke="#EF4444" strokeWidth="1.8" strokeDasharray="4 2" />
+                      <text x="-6" y="-29" fill="#FCA5A5" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
+                        FAKE AMBULANCE KA-05-AG-9XX2 (ZERO 108 DISPATCH)
+                      </text>
+                      <rect x="0" y="0" width="175" height="48" rx="6" fill="#F8FAFC" />
+                      <rect x="0" y="20" width="175" height="8" fill="#EF4444" />
+                    </g>
+                  </g>
+                )}
+
+                {/* CAM-023: NICE Road Kengeri Toll Weigh-In-Motion (+265 kg) (Case 0043) */}
+                {activeCam.id === 'CAM-023' && (
+                  <g>
+                    <rect x="295" y="110" width="105" height="190" fill="#1E293B" stroke="#F59E0B" strokeWidth="2" strokeDasharray="6 3" />
+                    <text x="235" y="102" fill="#FDE68A" fontSize="10" fontFamily="monospace" fontWeight="bold">
+                      ⚖️ WIM AXLE SENSOR PLATE: 2,410 KG → 2,675 KG (+265 KG ANOMALY!)
+                    </text>
+                    <g transform={`translate(${90 + playbackProgress * 4.2}, 160)`}>
+                      <rect x="-8" y="-20" width="175" height="72" fill="none" stroke="#EF4444" strokeWidth="2" />
+                      <text x="-4" y="-25" fill="#FCA5A5" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
+                        SIREN LANE BYPASS: KA-05-AG-9XX2 | +265 KG GOLD+GANG
+                      </text>
+                      <rect x="0" y="0" width="150" height="42" rx="6" fill="#F8FAFC" />
+                      <rect x="0" y="18" width="150" height="7" fill="#EF4444" />
+                    </g>
+                  </g>
+                )}
+
+                {/* CAM-024: Devanahalli SEZ Gate-2 Connected SUV Factory eSIM Exit (Case 0044) */}
+                {activeCam.id === 'CAM-024' && (
+                  <g>
+                    <circle
+                      cx={200 + playbackProgress * 3.4}
+                      cy={160}
+                      r={24 + (playbackProgress % 35) * 1.3}
+                      fill="none"
+                      stroke="#38BDF8"
+                      strokeWidth="1.8"
+                      strokeDasharray="4 3"
+                    />
+                    <g transform={`translate(${135 + playbackProgress * 3.4}, 165)`}>
+                      <rect x="-10" y="-22" width="190" height="72" fill="none" stroke="#38BDF8" strokeWidth="1.8" />
+                      <text x="-6" y="-27" fill="#7DD3FC" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
+                        CONNECTED SUV KA-03-NC-7XX5 | FACTORY SOS eSIM ACTIVE!
+                      </text>
+                      <rect x="0" y="0" width="128" height="36" rx="6" fill="#0284C7" />
+                      <polygon points="16,0 34,-12 96,-12 114,0" fill="#38BDF8" />
+                    </g>
+                  </g>
+                )}
+
+                {/* CAM-025: MG Road Metro Locker #14 Split-Screen Time-Shifted Match (Case 0044) */}
+                {activeCam.id === 'CAM-025' && (
+                  <g>
+                    <line x1="350" y1="30" x2="350" y2="295" stroke="#F59E0B" strokeWidth="3" strokeDasharray="6 3" />
+                    <text x="45" y="54" fill="#7DD3FC" fontSize="10" fontFamily="monospace" fontWeight="bold">
+                      CLIP A — 13:40:12 IST: INSIDER DROPS KEY-FOB IN LOCKER #14
+                    </text>
+                    <rect x="195" y="105" width="95" height="125" rx="4" fill="#1E293B" stroke="#64748B" strokeWidth="2" />
+                    <rect x="230" y="142" width="26" height="24" fill="#F59E0B" />
+                    <text x="370" y="54" fill="#6EE7B7" fontSize="10" fontFamily="monospace" fontWeight="bold">
+                      CLIP B — 14:02:18 IST (+22m): COURIER ZOYA OPENS LOCKER #14
+                    </text>
+                    <rect x="520" y="105" width="95" height="125" rx="4" fill="#1E293B" stroke="#64748B" strokeWidth="2" />
+                    <rect x="555" y="142" width="26" height="24" fill="#10B981" />
+                  </g>
+                )}
+
+                {/* CAM-026: KIAL Airport Terminal-2 Gate-4 Intercept (Case 0044) */}
+                {activeCam.id === 'CAM-026' && (
+                  <g>
+                    <rect x="440" y="58" width="225" height="150" rx="8" fill="#0F172A" stroke="#10B981" strokeWidth="2" />
+                    <text x="455" y="84" fill="#6EE7B7" fontSize="10" fontFamily="monospace" fontWeight="bold">
+                      KIAL TERMINAL-2 • DIGIYATRA GATE 4 INTERCEPT
+                    </text>
+                    <g transform={`translate(${75 + Math.min(playbackProgress * 3.1, 225)}, 175)`}>
+                      <rect x="-10" y="-22" width="180" height="68" fill="none" stroke="#F59E0B" strokeWidth="1.8" strokeDasharray="4 2" />
+                      <text x="-6" y="-27" fill="#FDE68A" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
+                        AIRPORT TAXI KA-04-D-3XX9 (RBI NOTE SERIAL MATCH)
+                      </text>
+                      <rect x="0" y="0" width="122" height="32" rx="6" fill="#E2E8F0" />
+                      <rect x="42" y="-8" width="32" height="8" rx="2" fill="#F59E0B" />
+                    </g>
+                  </g>
+                )}
+
                 {/* CAM-001, CAM-003 & All Other Corridor Cameras */}
-                {!['CAM-014', 'CAM-019', 'CAM-008', 'CAM-006'].includes(activeCam.id) && (
+                {![
+                  'CAM-014',
+                  'CAM-019',
+                  'CAM-008',
+                  'CAM-006',
+                  'CAM-021',
+                  'CAM-022',
+                  'CAM-023',
+                  'CAM-024',
+                  'CAM-025',
+                  'CAM-026',
+                ].includes(activeCam.id) && (
                   <g transform={`translate(${150 + playbackProgress * 3.4}, 188)`}>
                     <rect
                       x="-10"

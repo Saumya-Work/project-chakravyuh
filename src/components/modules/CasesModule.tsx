@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { useChakravyuh } from '@/context/ChakravyuhContext';
 import { INVESTIGATION_SCENARIO_BLUEPRINTS } from '@/data/syntheticData';
+import { ScenarioCctvVideoDeck } from '@/components/guided/ScenarioCctvVideoDeck';
 
 export const CasesModule: React.FC = () => {
   const {
@@ -327,6 +328,9 @@ export const CasesModule: React.FC = () => {
               </div>
             </div>
           </div>
+
+          {/* LIVE ANIMATED 3-CAMERA CCTV & FORENSIC VIDEO EVIDENCE DECK FOR SELECTED CASE */}
+          <ScenarioCctvVideoDeck caseId={activeScenarioBlueprint.caseId} isHi={isHi} />
         </div>
       </div>
 

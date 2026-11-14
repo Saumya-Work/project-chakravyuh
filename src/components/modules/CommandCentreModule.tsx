@@ -40,6 +40,7 @@ import {
 } from 'lucide-react';
 import { useChakravyuh } from '@/context/ChakravyuhContext';
 import { GUIDED_STAGES, INVESTIGATION_SCENARIO_BLUEPRINTS } from '@/data/syntheticData';
+import { ScenarioCctvVideoDeck } from '@/components/guided/ScenarioCctvVideoDeck';
 
 const CRIME_CATEGORY_DATA = [
   { category: 'Missing / Abduction', count: 4, fill: '#0EA5E9' },
@@ -338,6 +339,9 @@ export const CommandCentreModule: React.FC = () => {
             ))}
           </div>
         </div>
+
+        {/* LIVE ANIMATED 3-CAMERA CCTV & FORENSIC VIDEO EVIDENCE DECK FOR SELECTED CASE */}
+        <ScenarioCctvVideoDeck caseId={activeScenario.caseId} isHi={isHi} />
       </div>
 
       {/* SMART CRIMINAL vs. SOVEREIGN CHAKRAVYUH — 8-STAGE INTERACTIVE CAT-AND-MOUSE MATRIX */}
