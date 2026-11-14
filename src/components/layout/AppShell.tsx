@@ -284,6 +284,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     isAudioEnabled,
     setIsAudioEnabled,
     isSpeaking,
+    speakCustomText,
     stopSpeaking,
     cases,
     devices,
@@ -318,53 +319,12 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     if (langOverride) {
       setNarrationLanguage(langOverride);
     }
-    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
-    if (window.speechSynthesis.paused) {
-      window.speechSynthesis.resume();
-    }
-    const useHindi = (langOverride || narrationLanguage) === 'hi';
-    const voices = window.speechSynthesis.getVoices();
-    const hindiVoice =
-      voices.find(
-        (v) =>
-          v.localService &&
-          (v.lang.toLowerCase().startsWith('hi') ||
-            v.name.toLowerCase().includes('hindi') ||
-            v.name.toLowerCase().includes('hemant') ||
-            v.name.toLowerCase().includes('kalpana') ||
-            v.name.toLowerCase().includes('swara') ||
-            v.name.toLowerCase().includes('madhur'))
-      ) ||
-      voices.find(
-        (v) =>
-          v.lang.toLowerCase().startsWith('hi') ||
-          v.name.toLowerCase().includes('hindi') ||
-          v.name.toLowerCase().includes('swara') ||
-          v.name.toLowerCase().includes('madhur')
-      );
-    const englishVoice =
-      voices.find((v) => v.localService && (v.lang.includes('en-IN') || v.name.includes('India') || v.name.includes('Heera') || v.name.includes('Ravi'))) ||
-      voices.find((v) => v.localService && v.lang.startsWith('en')) ||
-      voices.find((v) => v.lang.includes('en-IN') || v.name.includes('India')) ||
-      voices.find((v) => v.lang.startsWith('en'));
-
-    const textToSpeak = useHindi
-      ? hindiVoice
-        ? currentNavMeta.voiceCommentaryHi
-        : currentNavMeta.voiceCommentaryHinglish
-      : currentNavMeta.voiceCommentary;
-
-    setTimeout(() => {
-      const u = new SpeechSynthesisUtterance(textToSpeak);
-      u.rate = 1.0;
-      if (useHindi && hindiVoice) {
-        u.voice = hindiVoice;
-      } else if (englishVoice) {
-        u.voice = englishVoice;
-      }
-      window.speechSynthesis.speak(u);
-    }, 50);
+    speakCustomText(
+      currentNavMeta.voiceCommentary,
+      currentNavMeta.voiceCommentaryHi,
+      currentNavMeta.voiceCommentaryHinglish,
+      langOverride
+    );
   };
 
   // Instant Global Search across all synthetic entities

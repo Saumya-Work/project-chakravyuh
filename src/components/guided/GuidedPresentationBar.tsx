@@ -24,7 +24,7 @@ import {
   ShieldAlert,
   Crosshair,
 } from 'lucide-react';
-import { useSentinel, NarrationLanguage } from '@/context/SentinelContext';
+import { useSentinel, NarrationLanguage, GeminiVoiceName } from '@/context/SentinelContext';
 import { GUIDED_STAGES } from '@/data/syntheticData';
 
 export const GuidedPresentationBar: React.FC = () => {
@@ -50,6 +50,9 @@ export const GuidedPresentationBar: React.FC = () => {
     isSpeaking,
     speechRate,
     setSpeechRate,
+    ttsEngineStatus,
+    geminiVoiceName,
+    setGeminiVoiceName,
     currentSpokenSentence,
     speakStageCommentary,
     isExecutiveFocusMode,
@@ -195,6 +198,28 @@ export const GuidedPresentationBar: React.FC = () => {
                 {isHi ? '🔊 फिर से सुनें' : '🔊 Replay Voice'}
               </button>
 
+              {/* Indian Gemini Studio Voice Selector + Speed Selector */}
+              <select
+                aria-label="Gemini Indian Human Voice Persona"
+                value={geminiVoiceName}
+                onChange={(e) => {
+                  const nextVoice = e.target.value as GeminiVoiceName;
+                  setGeminiVoiceName(nextVoice);
+                }}
+                title={
+                  ttsEngineStatus === 'gemini-hd'
+                    ? 'Paid Gemini 2.5 Studio HD Indian Human Voice Active (en-IN / hi-IN)'
+                    : 'Gemini Indian Voice Persona'
+                }
+                className="bg-slate-900 border border-emerald-500/50 rounded-lg px-2 py-1 text-[11px] font-semibold text-emerald-300 outline-none"
+              >
+                <option value="Kore">🇮🇳 Indian Female (Kore HD)</option>
+                <option value="Puck">🇮🇳 Indian Male (Puck HD)</option>
+                <option value="Aoede">🇮🇳 Indian Female Warm (Aoede HD)</option>
+                <option value="Charon">🇮🇳 Indian Male Deep (Charon HD)</option>
+                <option value="Fenrir">🇮🇳 Indian Tactical (Fenrir HD)</option>
+              </select>
+
               {/* Speed Selector */}
               <select
                 aria-label="Voice Commentary Speed"
@@ -202,9 +227,9 @@ export const GuidedPresentationBar: React.FC = () => {
                 onChange={(e) => setSpeechRate(Number(e.target.value))}
                 className="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-[11px] font-mono text-slate-300 outline-none"
               >
-                <option value={0.9}>Voice 0.9x</option>
-                <option value={1}>Voice 1.0x</option>
-                <option value={1.1}>Voice 1.1x</option>
+                <option value={0.9}>0.9x</option>
+                <option value={1}>1.0x</option>
+                <option value={1.1}>1.1x</option>
               </select>
 
               <div className="h-4 w-px bg-slate-700 mx-1" />

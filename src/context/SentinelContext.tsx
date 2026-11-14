@@ -36,6 +36,8 @@ import {
 } from '@/data/syntheticData';
 
 export type NarrationLanguage = 'en' | 'hi' | 'bilingual';
+export type GeminiVoiceName = 'Kore' | 'Puck' | 'Charon' | 'Aoede' | 'Fenrir';
+export type TtsEngineStatus = 'gemini-hd' | 'browser-fallback' | 'checking';
 
 interface ToastNotification {
   id: string;
@@ -60,8 +62,17 @@ interface SentinelContextType {
   isSpeaking: boolean;
   speechRate: number;
   setSpeechRate: (r: number) => void;
+  ttsEngineStatus: TtsEngineStatus;
+  geminiVoiceName: GeminiVoiceName;
+  setGeminiVoiceName: (v: GeminiVoiceName) => void;
   currentSpokenSentence: string;
   speakStageCommentary: (stageIdx?: number, langOverride?: NarrationLanguage) => void;
+  speakCustomText: (
+    textEn: string,
+    textHi: string,
+    textHinglish?: string,
+    langOverride?: NarrationLanguage
+  ) => void;
   stopSpeaking: () => void;
   // Data & Actions
   cases: CaseRecord[];
@@ -155,11 +166,44 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [isAudioEnabled, setIsAudioEnabledState] = useState<boolean>(true);
   const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
   const [speechRate, setSpeechRate] = useState<number>(1.0);
+  const [ttsEngineStatus, setTtsEngineStatus] = useState<TtsEngineStatus>('checking');
+  const [geminiVoiceName, setGeminiVoiceName] = useState<GeminiVoiceName>('Kore');
   const [currentSpokenSentence, setCurrentSpokenSentence] = useState<string>('');
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const audioPlayerRef = useRef<HTMLAudioElement | null>(null);
+  const ttsBlobCacheRef = useRef<Map<string, Promise<string | null>>>(new Map());
   const speechSessionIdRef = useRef<number>(0);
   const isSpeakingRef = useRef<boolean>(false);
   const speechCompletedForStageRef = useRef<boolean>(false);
+
+  // Check Gemini API TTS configuration on mount and periodically when waiting for .env update
+  useEffect(() => {
+    let active = true;
+    const checkStatus = async () => {
+      try {
+        const res = await fetch('/api/tts?status=1', { cache: 'no-store' });
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!active) return;
+        if (data.configured) {
+          setTtsEngineStatus('gemini-hd');
+          if (data.defaultVoice) {
+            setGeminiVoiceName(data.defaultVoice as GeminiVoiceName);
+          }
+        } else {
+          setTtsEngineStatus('browser-fallback');
+        }
+      } catch {
+        if (active) setTtsEngineStatus('browser-fallback');
+      }
+    };
+    checkStatus();
+    const poll = setInterval(checkStatus, 6000);
+    return () => {
+      active = false;
+      clearInterval(poll);
+    };
+  }, []);
 
   const [cases, setCases] = useState<CaseRecord[]>(INITIAL_CASES);
   const [selectedCaseId, setSelectedCaseId] = useState<string>('CASE-SNT-2026-0042');
@@ -191,6 +235,15 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const stopSpeaking = useCallback(() => {
     speechSessionIdRef.current += 1;
+    if (audioPlayerRef.current) {
+      try {
+        audioPlayerRef.current.pause();
+        audioPlayerRef.current.src = '';
+      } catch {
+        // Ignore audio reset errors
+      }
+      audioPlayerRef.current = null;
+    }
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
@@ -198,6 +251,46 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     isSpeakingRef.current = false;
     setIsSpeaking(false);
   }, []);
+
+  // Fetches WAV audio blob URL from our Paid Gemini TTS API route (/api/tts) with in-memory & disk caching
+  const fetchGeminiTtsObjectUrl = useCallback(
+    (text: string, lang: 'en' | 'hi', voice: GeminiVoiceName): Promise<string | null> => {
+      const cacheKey = `${voice}|${lang}|${text}`;
+      const existing = ttsBlobCacheRef.current.get(cacheKey);
+      if (existing) return existing;
+
+      const promise = (async () => {
+        try {
+          const res = await fetch('/api/tts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text, lang, voice }),
+          });
+          if (!res.ok) {
+            ttsBlobCacheRef.current.delete(cacheKey);
+            if (res.status === 503) {
+              setTtsEngineStatus('browser-fallback');
+            }
+            return null;
+          }
+          setTtsEngineStatus('gemini-hd');
+          const blob = await res.blob();
+          if (!blob || blob.size < 100) {
+            ttsBlobCacheRef.current.delete(cacheKey);
+            return null;
+          }
+          return URL.createObjectURL(blob);
+        } catch {
+          ttsBlobCacheRef.current.delete(cacheKey);
+          return null;
+        }
+      })();
+
+      ttsBlobCacheRef.current.set(cacheKey, promise);
+      return promise;
+    },
+    []
+  );
 
   const speakStageCommentary = useCallback(
     (stageIdx?: number, langOverride?: NarrationLanguage) => {
@@ -218,7 +311,7 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           ? stage.voiceScriptHinglish
           : hiDevanagariSentences;
 
-      if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+      if (typeof window === 'undefined') {
         setCurrentSpokenSentence(
           activeLang === 'hi' ? hiDevanagariSentences[0] : enSentences[0]
         );
@@ -226,8 +319,8 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         return;
       }
 
-      const voices = window.speechSynthesis.getVoices();
-      // Prefer local OS voices (v.localService) first so Chrome never hangs on unauthenticated cloud voices
+      const voices = 'speechSynthesis' in window ? window.speechSynthesis.getVoices() : [];
+      // Prefer local OS voices (v.localService) for browser fallback so Chrome never hangs on unauthenticated cloud voices
       const hindiNativeVoice =
         voices.find(
           (v) =>
@@ -253,9 +346,10 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         voices.find((v) => v.lang.includes('en-IN') || v.name.includes('India')) ||
         voices.find((v) => v.lang.startsWith('en'));
 
-      // Build queue of { spokenText, displaySubtitle, isHindi }
+      // Build queue of { geminiText, browserFallbackText, displaySubtitle, isHindi }
       type UtteranceItem = {
-        spokenText: string;
+        geminiText: string;
+        browserFallbackText: string;
         displaySubtitle: string;
         isHindi: boolean;
       };
@@ -263,31 +357,43 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       const queue: UtteranceItem[] = [];
       if (activeLang === 'en') {
         enSentences.forEach((s) => {
-          queue.push({ spokenText: s, displaySubtitle: s, isHindi: false });
+          queue.push({
+            geminiText: s,
+            browserFallbackText: s,
+            displaySubtitle: s,
+            isHindi: false,
+          });
         });
       } else if (activeLang === 'hi') {
         hiDevanagariSentences.forEach((hiSub, i) => {
-          const spoken = hindiNativeVoice
+          const fallbackSpoken = hindiNativeVoice
             ? hiSub
             : hiPhoneticSentences[i] || hiSub;
-          queue.push({ spokenText: spoken, displaySubtitle: hiSub, isHindi: true });
+          queue.push({
+            geminiText: hiSub,
+            browserFallbackText: fallbackSpoken,
+            displaySubtitle: hiSub,
+            isHindi: true,
+          });
         });
       } else {
         const maxLen = Math.max(enSentences.length, hiDevanagariSentences.length);
         for (let i = 0; i < maxLen; i++) {
           if (enSentences[i]) {
             queue.push({
-              spokenText: enSentences[i],
+              geminiText: enSentences[i],
+              browserFallbackText: enSentences[i],
               displaySubtitle: `🇬🇧 ${enSentences[i]}`,
               isHindi: false,
             });
           }
           if (hiDevanagariSentences[i]) {
-            const spokenHi = hindiNativeVoice
+            const fallbackHi = hindiNativeVoice
               ? hiDevanagariSentences[i]
               : hiPhoneticSentences[i] || hiDevanagariSentences[i];
             queue.push({
-              spokenText: spokenHi,
+              geminiText: hiDevanagariSentences[i],
+              browserFallbackText: fallbackHi,
               displaySubtitle: `🇮🇳 ${hiDevanagariSentences[i]}`,
               isHindi: true,
             });
@@ -300,17 +406,28 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           (activeLang === 'hi' ? stage.presenterScriptHi : stage.presenterScript)
       );
 
-      // Increment session ID so any previous cancelled utterance callbacks are ignored
+      // Increment session ID so any previous cancelled utterance/audio callbacks are ignored
       speechSessionIdRef.current += 1;
       const currentSessionId = speechSessionIdRef.current;
       speechCompletedForStageRef.current = false;
 
-      window.speechSynthesis.cancel();
-      if (window.speechSynthesis.paused) {
-        window.speechSynthesis.resume();
+      if (audioPlayerRef.current) {
+        try {
+          audioPlayerRef.current.pause();
+          audioPlayerRef.current.src = '';
+        } catch {
+          // Ignore
+        }
+        audioPlayerRef.current = null;
+      }
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        if (window.speechSynthesis.paused) {
+          window.speechSynthesis.resume();
+        }
       }
 
-      const speakSentenceAt = (sIndex: number) => {
+      const speakSentenceAt = async (sIndex: number) => {
         if (speechSessionIdRef.current !== currentSessionId) return;
 
         if (sIndex >= queue.length) {
@@ -323,7 +440,77 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         const item = queue[sIndex];
         setCurrentSpokenSentence(item.displaySubtitle);
 
-        const utterance = new SpeechSynthesisUtterance(item.spokenText);
+        // Prefetch next sentence in parallel for zero-latency human narration transitions
+        if (sIndex + 1 < queue.length) {
+          const nextItem = queue[sIndex + 1];
+          fetchGeminiTtsObjectUrl(
+            nextItem.geminiText,
+            nextItem.isHindi ? 'hi' : 'en',
+            geminiVoiceName
+          );
+        }
+
+        let advanced = false;
+        const advanceNext = () => {
+          if (advanced) return;
+          advanced = true;
+          if (speechSessionIdRef.current !== currentSessionId) return;
+          const completedPct = Math.round(((sIndex + 1) / queue.length) * 90);
+          setGuidedProgress((prev) => Math.max(prev, completedPct));
+          speakSentenceAt(sIndex + 1);
+        };
+
+        // 1. Try Paid Gemini Studio HD Human Voice first
+        const geminiAudioUrl = await fetchGeminiTtsObjectUrl(
+          item.geminiText,
+          item.isHindi ? 'hi' : 'en',
+          geminiVoiceName
+        );
+
+        if (speechSessionIdRef.current !== currentSessionId) return;
+
+        if (geminiAudioUrl) {
+          try {
+            const audio = new Audio(geminiAudioUrl);
+            audio.playbackRate = speechRate;
+            audioPlayerRef.current = audio;
+
+            const watchdog = setTimeout(() => {
+              advanceNext();
+            }, 22000);
+
+            audio.onplay = () => {
+              if (speechSessionIdRef.current !== currentSessionId) return;
+              isSpeakingRef.current = true;
+              setIsSpeaking(true);
+              const basePct = Math.round((sIndex / queue.length) * 85);
+              setGuidedProgress((prev) => Math.max(prev, basePct));
+            };
+
+            audio.onended = () => {
+              clearTimeout(watchdog);
+              advanceNext();
+            };
+
+            audio.onerror = () => {
+              clearTimeout(watchdog);
+              advanceNext();
+            };
+
+            await audio.play();
+            return;
+          } catch {
+            // Fall through to browser speechSynthesis if autoplay or audio element fails
+          }
+        }
+
+        // 2. Fallback to Browser speechSynthesis (when GEMINI_API_KEY is not yet added to .env)
+        if (!('speechSynthesis' in window)) {
+          advanceNext();
+          return;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(item.browserFallbackText);
         utterance.rate = speechRate;
         utterance.pitch = 1.0;
 
@@ -333,21 +520,9 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
           utterance.voice = englishIndianVoice;
         }
 
-        let advanced = false;
-        const advanceNext = () => {
-          if (advanced) return;
-          advanced = true;
-          clearTimeout(watchdog);
-          if (speechSessionIdRef.current !== currentSessionId) return;
-          const completedPct = Math.round(((sIndex + 1) / queue.length) * 90);
-          setGuidedProgress((prev) => Math.max(prev, completedPct));
-          speakSentenceAt(sIndex + 1);
-        };
-
-        // Watchdog timer in case a browser speech engine hangs without firing onend
         const watchdog = setTimeout(() => {
           advanceNext();
-        }, 11000);
+        }, 12000);
 
         utterance.onstart = () => {
           if (speechSessionIdRef.current !== currentSessionId) return;
@@ -358,10 +533,12 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         };
 
         utterance.onend = () => {
+          clearTimeout(watchdog);
           advanceNext();
         };
 
         utterance.onerror = () => {
+          clearTimeout(watchdog);
           advanceNext();
         };
 
@@ -373,9 +550,83 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         if (speechSessionIdRef.current === currentSessionId) {
           speakSentenceAt(0);
         }
-      }, 60);
+      }, 40);
     },
-    [guidedStageIndex, narrationLanguage, speechRate]
+    [fetchGeminiTtsObjectUrl, geminiVoiceName, guidedStageIndex, narrationLanguage, speechRate]
+  );
+
+  const speakCustomText = useCallback(
+    async (
+      textEn: string,
+      textHi: string,
+      textHinglish?: string,
+      langOverride?: NarrationLanguage
+    ) => {
+      if (typeof window === 'undefined') return;
+      const useHindi = (langOverride || narrationLanguage) === 'hi';
+      stopSpeaking();
+      speechSessionIdRef.current += 1;
+      const currentSessionId = speechSessionIdRef.current;
+
+      const geminiText = useHindi ? textHi : textEn;
+      const audioUrl = await fetchGeminiTtsObjectUrl(
+        geminiText,
+        useHindi ? 'hi' : 'en',
+        geminiVoiceName
+      );
+
+      if (speechSessionIdRef.current !== currentSessionId) return;
+
+      if (audioUrl) {
+        try {
+          const audio = new Audio(audioUrl);
+          audio.playbackRate = speechRate;
+          audioPlayerRef.current = audio;
+          audio.onplay = () => setIsSpeaking(true);
+          audio.onended = () => setIsSpeaking(false);
+          audio.onerror = () => setIsSpeaking(false);
+          await audio.play();
+          return;
+        } catch {
+          // Fall back to browser speech
+        }
+      }
+
+      if (!('speechSynthesis' in window)) return;
+      const voices = window.speechSynthesis.getVoices();
+      const hindiVoice =
+        voices.find(
+          (v) =>
+            v.localService &&
+            (v.lang.toLowerCase().startsWith('hi') ||
+              v.name.toLowerCase().includes('hindi') ||
+              v.name.toLowerCase().includes('hemant') ||
+              v.name.toLowerCase().includes('kalpana') ||
+              v.name.toLowerCase().includes('swara') ||
+              v.name.toLowerCase().includes('madhur'))
+        ) ||
+        voices.find((v) => v.lang.toLowerCase().startsWith('hi') || v.name.toLowerCase().includes('hindi'));
+      const englishVoice =
+        voices.find((v) => v.localService && (v.lang.includes('en-IN') || v.name.includes('India') || v.name.includes('Heera') || v.name.includes('Ravi'))) ||
+        voices.find((v) => v.localService && v.lang.startsWith('en')) ||
+        voices.find((v) => v.lang.startsWith('en'));
+
+      const fallbackText = useHindi
+        ? hindiVoice
+          ? textHi
+          : textHinglish || textHi
+        : textEn;
+
+      const u = new SpeechSynthesisUtterance(fallbackText);
+      u.rate = speechRate;
+      if (useHindi && hindiVoice) u.voice = hindiVoice;
+      else if (englishVoice) u.voice = englishVoice;
+      u.onstart = () => setIsSpeaking(true);
+      u.onend = () => setIsSpeaking(false);
+      u.onerror = () => setIsSpeaking(false);
+      window.speechSynthesis.speak(u);
+    },
+    [fetchGeminiTtsObjectUrl, geminiVoiceName, narrationLanguage, speechRate, stopSpeaking]
   );
 
   const setNarrationLanguage = useCallback((lang: NarrationLanguage) => {
@@ -1078,8 +1329,12 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         isSpeaking,
         speechRate,
         setSpeechRate,
+        ttsEngineStatus,
+        geminiVoiceName,
+        setGeminiVoiceName,
         currentSpokenSentence,
         speakStageCommentary,
+        speakCustomText,
         stopSpeaking,
         cases,
         selectedCaseId,
