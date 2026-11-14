@@ -297,3 +297,57 @@ flowchart TB
   1. **Point-of-Activation & Bulk-SIM Batch Link:** DoT / C-DOT central subscriber registry reveals `DEV-004` was activated 6 days earlier from a bulk batch of 5 SIMs at a kiosk near Mahadevapura.
   2. **UPI / POS Recharge Timestamp Match:** FIU/NPCI logs show `DEV-004` received a ₹199 data pack recharge on `23 Oct at 20:14 IST`. The kiosk’s adjacent ATM pinhole camera captured **Karan Malhotra’s White SUV** parked outside at `20:13 IST`!
   3. **3-Tower Timing Advance (TA) + Angle of Arrival (AoA):** During the 16-minute shadow stop (`19:02–19:18`), 3 surrounding cell towers triangulate `DEV-004`’s radio handshakes to a **40-meter stretch of the Old Canal Service Culvert**, pinpointing the exact hidden stop location.
+
+
+---
+---
+
+## PART 4: Multi-Case Power Showcase — 2 Additional Full Investigation Scenarios
+
+To prove that **Project Chakravyuh (`प्रोजेक्ट चक्रव्यूह`)** can defeat *any* criminal methodology—even when suspects carry **zero mobile phones** or operate in **100% Airplane Mode with time-shifted dead-drops**—the platform includes two additional end-to-end Bengaluru investigations:
+
+---
+
+### INVESTIGATION CASE 2 (`CASE-CKV-2026-0043`): Chickpet–Jayanagar ₹4.2 Crore Gold Bullion Heist ("The Zero-Phone Analog Gang")
+
+* **Incident Summary:** At `14:10 IST` on `04 November 2026`, three masked operatives execute a 4-minute vault heist at **Sri Lakshmi Bullion House, Raja Market (Avenue Road / Chickpet, Bengaluru)** and vanish with 52 kg of gold bullion (₹4.2 Crore).
+* **How the Criminal Gang Thought Ahead (4 Evasion Moves):**
+  1. **Zero Mobile Phones / Zero SIMs:** All 3 operatives carry **zero mobile phones** during the heist—communicating only on unlicensed `446 MHz` analog walkie-talkies so a Chickpet tower dump shows nothing.
+  2. **Green Laser Blinding of Vault CCTV:** They shine high-power green lasers at `CAM-021` (Raja Market Vault Cam) to saturate the optical sensor during the 4-minute breach.
+  3. **2-Wheeler to Fake Ambulance Relay at Lalbagh:** They flee Chickpet’s narrow lanes on two electric scooters (`KA-01-EM-2XX9`, `KA-02-EM-7XX4`), abandon them inside **Lalbagh West Gate Parking (`14:28 IST`)**, and load the 52 kg gold into a disguised **Private Patient-Transport Ambulance (`KA-05-AG-9XX2`)** with emergency sirens blaring through **Jayanagar 4th Block → NICE Ring Road (Kengeri) → Bidadi (Mysuru Road NH-275)**.
+  4. **Toll FASTag Bypass:** The fake ambulance uses the emergency siren bypass lane at NICE Road Kengeri Toll Plaza without scanning a FASTag.
+
+* **How Project Chakravyuh Caught the "Zero-Phone" Gang (4 Sovereign Traps):**
+  1. **Trap 1 — The "Synchronized Pre-Blackout" Telecom Trap (`13:25 IST`):**
+     - Criminals who leave their phones off *during* a 2:10 PM heist still used their phones *before* 1:30 PM to meet up!
+     - Chakravyuh scans for **3 phones that were co-located in Chamarajpet (1.8 km from Chickpet) at `13:20 IST` and all powered off within the same 8-second window (`13:25:04 IST`)**—and then all powered back on together at **Bidadi Industrial Area (Mysuru Highway)** at `16:10 IST` (`DEV-021` Harsha Gowda’s syndicate phone)!
+  2. **Trap 2 — BESCOM EV-Mitra Fast-Charger BMS + UPI Trail:**
+     - The two electric scooters dumped at Lalbagh West Gate had scratched-off frame numbers, but Chakravyuh extracts their **Battery Management System (BMS) serial ID (`BMS-PACK-9921`)** and queries **BESCOM EV-Mitra Public Fast Chargers**.
+     - That exact battery pack was charged to 100% at **Basavanagudi EV Station at `11:40 IST`**, paid via **UPI Reference `UPI-REF-8841209`** linked to operative *Harsha Gowda*!
+  3. **Trap 3 — NICE Road Weigh-In-Motion (WIM) Axle Sensor + 108 Ambulance Registry Trap:**
+     - Chakravyuh cross-checks every ambulance passing **Jayanagar → NICE Road Kengeri Toll (`14:52 IST`)** against the **Karnataka 108 / Suvarna Arogya Hospital Dispatch Grid**: `KA-05-AG-9XX2` had **zero hospital dispatch** and never visited Victoria, Nimhans, or Jayadeva Hospital.
+     - Furthermore, the **High-Speed Weigh-In-Motion (WIM) Axle Pad** at Kengeri Toll Ramp shows `KA-05-AG-9XX2` gained **`+265 kg` of payload** (3 operatives + 52 kg gold + steel boxes) between entering Lalbagh empty at `14:22` and hitting NICE Road at `14:52`!
+  4. **Trap 4 — C-DOT `446 MHz` SDR Spectrum Direction-Finding:**
+     - C-DOT Automated Spectrum Monitors atop **KR Market and Town Hall** triangulate three `446.09375 MHz` walkie-talkie bursts moving from Chickpet (`14:12`) $\rightarrow$ Lalbagh West Gate (`14:27`) $\rightarrow$ Jayanagar 4th Block (`14:36`), locking the exact relay path!
+
+---
+
+### INVESTIGATION CASE 3 (`CASE-CKV-2026-0044`): Devanahalli Aerospace Defence Blueprint Leak & Airport Intercept ("The Airplane-Mode + AI Deepfake Syndicate")
+
+* **Incident Summary:** At `10:15 IST` on `05 November 2026`, classified drone propulsion CAD blueprints are exfiltrated from an **Aerospace R&D Facility in Devanahalli (Bengaluru North)**, passed via a zero-contact dead-drop at **MG Road Namma Metro Station (`13:40 IST`)**, settled via a ₹65 Lakh crypto-hawala drop at **Whitefield (`15:20 IST`)**, and headed for international extraction via **Kempegowda International Airport Terminal 2 (`17:45 IST`)**.
+* **How the High-Tech Operative Thought Ahead (4 Evasion Moves):**
+  1. **100% Airplane Mode:** Insider engineer *Vikramaditya Joshi* puts his smartphone (`DEV-025`) in **100% Airplane Mode** before leaving Devanahalli so zero cell towers log his trip into central Bengaluru.
+  2. **AI Deepfake Voice Clone:** Uses an **AI Voice Clone** of the R&D Director over an encrypted VoIP call to authorize temporary visitor badge access at Devanahalli Gate-2.
+  3. **Time-Shifted Dead-Drop (Never in the Same CCTV Frame):** Places the encrypted micro-SD (hidden inside a car key-fob) into **Smart Parcel Locker #14 at MG Road Namma Metro Concourse (`CAM-022`) at `13:40 IST`** and leaves. Foreign courier *Zoya Merchant* arrives **22 minutes later at `14:02 IST`** to retrieve it—so the two conspirators never appear together on any camera!
+  4. **Cash-to-Crypto Hawala & Secondary Passport Exit:** Settles payment via a Whitefield cash drop while the courier takes an airport cab (`KA-04-D-3XX9`) to **Kempegowda International Airport (BLR) Terminal 2**.
+
+* **How Project Chakravyuh Caught the "Airplane-Mode + Dead-Drop" Syndicate (4 Sovereign Traps):**
+  1. **Trap 1 — Defeating "Airplane Mode" via Connected-Car Factory eSIM (`VEH-010`) + Metro Wi-Fi Probe:**
+     - The insider put his phone in Airplane Mode, **but forgot that his 2025 connected SUV (`KA-03-NC-7XX5`) has an embedded factory Telematics eSIM** (used for OEM SOS & live traffic) that pinged cell towers at **Devanahalli (`10:22`), Hebbal Flyover (`11:05`), Mekhri Circle (`11:20`), and MG Road (`13:35`)**!
+     - Even in Airplane Mode, his phone’s background Wi-Fi/BLE chip broadcast a MAC probe (`DEV-025`) inside **BMRCL MG Road Namma Metro Concourse at `13:39 IST`**!
+  2. **Trap 2 — The "Time-Shifted Spatial Interaction Graph" (Catching Two People 22 Minutes Apart):**
+     - Traditional CCTV review looks for two suspects standing together. Project Chakravyuh’s **Time-Shifted Spatial Interaction Graph** flags **Smart Locker #14 (`CAM-022`)**: out of 18,000 commuters at MG Road Metro between `13:00` and `14:30 IST`, **only TWO individuals interacted with Locker Bay #14** (`Vikramaditya Joshi` at `13:40` and `Zoya Merchant` at `14:02`)—proving the handover with `99.8%` certainty across a 22-minute gap!
+  3. **Trap 3 — C-DOT Forensic Acoustic Vocoder Trap (Exposing the AI Voice Clone):**
+     - Chakravyuh’s **Audio Forensics Engine** analyzes the "Director’s" gate-clearance phone call and detects **zero sub-glottal micro-tremors above `7.8 kHz`** and a neural vocoder phase-stitching signature—flagging the call as a **Synthetic AI Voice Clone** within 4 seconds!
+  4. **Trap 4 — FIU Currency-Note Serial OCR + KIAL Terminal-2 DigiYatra Intercept:**
+     - When ₹15 Lakh of the hawala payout is deposited into a **Whitefield Smart Cash Deposit Machine (CDM)** at `15:35 IST`, the machine’s **RBI Currency Serial-Number OCR** links the note batch to the escrow agent who booked airport taxi `KA-04-D-3XX9`—allowing CISF and Bengaluru Police to intercept the courier at **Kempegowda International Airport Terminal 2 (Gate 4)** at `17:45 IST` with the stolen micro-SD!

@@ -39,7 +39,7 @@ import {
   Languages,
 } from 'lucide-react';
 import { useChakravyuh } from '@/context/ChakravyuhContext';
-import { GUIDED_STAGES } from '@/data/syntheticData';
+import { GUIDED_STAGES, INVESTIGATION_SCENARIO_BLUEPRINTS } from '@/data/syntheticData';
 
 const CRIME_CATEGORY_DATA = [
   { category: 'Missing / Abduction', count: 4, fill: '#0EA5E9' },
@@ -71,6 +71,8 @@ const ACTIVITY_TIMELINE_DATA = [
 export const CommandCentreModule: React.FC = () => {
   const {
     cases,
+    selectedCaseId,
+    setSelectedCaseId,
     cameras,
     cctvRequests,
     leads,
@@ -82,11 +84,17 @@ export const CommandCentreModule: React.FC = () => {
     setNarrationLanguage,
     isExecutiveFocusMode,
     setIsExecutiveFocusMode,
+    speakCustomText,
+    isSpeaking,
+    stopSpeaking,
   } = useChakravyuh();
 
   const [showDetailedCharts, setShowDetailedCharts] = useState(false);
   const [showAllTraps, setShowAllTraps] = useState(true);
   const isHi = narrationLanguage === 'hi';
+  const activeScenario =
+    INVESTIGATION_SCENARIO_BLUEPRINTS.find((b) => b.caseId === selectedCaseId) ||
+    INVESTIGATION_SCENARIO_BLUEPRINTS[0];
 
   const receivedCamerasCount = cameras.filter((c) => c.footageStatus === 'Footage received').length;
   const pendingLeadsCount = leads.filter((l) => l.reviewStatus === 'Awaiting Investigator Review').length;
@@ -192,6 +200,142 @@ export const CommandCentreModule: React.FC = () => {
               <Languages className="w-4 h-4" />
               <span>🇮🇳+🇬🇧 Play Bilingual Demo (English + हिंदी)</span>
             </button>
+          </div>
+        </div>
+      </div>
+
+      {/* 3 FLAGSHIP INVESTIGATION CASES — MULTI-SCENARIO POWER SHOWCASE */}
+      <div className="bg-gradient-to-r from-[#0D1830] via-[#132344] to-[#0D1830] border-2 border-amber-500/50 rounded-2xl p-5 shadow-2xl space-y-4">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 border-b border-slate-700/80 pb-3">
+          <div>
+            <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-300 uppercase">
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <span>
+                {isHi
+                  ? '3 प्रमुख जांच केस (Multi-Case Power Showcase) — किसी भी केस को चुनें और पूरी कहानी सुनें'
+                  : '3 FLAGSHIP INVESTIGATION SCENARIOS — SHOWCASING HOW CHAKRAVYUH DEFEATS EVERY CRIMINAL METHOD'}
+              </span>
+            </div>
+            <p className="text-xs text-slate-300 mt-1">
+              {isHi
+                ? 'प्रोजेक्ट चक्रव्यूह केवल एक तरीके के अपराध तक सीमित नहीं है। नीचे 3 अलग-अलग मामलों पर क्लिक करके देखें और सुनें:'
+                : 'Click any of the 3 investigation cases below to switch scenarios, inspect the 4-Step Discovery Funnel, or listen to the full Indian HD Voice Case Briefing:'}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
+            <button
+              onClick={() =>
+                speakCustomText(
+                  activeScenario.voiceBriefingEn,
+                  activeScenario.voiceBriefingHi,
+                  undefined,
+                  'en'
+                )
+              }
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs shadow-lg transition"
+            >
+              <Volume2 className="w-4 h-4" />
+              <span>🇬🇧 Speak Selected Case (EN)</span>
+            </button>
+            <button
+              onClick={() =>
+                speakCustomText(
+                  activeScenario.voiceBriefingEn,
+                  activeScenario.voiceBriefingHi,
+                  undefined,
+                  'hi'
+                )
+              }
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs shadow-lg transition"
+            >
+              <Volume2 className="w-4 h-4" />
+              <span>🇮🇳 हिंदी में केस सुनें (HI)</span>
+            </button>
+            {isSpeaking && (
+              <button
+                onClick={stopSpeaking}
+                className="px-2.5 py-2 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 text-xs font-bold"
+              >
+                Stop Voice
+              </button>
+            )}
+            <button
+              onClick={() => setActiveModule('cases')}
+              className="px-3 py-2 rounded-xl bg-[#090D16] hover:bg-slate-800 border border-sky-500/40 text-sky-300 text-xs font-bold transition"
+            >
+              {isHi ? 'पूरा केस डोजियर खोलें →' : 'Open Full Case Dossier →'}
+            </button>
+          </div>
+        </div>
+
+        {/* 3 Scenario Selector Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {INVESTIGATION_SCENARIO_BLUEPRINTS.map((scen) => {
+            const isSelected = activeScenario.caseId === scen.caseId;
+            return (
+              <div
+                key={scen.caseId}
+                onClick={() => setSelectedCaseId(scen.caseId)}
+                className={`p-4 rounded-xl border-2 cursor-pointer transition flex flex-col justify-between gap-2 ${
+                  isSelected
+                    ? 'bg-sky-950/80 border-amber-400 shadow-lg shadow-amber-500/10'
+                    : 'bg-[#090D16]/90 border-slate-800 hover:border-slate-600'
+                }`}
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                      {isHi ? scen.badgeHi : scen.badgeEn}
+                    </span>
+                    <span className="font-mono text-xs font-bold text-sky-300">{scen.caseId}</span>
+                  </div>
+                  <div className="text-sm font-extrabold text-white mt-1.5">
+                    {isHi ? scen.shortTitleHi : scen.shortTitleEn}
+                  </div>
+                  <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                    {isHi ? scen.keyChallengeHi : scen.keyChallengeEn}
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono">
+                  <span className="text-teal-300 truncate">{scen.vehicleMasked}</span>
+                  <span className="text-amber-300 font-bold shrink-0">
+                    {isSelected ? (isHi ? '✓ सक्रिय केस' : '✓ Active Scenario') : isHi ? 'चुनें →' : 'Select →'}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Active Scenario 4-Step Discovery Funnel + 4 Traps Preview */}
+        <div className="bg-[#090D16]/95 border border-sky-500/35 rounded-xl p-4 space-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="text-xs font-mono font-bold text-sky-300 uppercase">
+              {isHi
+                ? `🔍 ${activeScenario.shortTitleHi} — 4-चरणीय खोज और सरकारी जाल:`
+                : `🔍 ${activeScenario.shortTitleEn} — 4-STEP DISCOVERY FUNNEL & SOVEREIGN TRAPS:`}
+            </div>
+            <span className="text-xs font-mono text-emerald-300">
+              🎯 {activeScenario.suspectAlias}
+            </span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-2.5">
+            {activeScenario.discoveryFunnelSteps.map((st, idx) => (
+              <div key={idx} className="p-3 rounded-lg bg-[#10192B] border border-sky-500/30 space-y-1">
+                <div className="flex items-center justify-between gap-1">
+                  <span className="text-xs font-bold text-white">
+                    {isHi ? st.stepTitleHi : st.stepTitleEn}
+                  </span>
+                  <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold shrink-0">
+                    {st.metricBadge}
+                  </span>
+                </div>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  {isHi ? st.detailHi : st.detailEn}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

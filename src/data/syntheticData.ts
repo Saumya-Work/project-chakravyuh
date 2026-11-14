@@ -38,6 +38,52 @@ export const INITIAL_CASES: CaseRecord[] = [
     pendingRequestsCount: 4,
   },
   {
+    id: 'CASE-CKV-2026-0043',
+    title: 'Chickpet–Jayanagar ₹4.2 Cr Gold Bullion Heist — "Zero-Phone Gang" & Fake Ambulance Relay',
+    category: 'Armed Bullion Heist / Organized Syndicate',
+    status: 'Active — Priority Verification',
+    incidentDate: '04 November 2026',
+    lastConfirmedSightingTime: '14:10',
+    complaintReceivedTime: '14:22',
+    incidentLocation: 'Raja Market (Avenue Rd / Chickpet) → Lalbagh West Gate → Jayanagar 4th Block → NICE Road (Kengeri–Bidadi NH-275), Bengaluru',
+    coordinates: [12.9698, 77.5798],
+    victimAlias: 'Sri Lakshmi Bullion Vault (Mahendra Jain, Chickpet)',
+    victimDescription: '52 kg gold bullion (₹4.2 Crore) looted in 4 minutes by 3 masked operatives carrying ZERO mobile phones, using green lasers to blind CCTV, EV scooters to reach Lalbagh, and a disguised ambulance (KA-05-AG-9XX2) to escape toward Mysuru Road.',
+    assignedInvestigator: 'Inspector Vikram Rao',
+    supervisingOfficer: 'ACP Meera Nair',
+    forensicLead: 'Dr. Priya Krishnan',
+    summary:
+      'Three operatives executed a zero-phone heist at Chickpet Raja Market (14:10 IST), blinded vault CCTV with green lasers, rode electric scooters to Lalbagh West Gate (14:28 IST), and transferred 52 kg of gold into a disguised Patient Ambulance (KA-05-AG-9XX2). Project Chakravyuh trapped them via: (1) Chamarajpet Synchronized Pre-Heist Phone Blackout at 13:25 IST, (2) BESCOM EV-Mitra Fast-Charger BMS + UPI payment link at Basavanagudi, (3) NICE Road Kengeri Toll Weigh-In-Motion (+265 kg payload spike) + 108 Hospital Dispatch mismatch, and (4) C-DOT 446 MHz Walkie-Talkie RF Direction Finding.',
+    authorisationRef: 'AUTH-BLR-SYN-2026-8904',
+    jurisdiction: 'Chickpet & Jayanagar Police Sub-Division — Bengaluru South/West',
+    evidenceCount: 10,
+    leadsCount: 4,
+    pendingRequestsCount: 1,
+  },
+  {
+    id: 'CASE-CKV-2026-0044',
+    title: 'Devanahalli Aerospace Blueprint Espionage — Airplane-Mode Dead-Drop & KIAL Terminal-2 Intercept',
+    category: 'National Security / Corporate Espionage & Cyber Fraud',
+    status: 'Active — Priority Verification',
+    incidentDate: '05 November 2026',
+    lastConfirmedSightingTime: '13:40',
+    complaintReceivedTime: '14:30',
+    incidentLocation: 'Devanahalli Aerospace Park → MG Road Namma Metro Locker #14 → Whitefield → Kempegowda International Airport (Terminal 2), Bengaluru',
+    coordinates: [12.9756, 77.6066],
+    victimAlias: 'AeroVeda Defence Systems (Devanahalli SEZ, Bengaluru North)',
+    victimDescription: 'Classified drone propulsion CAD blueprints stolen on micro-SD by insider keeping phone in 100% Airplane Mode, using AI Deepfake Voice Clone of Director, and executing a 22-minute time-shifted dead-drop at MG Road Metro Locker #14.',
+    assignedInvestigator: 'Inspector Kavita Reddy',
+    supervisingOfficer: 'ACP Meera Nair',
+    forensicLead: 'Dr. Priya Krishnan',
+    summary:
+      'Insider Vikramaditya Joshi exfiltrated defence CAD blueprints from Devanahalli with his smartphone in 100% Airplane Mode, authorized gate exit via an AI Deepfake Voice Clone, and placed the micro-SD in MG Road Metro Smart Locker #14 at 13:40 IST for courier Zoya Merchant to collect 22 minutes later (14:02 IST) so they never appeared in the same CCTV frame. Project Chakravyuh trapped them via: (1) Connected-SUV Factory Telematics eSIM (KA-03-NC-7XX5) + Metro BLE probe defeating Airplane Mode, (2) Time-Shifted Spatial Interaction Graph on Locker #14 across 18,000 commuters, (3) C-DOT Acoustic Vocoder Trap exposing the AI Voice Clone, and (4) Whitefield CDM Currency-Note Serial OCR leading to KIAL Terminal-2 Gate-4 intercept.',
+    authorisationRef: 'AUTH-BLR-SYN-2026-8951',
+    jurisdiction: 'Devanahalli, Cubbon Park & Whitefield CEN Division — Bengaluru',
+    evidenceCount: 11,
+    leadsCount: 5,
+    pendingRequestsCount: 0,
+  },
+  {
     id: 'CASE-CKV-2026-0039',
     title: 'SP Road & Peenya Electronics Hub (Bengaluru–Tumakuru NH-48) — Unauthorised Night Entry Inquiry',
     category: 'Commercial Burglary / Intrusion',
@@ -3241,3 +3287,358 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
 ];
 
 
+export interface InvestigationScenarioBlueprint {
+  caseId: string;
+  badgeEn: string;
+  badgeHi: string;
+  shortTitleEn: string;
+  shortTitleHi: string;
+  headlineEn: string;
+  headlineHi: string;
+  corridorEn: string;
+  corridorHi: string;
+  suspectAlias: string;
+  vehicleMasked: string;
+  keyChallengeEn: string;
+  keyChallengeHi: string;
+  discoveryFunnelSteps: Array<{
+    stepTitleEn: string;
+    stepTitleHi: string;
+    metricBadge: string;
+    detailEn: string;
+    detailHi: string;
+  }>;
+  criminalMoves: Array<{
+    titleEn: string;
+    titleHi: string;
+    descEn: string;
+    descHi: string;
+  }>;
+  chakravyuhTraps: Array<{
+    titleEn: string;
+    titleHi: string;
+    systemUsed: string;
+    descEn: string;
+    descHi: string;
+  }>;
+  voiceBriefingEn: string;
+  voiceBriefingHi: string;
+}
+
+export const INVESTIGATION_SCENARIO_BLUEPRINTS: InvestigationScenarioBlueprint[] = [
+  {
+    caseId: 'CASE-CKV-2026-0042',
+    badgeEn: 'SCENARIO 1 • BURNER PHONE & FAKE HOME ALIBI',
+    badgeHi: 'केस 1 • फर्जी सिम और नकली "घर की अलीबी"',
+    shortTitleEn: 'Case 1: Indiranagar Abduction (Aarav Sharma)',
+    shortTitleHi: 'केस 1: इंदिरानगर अपहरण केस (आरव शर्मा)',
+    headlineEn: 'CASE-CKV-2026-0042: Indiranagar 100Ft Rd Abduction — Fake Home Alibi, Faraday Bag & Blind-Spot Camera',
+    headlineHi: 'CASE-CKV-2026-0042: इंदिरानगर 100 फीट रोड अपहरण — नकली अलीबी, सिग्नल-ब्लॉकिंग बैग और ब्लाइंड-स्पॉट कैमरा',
+    corridorEn: 'Indiranagar 100Ft Rd → 12th Main → Sony World Signal → Challaghatta Lake → Domlur–Marathahalli Flyover',
+    corridorHi: 'इंदिरानगर 100 फीट रोड → 12वां मेन → सोनी वर्ल्ड सिग्नल → चल्लघट्टा झील → डोमलूर–मराठाहल्ली फ्लाईओवर',
+    suspectAlias: 'Karan Malhotra (DEV-019 Home Alibi + DEV-004 Burner)',
+    vehicleMasked: 'White Compact SUV (KA-01-MX-4XX1)',
+    keyChallengeEn: 'Suspect left his real phone at home playing video, carried an unlinked burner phone, put the victim’s phone in a Faraday bag, and struck inside a dead CCTV camera zone.',
+    keyChallengeHi: 'अपराधी ने अपना असली फ़ोन घर पर वीडियो चलाकर छोड़ दिया, फर्जी सिम साथ ले गया, पीड़ित का फ़ोन सिग्नल-ब्लॉकिंग बैग में डाला और बंद कैमरे वाली गली चुनी।',
+    discoveryFunnelSteps: [
+      {
+        stepTitleEn: '1. Crime-Time Tower Dump',
+        stepTitleHi: '1. वारदात के वक्त के सभी सिग्नल',
+        metricBadge: '3,420 → 30 Phones',
+        detailEn: 'Pulled 3,420 active signals in Indiranagar and filtered to 30 phones inside the 100Ft Rd Library geofence at 6:48 PM.',
+        detailHi: 'इंदिरानगर के 3,420 सिग्नलों में से शाम 6:48 पर लाइब्रेरी क्राइम-सीन घेरे के 30 फ़ोन छाँटे गए।',
+      },
+      {
+        stepTitleEn: '2. Case-by-Case Elimination',
+        stepTitleHi: '2. केस-बाय-केस निर्दोष छंटनी',
+        metricBadge: '30 → 1 Burner (DEV-004)',
+        detailEn: 'Cleared 26 residents, Rohan Verma (DEV-007 gate RFID), and courier Sameer (DEV-012)—isolating only 1 burner phone (DEV-004).',
+        detailHi: '26 निवासियों, रोहन वर्मा (गेट पास) और कूरियर समीर को निर्दोष पाकर हटाया—केवल 1 फर्जी सिम (DEV-004) बचा।',
+      },
+      {
+        stepTitleEn: '3. 10-Day Signal History Scan',
+        stepTitleHi: '3. 10-दिन की सिग्नल हिस्ट्री',
+        metricBadge: '14 Towers • 99.6% Match',
+        detailEn: 'Checked DEV-004’s 10-day history: on 24 Oct (SP Rd) & 29 Oct (ORR), it traveled in the same pocket as Karan Malhotra’s phone (DEV-019)!',
+        detailHi: 'DEV-004 की 10-दिन की हिस्ट्री जांची: 24 और 29 अक्टूबर को यह लगातार 14 टावरों पर करण मल्होत्रा के असली फ़ोन (DEV-019) के साथ चला था!',
+      },
+      {
+        stepTitleEn: '4. BESCOM Smart Meter Alibi Trap',
+        stepTitleHi: '4. स्मार्ट बिजली मीटर से अलीबी ध्वस्त',
+        metricBadge: 'Flat 138W Empty Home',
+        detailEn: 'Checked Karan’s DEV-019 on 02 Nov: motionless at 6:15 PM with flat 138W fridge-only power, 3 mins before DEV-004 turned on!',
+        detailHi: '2 नवंबर को करण का फ़ोन (DEV-019) शाम 6:15 पर मेज पर रुका (घर का बिजली मीटर 138W खाली) और 6:18 पर फर्जी सिम चालू हुआ!',
+      },
+    ],
+    criminalMoves: [
+      {
+        titleEn: 'Fake Home Alibi + Unlinked Burner',
+        titleHi: 'नकली घर की अलीबी और बाहरी फर्जी सिम',
+        descEn: 'Left personal phone (DEV-019) at home streaming video on Wi-Fi and carried out-of-district burner (DEV-004) with zero calls to Aarav.',
+        descHi: 'असली फ़ोन घर पर वाई-फाई वीडियो पर छोड़ा और बिना कॉल किए बाहरी जिले का फर्जी सिम (DEV-004) इस्तेमाल किया।',
+      },
+      {
+        titleEn: 'Faraday Bag Drop at 6:48 PM',
+        titleHi: 'शाम 6:48 पर सिग्नल-ब्लॉकिंग बैग',
+        descEn: 'Dropped Aarav’s iPhone (DEV-001) into an RF-shielded pouch so the signal vanished instantly.',
+        descHi: 'आरव के फ़ोन को सिग्नल-रोकने वाले बैग में डाल दिया ताकि पुलिस को लगे बैटरी खत्म हो गई।',
+      },
+      {
+        titleEn: 'CCTV Blind-Spot & 16-Min Canal Stop',
+        titleHi: 'बंद कैमरा गली और 16-मिनट का ठहराव',
+        descEn: 'Kidnapped Aarav under offline Camera 008 (12th Main) and hid 12 mins at Challaghatta Lake Bund to break travel time.',
+        descHi: 'बैटरी रिपेयर से बंद कैमरे (CAM-008) के नीचे अपहरण किया और चल्लघट्टा झील की गली में 12 मिनट रुककर समय का गणित तोड़ा।',
+      },
+      {
+        titleEn: 'Muddy Plate + ripped FASTag',
+        titleHi: 'नंबर प्लेट पर कीचड़ और बिना फास्टैग',
+        descEn: 'Covered last digits of KA-01-MX-4XX1 with mud and ripped off the FASTag sticker on Domlur–Marathahalli Flyover.',
+        descHi: 'नंबर प्लेट के आखिरी अंकों पर कीचड़ लगाया और फ्लाईओवर पर फास्टैग स्टिकर उखाड़ दिया।',
+      },
+    ],
+    chakravyuhTraps: [
+      {
+        titleEn: '10-Day Signal History + BESCOM 138W Meter',
+        titleHi: '10-दिन की हिस्ट्री + स्मार्ट बिजली मीटर (138W)',
+        systemUsed: 'C-DOT Telecom Archive + BESCOM AMI Smart Grid',
+        descEn: '10-day history of burner DEV-004 matched Karan’s DEV-019 across 14 towers; BESCOM 138W flatline proved his apartment was empty.',
+        descHi: 'फर्जी सिम की 10-दिन की हिस्ट्री से करण का असली फ़ोन पकड़ा गया और 138 वॉट के बिजली मीटर ने साबित किया कि घर खाली था।',
+      },
+      {
+        titleEn: 'BMTC Bus Route-335E Moving Dashcam',
+        titleHi: 'सरकारी बस (BMTC 335E) का चलता डैशकैम',
+        systemUsed: 'BMTC Intelligent Transit AVL + ADAS Video',
+        descEn: 'While fixed pole CAM-008 was dead, passing BMTC Bus KA-01-F-8XX1 filmed the White SUV waiting inside 12th Main at 6:44:50 PM.',
+        descHi: 'गली का कैमरा बंद था, लेकिन शाम 6:44:50 पर वहां से गुजरती BMTC बस के कैमरे ने सफेद एसयूवी को रिकॉर्ड कर लिया।',
+      },
+      {
+        titleEn: '433MHz Tyre Sensor (TPMS) + Ghost-FASTag',
+        titleHi: '433MHz टायर सेंसर और घोस्ट-फास्टैग अलर्ट',
+        systemUsed: 'NHAI RFID Gantry + Smart Pole RF Sniffer',
+        descEn: 'Matched identical wheel sensor ID (TPMS-HEX-88A4) at Sony World Signal & Flyover; 1 of 412 cars had no FASTag.',
+        descHi: 'दोनों चौराहों पर कार के चारों पहियों के रेडियो सेंसर (TPMS-HEX-88A4) का 100% मिलान हुआ।',
+      },
+      {
+        titleEn: '3-Tower RF Triangulation at Challaghatta Lake',
+        titleHi: 'चल्लघट्टा झील पर 3-टावर रेडियो ट्रैप',
+        systemUsed: 'C-DOT 5G Timing Advance + AoA',
+        descEn: 'Triangulated burner DEV-004 to a 40m culvert near Challaghatta Lake during the exact 12-minute stop.',
+        descHi: 'तीनों मोबाइल टावरों ने 12 मिनट के ठहराव के दौरान चल्लघट्टा झील की पुलिया में फर्जी फ़ोन की सटीक लोकेशन पकड़ ली।',
+      },
+    ],
+    voiceBriefingEn:
+      'Investigation Case 1: The Indiranagar Abduction of Aarav Sharma. When Aarav vanished at 6:48 PM, the suspect thought he was invisible because he left his real phone at home playing a video, carried an unlinked burner phone, and struck under a dead CCTV camera. Project Chakravyuh pulled 3,420 signals at the time of the crime, narrowed them to 30 geofence phones, and cleared 28 innocent citizens case by case to isolate Burner Device 004. By checking the 10-day signal history of Device 004 across earlier Bengaluru cases, Chakravyuh discovered it traveled across 14 cell towers in the exact same pocket as Karan Malhotra’s personal phone! Checking Karan’s home smart electricity meter showed a flat 138 watt empty house line, while a passing B M T C bus dashcam and tyre pressure radio sensors locked his White S U V.',
+    voiceBriefingHi:
+      'जांच केस एक: इंदिरानगर से आरव शर्मा का अपहरण। अपराधी करण मल्होत्रा ने सोचा था कि वह कभी नहीं पकड़ा जाएगा क्योंकि उसने अपना असली फ़ोन घर पर वीडियो चलाकर छोड़ दिया था, वारदात में बाहरी जिले का फर्जी सिम इस्तेमाल किया और बंद सीसीटीवी कैमरे वाली गली चुनी। लेकिन प्रोजेक्ट चक्रव्यूह ने वारदात के वक्त सक्रिय 3,420 मोबाइल सिग्नलों में से क्राइम सीन के 30 फ़ोन छाँटे और केस-बाय-केस 28 निर्दोष लोगों को हटाकर फर्जी फ़ोन डिवाइस 004 को अलग कर लिया। जब डिवाइस 004 के पिछले 10 दिनों के सिग्नल का इतिहास जांचा गया, तो वह 14 मोबाइल टावरों पर करण मल्होत्रा के असली फ़ोन के साथ एक ही जेब में चलता मिला! इसके बाद घर के स्मार्ट बिजली मीटर के 138 वॉट के खाली घर के रिकॉर्ड, बीएमटीसी बस के कैमरे और कार के टायर सेंसर से पूरा चक्रव्यूह बंद हो गया।',
+  },
+  {
+    caseId: 'CASE-CKV-2026-0043',
+    badgeEn: 'SCENARIO 2 • ZERO-PHONE GANG & FAKE AMBULANCE',
+    badgeHi: 'केस 2 • "बिना मोबाइल" गैंग और नकली एम्बुलेंस',
+    shortTitleEn: 'Case 2: Chickpet ₹4.2 Cr Gold Heist ("Zero-Phone Gang")',
+    shortTitleHi: 'केस 2: चिकपेट ₹4.2 करोड़ सोना लूट ("नो-फ़ोन गैंग")',
+    headlineEn: 'CASE-CKV-2026-0043: Chickpet–Jayanagar ₹4.2 Cr Gold Heist — Zero Phones, EV Scooter Swap & Disguised Ambulance',
+    headlineHi: 'CASE-CKV-2026-0043: चिकपेट–जयनगर ₹4.2 करोड़ सोना लूट — जीरो मोबाइल फ़ोन, इलेक्ट्रिक स्कूटर और नकली एम्बुलेंस',
+    corridorEn: 'Chickpet Raja Market → Lalbagh West Gate → Jayanagar 4th Block → NICE Road (Kengeri) → Bidadi (Mysuru Hwy)',
+    corridorHi: 'चिकपेट राजा मार्केट → लालबाग वेस्ट गेट → जयनगर 4th ब्लॉक → नाइस रोड (केंगेरी) → बिदादी (मैसूर हाईवे)',
+    suspectAlias: 'Harsha Gowda Syndicate (3 Masked Operatives — Zero Phones Carried at Scene)',
+    vehicleMasked: 'EV Scooters (KA-01-EM-2XX9) → Fake Ambulance (KA-05-AG-9XX2)',
+    keyChallengeEn: 'What if criminals carry ZERO mobile phones during the crime, blind CCTV with green lasers, and escape in a siren-blaring Ambulance?',
+    keyChallengeHi: 'अगर अपराधी वारदात में एक भी मोबाइल फ़ोन साथ न ले जाएं, कैमरों पर ग्रीन लेज़र मारें और सायरन बजाती एम्बुलेंस में भागें तो सिस्टम उन्हें कैसे पकड़ेगा?',
+    discoveryFunnelSteps: [
+      {
+        stepTitleEn: '1. Pre-Crime Synchronized Silence Scan',
+        stepTitleHi: '1. वारदात से पहले एक साथ बंद हुए फ़ोन',
+        metricBadge: '3 Phones Off at 13:25:04',
+        detailEn: 'Zero phones at Chickpet at 14:10—so Chakravyuh scanned surrounding sectors for 3 phones that met at 13:20 and switched off at the exact same second (13:25:04 IST) in Chamarajpet!',
+        detailHi: 'दोपहर 2:10 पर चिकपेट में कोई संदिग्ध फ़ोन नहीं था—तो चक्रव्यूह ने दोपहर 1:25:04 पर चामराजपेट में एक साथ स्विच-ऑफ हुए 3 फ़ोन पकड़े जो शाम 4:10 पर बिदादी में एक साथ चालू हुए!',
+      },
+      {
+        stepTitleEn: '2. Abandoned EV Scooter Battery BMS Trace',
+        stepTitleHi: '2. लावारिस इलेक्ट्रिक स्कूटर बैटरी (BMS) जांच',
+        metricBadge: 'BMS-PACK-9921 → UPI Match',
+        detailEn: 'Scooters dumped at Lalbagh had scraped chassis numbers, but BESCOM EV-Mitra Fast Charger logged Battery BMS-PACK-9921 charging at 11:40 AM via Harsha Gowda’s UPI!',
+        detailHi: 'लालबाग में छोड़े गए स्कूटरों का चेसिस नंबर मिटा था, पर BESCOM चार्जिंग स्टेशन ने सुबह 11:40 पर बैटरी चिप (BMS-9921) और हर्षा गौड़ा का UPI पेमेंट पकड़ लिया!',
+      },
+      {
+        stepTitleEn: '3. 108 Hospital Grid + Axle Weight Sensor',
+        stepTitleHi: '3. 108 अस्पताल ग्रिड + टोल वजन सेंसर (+265 kg)',
+        metricBadge: '+265 kg Payload Spike',
+        detailEn: 'Ambulance KA-05-AG-9XX2 had zero hospital dispatch in 108 Grid, and NICE Road Kengeri Weigh-In-Motion pad showed it gained +265 kg (3 men + 52 kg gold) after Lalbagh!',
+        detailHi: 'एम्बुलेंस KA-05-AG-9XX2 का किसी अस्पताल में रिकॉर्ड नहीं था और नाइस रोड टोल के वजन सेंसर ने लालबाग के बाद उसमें +265 किलो वजन बढ़ना (3 लोग + 52 किलो सोना) पकड़ लिया!',
+      },
+      {
+        stepTitleEn: '4. C-DOT 446 MHz Walkie-Talkie Triangulation',
+        stepTitleHi: '4. 446 MHz वॉकी-टॉकी रेडियो सिग्नल ट्रैक',
+        metricBadge: '446.09 MHz RF Trail',
+        detailEn: 'C-DOT spectrum sensors atop KR Market & Town Hall tracked 3 analog walkie-talkie bursts moving from Chickpet (14:12) to Lalbagh (14:27) and Jayanagar (14:36).',
+        detailHi: 'टाउन हॉल और केआर मार्केट पर लगे C-DOT रेडियो सेंसरों ने अपराधियों के वॉकी-टॉकी (446 MHz) तरंगों को चिकपेट से लालबाग और जयनगर तक ट्रैक कर लिया।',
+      },
+    ],
+    criminalMoves: [
+      {
+        titleEn: '100% Zero-Phone Operation at Scene',
+        titleHi: 'क्राइम-सीन पर जीरो मोबाइल फ़ोन',
+        descEn: 'Left all mobile phones behind before entering Chickpet Raja Market and used unlicensed 446 MHz walkie-talkies.',
+        descHi: 'चिकपेट बाजार में घुसने से पहले सभी मोबाइल फ़ोन बंद कर दिए और केवल वॉकी-टॉकी का इस्तेमाल किया।',
+      },
+      {
+        titleEn: 'Green Laser Blinding on Vault CCTV',
+        titleHi: 'तिजोरी के कैमरों पर ग्रीन लेज़र अटैक',
+        descEn: 'Used high-intensity 532nm green lasers to dazzle CAM-021 lens during the 4-minute bullion vault breach.',
+        descHi: 'लूट के 4 मिनट के दौरान सीसीटीवी कैमरे (CAM-021) के लेंस पर तेज हरी लेज़र लाइट मारी।',
+      },
+      {
+        titleEn: 'EV Scooter to Fake Ambulance Relay',
+        titleHi: 'इलेक्ट्रिक स्कूटर से नकली एम्बुलेंस में शिफ्ट',
+        descEn: 'Dumped two electric scooters at Lalbagh West Gate (14:28) and loaded 52 kg gold into a siren-blaring Ambulance (KA-05-AG-9XX2).',
+        descHi: 'लालबाग वेस्ट गेट पर स्कूटर छोड़कर 52 किलो सोना सायरन बजाती नकली एम्बुलेंस (KA-05-AG-9XX2) में रख लिया।',
+      },
+      {
+        titleEn: 'Siren Bypass at NICE Road Toll',
+        titleHi: 'नाइस रोड टोल पर सायरन लेन से बचाव',
+        descEn: 'Used the emergency vehicle siren lane at Kengeri Toll Plaza to avoid FASTag scanning.',
+        descHi: 'फास्टैग स्कैन से बचने के लिए केंगेरी टोल प्लाजा पर इमरजेंसी सायरन लेन का इस्तेमाल किया।',
+      },
+    ],
+    chakravyuhTraps: [
+      {
+        titleEn: 'Synchronized Pre-Blackout & Post-Wakeup Trap',
+        titleHi: 'एक साथ स्विच-ऑफ और ऑन होने का ट्रैप',
+        systemUsed: 'C-DOT Temporal Silence Correlation Engine',
+        descEn: 'Caught 3 phones in Chamarajpet that turned off at the exact same second (13:25:04) before the heist and turned on together at Bidadi (16:10).',
+        descHi: 'चामराजपेट में दोपहर 1:25:04 पर एक साथ बंद हुए और शाम 4:10 पर बिदादी में एक साथ चालू हुए 3 फ़ोन पकड़े गए।',
+      },
+      {
+        titleEn: 'BESCOM EV-Mitra Battery BMS + UPI Link',
+        titleHi: 'EV चार्जिंग स्टेशन बैटरी चिप और UPI मिलान',
+        systemUsed: 'BESCOM EV-Mitra Grid + NPCI UPI Telemetry',
+        descEn: 'Matched the abandoned scooter’s internal battery chip (BMS-PACK-9921) to an 11:40 AM fast-charge paid by Harsha Gowda’s UPI.',
+        descHi: 'लावारिस स्कूटर की बैटरी चिप (BMS-9921) से सुबह 11:40 का चार्जिंग रिकॉर्ड और हर्षा गौड़ा का UPI खाता पकड़ लिया।',
+      },
+      {
+        titleEn: 'NICE Road Weigh-In-Motion (+265 kg) + 108 Grid',
+        titleHi: 'टोल वजन सेंसर (+265 किलो) और 108 एम्बुलेंस जांच',
+        systemUsed: 'Highway WIM Axle Sensor + Karnataka 108 Dispatch',
+        descEn: 'Proved Ambulance KA-05-AG-9XX2 had zero hospital calls and gained +265 kg payload between Lalbagh and Kengeri Toll.',
+        descHi: 'साबित किया कि एम्बुलेंस का किसी अस्पताल से संबंध नहीं था और लालबाग के बाद उसका वजन 265 किलो बढ़ गया था।',
+      },
+      {
+        titleEn: '446 MHz Walkie-Talkie Spectrum Direction Finding',
+        titleHi: '446 MHz वॉकी-टॉकी रेडियो दिशा पहचान',
+        systemUsed: 'C-DOT Urban SDR Spectrum Monitors',
+        descEn: 'Triangulated unencrypted 446.09 MHz walkie-talkie transmissions from Chickpet to Lalbagh West Gate.',
+        descHi: 'चिकपेट से लालबाग वेस्ट गेट तक अपराधियों के वॉकी-टॉकी रेडियो सिग्नल का पूरा रास्ता ट्रैक किया।',
+      },
+    ],
+    voiceBriefingEn:
+      'Investigation Case 2: The Chickpet 4.2 Crore Gold Bullion Heist. In this scenario, the gang carried zero mobile phones during the robbery, blinded vault cameras with green lasers, rode electric scooters to Lalbagh West Gate, and escaped with 52 kilograms of gold inside a disguised ambulance blaring its siren toward Mysuru Road. Watch how Project Chakravyuh trapped them without needing a single phone at the crime scene. First, Chakravyuh scanned for synchronized silence and found three phones in nearby Chamarajpet that all switched off at the exact same second at 1:25 PM before the heist and switched back on together at Bidadi at 4:10 PM. Second, even though the abandoned electric scooters had scraped frame numbers, the B E S C O M fast charging station at Basavanagudi logged the scooter’s internal battery chip ID and linked it to operative Harsha Gowda’s U P I payment. Third, the N I C E Road Kengeri toll axle weight sensor proved the fake ambulance gained 265 kilograms of weight right after leaving Lalbagh with zero hospital dispatch records.',
+    voiceBriefingHi:
+      'जांच केस दो: चिकपेट की चार दशमलव दो करोड़ रुपये की सोना लूट। इस मामले में अपराधियों ने सोचा कि अगर वे वारदात में एक भी मोबाइल फ़ोन नहीं ले जाएंगे तो पुलिस उन्हें कभी नहीं पकड़ पाएगी। उन्होंने लेज़र लाइट से कैमरे बंद किए, इलेक्ट्रिक स्कूटर से लालबाग पहुंचे और वहां से बावन किलो सोना एक नकली एम्बुलेंस में रखकर सायरन बजाते हुए मैसूर रोड की तरफ भागे। लेकिन देखिए प्रोजेक्ट चक्रव्यूह ने बिना मोबाइल सिग्नल के भी उन्हें कैसे घेरा: पहला, चक्रव्यूह ने वारदात से ठीक पैंतालीस मिनट पहले चामराजपेट में एक ही सेकंड पर एक साथ स्विच ऑफ हुए तीन फ़ोन पकड़े जो शाम चार बजकर दस मिनट पर बिदादी में एक साथ चालू हुए। दूसरा, लालबाग में छोड़े गए स्कूटर की बैटरी चिप से बसवनगुड़ी चार्जिंग स्टेशन पर किया गया यूपीआई पेमेंट पकड़ लिया गया। और तीसरा, नाइस रोड टोल के वजन सेंसर ने पकड़ लिया कि लालबाग से निकलने के बाद उस नकली एम्बुलेंस का वजन दो सौ पैंसठ किलो बढ़ गया था!',
+  },
+  {
+    caseId: 'CASE-CKV-2026-0044',
+    badgeEn: 'SCENARIO 3 • AIRPLANE MODE, AI VOICE CLONE & DEAD-DROP',
+    badgeHi: 'केस 3 • एयरप्लेन मोड, AI वॉयस क्लोन और मेट्रो लॉकर डेड-ड्रॉप',
+    shortTitleEn: 'Case 3: Devanahalli Aerospace Leak & Airport Intercept',
+    shortTitleHi: 'केस 3: देवनहल्ली एयरोस्पेस जासूसी और एयरपोर्ट इंटरसेप्ट',
+    headlineEn: 'CASE-CKV-2026-0044: Devanahalli Defence Blueprint Leak — Airplane Mode, AI Voice Clone & MG Road Metro Dead-Drop',
+    headlineHi: 'CASE-CKV-2026-0044: देवनहल्ली डिफेंस ब्लूप्रिंट लीक — एयरप्लेन मोड, AI वॉयस क्लोन और एमजी रोड मेट्रो डेड-ड्रॉप',
+    corridorEn: 'Devanahalli Aerospace SEZ → Hebbal → MG Road Namma Metro Locker #14 → Whitefield → KIAL Airport Terminal 2',
+    corridorHi: 'देवनहल्ली एयरोस्पेस पार्क → हेब्बल → एमजी रोड नम्मा मेट्रो लॉकर #14 → व्हाइटफील्ड → केंपेगौड़ा एयरपोर्ट टर्मिनल-2',
+    suspectAlias: 'Vikramaditya Joshi (Insider) + Zoya Merchant (Courier at KIAL T2)',
+    vehicleMasked: 'Connected SUV (KA-03-NC-7XX5) + Airport Taxi (KA-04-D-3XX9)',
+    keyChallengeEn: 'What if an insider puts his phone in 100% Airplane Mode, uses an AI Deepfake Voice Clone, and drops the chip in a Metro Locker 22 minutes before the courier arrives so they never meet on camera?',
+    keyChallengeHi: 'अगर अपराधी अपना फ़ोन 100% एयरप्लेन मोड में रखे, डायरेक्टर की AI नकली आवाज़ बनाए, और मेट्रो लॉकर में चिप रखकर कूरियर के आने से 22 मिनट पहले चला जाए ताकि दोनों कभी एक कैमरे में साथ न दिखें?',
+    discoveryFunnelSteps: [
+      {
+        stepTitleEn: '1. Connected-Car Factory eSIM Defeats Airplane Mode',
+        stepTitleHi: '1. कार के इनबिल्ट eSIM ने तोड़ा एयरप्लेन मोड',
+        metricBadge: 'KA-03-NC-7XX5 eSIM Trail',
+        detailEn: 'Insider put his phone in Airplane Mode, but his 2025 SUV’s built-in factory telematics eSIM pinged towers from Devanahalli (10:22) to MG Road Metro (13:35)!',
+        detailHi: 'आरोपी ने फ़ोन एयरप्लेन मोड में रखा, लेकिन अपनी आधुनिक कार (KA-03-NC-7XX5) के इनबिल्ट फैक्ट्री eSIM को भूल गया जिसने देवनहल्ली से एमजी रोड तक हर मिनट लोकेशन भेजी!',
+      },
+      {
+        stepTitleEn: '2. Time-Shifted CCTV Graph (22-Min Gap Match)',
+        stepTitleHi: '2. टाइम-शिफ्टेड सीसीटीवी ग्राफ (22 मिनट का अंतर)',
+        metricBadge: '2 of 18,000 Commuters',
+        detailEn: 'Out of 18,000 MG Road Metro passengers, Chakravyuh flagged that ONLY 2 people touched Smart Locker #14 within 30 mins: Vikramaditya (13:40) and Zoya (14:02)!',
+        detailHi: 'एमजी रोड मेट्रो के 18,000 यात्रियों में से केवल 2 लोगों ने 30 मिनट के भीतर स्मार्ट लॉकर #14 को छुआ: विक्रमादित्य (13:40) और ज़ोया (14:02)—बिना साथ दिखे कनेक्शन साबित!',
+      },
+      {
+        stepTitleEn: '3. C-DOT Acoustic Vocoder AI-Deepfake Trap',
+        stepTitleHi: '3. AI नकली आवाज़ (Deepfake) की स्पेक्ट्रल पहचान',
+        metricBadge: '>7.8 kHz Vocoder Artifact',
+        detailEn: 'Forensic audio scan of the "Director’s" security call detected missing human breathing harmonics above 7.8 kHz—proving an AI Voice Clone in 4 seconds!',
+        detailHi: 'सुरक्षा गेट पर आए "डायरेक्टर" के कॉल की ऑडियो जांच में 7.8 kHz से ऊपर इंसानी सांसों की तरंगें गायब मिलीं—4 सेकंड में AI वॉयस क्लोन पकड़ा गया!',
+      },
+      {
+        stepTitleEn: '4. RBI Note-Serial OCR → KIAL Terminal-2 Intercept',
+        stepTitleHi: '4. नोट सीरियल नंबर स्कैन → एयरपोर्ट टर्मिनल-2 गिरफ्तारी',
+        metricBadge: 'Intercepted at Gate 4 (17:45)',
+        detailEn: 'Whitefield Smart Cash Deposit Machine OCR scanned ₹15L hawala notes at 15:35, linking the escrow agent to cab KA-04-D-3XX9 and intercepting Zoya at KIAL Terminal 2!',
+        detailHi: 'व्हाइटफील्ड की कैश मशीन (CDM) ने हवाला के नोटों के सीरियल नंबर स्कैन कर एयरपोर्ट टैक्सी (KA-04-D-3XX9) को ट्रैक किया और केंपेगौड़ा एयरपोर्ट टर्मिनल-2 पर कूरियर को पकड़ लिया!',
+      },
+    ],
+    criminalMoves: [
+      {
+        titleEn: '100% Smartphone Airplane Mode',
+        titleHi: 'मोबाइल 100% एयरप्लेन मोड पर',
+        descEn: 'Switched phone (DEV-025) to Airplane Mode before leaving Devanahalli so zero mobile towers logged his journey.',
+        descHi: 'देवनहल्ली से निकलने से पहले मोबाइल को एयरप्लेन मोड में डाल दिया ताकि कोई टावर ट्रैक न कर सके।',
+      },
+      {
+        titleEn: 'AI Deepfake Voice Clone Call',
+        titleHi: 'डायरेक्टर की AI डीपफेक आवाज़',
+        descEn: 'Used a real-time AI voice clone of the Aerospace Director over encrypted VoIP to clear Gate-2 security.',
+        descHi: 'गेट-2 की सुरक्षा को चकमा देने के लिए डायरेक्टर की AI से बनी नकली आवाज़ में कॉल किया।',
+      },
+      {
+        titleEn: '22-Minute Time-Shifted Metro Dead-Drop',
+        titleHi: '22-मिनट के अंतराल पर मेट्रो लॉकर डेड-ड्रॉप',
+        descEn: 'Left micro-SD key-fob in MG Road Metro Locker #14 at 13:40; courier Zoya picked it up at 14:02 so they never met on CCTV.',
+        descHi: 'दोपहर 1:40 पर एमजी रोड मेट्रो लॉकर #14 में चिप रखी और कूरियर ने 2:02 पर निकाली ताकि दोनों कभी एक फ्रेम में न दिखें।',
+      },
+      {
+        titleEn: 'Whitefield Hawala Settlement & Airport Exit',
+        titleHi: 'व्हाइटफील्ड हवाला पेमेंट और एयरपोर्ट से फरार',
+        descEn: 'Settled payout via Whitefield cash drop while courier headed to Kempegowda Airport Terminal 2.',
+        descHi: 'व्हाइटफील्ड में हवाला कैश लिया और कूरियर केंपेगौड़ा एयरपोर्ट टर्मिनल-2 से विदेश भागने निकली।',
+      },
+    ],
+    chakravyuhTraps: [
+      {
+        titleEn: 'Connected-SUV Factory eSIM + Metro BLE Probe',
+        titleHi: 'कनेक्टेड कार eSIM और मेट्रो वाई-फाई प्रोब',
+        systemUsed: 'OEM Automotive Telematics Grid + BMRCL Wi-Fi',
+        descEn: 'Tracked the insider’s SUV (KA-03-NC-7XX5) via its factory SOS eSIM from Devanahalli to MG Road Metro.',
+        descHi: 'फ़ोन एयरप्लेन मोड में था, पर कार के इनबिल्ट eSIM ने देवनहल्ली से एमजी रोड मेट्रो तक पूरा रास्ता बता दिया।',
+      },
+      {
+        titleEn: 'Time-Shifted Spatial Interaction Graph',
+        titleHi: 'टाइम-शिफ्टेड सीसीटीवी इंटरैक्शन ग्राफ',
+        systemUsed: 'BMRCL Smart Locker Telemetry + CAM-022 Vision',
+        descEn: 'Linked the 13:40 drop and 14:02 pickup at Locker #14 out of 18,000 commuters without needing both suspects in one frame.',
+        descHi: '18,000 यात्रियों के बीच लॉकर #14 को 22 मिनट के अंतर पर छूने वाले दोनों संदिग्धों को अपने-आप जोड़ दिया।',
+      },
+      {
+        titleEn: 'C-DOT Neural Vocoder Spectral Analysis',
+        titleHi: 'C-DOT एकॉस्टिक AI वॉयस डिटेक्टर',
+        systemUsed: 'C-DOT Forensic Audio Spectral Lab',
+        descEn: 'Flagged synthetic vocoder phase artifacts above 7.8 kHz in the gate authorization call within 4 seconds.',
+        descHi: 'गेट क्लियरेंस कॉल की ध्वनि तरंगों की जांच कर 4 सेकंड में साबित कर दिया कि आवाज़ AI से बनाई गई थी।',
+      },
+      {
+        titleEn: 'RBI Note-Serial OCR + KIAL DigiYatra Intercept',
+        titleHi: 'नोट सीरियल नंबर OCR और एयरपोर्ट इंटरसेप्ट',
+        systemUsed: 'FIU Smart CDM OCR + KIAL Terminal-2 Security',
+        descEn: 'Traced Whitefield CDM currency serial numbers to taxi KA-04-D-3XX9 and intercepted courier at KIAL Terminal 2 Gate 4.',
+        descHi: 'व्हाइटफील्ड कैश मशीन में जमा नोटों के सीरियल नंबर से एयरपोर्ट टैक्सी ट्रैक कर कूरियर को टर्मिनल-2 के गेट-4 पर दबोच लिया।',
+      },
+    ],
+    voiceBriefingEn:
+      'Investigation Case 3: The Devanahalli Aerospace Blueprint Espionage and Airport Intercept. Here, an insider stole classified drone blueprints, put his smartphone in 100 percent Airplane Mode, used an A I deepfake voice clone of his director, and placed the chip inside M G Road Metro Locker number 14 at 1:40 PM. A foreign courier picked it up 22 minutes later at 2:02 PM so the two conspirators never appeared together on any camera. Watch how Project Chakravyuh defeated every single move: First, while the insider’s phone was in Airplane Mode, his connected S U V’s built in factory e-SIM pinged cell towers all the way from Devanahalli to M G Road Metro. Second, Chakravyuh’s Time Shifted Spatial Graph scanned 18,000 metro passengers and flagged that only two people touched Locker 14 within thirty minutes, linking the insider and the courier across the 22 minute gap. Third, C-DOT acoustic forensics exposed the A I voice clone in four seconds, and R B I currency serial number scanning at a Whitefield cash machine tracked the courier’s taxi straight to Kempegowda International Airport Terminal 2 before takeoff.',
+    voiceBriefingHi:
+      'जांच केस तीन: देवनहल्ली एयरोस्पेस ब्लूप्रिंट जासूसी और केंपेगौड़ा एयरपोर्ट इंटरसेप्ट। इस हाई-टेक मामले में एक भेदी ने ड्रोन के गोपनीय डिज़ाइन चुराए, अपना मोबाइल सौ प्रतिशत एयरप्लेन मोड में डाला, डायरेक्टर की एआई नकली आवाज़ का इस्तेमाल किया, और दोपहर एक बजकर चालीस मिनट पर एमजी रोड मेट्रो के स्मार्ट लॉकर नंबर चौदह में चिप रख दी। बाईस मिनट बाद दोपहर दो बजकर दो मिनट पर महिला कूरियर ने वह चिप निकाली ताकि दोनों कभी किसी सीसीटीवी कैमरे में एक साथ न दिखें। लेकिन देखिए प्रोजेक्ट चक्रव्यूह ने उन्हें कैसे पकड़ा: पहला, आरोपी का फ़ोन एयरप्लेन मोड में था, लेकिन उसकी आधुनिक कार के इनबिल्ट फैक्ट्री ई-सिम ने देवनहल्ली से एमजी रोड मेट्रो तक हर मिनट की लोकेशन दे दी। दूसरा, चक्रव्यूह के टाइम-शिफ्टेड ग्राफ ने अठारह हज़ार मेट्रो यात्रियों में से उन दोनों लोगों को तुरंत पकड़ लिया जिन्होंने बाईस मिनट के अंतर पर लॉकर नंबर चौदह को खोला था। और तीसरा, व्हाइटफील्ड की कैश मशीन में जमा हवाला नोटों के सीरियल नंबर से कूरियर की टैक्सी ट्रैक कर केंपेगौड़ा एयरपोर्ट टर्मिनल-दो पर उड़ान से ठीक पहले उसे पकड़ लिया गया!',
+  },
+];
