@@ -143,33 +143,13 @@ async function synthesizeGeminiSpeech(text: string, lang: string, requestedVoice
     // Ignore cache read error
   }
 
-  // Verified Indian accent director prompt (speaks ONLY the quoted transcript in an authentic Indian accent)
-  const directorPrompt = isHindi
-    ? `Speak in a natural, warm Indian Hindi accent (hi-IN) like a real Indian news presenter: "${cleanText}"`
-    : `Speak in a natural, warm Indian English accent (en-IN) like a real Indian officer from Bengaluru, India: "${cleanText}"`;
-
-  const payload = {
-    contents: [
-      {
-        parts: [
-          {
-            text: directorPrompt,
-          },
-        ],
-      },
-    ],
-    generationConfig: {
-      responseModalities: ['AUDIO'],
-      speechConfig: {
-        languageCode: isHindi ? 'hi-IN' : 'en-IN',
-        voiceConfig: {
-          prebuiltVoiceConfig: {
-            voiceName,
-          },
-        },
-      },
-    },
-  };
+  // Verified Indian accent director prompt, with automatic fallback to plain transcript if model ever skips audio
+  const promptsToTry = [
+    isHindi
+      ? `Read the following Hindi transcript aloud verbatim in a natural, warm Indian accent (hi-IN):\n\n${cleanText}`
+      : `Read the following English transcript aloud verbatim in a natural, warm Indian English accent (en-IN):\n\n${cleanText}`,
+    cleanText,
+  ];
 
   const keysToTry = fallbackKey && fallbackKey !== primaryKey ? [primaryKey, fallbackKey] : [primaryKey];
   let lastErrorText = '';
@@ -180,59 +160,84 @@ async function synthesizeGeminiSpeech(text: string, lang: string, requestedVoice
       activeKey
     )}`;
 
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+    for (const promptText of promptsToTry) {
+      const payload = {
+        contents: [
+          {
+            parts: [
+              {
+                text: promptText,
+              },
+            ],
+          },
+        ],
+        generationConfig: {
+          responseModalities: ['AUDIO'],
+          speechConfig: {
+            languageCode: isHindi ? 'hi-IN' : 'en-IN',
+            voiceConfig: {
+              prebuiltVoiceConfig: {
+                voiceName,
+              },
+            },
+          },
         },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        lastStatus = response.status;
-        lastErrorText = await response.text();
-        continue;
-      }
-
-      const data = await response.json();
-      const parts = data?.candidates?.[0]?.content?.parts || [];
-      const audioPart = parts.find((p: { inlineData?: { data?: string; mimeType?: string } }) => p?.inlineData?.data);
-
-      if (!audioPart?.inlineData?.data) {
-        lastStatus = 502;
-        lastErrorText = JSON.stringify(data).slice(0, 400);
-        continue;
-      }
-
-      const mimeType: string = audioPart.inlineData.mimeType || 'audio/L16;codec=pcm;rate=24000';
-      const rateMatch = mimeType.match(/rate=(\d+)/i);
-      const sampleRate = rateMatch ? parseInt(rateMatch[1], 10) : 24000;
-
-      const rawBuffer = Buffer.from(audioPart.inlineData.data, 'base64');
-      const wavBuffer = pcm16ToWav(rawBuffer, sampleRate, 1, 16);
+      };
 
       try {
-        fs.mkdirSync(cacheDir, { recursive: true });
-        fs.writeFileSync(cacheFile, wavBuffer);
-      } catch {
-        // Ignore cache write errors
-      }
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
 
-      return new NextResponse(new Uint8Array(wavBuffer), {
-        status: 200,
-        headers: {
-          'Content-Type': 'audio/wav',
-          'Cache-Control': 'public, max-age=86400',
-          'X-TTS-Engine': 'gemini-2.5-flash-preview-tts',
-          'X-TTS-Accent': isHindi ? 'hi-IN' : 'en-IN',
-          'X-TTS-Voice': voiceName,
-          'X-TTS-Cache': 'MISS',
-        },
-      });
-    } catch (error) {
-      lastStatus = 500;
-      lastErrorText = error instanceof Error ? error.message : 'Unknown network error';
+        if (!response.ok) {
+          lastStatus = response.status;
+          lastErrorText = await response.text();
+          break; // Try next key on HTTP error
+        }
+
+        const data = await response.json();
+        const parts = data?.candidates?.[0]?.content?.parts || [];
+        const audioPart = parts.find((p: { inlineData?: { data?: string; mimeType?: string } }) => p?.inlineData?.data);
+
+        if (!audioPart?.inlineData?.data) {
+          lastStatus = 502;
+          lastErrorText = JSON.stringify(data).slice(0, 400);
+          continue; // Retry with plain cleanText + languageCode (en-IN / hi-IN)
+        }
+
+        const mimeType: string = audioPart.inlineData.mimeType || 'audio/L16;codec=pcm;rate=24000';
+        const rateMatch = mimeType.match(/rate=(\d+)/i);
+        const sampleRate = rateMatch ? parseInt(rateMatch[1], 10) : 24000;
+
+        const rawBuffer = Buffer.from(audioPart.inlineData.data, 'base64');
+        const wavBuffer = pcm16ToWav(rawBuffer, sampleRate, 1, 16);
+
+        try {
+          fs.mkdirSync(cacheDir, { recursive: true });
+          fs.writeFileSync(cacheFile, wavBuffer);
+        } catch {
+          // Ignore cache write errors
+        }
+
+        return new NextResponse(new Uint8Array(wavBuffer), {
+          status: 200,
+          headers: {
+            'Content-Type': 'audio/wav',
+            'Cache-Control': 'public, max-age=86400',
+            'X-TTS-Engine': 'gemini-2.5-flash-preview-tts',
+            'X-TTS-Accent': isHindi ? 'hi-IN' : 'en-IN',
+            'X-TTS-Voice': voiceName,
+            'X-TTS-Cache': 'MISS',
+          },
+        });
+      } catch (error) {
+        lastStatus = 500;
+        lastErrorText = error instanceof Error ? error.message : 'Unknown network error';
+      }
     }
   }
 
