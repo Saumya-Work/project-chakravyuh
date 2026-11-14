@@ -111,7 +111,7 @@ export const ReportsModule: React.FC = () => {
 
     addLine('5. CCTV DISCOVERY, 6. VIDEO OBSERVATIONS & 7. VEHICLE OBSERVATIONS', 11, true, [14, 116, 144]);
     addLine(
-      `20 corridor cameras discovered. CAM-014 (19:02): White SUV-like vehicle moving east (VEH-001, partial plate KA-01-MX-4??). CAM-019 (19:18): Visually similar white SUV-like vehicle on Domlur–Marathahalli Flyover (Old Airport Road) ramp (VEH-002). CAM-006 (19:25): No relevant observation. Fleet Cab VEH-003 (KA-01-MX-4812) excluded via CAM-015 southbound ANPR at 19:08.`
+      `20 corridor cameras discovered. CAM-014 (19:02): White SUV-like vehicle moving east (VEH-001, partial plate KA-01-MX-4XX?). CAM-019 (19:18): Visually similar white SUV-like vehicle on Domlur–Marathahalli Flyover (Old Airport Road) ramp (VEH-002). CAM-006 (19:25): No relevant observation. Fleet Cab VEH-003 (KA-04-MX-4XX2) excluded via CAM-015 southbound ANPR at 19:08.`
     );
     y += 4;
 
@@ -503,7 +503,7 @@ ${evidenceItems.map((e) => `- ${e.id}: ${e.originalFilename} | SHA-256: ${e.sha2
             <div className="p-4 rounded-xl bg-[#090D16] border border-slate-800 space-y-1.5">
               <div className="font-mono font-bold text-sky-400 uppercase">7. Vehicle Intelligence & Comparison</div>
               <p className="text-slate-200 leading-relaxed">
-                {vehicles.length} corridor vehicles analyzed. VEH-001 (CAM-014, KA-01-MX-4??) and VEH-002 (CAM-019, plate obscured) marked as Possibly Related pending intermediate camera checks. Commercial fleet SUV VEH-003 (KA-01-MX-4812) confirmed NOT the same vehicle via CAM-015 southbound ANPR.
+                {vehicles.length} corridor vehicles analyzed. VEH-001 (CAM-014, KA-01-MX-4XX?) and VEH-002 (CAM-019, plate obscured) marked as Possibly Related pending intermediate camera checks. Commercial fleet SUV VEH-003 (KA-04-MX-4XX2) confirmed NOT the same vehicle via CAM-015 southbound ANPR.
               </p>
             </div>
 

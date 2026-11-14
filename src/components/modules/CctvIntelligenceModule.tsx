@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import {
@@ -249,7 +249,7 @@ export const CctvIntelligenceModule: React.FC = () => {
                     />
                     <text x="-10" y="-29" fill="#FDE68A" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
                       {activeCam.id === 'CAM-014'
-                        ? 'OBJ: WHITE CRETA SUV (19:02) | KA-01-MX-4?? | TPMS-HEX-88A4'
+                        ? 'OBJ: WHITE CRETA SUV (19:02) | KA-01-MX-4XX? | TPMS-HEX-88A4'
                         : 'OBJ: WHITE CRETA SUV (19:18 RAMP) | GHOST-FASTAG + TPMS-88A4'}
                     </text>
                     {/* White SUV Silhouette */}
@@ -275,12 +275,12 @@ export const CctvIntelligenceModule: React.FC = () => {
                     {/* Side-lane lay-by curb */}
                     <rect x="240" y="135" width="260" height="80" rx="8" fill="#111C2D" stroke="#10B981" strokeWidth="1.5" strokeDasharray="5 3" />
                     <text x="250" y="128" fill="#6EE7B7" fontSize="10" fontFamily="monospace" fontWeight="bold">
-                      🪤 SOVEREIGN TRAP: BMTC BUS #KA-01-F-8821 (ROUTE 335E) ADAS DASHCAM @ 18:44:50
+                      🪤 SOVEREIGN TRAP: BMTC BUS #KA-01-F-8XX1 (ROUTE 335E) ADAS DASHCAM @ 18:44:50
                     </text>
                     <g transform={`translate(${265 + (playbackProgress % 40) * 0.4}, 162)`}>
                       <rect x="-8" y="-16" width="135" height="62" fill="none" stroke="#EF4444" strokeWidth="1.5" strokeDasharray="4 2" />
                       <text x="-6" y="-20" fill="#FCA5A5" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
-                        WHITE SUV IDLING IN CAM-008 BLIND SPOT | KA-01-MX-4821
+                        WHITE SUV IDLING IN CAM-008 BLIND SPOT | KA-01-MX-4XX1
                       </text>
                       <rect x="0" y="0" width="112" height="32" rx="6" fill="#F8FAFC" />
                       <polygon points="14,0 30,-11 86,-11 100,0" fill="#E2E8F0" />
@@ -295,7 +295,7 @@ export const CctvIntelligenceModule: React.FC = () => {
                   <g transform={`translate(${480 - playbackProgress * 3.1}, 190)`}>
                     <rect x="-10" y="-18" width="138" height="64" fill="none" stroke="#10B981" strokeWidth="1.5" strokeDasharray="4 2" />
                     <text x="-8" y="-23" fill="#6EE7B7" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
-                      CLEARED: NAVEEN KUMAR AIRPORT CAB (KA-04-AB-8814) → HOSUR RD
+                      CLEARED: NAVEEN KUMAR AIRPORT CAB (KA-04-AB-8XX4) → HOSUR RD
                     </text>
                     <rect x="0" y="0" width="108" height="30" rx="5" fill="#E2E8F0" />
                     <rect x="38" y="-8" width="26" height="8" rx="2" fill="#F59E0B" />

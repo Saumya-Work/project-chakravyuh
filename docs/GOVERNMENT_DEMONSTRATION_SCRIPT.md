@@ -55,7 +55,7 @@
 ## Stage 5 — CCTV Footage Review and Analysis (03:45 – 04:30)
 - **Visual Action:** Switch between `CAM-014`, `CAM-019`, and `CAM-006` in the Video Review Workspace.
 - **Key Points:**
-  - `CAM-014` (`19:02`): A white SUV-like vehicle is observed moving east (partial plate `KA-01-MX-4??`).
+  - `CAM-014` (`19:02`): A white SUV-like vehicle is observed moving east (partial plate `KA-01-MX-4XX?`).
   - `CAM-019` (`19:18`): A visually similar white SUV-like vehicle is observed entering the Domlur–Marathahalli Flyover (Old Airport Road) ramp.
   - `CAM-006` (`19:25`): No relevant observation in the reviewed segment.
   - Original video files remain untouched in the immutable vault; facial recognition is disabled by policy.
@@ -67,7 +67,7 @@
 - **Visual Action:** Inspect the East Corridor Comparison Schematic for `VEH-001` through `VEH-008`.
 - **Key Points:**
   - Point out the **16-minute interval** between `CAM-014` (`19:02`) and `CAM-019` (`19:18`) over `1.1 km`—the system refuses to invent movement across unverified gaps.
-  - Show how commercial fleet SUV `VEH-003` (`KA-01-MX-4812`) is excluded via `CAM-015` southbound ANPR at `19:08`.
+  - Show how commercial fleet SUV `VEH-003` (`KA-04-MX-4XX2`) is excluded via `CAM-015` southbound ANPR at `19:08`.
 - **Official Narration:** *"Vehicle observations from different evidence sources can be brought together for comparison and manual verification."*
 
 ---

@@ -147,7 +147,7 @@ export const VehicleIntelligenceModule: React.FC = () => {
               CAM-014 (19:02 IST) — EVD-006
             </text>
             <text x="410" y="48" textAnchor="middle" fill="#F8FAFC" fontSize="10" fontFamily="monospace">
-              VEH-001: White SUV (KA-01-MX-4??)
+              VEH-001: White SUV (KA-01-MX-4XX?)
             </text>
 
             {/* Node 3: CAM-019 (Domlur–Marathahalli Flyover Ramp (Old Airport Road)) */}
@@ -172,7 +172,7 @@ export const VehicleIntelligenceModule: React.FC = () => {
               CAM-015 (19:08 Southbound) — EVD-009
             </text>
             <text x="650" y="170" textAnchor="middle" fill="#94A3B8" fontSize="10" fontFamily="monospace">
-              VEH-003 (KA-01-MX-4812) Excluded
+              VEH-003 (KA-04-MX-4XX2) Excluded
             </text>
           </svg>
         </div>
@@ -221,7 +221,7 @@ export const VehicleIntelligenceModule: React.FC = () => {
                 {veh3.verificationStatus}
               </span>
             </div>
-            <div className="font-semibold text-white">White Fleet SUV • Reg: KA-01-MX-4812</div>
+            <div className="font-semibold text-white">White Fleet SUV • Reg: KA-04-MX-4XX2</div>
             <p className="text-[11px] text-slate-400 mt-1">
               Verified turning south at 19:04 and confirmed on CAM-015 at 19:08 (EVD-009). Proven NOT the same vehicle as the 19:18 East Flyover sighting.
             </p>

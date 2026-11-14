@@ -53,7 +53,7 @@ flowchart LR
 * **How the Criminal Thinks:** *"ANPR cameras automatically read number plates. I need a vehicle that looks like 10,000 other cars in Bengaluru and a plate that cannot be read cleanly."*
 * **The Evasion Move:**
   1. **Common Silhouette:** Uses a **White Compact SUV (`VEH-001`)**—the single most common urban vehicle type—so dozens of innocent white SUVs (`VEH-003` Naveen Kumar’s airport cab, `VEH-008` Col. Vishwanath’s resident SUV) clutter the search.
-  2. **Prefix Cloning:** Uses a synthetic/cloned registration prefix **`KA-01-MX-4??`** that matches local Indiranagar 100Ft Road resident passes (`KA-01-MX-4091`) and commercial fleet cabs (`KA-01-MX-4812`).
+  2. **Prefix Cloning:** Uses a synthetic/cloned registration prefix **`KA-01-MX-4XX?`** that matches local Indiranagar 100Ft Road resident passes (`KA-53-MX-4XX1`) and commercial fleet cabs (`KA-04-MX-4XX2`).
   3. **Optical Defeat:** Splashes mud over the last two digits at **Sony World Signal (Indiranagar–Koramangala) (`CAM-014` at 19:02)** and uses a trailing accomplice vehicle with high-beam LED headlights (or a high-gloss rear plate cover) ascending **Domlur–Marathahalli Flyover (Old Airport Road) (`CAM-019` at 19:18)** to wash out the rear plate in camera glare.
 
 ---
@@ -158,14 +158,14 @@ flowchart TD
 ### Trap 4: "Visual Micro-Signature & Non-CCTV Sensor Fusion" (Defeating Cloned Plates & Glare)
 * **Criminal’s Blind Spot:** You can clone a number plate or blind an ANPR camera with high beams, but you cannot easily change the physical geometry of your vehicle or avoid passive roadside sensors.
 * **How Project Chakravyuh Catches Them:**
-  1. **Visual Micro-Signature Matching:** Instead of relying only on plate text `KA-01-MX-4??`, Chakravyuh logs **4 physical micro-features** across `CAM-014` (19:02) and `CAM-019` (19:18):
+  1. **Visual Micro-Signature Matching:** Instead of relying only on plate text `KA-01-MX-4XX?`, Chakravyuh logs **4 physical micro-features** across `CAM-014` (19:02) and `CAM-019` (19:18):
      - Aftermarket matte-black roof-rail crossbars
      - Left front fog-lamp bezel scuff/asymmetry
      - Upper-left windshield FASTag + green resident pass sticker placement
      - Dark 35% VLT tint on the rear quarter glass
-  2. **Innocent Prefix Elimination:** Chakravyuh automatically cross-checks all other `KA-01-MX-4??` white SUVs in the city:
-     - `VEH-003` (*Naveen Kumar’s Airport Cab*, `KA-01-MX-4812`) is **cleared** via `CAM-015` southbound ANPR at 19:08.
-     - `VEH-008` (*Col. Vishwanath’s Resident SUV*, `KA-01-MX-4091`) is **checked** against apartment gate logs.
+  2. **Innocent Prefix Elimination:** Chakravyuh automatically cross-checks all other `KA-01-MX-4XX?` white SUVs in the city:
+     - `VEH-003` (*Naveen Kumar’s Airport Cab*, `KA-04-MX-4XX2`) is **cleared** via `CAM-015` southbound ANPR at 19:08.
+     - `VEH-008` (*Col. Vishwanath’s Resident SUV*, `KA-53-MX-4XX1`) is **checked** against apartment gate logs.
   3. **Passive FASTag / Fuel / Boom-Barrier Check:** Many commercial plazas, flyover gantries, and fuel forecourts (`CAM-010` Deccan Fuel Station) have passive RFID/FASTag readers that read the windshield tag’s cryptographic ID even when the metal number plate is covered in mud!
 
 ---
@@ -201,7 +201,7 @@ flowchart TD
 * **How Project Chakravyuh Catches Them:**
   1. **Automatic Cross-Case Entity Indexing:** Every time any police station uploads a tower dump, ANPR log, or witness report into Project Chakravyuh, the **Global Entity Graph** checks for overlapping devices, vehicle prefixes, and Modus Operandi across all open inquiries.
   2. **The Multi-Case Match:** Chakravyuh automatically surfaces **`LEAD-006`**, revealing that:
-     - Burner phone **`DEV-004`** and partial plate **`KA-01-MX-4??`** appeared in **both** the 24 Oct Mahadevapura Warehouse burglary (`CASE-SNT-2026-0039`, where RF Faraday pouches were stolen!) and the 02 Nov Aarav Sharma abduction (`CASE-SNT-2026-0042`)!
+     - Burner phone **`DEV-004`** and partial plate **`KA-01-MX-4XX?`** appeared in **both** the 24 Oct Mahadevapura Warehouse burglary (`CASE-SNT-2026-0039`, where RF Faraday pouches were stolen!) and the 02 Nov Aarav Sharma abduction (`CASE-SNT-2026-0042`)!
      - Companion personal phone **`DEV-019` (Karan Malhotra)** traveled with `DEV-004` during the 24 Oct warehouse incident, giving investigators a **high-priority human verification lead** while still preserving strict human-in-the-loop safeguards.
 
 ---
@@ -213,7 +213,7 @@ flowchart TD
 | **1** | Leaves real phone at home (streaming video) & carries a burner phone (`DEV-004`). | **Sleep/Wake Shadow + Rehearsal Link:** Links burner `DEV-004` to personal phone `DEV-019` (*Karan Malhotra*) from the 24 Oct dry-run, and detects `DEV-019` going motionless 3 mins before `DEV-004` turned on. | Multi-Case Tower Dumps + Timing Advance Variance |
 | **2** | Drops victim *Aarav Sharma’s* phone (`DEV-001`) into a Faraday bag at 18:48. | **RF-Shielding Signature:** Detects abrupt `-40 dBm` signal loss with **no `IMSI-Detach` power-off packet**, pinpointing forced interruption at 18:48 in Sector 04B. | Telecom Baseband Signalling Logs (`EVD-002`) |
 | **3** | Picks up victim inside `CAM-008` blind spot during scheduled UPS battery outage. | **Closed-Ring Perimeter Trap:** Surrounds the blind spot with flanking cameras (`CAM-001`, `003`, `005`, `007`, `009`, `014`) so no vehicle can enter or exit unseen. | Spatial Camera Registry + FOV Cones |
-| **4** | Uses common White SUV with cloned prefix `KA-01-MX-4??` & high-beam glare. | **Visual Micro-Signature + Exclusion:** Matches roof-rails, fog-lamp scuff & sticker placement while ruling out innocent white SUVs (`Naveen Kumar’s cab`, `Col. Vishwanath’s SUV`). | Multi-Camera Video + Southbound ANPR (`EVD-009`) |
+| **4** | Uses common White SUV with cloned prefix `KA-01-MX-4XX?` & high-beam glare. | **Visual Micro-Signature + Exclusion:** Matches roof-rails, fog-lamp scuff & sticker placement while ruling out innocent white SUVs (`Naveen Kumar’s cab`, `Col. Vishwanath’s SUV`). | Multi-Camera Video + Southbound ANPR (`EVD-009`) |
 | **5** | Stops for 12 mins in an unmonitored canal lane so a 4-min drive takes 16 mins (19:02–19:18). | **16-Min Isochrone Prism:** Proves burner phone `DEV-004` paused in the exact same `Sony World Signal (Indiranagar–Koramangala)` cell sector (`19:03–19:17`) as the White SUV’s 16-minute delay. | Time-Distance Prism + Cell Handover Sequence |
 | **6** | Operates at dusk near a parked grey car so witnesses give conflicting colors. | **Optical Sightline Reconciliation:** Uses `CAM-003` to prove Jogger *Aditi Rao* saw *Dr. Kulkarni’s* parked grey sedan (`VEH-004`), validating *Suresh Babu’s* White SUV sighting. | Witness Sightline Map + Clinic CCTV (`EVD-005`) |
 | **7** | Uses encrypted VoIP / Wi-Fi / prepaid top-ups to avoid normal phone call logs. | **Wi-Fi Probe & Recharge Anchor:** Correlates commercial Wi-Fi router probes and prepaid SIM point-of-sale recharge timestamps with shop CCTV. | Router BSSID Logs + Retail POS Timestamps |
@@ -244,7 +244,7 @@ flowchart TB
 ```
 
 ### 1. Passive FASTag UHF-RFID vs. Optical ANPR ("The Ghost-Tag Trap")
-* **What the Criminal Did:** Covered the last digits of the number plate (`KA-01-MX-4??`) with mud and used high-beam glare on the flyover (`CAM-019`) to blind the camera. If smart, they also peeled off their FASTag sticker.
+* **What the Criminal Did:** Covered the last digits of the number plate (`KA-01-MX-4XX?`) with mud and used high-beam glare on the flyover (`CAM-019`) to blind the camera. If smart, they also peeled off their FASTag sticker.
 * **Sovereign Grid Counter-Trap:**
   * Every highway up-ramp (`CAM-019` Domlur–Marathahalli Flyover (Old Airport Road)) and fuel station forecourt (`CAM-010`) has a **300 MHz–900 MHz UHF RFID FASTag Interrogator**.
   * **Case A (FASTag left on windshield):** The RFID reader reads the encrypted 96-bit Electronic Product Code (`EPC`) burned into the windshield chip—revealing the exact chassis and bank account even if the metal plate is completely mud-covered!
@@ -261,7 +261,7 @@ flowchart TB
 * **What the Criminal Did:** Chose Indiranagar 12th Main Pickup Lay-by (`12th Main Service Lane (Indiranagar)`) at 18:45 because the fixed pole camera (`CAM-008`) was powered down for UPS battery maintenance.
 * **Sovereign Grid Counter-Trap:**
   * Fixed cameras aren't the only cameras owned by the government. **BMTC Smart City Buses** and **PCR Police Patrol Vehicles** are equipped with continuous 4-channel ADAS road-facing cameras and GPS telemetry.
-  * Chakravyuh queries the **Metro Transit Fleet AVL Grid** and discovers that **BMTC Route-335E (Bus #KA-01-F-8821)** drove right past the mouth of 12th Main Service Lane (Indiranagar) at **18:44:50 IST**!
+  * Chakravyuh queries the **Metro Transit Fleet AVL Grid** and discovers that **BMTC Route-335E (Bus #KA-01-F-8XX1)** drove right past the mouth of 12th Main Service Lane (Indiranagar) at **18:44:50 IST**!
   * The bus’s side-facing transit camera captured the **White Compact SUV idling in the 12th Main Service Lane (Indiranagar) pickup bay** right inside `CAM-008`’s blind spot!
 
 ### 4. Smart Electricity Meter (AMI) & Broadband ONT Deep-Packet Alibi Test
