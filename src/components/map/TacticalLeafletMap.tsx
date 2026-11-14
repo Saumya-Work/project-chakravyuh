@@ -164,7 +164,7 @@ export const TacticalLeafletMap: React.FC<TacticalMapProps> = ({
         },
         {
           id: 'BLR-27M-02A',
-          name: '27th Main Sector 02A (Approximate 700m Footprint)',
+          name: 'Sony World Signal (Indiranagar–Koramangala) Sector 02A (Approximate 700m Footprint)',
           coords: [12.9718, 77.6535] as [number, number],
           radius: 700,
           color: '#3B82F6',
@@ -197,7 +197,7 @@ export const TacticalLeafletMap: React.FC<TacticalMapProps> = ({
       });
     }
 
-    // 3. Primary Incident Marker (Kaveri Enclave Sector-4)
+    // 3. Primary Incident Marker (Indiranagar 100 Feet Road (HAL 2nd Stage))
     const incidentHtml = `
       <div style="position:relative;display:flex;align-items:center;justify-content:center;width:30px;height:30px;">
         <div style="position:absolute;width:30px;height:30px;border-radius:9999px;background:rgba(239,68,68,0.35);border:2px solid #EF4444;"></div>
@@ -216,7 +216,7 @@ export const TacticalLeafletMap: React.FC<TacticalMapProps> = ({
         `<div style="font-family:sans-serif;font-size:12px;color:#0F172A;min-width:210px;">
           <b style="color:#DC2626;">INCIDENT & LAST SIGHTING ANCHOR</b><br/>
           <b>Case:</b> CASE-SNT-2026-0042<br/>
-          <b>Location:</b> Kaveri Enclave Sector-4 Library Walkway (Fictional)<br/>
+          <b>Location:</b> Indiranagar 100 Feet Road (HAL 2nd Stage) Library Walkway (Fictional)<br/>
           <b>Last Sighting:</b> 18:30 IST (CAM-001 Verified)<br/>
           <b>Complaint:</b> 21:15 IST
         </div>`

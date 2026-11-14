@@ -88,10 +88,10 @@ export const VehicleIntelligenceModule: React.FC = () => {
           <svg className="w-full h-44" viewBox="0 0 900 175">
             {/* Background Grid */}
             <line x1="40" y1="80" x2="860" y2="80" stroke="#1E293B" strokeWidth="8" />
-            {/* Southbound branch at 27th Main */}
+            {/* Southbound branch at Sony World Signal (Indiranagar–Koramangala) */}
             <path d="M 410 80 L 490 155 L 700 155" fill="none" stroke="#1E293B" strokeWidth="6" />
 
-            {/* Documented Segment 1: Enclave Library (CAM-001) to 27th Main (CAM-014) */}
+            {/* Documented Segment 1: Enclave Library (CAM-001) to Sony World Signal (Indiranagar–Koramangala) (CAM-014) */}
             <line
               x1="90"
               y1="80"
@@ -134,7 +134,7 @@ export const VehicleIntelligenceModule: React.FC = () => {
               VEH-008 & VEH-007
             </text>
 
-            {/* Node 2: CAM-014 (27th Main Signal) */}
+            {/* Node 2: CAM-014 (Sony World Junction (Koramangala–Indiranagar Link)) */}
             <circle
               cx="410"
               cy="80"
@@ -147,10 +147,10 @@ export const VehicleIntelligenceModule: React.FC = () => {
               CAM-014 (19:02 IST) — EVD-006
             </text>
             <text x="410" y="48" textAnchor="middle" fill="#F8FAFC" fontSize="10" fontFamily="monospace">
-              VEH-001: White SUV (KA-00-SYN-4??)
+              VEH-001: White SUV (KA-01-MX-4??)
             </text>
 
-            {/* Node 3: CAM-019 (East Link Flyover Ramp) */}
+            {/* Node 3: CAM-019 (Domlur–Marathahalli Flyover Ramp (Old Airport Road)) */}
             <circle
               cx="780"
               cy="80"
@@ -172,7 +172,7 @@ export const VehicleIntelligenceModule: React.FC = () => {
               CAM-015 (19:08 Southbound) — EVD-009
             </text>
             <text x="650" y="170" textAnchor="middle" fill="#94A3B8" fontSize="10" fontFamily="monospace">
-              VEH-003 (KA-00-SYN-4812) Excluded
+              VEH-003 (KA-01-MX-4812) Excluded
             </text>
           </svg>
         </div>
@@ -191,7 +191,7 @@ export const VehicleIntelligenceModule: React.FC = () => {
             </div>
             <div className="font-semibold text-white">White Compact SUV • Reg: {veh1.syntheticRegObservation}</div>
             <p className="text-[11px] text-slate-400 mt-1">
-              Observed moving east at 27th Main Signal. Roof rails and dark rear quarter glass documented in EVD-006.
+              Observed moving east at Sony World Junction (Koramangala–Indiranagar Link). Roof rails and dark rear quarter glass documented in EVD-006.
             </p>
           </div>
 
@@ -207,7 +207,7 @@ export const VehicleIntelligenceModule: React.FC = () => {
             </div>
             <div className="font-semibold text-white">Visually Similar White SUV • Reg: Obscured</div>
             <p className="text-[11px] text-slate-400 mt-1">
-              Observed 16 minutes later on East Link Flyover ramp (EVD-007). Matches silhouette of VEH-001; requires intermediate camera verification (CAM-016/017).
+              Observed 16 minutes later on Domlur–Marathahalli Flyover (Old Airport Road) ramp (EVD-007). Matches silhouette of VEH-001; requires intermediate camera verification (CAM-016/017).
             </p>
           </div>
 
@@ -221,7 +221,7 @@ export const VehicleIntelligenceModule: React.FC = () => {
                 {veh3.verificationStatus}
               </span>
             </div>
-            <div className="font-semibold text-white">White Fleet SUV • Reg: KA-00-SYN-4812</div>
+            <div className="font-semibold text-white">White Fleet SUV • Reg: KA-01-MX-4812</div>
             <p className="text-[11px] text-slate-400 mt-1">
               Verified turning south at 19:04 and confirmed on CAM-015 at 19:08 (EVD-009). Proven NOT the same vehicle as the 19:18 East Flyover sighting.
             </p>

@@ -87,7 +87,7 @@ const INGESTION_STREAMS: IngestionStream[] = [
     validated: 0,
     reviewRequired: 2,
     rejected: 0,
-    sourceInfo: 'Field Canvass Team-01 (Sub-lane B Interviews W-01 & W-02)',
+    sourceInfo: 'Field Canvass Team-01 (12th Main Service Lane (Indiranagar) Interviews W-01 & W-02)',
     timestamp: '02 Nov 2026, 22:01 IST',
     provenance: 'EVD-010 (Signed Transcript PDF)',
     authRef: 'AUTH-BLR-SYN-2026-8841',

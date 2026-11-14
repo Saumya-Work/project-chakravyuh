@@ -66,12 +66,17 @@ export const CctvIntelligenceModule: React.FC = () => {
 
   // Format synthetic timestamp overlay based on camera
   const getSimulatedTimestamp = () => {
-    const baseHour = activeCam.id === 'CAM-001' || activeCam.id === 'CAM-003' ? '18' : '19';
+    const baseHour =
+      activeCam.id === 'CAM-001' || activeCam.id === 'CAM-003' || activeCam.id === 'CAM-008'
+        ? '18'
+        : '19';
     const baseMin =
       activeCam.id === 'CAM-014'
         ? '02'
         : activeCam.id === 'CAM-019'
         ? '18'
+        : activeCam.id === 'CAM-008'
+        ? '44'
         : activeCam.id === 'CAM-006'
         ? '25'
         : activeCam.id === 'CAM-001'
@@ -204,122 +209,144 @@ export const CctvIntelligenceModule: React.FC = () => {
               </div>
             </div>
 
-            {/* Synthetic Illustrative Video Canvas Area */}
+            {/* Synthetic Illustrative Video Canvas Area — Animated for Every Camera (Including BMTC Bus 335E Dashcam for CAM-008) */}
             <div className="relative h-80 bg-[#050911] overflow-hidden flex items-center justify-center select-none">
-              {activeCam.footageStatus !== 'Footage received' ? (
-                <div className="text-center p-6 max-w-md">
-                  <AlertTriangle className="w-10 h-10 text-rose-400 mx-auto mb-2" />
-                  <div className="text-sm font-bold text-white">
-                    {activeCam.id} — {activeCam.footageStatus}
-                  </div>
-                  <p className="text-xs text-slate-400 mt-1">
-                    {activeCam.reviewerNotes ||
-                      'Footage container has not yet been received or was offline during the requested window.'}
-                  </p>
-                </div>
-              ) : (
-                <>
-                  {/* Simulated Road & Corridor Perspective SVG */}
-                  <svg className="w-full h-full" viewBox="0 0 700 320" preserveAspectRatio="none">
-                    {/* Night sky / street background */}
-                    <rect width="700" height="320" fill="#070D19" />
-                    {/* Perspective road lanes */}
-                    <polygon points="0,300 700,300 520,110 180,110" fill="#0F172A" stroke="#1E293B" strokeWidth="2" />
-                    <line
-                      x1="350"
-                      y1="110"
-                      x2="350"
-                      y2="300"
-                      stroke="#38BDF8"
-                      strokeWidth="2"
-                      strokeDasharray="14 10"
-                      opacity="0.4"
+              <svg className="w-full h-full" viewBox="0 0 700 320" preserveAspectRatio="none">
+                {/* Night sky / street background */}
+                <rect width="700" height="320" fill="#070D19" />
+                {/* Perspective road lanes */}
+                <polygon points="0,300 700,300 520,110 180,110" fill="#0F172A" stroke="#1E293B" strokeWidth="2" />
+                <line
+                  x1="350"
+                  y1="110"
+                  x2="350"
+                  y2="300"
+                  stroke="#38BDF8"
+                  strokeWidth="2"
+                  strokeDasharray="14 10"
+                  opacity="0.4"
+                />
+                {/* Grid overlay */}
+                <line x1="0" y1="160" x2="700" y2="160" stroke="#0EA5E9" strokeWidth="0.5" opacity="0.2" />
+                <line x1="350" y1="0" x2="350" y2="320" stroke="#0EA5E9" strokeWidth="0.5" opacity="0.2" />
+
+                {/* CAM-014 (Sony World Junction) & CAM-019 (Domlur–Marathahalli Flyover Ramp) */}
+                {(activeCam.id === 'CAM-014' || activeCam.id === 'CAM-019') && (
+                  <g
+                    transform={`translate(${110 + playbackProgress * 4.2}, ${
+                      activeCam.id === 'CAM-014' ? 185 : 170
+                    })`}
+                  >
+                    <rect
+                      x="-12"
+                      y="-24"
+                      width="155"
+                      height="74"
+                      fill="none"
+                      stroke="#F59E0B"
+                      strokeWidth="1.8"
+                      strokeDasharray="4 2"
                     />
-                    {/* Grid overlay */}
-                    <line x1="0" y1="160" x2="700" y2="160" stroke="#0EA5E9" strokeWidth="0.5" opacity="0.2" />
-                    <line x1="350" y1="0" x2="350" y2="320" stroke="#0EA5E9" strokeWidth="0.5" opacity="0.2" />
+                    <text x="-10" y="-29" fill="#FDE68A" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
+                      {activeCam.id === 'CAM-014'
+                        ? 'OBJ: WHITE CRETA SUV (19:02) | KA-01-MX-4?? | TPMS-HEX-88A4'
+                        : 'OBJ: WHITE CRETA SUV (19:18 RAMP) | GHOST-FASTAG + TPMS-88A4'}
+                    </text>
+                    {/* White SUV Silhouette */}
+                    <rect x="0" y="0" width="115" height="34" rx="6" fill="#F8FAFC" />
+                    <polygon points="15,0 32,-12 90,-12 104,0" fill="#E2E8F0" />
+                    {/* Roof rail crossbars */}
+                    <line x1="36" y1="-14" x2="86" y2="-14" stroke="#0F172A" strokeWidth="2.5" />
+                    <rect x="28" y="-9" width="24" height="9" fill="#1E293B" />
+                    <rect x="56" y="-9" width="28" height="9" fill="#0F172A" />
+                    <circle cx="24" cy="34" r="9" fill="#334155" stroke="#38BDF8" strokeWidth="2" />
+                    <circle cx="88" cy="34" r="9" fill="#334155" stroke="#38BDF8" strokeWidth="2" />
+                    <polygon
+                      points="115,8 180,-5 180,38 115,24"
+                      fill="#FEF08A"
+                      opacity={activeCam.id === 'CAM-019' ? '0.5' : '0.3'}
+                    />
+                  </g>
+                )}
 
-                    {/* Animated Vehicle or Pedestrian depending on camera */}
-                    {(activeCam.id === 'CAM-014' || activeCam.id === 'CAM-019') && (
-                      <g
-                        transform={`translate(${120 + playbackProgress * 4.2}, ${
-                          activeCam.id === 'CAM-014' ? 185 : 170
-                        })`}
-                      >
-                        {/* Bounding Box (Non-Biometric Object Tracking Frame) */}
-                        <rect
-                          x="-12"
-                          y="-18"
-                          width="135"
-                          height="66"
-                          fill="none"
-                          stroke="#F59E0B"
-                          strokeWidth="1.5"
-                          strokeDasharray="4 2"
-                        />
-                        <text x="-10" y="-23" fill="#FDE68A" fontSize="10" fontFamily="monospace" fontWeight="bold">
-                          {activeCam.id === 'CAM-014'
-                            ? 'OBJ: WHITE SUV-LIKE (19:02 EAST) | KA-00-SYN-4??'
-                            : 'OBJ: SIMILAR WHITE SUV-LIKE (19:18 RAMP) | PLATE GLARE'}
-                        </text>
-                        {/* White SUV Silhouette */}
-                        <rect x="0" y="0" width="110" height="34" rx="6" fill="#F8FAFC" />
-                        <polygon points="15,0 32,-12 88,-12 102,0" fill="#E2E8F0" />
-                        <rect x="28" y="-9" width="24" height="9" fill="#1E293B" />
-                        <rect x="56" y="-9" width="28" height="9" fill="#0F172A" />
-                        <circle cx="24" cy="34" r="9" fill="#334155" stroke="#94A3B8" strokeWidth="2" />
-                        <circle cx="86" cy="34" r="9" fill="#334155" stroke="#94A3B8" strokeWidth="2" />
-                        {/* Headlamp beam */}
-                        <polygon
-                          points="110,8 175,-5 175,38 110,24"
-                          fill="#FEF08A"
-                          opacity={activeCam.id === 'CAM-019' ? '0.45' : '0.25'}
-                        />
-                      </g>
-                    )}
+                {/* CAM-008: BMTC Route-335E Electric Bus ADAS Side-Camera Sovereign Trap Feed */}
+                {activeCam.id === 'CAM-008' && (
+                  <g>
+                    {/* Side-lane lay-by curb */}
+                    <rect x="240" y="135" width="260" height="80" rx="8" fill="#111C2D" stroke="#10B981" strokeWidth="1.5" strokeDasharray="5 3" />
+                    <text x="250" y="128" fill="#6EE7B7" fontSize="10" fontFamily="monospace" fontWeight="bold">
+                      🪤 SOVEREIGN TRAP: BMTC BUS #KA-01-F-8821 (ROUTE 335E) ADAS DASHCAM @ 18:44:50
+                    </text>
+                    <g transform={`translate(${265 + (playbackProgress % 40) * 0.4}, 162)`}>
+                      <rect x="-8" y="-16" width="135" height="62" fill="none" stroke="#EF4444" strokeWidth="1.5" strokeDasharray="4 2" />
+                      <text x="-6" y="-20" fill="#FCA5A5" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
+                        WHITE SUV IDLING IN CAM-008 BLIND SPOT | KA-01-MX-4821
+                      </text>
+                      <rect x="0" y="0" width="112" height="32" rx="6" fill="#F8FAFC" />
+                      <polygon points="14,0 30,-11 86,-11 100,0" fill="#E2E8F0" />
+                      <circle cx="24" cy="32" r="8" fill="#334155" stroke="#94A3B8" strokeWidth="2" />
+                      <circle cx="86" cy="32" r="8" fill="#334155" stroke="#94A3B8" strokeWidth="2" />
+                    </g>
+                  </g>
+                )}
 
-                    {activeCam.id === 'CAM-006' && (
-                      <g>
-                        <text x="210" y="195" fill="#94A3B8" fontSize="12" fontFamily="monospace">
-                          19:25 IST — NO RELEVANT OBSERVATION IN REVIEWED SEGMENT
-                        </text>
-                      </g>
-                    )}
+                {/* CAM-006: Exculpatory Feed — Naveen Kumar's Airport Cab Turning South to Hosur Road */}
+                {activeCam.id === 'CAM-006' && (
+                  <g transform={`translate(${480 - playbackProgress * 3.1}, 190)`}>
+                    <rect x="-10" y="-18" width="138" height="64" fill="none" stroke="#10B981" strokeWidth="1.5" strokeDasharray="4 2" />
+                    <text x="-8" y="-23" fill="#6EE7B7" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
+                      CLEARED: NAVEEN KUMAR AIRPORT CAB (KA-04-AB-8814) → HOSUR RD
+                    </text>
+                    <rect x="0" y="0" width="108" height="30" rx="5" fill="#E2E8F0" />
+                    <rect x="38" y="-8" width="26" height="8" rx="2" fill="#F59E0B" />
+                    <circle cx="22" cy="30" r="8" fill="#334155" stroke="#10B981" strokeWidth="2" />
+                    <circle cx="84" cy="30" r="8" fill="#334155" stroke="#10B981" strokeWidth="2" />
+                  </g>
+                )}
 
-                    {(activeCam.id === 'CAM-001' || activeCam.id === 'CAM-003') && (
-                      <g transform={`translate(${160 + playbackProgress * 3.2}, 190)`}>
-                        <rect
-                          x="-10"
-                          y="-25"
-                          width="55"
-                          height="75"
-                          fill="none"
-                          stroke="#10B981"
-                          strokeWidth="1.5"
-                          strokeDasharray="4 2"
-                        />
-                        <text x="-10" y="-30" fill="#6EE7B7" fontSize="10" fontFamily="monospace">
-                          PEDESTRIAN OBSERVATION ({activeCam.id === 'CAM-001' ? '18:30' : '18:36'})
-                        </text>
-                        <circle cx="16" cy="-8" r="7" fill="#38BDF8" />
-                        <rect x="8" y="0" width="16" height="28" rx="4" fill="#0284C7" />
-                      </g>
-                    )}
-                  </svg>
+                {/* CAM-001, CAM-003 & All Other Corridor Cameras */}
+                {!['CAM-014', 'CAM-019', 'CAM-008', 'CAM-006'].includes(activeCam.id) && (
+                  <g transform={`translate(${150 + playbackProgress * 3.4}, 188)`}>
+                    <rect
+                      x="-10"
+                      y="-25"
+                      width="68"
+                      height="76"
+                      fill="none"
+                      stroke="#10B981"
+                      strokeWidth="1.5"
+                      strokeDasharray="4 2"
+                    />
+                    <text x="-10" y="-30" fill="#6EE7B7" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
+                      {activeCam.id === 'CAM-001'
+                        ? 'AARAV SHARMA DEPARTING INDIRANAGAR LIBRARY (18:30)'
+                        : activeCam.id === 'CAM-003'
+                        ? 'APOLLO PHARMACY 100FT RD — PEDESTRIAN & PARKED SEDAN (18:36)'
+                        : `${activeCam.id} CORRIDOR FEED — ACTIVE PLAYBACK`}
+                    </text>
+                    <circle cx="18" cy="-8" r="7" fill="#38BDF8" />
+                    <rect x="10" y="0" width="16" height="28" rx="4" fill="#0284C7" />
+                  </g>
+                )}
+              </svg>
 
-                  {/* Top-Left HUD Overlay */}
-                  <div className="absolute top-3 left-3 bg-[#090D16]/85 border border-slate-700 rounded px-2.5 py-1.5 text-[10px] font-mono text-slate-300 space-y-0.5">
-                    <div>CAM ID: {activeCam.id} ({activeCam.cameraType})</div>
-                    <div>DIR: {activeCam.directionLabel} | FOV: {activeCam.fovDeg}°</div>
-                    <div className="text-teal-400">BIOMETRICS / FACIAL REC: DISABLED BY POLICY</div>
-                  </div>
+              {/* Top-Left HUD Overlay */}
+              <div className="absolute top-3 left-3 bg-[#090D16]/85 border border-slate-700 rounded px-2.5 py-1.5 text-[10px] font-mono text-slate-300 space-y-0.5">
+                <div>
+                  CAM ID: {activeCam.id} (
+                  {activeCam.id === 'CAM-008'
+                    ? 'Fixed Pole Offline → Recovered via BMTC Bus #335E ADAS Dashcam'
+                    : activeCam.cameraType}
+                  )
+                </div>
+                <div>DIR: {activeCam.directionLabel} | FOV: {activeCam.fovDeg}°</div>
+                <div className="text-teal-400">BIOMETRICS / FACIAL REC: DISABLED BY POLICY</div>
+              </div>
 
-                  {/* Bottom-Right Integrity Stamp */}
-                  <div className="absolute bottom-3 right-3 bg-[#090D16]/85 border border-emerald-500/40 rounded px-2.5 py-1 text-[10px] font-mono text-emerald-300">
-                    WORKING COPY PROXY • ORIGINAL SHA-256 SEALED
-                  </div>
-                </>
-              )}
+              {/* Bottom-Right Integrity Stamp */}
+              <div className="absolute bottom-3 right-3 bg-[#090D16]/85 border border-emerald-500/40 rounded px-2.5 py-1 text-[10px] font-mono text-emerald-300">
+                WORKING COPY PROXY • ORIGINAL SHA-256 SEALED
+              </div>
             </div>
 
             {/* Video Playback Controls */}

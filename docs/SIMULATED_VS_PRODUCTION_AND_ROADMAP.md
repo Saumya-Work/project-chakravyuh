@@ -20,7 +20,7 @@
 
 ## 2. Known Limitations of the Demonstration Environment
 
-1. **Synthetic Data Only:** All entities, coordinates, registration numbers (`KA-00-SYN-...`), and timestamps are fictional.
+1. **Synthetic Data Only:** All entities, coordinates, registration numbers (`KA-01-MX-...`), and timestamps are fictional.
 2. **In-Memory Session State:** Demo actions persist during the browser session and can be reset at any time via `Reset Demo`. Production deployment requires PostgreSQL with encrypted storage volumes.
 3. **Illustrative Video Streams:** Video feeds in Stage 5 are synthetic vector animations illustrating corridor observations rather than real private CCTV recordings.
 4. **Demonstration Security Controls:** Role switching is intentionally frictionless for live executive demonstrations and is not production-certified authentication.

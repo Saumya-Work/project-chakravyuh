@@ -135,7 +135,7 @@ export const LocationIntelligenceModule: React.FC = () => {
             <span>Stage 4 & Part 6 • Interactive Location Intelligence & CCTV Camera Discovery</span>
           </div>
           <h1 className="text-xl font-bold text-white mt-1">
-            Spatial Investigation Grid & 20-Camera Corridor Registry (Fictional Bengaluru Zone)
+            Spatial Investigation Grid & 20-Camera Corridor Registry (Bengaluru (Indiranagar, Koramangala, Domlur, Marathahalli, Whitefield & Hosur/Kolar/Tumakuru/Mysuru))
           </h1>
           <p className="text-xs text-slate-400 mt-0.5">
             Instead of manually identifying camera locations, investigators can use the camera registry and incident geography to identify cameras that may contain relevant footage.
@@ -215,7 +215,7 @@ export const LocationIntelligenceModule: React.FC = () => {
               className="bg-[#090D16] border border-[#22314E] rounded-lg px-3 py-1.5 text-xs text-sky-300 font-mono outline-none"
             >
               <option value={600}>Radius: 600m (Enclave Immediate)</option>
-              <option value={1500}>Radius: 1,500m (27th Main Signal)</option>
+              <option value={1500}>Radius: 1,500m (Sony World Junction (Koramangala–Indiranagar Link))</option>
               <option value={2800}>Radius: 2,800m (Full East Corridor)</option>
             </select>
           </div>

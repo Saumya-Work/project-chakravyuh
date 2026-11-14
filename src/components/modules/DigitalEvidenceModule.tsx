@@ -77,7 +77,7 @@ export const DigitalEvidenceModule: React.FC = () => {
     setUploadedFileName(`CAM016_CanalBridge_RawSegment_${Date.now().toString().slice(-4)}.mp4`);
     setUploadedFileSize('542.6 MB (Synthetic Stream)');
     setComputedHash(hashHex);
-    setUploadTitle('CCTV Footage Container — CAM-016 (Indira Canal Bridge East)');
+    setUploadTitle('CCTV Footage Container — CAM-016 (Challaghatta–Yemlur Lake Bridge (behind Embassy GolfLinks) East)');
     setUploadSource('Civic Waterways Authority NVR');
     setUploadType('CCTV Video Container (.MP4)');
     setUploading(false);

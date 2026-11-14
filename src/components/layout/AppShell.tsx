@@ -157,7 +157,7 @@ const NAV_ITEMS: NavItem[] = [
     plainExplanation: 'Stage 6: Reconstructs the 16-minute Canal Lane vehicle swap using acoustic mic sensors and Wi-Fi probes, while clearing Naveen Kumar’s airport cab.',
     plainExplanationHi: 'चरण 6: 16 मिनट के अंधेरे रास्ते के गैप को स्मार्ट-पोल माइक और वाई-फाई सिग्नल से सुलझाता है, और निर्दोष कैब ड्राइवर नवीन कुमार को बाहर करता है।',
     voiceCommentary:
-      'Stage 6, Vehicle Intelligence. Between 7:02 PM and 7:18 PM, the suspect hid in Canal Service Lane for sixteen minutes. Chakravyuh uses smart-pole acoustic sensors and apartment gate Wi-Fi logs to pinpoint the stop, while clearing Naveen Kumar’s airport taxi.',
+      'Stage 6, Vehicle Intelligence. Between 7:02 PM and 7:18 PM, the suspect hid in Yemlur–Challaghatta Service Lane (Domlur) for sixteen minutes. Chakravyuh uses smart-pole acoustic sensors and apartment gate Wi-Fi logs to pinpoint the stop, while clearing Naveen Kumar’s airport taxi.',
     voiceCommentaryHi:
       'चरण छह, गाड़ियों का मिलान। अपराधी सोलह मिनट तक बिना कैमरे वाली गली में छुपा रहा। चक्रव्यूह ने स्मार्ट-पोल के साउंड सेंसर और गेट के वाई-फाई से उस ठिकाने को पकड़ लिया और निर्दोष टैक्सी ड्राइवर नवीन कुमार को क्लीन चिट दी।',
     voiceCommentaryHinglish:
@@ -315,18 +315,37 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
   const isHi = narrationLanguage === 'hi';
 
   const speakCurrentPageGuide = (langOverride?: 'en' | 'hi') => {
+    if (langOverride) {
+      setNarrationLanguage(langOverride);
+    }
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+    }
     const useHindi = (langOverride || narrationLanguage) === 'hi';
     const voices = window.speechSynthesis.getVoices();
-    const hindiVoice = voices.find(
-      (v) =>
-        v.lang.toLowerCase().startsWith('hi') ||
-        v.name.toLowerCase().includes('hindi') ||
-        v.name.toLowerCase().includes('swara') ||
-        v.name.toLowerCase().includes('madhur')
-    );
+    const hindiVoice =
+      voices.find(
+        (v) =>
+          v.localService &&
+          (v.lang.toLowerCase().startsWith('hi') ||
+            v.name.toLowerCase().includes('hindi') ||
+            v.name.toLowerCase().includes('hemant') ||
+            v.name.toLowerCase().includes('kalpana') ||
+            v.name.toLowerCase().includes('swara') ||
+            v.name.toLowerCase().includes('madhur'))
+      ) ||
+      voices.find(
+        (v) =>
+          v.lang.toLowerCase().startsWith('hi') ||
+          v.name.toLowerCase().includes('hindi') ||
+          v.name.toLowerCase().includes('swara') ||
+          v.name.toLowerCase().includes('madhur')
+      );
     const englishVoice =
+      voices.find((v) => v.localService && (v.lang.includes('en-IN') || v.name.includes('India') || v.name.includes('Heera') || v.name.includes('Ravi'))) ||
+      voices.find((v) => v.localService && v.lang.startsWith('en')) ||
       voices.find((v) => v.lang.includes('en-IN') || v.name.includes('India')) ||
       voices.find((v) => v.lang.startsWith('en'));
 
@@ -336,16 +355,16 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
         : currentNavMeta.voiceCommentaryHinglish
       : currentNavMeta.voiceCommentary;
 
-    const u = new SpeechSynthesisUtterance(textToSpeak);
-    u.rate = 1.0;
-    if (useHindi && hindiVoice) {
-      u.voice = hindiVoice;
-      u.lang = 'hi-IN';
-    } else if (englishVoice) {
-      u.voice = englishVoice;
-      u.lang = englishVoice.lang || 'en-IN';
-    }
-    window.speechSynthesis.speak(u);
+    setTimeout(() => {
+      const u = new SpeechSynthesisUtterance(textToSpeak);
+      u.rate = 1.0;
+      if (useHindi && hindiVoice) {
+        u.voice = hindiVoice;
+      } else if (englishVoice) {
+        u.voice = englishVoice;
+      }
+      window.speechSynthesis.speak(u);
+    }, 50);
   };
 
   // Instant Global Search across all synthetic entities
@@ -470,7 +489,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
           <span>DEMONSTRATION ENVIRONMENT — SYNTHETIC DATA ONLY</span>
         </div>
         <div className="hidden md:flex items-center gap-4 text-[11px] text-slate-400 font-mono">
-          <span>Active Scenario: CASE-SNT-2026-0042 (Fictional Bengaluru Zone)</span>
+          <span>Active Scenario: CASE-SNT-2026-0042 (Bengaluru (Indiranagar, Koramangala, Domlur, Marathahalli, Whitefield & Hosur/Kolar/Tumakuru/Mysuru))</span>
           <span>•</span>
           <span className="text-sky-300">🔊 Voice Audio Commentary & Simplified Briefing Mode Available</span>
         </div>

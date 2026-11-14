@@ -126,10 +126,7 @@ export const CommandCentreModule: React.FC = () => {
 
   const launchStageWithVoice = (stageIdx: number, lang?: 'en' | 'hi') => {
     const chosenLang = lang || (narrationLanguage === 'hi' ? 'hi' : 'en');
-    startGuidedInvestigation(false, true, chosenLang);
-    setTimeout(() => {
-      goToGuidedStage(stageIdx);
-    }, 50);
+    startGuidedInvestigation(false, true, chosenLang, stageIdx);
   };
 
   return (
@@ -302,7 +299,7 @@ export const CommandCentreModule: React.FC = () => {
               </>
             ) : (
               <>
-                Aarav Sharma departs Kaveri Enclave Library at <b>18:30</b>. His phone (<code className="text-sky-300">DEV-001</code>) is dropped into a Faraday pouch at <b>18:48</b>. Chakravyuh links 4 cross-station rehearsal cases via ICJS/CCTNS.
+                Aarav Sharma departs State Central Library, Indiranagar at <b>18:30</b>. His phone (<code className="text-sky-300">DEV-001</code>) is dropped into a Faraday pouch at <b>18:48</b>. Chakravyuh links 4 cross-station rehearsal cases via ICJS/CCTNS.
               </>
             )}
           </p>

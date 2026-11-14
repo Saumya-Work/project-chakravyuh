@@ -173,13 +173,13 @@ export const AiEngineModule: React.FC = () => {
           <div className="p-2.5 rounded bg-[#090D16] border border-slate-800">
             <span className="font-bold text-emerald-300">Fleet Cab VEH-003 Excluded:</span>{' '}
             <span className="text-slate-300">
-              Matched prefix KA-00-SYN-4?? at CAM-014 (19:04), but CAM-015 ANPR (19:08) proves it continued south (EVD-009).
+              Matched prefix KA-01-MX-4?? at CAM-014 (19:04), but CAM-015 ANPR (19:08) proves it continued south (EVD-009).
             </span>
           </div>
           <div className="p-2.5 rounded bg-[#090D16] border border-slate-800">
             <span className="font-bold text-emerald-300">CAM-008 Tampering Ruled Out:</span>{' '}
             <span className="text-slate-300">
-              Sub-lane B outage (18:15–19:30) matched to a municipal UPS feeder work order scheduled 5 days prior.
+              12th Main Service Lane (Indiranagar) outage (18:15–19:30) matched to a municipal UPS feeder work order scheduled 5 days prior.
             </span>
           </div>
         </div>

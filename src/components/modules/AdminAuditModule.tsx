@@ -27,7 +27,7 @@ const SIMULATED_VS_PRODUCTION = [
   },
   {
     capability: 'Vehicle & ANPR Observations',
-    simulatedNow: '8 synthetic vehicle records (KA-00-SYN-...) with manual investigator comparison controls.',
+    simulatedNow: '8 synthetic vehicle records (KA-01-MX-...) with manual investigator comparison controls.',
     futureProduction: 'Authorised Traffic Command ANPR log ingestion with strict visual confirmation workflows.',
   },
   {

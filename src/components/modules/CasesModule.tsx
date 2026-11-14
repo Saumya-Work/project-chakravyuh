@@ -37,7 +37,7 @@ export const CasesModule: React.FC = () => {
   const [showNewCaseModal, setShowNewCaseModal] = useState(false);
   const [formTitle, setFormTitle] = useState('Suspected Corridor Vehicle Abduction Inquiry');
   const [formCategory, setFormCategory] = useState('Missing Person / Suspected Abduction');
-  const [formLocation, setFormLocation] = useState('Kaveri Enclave Sector-4, East Link Corridor (Fictional Bengaluru)');
+  const [formLocation, setFormLocation] = useState('Indiranagar 100 Feet Road (HAL 2nd Stage), East Link Corridor (Fictional Bengaluru)');
   const [formVictim, setFormVictim] = useState('Aarav Sharma (32, Software Architect)');
   const [formSighting, setFormSighting] = useState('18:30');
   const [formComplaint, setFormComplaint] = useState('21:15');
@@ -85,7 +85,7 @@ export const CasesModule: React.FC = () => {
       forensicLead: 'Dr. Priya Krishnan',
       summary: `Documented incident at ${formLocation}. Last confirmed sighting at ${formSighting}; complaint received at ${formComplaint}.`,
       authorisationRef: `AUTH-BLR-SYN-2026-${8900 + cases.length}`,
-      jurisdiction: 'East Metro Synthetic Division (Demo)',
+      jurisdiction: 'Indiranagar Police Station — Bengaluru East Division',
     });
     setShowNewCaseModal(false);
   };
@@ -239,7 +239,7 @@ export const CasesModule: React.FC = () => {
                   </div>
                   <div className="text-lg font-bold font-mono mt-0.5">18:30 IST</div>
                   <div className="text-[11px] opacity-90">
-                    Kaveri Enclave Sector-4 Community Library Walkway
+                    Indiranagar 100 Feet Road (HAL 2nd Stage) Community Library Walkway
                   </div>
                 </div>
 

@@ -111,7 +111,7 @@ export const ReportsModule: React.FC = () => {
 
     addLine('5. CCTV DISCOVERY, 6. VIDEO OBSERVATIONS & 7. VEHICLE OBSERVATIONS', 11, true, [14, 116, 144]);
     addLine(
-      `20 corridor cameras discovered. CAM-014 (19:02): White SUV-like vehicle moving east (VEH-001, partial plate KA-00-SYN-4??). CAM-019 (19:18): Visually similar white SUV-like vehicle on East Link Flyover ramp (VEH-002). CAM-006 (19:25): No relevant observation. Fleet Cab VEH-003 (KA-00-SYN-4812) excluded via CAM-015 southbound ANPR at 19:08.`
+      `20 corridor cameras discovered. CAM-014 (19:02): White SUV-like vehicle moving east (VEH-001, partial plate KA-01-MX-4??). CAM-019 (19:18): Visually similar white SUV-like vehicle on Domlur–Marathahalli Flyover (Old Airport Road) ramp (VEH-002). CAM-006 (19:25): No relevant observation. Fleet Cab VEH-003 (KA-01-MX-4812) excluded via CAM-015 southbound ANPR at 19:08.`
     );
     y += 4;
 
@@ -307,7 +307,7 @@ ${evidenceItems.map((e) => `- ${e.id}: ${e.originalFilename} | SHA-256: ${e.sha2
             <option value="DEV-004">DEV-004 (Field Handset)</option>
             <option value="DEV-007">DEV-007 (Exculpatory)</option>
             <option value="CAM-001">CAM-001 (Library Gate)</option>
-            <option value="CAM-014">CAM-014 (27th Main)</option>
+            <option value="CAM-014">CAM-014 (Sony World Signal (Indiranagar–Koramangala))</option>
             <option value="CAM-019">CAM-019 (East Flyover)</option>
             <option value="VEH-001">VEH-001 (White SUV)</option>
             <option value="VEH-002">VEH-002 (Flyover SUV)</option>
@@ -463,7 +463,7 @@ ${evidenceItems.map((e) => `- ${e.id}: ${e.originalFilename} | SHA-256: ${e.sha2
             <div className="p-4 rounded-xl bg-[#090D16] border border-slate-800 space-y-1.5">
               <div className="font-mono font-bold text-sky-400 uppercase">2. Incident Chronology</div>
               <p className="text-slate-200 leading-relaxed">
-                18:30 IST: Last confirmed visual sighting of Aarav Sharma exiting Kaveri Enclave Community Library (CAM-001). 18:36 IST: Pedestrian passing Apex Pharmacy (CAM-003). 18:48 IST: Primary handset DEV-001 loses network registration in Sector 04B. 21:15 IST: Formal family complaint registered.
+                18:30 IST: Last confirmed visual sighting of Aarav Sharma exiting State Central Library, Indiranagar 100Ft Road (CAM-001). 18:36 IST: Pedestrian passing Apollo Pharmacy (100Ft Road, Indiranagar) (CAM-003). 18:48 IST: Primary handset DEV-001 loses network registration in Sector 04B. 21:15 IST: Formal family complaint registered.
               </p>
             </div>
 
@@ -503,7 +503,7 @@ ${evidenceItems.map((e) => `- ${e.id}: ${e.originalFilename} | SHA-256: ${e.sha2
             <div className="p-4 rounded-xl bg-[#090D16] border border-slate-800 space-y-1.5">
               <div className="font-mono font-bold text-sky-400 uppercase">7. Vehicle Intelligence & Comparison</div>
               <p className="text-slate-200 leading-relaxed">
-                {vehicles.length} corridor vehicles analyzed. VEH-001 (CAM-014, KA-00-SYN-4??) and VEH-002 (CAM-019, plate obscured) marked as Possibly Related pending intermediate camera checks. Commercial fleet SUV VEH-003 (KA-00-SYN-4812) confirmed NOT the same vehicle via CAM-015 southbound ANPR.
+                {vehicles.length} corridor vehicles analyzed. VEH-001 (CAM-014, KA-01-MX-4??) and VEH-002 (CAM-019, plate obscured) marked as Possibly Related pending intermediate camera checks. Commercial fleet SUV VEH-003 (KA-01-MX-4812) confirmed NOT the same vehicle via CAM-015 southbound ANPR.
               </p>
             </div>
 
@@ -511,7 +511,7 @@ ${evidenceItems.map((e) => `- ${e.id}: ${e.originalFilename} | SHA-256: ${e.sha2
             <div className="p-4 rounded-xl bg-[#090D16] border border-slate-800 space-y-1.5">
               <div className="font-mono font-bold text-sky-400 uppercase">8. Geographic Correlation</div>
               <p className="text-slate-200 leading-relaxed">
-                Spatial alignment observed along the West-to-East arterial axis from Kaveri Sector-4 (18:30–18:48) to 27th Main Signal (19:02–19:03) and East Link Flyover Ramp (19:18–19:19), without interpolating unverified paths between sightings.
+                Spatial alignment observed along the West-to-East arterial axis from Kaveri Sector-4 (18:30–18:48) to Sony World Junction (Koramangala–Indiranagar Link) (19:02–19:03) and Domlur–Marathahalli Flyover Ramp (Old Airport Road) (19:18–19:19), without interpolating unverified paths between sightings.
               </p>
             </div>
 
@@ -547,7 +547,7 @@ ${evidenceItems.map((e) => `- ${e.id}: ${e.originalFilename} | SHA-256: ${e.sha2
             <div className="p-4 rounded-xl bg-[#090D16] border border-rose-500/30 space-y-1.5">
               <div className="font-mono font-bold text-rose-300 uppercase">12. Documented Evidence Gaps</div>
               <p className="text-slate-200 leading-relaxed">
-                (1) CAM-008 (Sub-lane B Pickup Lay-by) was offline 18:15–19:30 due to pre-scheduled UPS maintenance. (2) CAM-011 24-hour SD card loop expired prior to complaint. (3) 1.1 km stretch between CAM-014 and CAM-019 awaits intermediate camera footage.
+                (1) CAM-008 (12th Main Service Lane (Indiranagar) Pickup Lay-by) was offline 18:15–19:30 due to pre-scheduled UPS maintenance. (2) CAM-011 24-hour SD card loop expired prior to complaint. (3) 1.1 km stretch between CAM-014 and CAM-019 awaits intermediate camera footage.
               </p>
             </div>
 

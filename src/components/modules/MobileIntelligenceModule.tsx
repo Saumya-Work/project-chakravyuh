@@ -33,9 +33,9 @@ export const MobileIntelligenceModule: React.FC = () => {
 
   const selectedDevice = devices.find((d) => d.id === selectedDeviceId) || devices[0];
 
-  // Key subset for horizontal correlation timeline vs all 30 devices
+  // Key subset for horizontal correlation timeline vs all devices
   const timelineDevices = devices.filter((d) =>
-    ['DEV-001', 'DEV-004', 'DEV-007', 'DEV-012', 'DEV-002', 'DEV-003'].includes(d.id)
+    ['DEV-001', 'DEV-004', 'DEV-019', 'DEV-007', 'DEV-012', 'DEV-002', 'DEV-003'].includes(d.id)
   );
 
   const displayedRegistryDevices =
@@ -148,7 +148,7 @@ export const MobileIntelligenceModule: React.FC = () => {
             <span>18:10</span>
             <span className="text-amber-300 font-bold">18:30 (Sighting)</span>
             <span className="text-rose-300 font-bold">18:48 (DEV-001 Loss)</span>
-            <span className="text-sky-300">19:02 (27th Main)</span>
+            <span className="text-sky-300">19:02 (Sony World Signal (Indiranagar–Koramangala))</span>
             <span>19:20 (Flyover)</span>
           </div>
         </div>
@@ -249,7 +249,7 @@ export const MobileIntelligenceModule: React.FC = () => {
                 <span className="font-mono text-[10px]">LEAD-001</span>
               </div>
               <p className="text-slate-300 text-[11px] mt-1 leading-relaxed">
-                Why connected: DEV-004 registered in Sector 04A (18:28) and handed over to Sector 04B (18:44) within 2 minutes of DEV-001, then progressed east to 27th Main (19:03) and Flyover (19:19).
+                Why connected: DEV-004 registered in Sector 04A (18:28) and handed over to Sector 04B (18:44) within 2 minutes of DEV-001, then progressed east to Sony World Signal (Indiranagar–Koramangala) (19:03) and Flyover (19:19).
               </p>
             </div>
 

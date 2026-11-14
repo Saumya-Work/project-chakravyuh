@@ -114,7 +114,12 @@ interface SentinelContextType {
   guidedStageIndex: number;
   isGuidedPlaying: boolean;
   guidedProgress: number;
-  startGuidedInvestigation: (withPresentationMode?: boolean, withAudio?: boolean, lang?: NarrationLanguage) => void;
+  startGuidedInvestigation: (
+    withPresentationMode?: boolean,
+    withAudio?: boolean,
+    lang?: NarrationLanguage,
+    initialStageIdx?: number
+  ) => void;
   pauseGuided: () => void;
   resumeGuided: () => void;
   nextGuidedStage: () => void;
@@ -222,14 +227,17 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       }
 
       const voices = window.speechSynthesis.getVoices();
+      // Prefer local OS voices (v.localService) first so Chrome never hangs on unauthenticated cloud voices
       const hindiNativeVoice =
         voices.find(
           (v) =>
+            v.localService &&
             (v.lang.toLowerCase().startsWith('hi') ||
               v.name.toLowerCase().includes('hindi') ||
+              v.name.toLowerCase().includes('hemant') ||
+              v.name.toLowerCase().includes('kalpana') ||
               v.name.toLowerCase().includes('swara') ||
-              v.name.toLowerCase().includes('madhur')) &&
-            v.name.toLowerCase().includes('natural')
+              v.name.toLowerCase().includes('madhur'))
         ) ||
         voices.find(
           (v) =>
@@ -240,9 +248,9 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         );
 
       const englishIndianVoice =
-        voices.find((v) => (v.lang.includes('en-IN') || v.name.includes('India')) && v.name.includes('Natural')) ||
+        voices.find((v) => v.localService && (v.lang.includes('en-IN') || v.name.includes('India') || v.name.includes('Heera') || v.name.includes('Ravi'))) ||
+        voices.find((v) => v.localService && v.lang.startsWith('en')) ||
         voices.find((v) => v.lang.includes('en-IN') || v.name.includes('India')) ||
-        voices.find((v) => v.lang.includes('en-GB') && v.name.includes('Natural')) ||
         voices.find((v) => v.lang.startsWith('en'));
 
       // Build queue of { spokenText, displaySubtitle, isHindi }
@@ -259,14 +267,12 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         });
       } else if (activeLang === 'hi') {
         hiDevanagariSentences.forEach((hiSub, i) => {
-          // If native Hindi TTS voice exists, speak Devanagari; otherwise speak natural Hinglish phonetics with Indian English voice while showing Hindi subtitle
           const spoken = hindiNativeVoice
             ? hiSub
             : hiPhoneticSentences[i] || hiSub;
           queue.push({ spokenText: spoken, displaySubtitle: hiSub, isHindi: true });
         });
       } else {
-        // Bilingual: alternate English sentence then Hindi sentence
         const maxLen = Math.max(enSentences.length, hiDevanagariSentences.length);
         for (let i = 0; i < maxLen; i++) {
           if (enSentences[i]) {
@@ -300,6 +306,9 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       speechCompletedForStageRef.current = false;
 
       window.speechSynthesis.cancel();
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
 
       const speakSentenceAt = (sIndex: number) => {
         if (speechSessionIdRef.current !== currentSessionId) return;
@@ -320,11 +329,25 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
         if (item.isHindi && hindiNativeVoice) {
           utterance.voice = hindiNativeVoice;
-          utterance.lang = 'hi-IN';
         } else if (englishIndianVoice) {
           utterance.voice = englishIndianVoice;
-          utterance.lang = englishIndianVoice.lang || 'en-IN';
         }
+
+        let advanced = false;
+        const advanceNext = () => {
+          if (advanced) return;
+          advanced = true;
+          clearTimeout(watchdog);
+          if (speechSessionIdRef.current !== currentSessionId) return;
+          const completedPct = Math.round(((sIndex + 1) / queue.length) * 90);
+          setGuidedProgress((prev) => Math.max(prev, completedPct));
+          speakSentenceAt(sIndex + 1);
+        };
+
+        // Watchdog timer in case a browser speech engine hangs without firing onend
+        const watchdog = setTimeout(() => {
+          advanceNext();
+        }, 11000);
 
         utterance.onstart = () => {
           if (speechSessionIdRef.current !== currentSessionId) return;
@@ -335,15 +358,11 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         };
 
         utterance.onend = () => {
-          if (speechSessionIdRef.current !== currentSessionId) return;
-          const completedPct = Math.round(((sIndex + 1) / queue.length) * 90);
-          setGuidedProgress((prev) => Math.max(prev, completedPct));
-          speakSentenceAt(sIndex + 1);
+          advanceNext();
         };
 
         utterance.onerror = () => {
-          if (speechSessionIdRef.current !== currentSessionId) return;
-          speakSentenceAt(sIndex + 1);
+          advanceNext();
         };
 
         utteranceRef.current = utterance;
@@ -391,7 +410,7 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   useEffect(() => {
     if (isGuidedActive && isAudioEnabled && isGuidedPlaying) {
       speakStageCommentary(guidedStageIndex);
-    } else if (!isGuidedPlaying || !isGuidedActive) {
+    } else if (isGuidedActive && !isGuidedPlaying) {
       stopSpeaking();
     }
   }, [isGuidedActive, guidedStageIndex, isAudioEnabled, isGuidedPlaying, speakStageCommentary, stopSpeaking]);
@@ -502,12 +521,18 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, [isGuidedActive, isGuidedPlaying, guidedStageIndex, isAudioEnabled]);
 
   const startGuidedInvestigation = useCallback(
-    (withPresentationMode = false, withAudio = true, lang?: NarrationLanguage) => {
+    (
+      withPresentationMode = false,
+      withAudio = true,
+      lang?: NarrationLanguage,
+      initialStageIdx = 0
+    ) => {
+      const targetStageIdx = Math.max(0, Math.min(GUIDED_STAGES.length - 1, initialStageIdx));
       speechCompletedForStageRef.current = false;
       if (lang) {
         setNarrationLanguageState(lang);
       }
-      setGuidedStageIndex(0);
+      setGuidedStageIndex(targetStageIdx);
       setGuidedProgress(0);
       setIsGuidedActive(true);
       setIsGuidedPlaying(true);
@@ -516,13 +541,13 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       if (withPresentationMode) {
         setIsPresentationMode(true);
       }
-      setActiveModuleState(GUIDED_STAGES[0].targetModule as ModuleId);
+      setActiveModuleState(GUIDED_STAGES[targetStageIdx].targetModule as ModuleId);
       const activeLang = lang || narrationLanguage;
       logAudit(
         'Guided Presentation',
         'GUIDED_DEMO_STARTED',
         'CASE-SNT-2026-0042',
-        `Launched 8-stage Voice-Guided Investigation Walkthrough (${activeLang === 'hi' ? 'Hindi' : activeLang === 'bilingual' ? 'Bilingual' : 'English'}).`
+        `Launched Stage ${targetStageIdx + 1} of Voice-Guided Investigation Walkthrough (${activeLang === 'hi' ? 'Hindi' : activeLang === 'bilingual' ? 'Bilingual' : 'English'}).`
       );
       triggerToast(
         activeLang === 'hi' ? 'हिंदी वॉइस-गाइडेड डेमो शुरू' : 'Voice-Guided Investigation Active',

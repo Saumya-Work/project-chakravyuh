@@ -19,7 +19,7 @@
 ---
 
 ## Stage 1 — Incident Registration (00:45 – 01:25)
-- **Visual Action:** Watch the 6-step registration sequence for **`CASE-SNT-2026-0042`** (Missing Person / Suspected Abduction, Kaveri Enclave Sector-4, Bengaluru Fictional Zone).
+- **Visual Action:** Watch the 6-step registration sequence for **`CASE-SNT-2026-0042`** (Missing Person / Suspected Abduction, Indiranagar 100 Feet Road (HAL 2nd Stage), Bengaluru Fictional Zone).
 - **Key Point:** The last confirmed sighting (`18:30 IST` at the Community Library walkway) and formal complaint receipt (`21:15 IST`) are immediately anchored on the spatial grid and unified timeline.
 - **Official Narration:** *"An investigation begins with a documented incident. Project Chakravyuh creates a structured case workspace where all subsequent evidence and investigative observations can be brought together."*
 
@@ -55,8 +55,8 @@
 ## Stage 5 — CCTV Footage Review and Analysis (03:45 – 04:30)
 - **Visual Action:** Switch between `CAM-014`, `CAM-019`, and `CAM-006` in the Video Review Workspace.
 - **Key Points:**
-  - `CAM-014` (`19:02`): A white SUV-like vehicle is observed moving east (partial plate `KA-00-SYN-4??`).
-  - `CAM-019` (`19:18`): A visually similar white SUV-like vehicle is observed entering the East Link Flyover ramp.
+  - `CAM-014` (`19:02`): A white SUV-like vehicle is observed moving east (partial plate `KA-01-MX-4??`).
+  - `CAM-019` (`19:18`): A visually similar white SUV-like vehicle is observed entering the Domlur–Marathahalli Flyover (Old Airport Road) ramp.
   - `CAM-006` (`19:25`): No relevant observation in the reviewed segment.
   - Original video files remain untouched in the immutable vault; facial recognition is disabled by policy.
 - **Official Narration:** *"Once footage is obtained through authorised channels, the platform helps investigators review, document and connect relevant observations while preserving the original footage."*
@@ -67,7 +67,7 @@
 - **Visual Action:** Inspect the East Corridor Comparison Schematic for `VEH-001` through `VEH-008`.
 - **Key Points:**
   - Point out the **16-minute interval** between `CAM-014` (`19:02`) and `CAM-019` (`19:18`) over `1.1 km`—the system refuses to invent movement across unverified gaps.
-  - Show how commercial fleet SUV `VEH-003` (`KA-00-SYN-4812`) is excluded via `CAM-015` southbound ANPR at `19:08`.
+  - Show how commercial fleet SUV `VEH-003` (`KA-01-MX-4812`) is excluded via `CAM-015` southbound ANPR at `19:08`.
 - **Official Narration:** *"Vehicle observations from different evidence sources can be brought together for comparison and manual verification."*
 
 ---
