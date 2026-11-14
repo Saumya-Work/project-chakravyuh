@@ -158,28 +158,67 @@ const CASE_FEEDS: Record<string, FeedMeta[]> = {
 };
 
 export const ScenarioCctvVideoDeck: React.FC<ScenarioCctvVideoDeckProps> = ({ caseId, isHi = false }) => {
-  const { setActiveModule, setSelectedCameraId, speakCustomText } = useChakravyuh();
+  const {
+    setActiveModule,
+    setSelectedCameraId,
+    speakCustomText,
+    startGuidedInvestigation,
+    isSpeaking,
+    stopSpeaking,
+  } = useChakravyuh();
   const feeds = CASE_FEEDS[caseId] || CASE_FEEDS['CASE-CKV-2026-0042'];
 
   const [activeFeedIdx, setActiveFeedIdx] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [progress, setProgress] = useState<number>(30);
+  const [isAutoNarratingReel, setIsAutoNarratingReel] = useState<boolean>(false);
 
   // Reset active feed index when case switches
   useEffect(() => {
     setActiveFeedIdx(0);
     setProgress(25);
     setIsPlaying(true);
+    setIsAutoNarratingReel(false);
   }, [caseId]);
 
-  // Smooth 60fps-style animation loop for all video feeds
+  // Smooth 60fps-style animation loop for all video feeds + auto-advance when Narrated Video Reel is active
   useEffect(() => {
     if (!isPlaying) return;
     const timer = setInterval(() => {
-      setProgress((prev) => (prev >= 100 ? 0 : prev + 1.4));
+      setProgress((prev) => {
+        if (prev >= 100) {
+          if (isAutoNarratingReel) {
+            if (!isSpeaking) {
+              setActiveFeedIdx((curr) => {
+                const next = curr + 1;
+                if (next < feeds.length) {
+                  const nextFeed = feeds[next];
+                  speakCustomText(nextFeed.voiceEn, nextFeed.voiceHi, undefined, isHi ? 'hi' : 'en');
+                  return next;
+                }
+                setIsAutoNarratingReel(false);
+                return 0;
+              });
+              return 0;
+            }
+            return 96; // Hold near end of clip while voice finishes
+          }
+          return 0;
+        }
+        return prev + (isAutoNarratingReel ? 0.9 : 1.4);
+      });
     }, 120);
     return () => clearInterval(timer);
-  }, [isPlaying]);
+  }, [isPlaying, isAutoNarratingReel, isSpeaking, feeds, isHi, speakCustomText]);
+
+  const startAutoNarratedReel = (lang: 'en' | 'hi') => {
+    setIsAutoNarratingReel(true);
+    setActiveFeedIdx(0);
+    setProgress(0);
+    setIsPlaying(true);
+    const first = feeds[0];
+    speakCustomText(first.voiceEn, first.voiceHi, undefined, lang);
+  };
 
   const currentFeed = feeds[activeFeedIdx] || feeds[0];
 
@@ -568,24 +607,56 @@ export const ScenarioCctvVideoDeck: React.FC<ScenarioCctvVideoDeckProps> = ({ ca
 
         <div className="flex flex-wrap items-center gap-2">
           <button
+            onClick={() => startAutoNarratedReel('en')}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs transition shadow-lg"
+          >
+            <Play className="w-3.5 h-3.5 fill-slate-950" />
+            <span>🎬 Narrated Video Reel (EN)</span>
+          </button>
+
+          <button
+            onClick={() => startAutoNarratedReel('hi')}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-extrabold text-xs transition shadow-lg"
+          >
+            <Play className="w-3.5 h-3.5 fill-slate-950" />
+            <span>🎬 हिंदी नैरेटेड वीडियो रील (HI)</span>
+          </button>
+
+          <button
             onClick={() =>
-              speakCustomText(currentFeed.voiceEn, currentFeed.voiceHi, undefined, isHi ? 'hi' : 'en')
+              startGuidedInvestigation(false, true, isHi ? 'hi' : 'en', 0, caseId)
             }
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs transition shadow"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs transition shadow"
           >
             <Volume2 className="w-3.5 h-3.5" />
-            <span>{isHi ? '🔊 इस वीडियो फुटेज का विवरण सुनें' : '🔊 Explain This Video Feed (Voice)'}</span>
+            <span>
+              {isHi
+                ? '🚀 पूरा 8-चरण लाइव डेमो चलाएं'
+                : '🚀 Launch Full 8-Stage Narrated Demo'}
+            </span>
           </button>
+
+          {isSpeaking && (
+            <button
+              onClick={() => {
+                setIsAutoNarratingReel(false);
+                stopSpeaking();
+              }}
+              className="px-2.5 py-1.5 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold text-xs"
+            >
+              Stop Voice
+            </button>
+          )}
 
           <button
             onClick={() => {
               setSelectedCameraId(currentFeed.camId);
               setActiveModule('cctv-intelligence');
             }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/50 text-sky-200 font-bold text-xs transition"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/50 text-sky-200 font-bold text-xs transition"
           >
             <ExternalLink className="w-3.5 h-3.5" />
-            <span>{isHi ? 'फुल-स्क्रीन सीसीटीवी लैब में खोलें' : 'Open in Full CCTV Lab'}</span>
+            <span>{isHi ? 'CCTV लैब' : 'Full CCTV Lab'}</span>
           </button>
         </div>
       </div>
@@ -641,6 +712,17 @@ export const ScenarioCctvVideoDeck: React.FC<ScenarioCctvVideoDeckProps> = ({ ca
           <div className="absolute top-2.5 right-2.5 bg-emerald-950/90 border border-emerald-400/60 rounded px-2.5 py-1 text-[10px] font-mono font-bold text-emerald-300">
             {isHi ? currentFeed.trapBadgeHi : currentFeed.trapBadgeEn}
           </div>
+
+          {/* Bottom Cinema Subtitle Overlay */}
+          <div className="absolute bottom-2.5 left-3 right-3 bg-[#060B14]/90 border border-sky-500/40 rounded-lg px-3 py-2 text-xs text-sky-100 font-medium shadow-lg flex items-start gap-2">
+            <Volume2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+            <span>
+              <b className="text-amber-300 font-mono mr-1.5">
+                [{currentFeed.camId} • {activeFeedIdx + 1}/3]:
+              </b>
+              {isHi ? currentFeed.voiceHi : currentFeed.voiceEn}
+            </span>
+          </div>
         </div>
 
         {/* Bottom Scrubber Bar */}
@@ -676,3 +758,4 @@ export const ScenarioCctvVideoDeck: React.FC<ScenarioCctvVideoDeckProps> = ({ ca
     </div>
   );
 };
+

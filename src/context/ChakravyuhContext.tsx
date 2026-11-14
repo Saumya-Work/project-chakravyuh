@@ -33,6 +33,7 @@ import {
   INITIAL_COLLABORATION_TASKS,
   INITIAL_AUDIT_LOGS,
   GUIDED_STAGES,
+  getGuidedStagesForCase,
 } from '@/data/syntheticData';
 
 export type NarrationLanguage = 'en' | 'hi' | 'bilingual';
@@ -66,7 +67,11 @@ interface ChakravyuhContextType {
   geminiVoiceName: GeminiVoiceName;
   setGeminiVoiceName: (v: GeminiVoiceName) => void;
   currentSpokenSentence: string;
-  speakStageCommentary: (stageIdx?: number, langOverride?: NarrationLanguage) => void;
+  speakStageCommentary: (
+    stageIdx?: number,
+    langOverride?: NarrationLanguage,
+    caseIdOverride?: string
+  ) => void;
   speakCustomText: (
     textEn: string,
     textHi: string,
@@ -129,7 +134,8 @@ interface ChakravyuhContextType {
     withPresentationMode?: boolean,
     withAudio?: boolean,
     lang?: NarrationLanguage,
-    initialStageIdx?: number
+    initialStageIdx?: number,
+    caseIdOverride?: string
   ) => void;
   pauseGuided: () => void;
   resumeGuided: () => void;
@@ -293,10 +299,11 @@ export const ChakravyuhProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   );
 
   const speakStageCommentary = useCallback(
-    (stageIdx?: number, langOverride?: NarrationLanguage) => {
+    (stageIdx?: number, langOverride?: NarrationLanguage, caseIdOverride?: string) => {
       const idx = stageIdx !== undefined ? stageIdx : guidedStageIndex;
       const activeLang = langOverride || narrationLanguage;
-      const stage = GUIDED_STAGES[idx] || GUIDED_STAGES[0];
+      const activeStages = getGuidedStagesForCase(caseIdOverride || selectedCaseId);
+      const stage = activeStages[idx] || activeStages[0];
 
       const enSentences =
         stage.voiceScript && stage.voiceScript.length > 0
@@ -552,7 +559,7 @@ export const ChakravyuhProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         }
       }, 40);
     },
-    [fetchGeminiTtsObjectUrl, geminiVoiceName, guidedStageIndex, narrationLanguage, speechRate]
+    [fetchGeminiTtsObjectUrl, geminiVoiceName, guidedStageIndex, narrationLanguage, selectedCaseId, speechRate]
   );
 
   const speakCustomText = useCallback(
@@ -728,20 +735,39 @@ export const ChakravyuhProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     [triggerToast]
   );
 
+  // Synchronize default camera, vehicle & lead when selectedCaseId changes
+  useEffect(() => {
+    if (selectedCaseId === 'CASE-CKV-2026-0043') {
+      setSelectedCameraId('CAM-021');
+      setSelectedVehicleId('VEH-007');
+      setSelectedLeadId('LEAD-007');
+    } else if (selectedCaseId === 'CASE-CKV-2026-0044') {
+      setSelectedCameraId('CAM-025');
+      setSelectedVehicleId('VEH-008');
+      setSelectedLeadId('LEAD-008');
+    } else if (selectedCaseId === 'CASE-CKV-2026-0042') {
+      setSelectedCameraId('CAM-014');
+      setSelectedVehicleId('VEH-001');
+      setSelectedLeadId('LEAD-001');
+    }
+  }, [selectedCaseId]);
+
   // Synchronize active module when guided stage changes
   useEffect(() => {
     if (isGuidedActive) {
-      const stage = GUIDED_STAGES[guidedStageIndex];
+      const activeStages = getGuidedStagesForCase(selectedCaseId);
+      const stage = activeStages[guidedStageIndex];
       if (stage && stage.targetModule) {
         setActiveModuleState(stage.targetModule as ModuleId);
       }
     }
-  }, [isGuidedActive, guidedStageIndex]);
+  }, [isGuidedActive, guidedStageIndex, selectedCaseId]);
 
   // Timer for Guided Investigation Playback — waits for voice completion when Audio is ON
   useEffect(() => {
     if (!isGuidedActive || !isGuidedPlaying) return;
-    const stage = GUIDED_STAGES[guidedStageIndex];
+    const activeStages = getGuidedStagesForCase(selectedCaseId);
+    const stage = activeStages[guidedStageIndex];
     const stepMs = 250;
     const baseIncrement = (100 / ((stage?.durationSeconds || 40) * 1000)) * stepMs;
 
@@ -755,7 +781,7 @@ export const ChakravyuhProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         // Once speech has completed (or when muted), advance smoothly to 100% and switch steps
         const finishIncrement = isAudioEnabled ? 2.0 : baseIncrement;
         if (prev + finishIncrement >= 100) {
-          if (guidedStageIndex < GUIDED_STAGES.length - 1) {
+          if (guidedStageIndex < activeStages.length - 1) {
             speechCompletedForStageRef.current = false;
             setGuidedStageIndex((s) => s + 1);
             return 0;
@@ -769,16 +795,22 @@ export const ChakravyuhProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     }, stepMs);
 
     return () => clearInterval(timer);
-  }, [isGuidedActive, isGuidedPlaying, guidedStageIndex, isAudioEnabled]);
+  }, [isGuidedActive, isGuidedPlaying, guidedStageIndex, isAudioEnabled, selectedCaseId]);
 
   const startGuidedInvestigation = useCallback(
     (
       withPresentationMode = false,
       withAudio = true,
       lang?: NarrationLanguage,
-      initialStageIdx = 0
+      initialStageIdx = 0,
+      caseIdOverride?: string
     ) => {
-      const targetStageIdx = Math.max(0, Math.min(GUIDED_STAGES.length - 1, initialStageIdx));
+      const targetCaseId = caseIdOverride || selectedCaseId || 'CASE-CKV-2026-0042';
+      if (caseIdOverride && caseIdOverride !== selectedCaseId) {
+        setSelectedCaseId(caseIdOverride);
+      }
+      const activeStages = getGuidedStagesForCase(targetCaseId);
+      const targetStageIdx = Math.max(0, Math.min(activeStages.length - 1, initialStageIdx));
       speechCompletedForStageRef.current = false;
       if (lang) {
         setNarrationLanguageState(lang);
@@ -792,23 +824,25 @@ export const ChakravyuhProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       if (withPresentationMode) {
         setIsPresentationMode(true);
       }
-      setActiveModuleState(GUIDED_STAGES[targetStageIdx].targetModule as ModuleId);
+      setActiveModuleState(activeStages[targetStageIdx].targetModule as ModuleId);
       const activeLang = lang || narrationLanguage;
       logAudit(
         'Guided Presentation',
         'GUIDED_DEMO_STARTED',
-        'CASE-CKV-2026-0042',
-        `Launched Stage ${targetStageIdx + 1} of Voice-Guided Investigation Walkthrough (${activeLang === 'hi' ? 'Hindi' : activeLang === 'bilingual' ? 'Bilingual' : 'English'}).`
+        targetCaseId,
+        `Launched Stage ${targetStageIdx + 1} of Voice-Guided Investigation Walkthrough for ${targetCaseId} (${activeLang === 'hi' ? 'Hindi' : activeLang === 'bilingual' ? 'Bilingual' : 'English'}).`
       );
       triggerToast(
-        activeLang === 'hi' ? 'हिंदी वॉइस-गाइडेड डेमो शुरू' : 'Voice-Guided Investigation Active',
+        activeLang === 'hi'
+          ? `हिंदी वॉइस-गाइडेड डेमो शुरू (${targetCaseId})`
+          : `Voice-Guided Investigation Active (${targetCaseId})`,
         activeLang === 'hi'
           ? 'सरल हिंदी और इंग्लिश ऑडियो कमेंट्री चालू है।'
-          : 'Continuous audio commentary and Executive Focus Mode enabled.',
+          : 'Continuous 8-stage audio commentary and Executive Focus Mode enabled.',
         'info'
       );
     },
-    [logAudit, narrationLanguage, triggerToast]
+    [logAudit, narrationLanguage, selectedCaseId, triggerToast]
   );
 
   const pauseGuided = useCallback(() => {

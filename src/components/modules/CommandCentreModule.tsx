@@ -39,7 +39,7 @@ import {
   Languages,
 } from 'lucide-react';
 import { useChakravyuh } from '@/context/ChakravyuhContext';
-import { GUIDED_STAGES, INVESTIGATION_SCENARIO_BLUEPRINTS } from '@/data/syntheticData';
+import { GUIDED_STAGES, INVESTIGATION_SCENARIO_BLUEPRINTS, getGuidedStagesForCase } from '@/data/syntheticData';
 import { ScenarioCctvVideoDeck } from '@/components/guided/ScenarioCctvVideoDeck';
 
 const CRIME_CATEGORY_DATA = [
@@ -96,6 +96,7 @@ export const CommandCentreModule: React.FC = () => {
   const activeScenario =
     INVESTIGATION_SCENARIO_BLUEPRINTS.find((b) => b.caseId === selectedCaseId) ||
     INVESTIGATION_SCENARIO_BLUEPRINTS[0];
+  const activeGuidedStages = getGuidedStagesForCase(activeScenario.caseId);
 
   const receivedCamerasCount = cameras.filter((c) => c.footageStatus === 'Footage received').length;
   const pendingLeadsCount = leads.filter((l) => l.reviewStatus === 'Awaiting Investigator Review').length;
@@ -133,9 +134,9 @@ export const CommandCentreModule: React.FC = () => {
 
   const displayAllAnalytics = !isExecutiveFocusMode || showDetailedCharts;
 
-  const launchStageWithVoice = (stageIdx: number, lang?: 'en' | 'hi') => {
+  const launchStageWithVoice = (stageIdx: number, lang?: 'en' | 'hi', caseIdOverride?: string) => {
     const chosenLang = lang || (narrationLanguage === 'hi' ? 'hi' : 'en');
-    startGuidedInvestigation(false, true, chosenLang, stageIdx);
+    startGuidedInvestigation(false, true, chosenLang, stageIdx, caseIdOverride || activeScenario.caseId);
   };
 
   return (
@@ -226,6 +227,20 @@ export const CommandCentreModule: React.FC = () => {
 
           <div className="flex flex-wrap items-center gap-2 shrink-0">
             <button
+              onClick={() => startGuidedInvestigation(false, true, 'en', 0, activeScenario.caseId)}
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-extrabold text-xs shadow-lg transition"
+            >
+              <Play className="w-4 h-4 fill-slate-950" />
+              <span>🎬 Play 8-Stage Narrated Demo (EN)</span>
+            </button>
+            <button
+              onClick={() => startGuidedInvestigation(false, true, 'hi', 0, activeScenario.caseId)}
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-extrabold text-xs shadow-lg transition"
+            >
+              <Play className="w-4 h-4 fill-slate-950" />
+              <span>🎬 8-चरण हिंदी वॉइस डेमो (HI)</span>
+            </button>
+            <button
               onClick={() =>
                 speakCustomText(
                   activeScenario.voiceBriefingEn,
@@ -234,24 +249,10 @@ export const CommandCentreModule: React.FC = () => {
                   'en'
                 )
               }
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs shadow-lg transition"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/50 text-sky-200 font-bold text-xs transition"
             >
               <Volume2 className="w-4 h-4" />
-              <span>🇬🇧 Speak Selected Case (EN)</span>
-            </button>
-            <button
-              onClick={() =>
-                speakCustomText(
-                  activeScenario.voiceBriefingEn,
-                  activeScenario.voiceBriefingHi,
-                  undefined,
-                  'hi'
-                )
-              }
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs shadow-lg transition"
-            >
-              <Volume2 className="w-4 h-4" />
-              <span>🇮🇳 हिंदी में केस सुनें (HI)</span>
+              <span>🇬🇧 Quick Summary</span>
             </button>
             {isSpeaking && (
               <button
@@ -261,12 +262,6 @@ export const CommandCentreModule: React.FC = () => {
                 Stop Voice
               </button>
             )}
-            <button
-              onClick={() => setActiveModule('cases')}
-              className="px-3 py-2 rounded-xl bg-[#090D16] hover:bg-slate-800 border border-sky-500/40 text-sky-300 text-xs font-bold transition"
-            >
-              {isHi ? 'पूरा केस डोजियर खोलें →' : 'Open Full Case Dossier →'}
-            </button>
           </div>
         </div>
 
@@ -278,7 +273,7 @@ export const CommandCentreModule: React.FC = () => {
               <div
                 key={scen.caseId}
                 onClick={() => setSelectedCaseId(scen.caseId)}
-                className={`p-4 rounded-xl border-2 cursor-pointer transition flex flex-col justify-between gap-2 ${
+                className={`p-4 rounded-xl border-2 cursor-pointer transition flex flex-col justify-between gap-2.5 ${
                   isSelected
                     ? 'bg-sky-950/80 border-amber-400 shadow-lg shadow-amber-500/10'
                     : 'bg-[#090D16]/90 border-slate-800 hover:border-slate-600'
@@ -298,11 +293,20 @@ export const CommandCentreModule: React.FC = () => {
                     {isHi ? scen.keyChallengeHi : scen.keyChallengeEn}
                   </p>
                 </div>
-                <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono">
+                <div className="pt-2 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono">
                   <span className="text-teal-300 truncate">{scen.vehicleMasked}</span>
-                  <span className="text-amber-300 font-bold shrink-0">
-                    {isSelected ? (isHi ? '✓ सक्रिय केस' : '✓ Active Scenario') : isHi ? 'चुनें →' : 'Select →'}
-                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        startGuidedInvestigation(false, true, isHi ? 'hi' : 'en', 0, scen.caseId);
+                      }}
+                      className="px-2.5 py-1 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-[10px] flex items-center gap-1 shadow transition"
+                    >
+                      <Play className="w-3 h-3 fill-slate-950" />
+                      <span>{isHi ? '8-चरण वॉइस डेमो' : 'Play 8-Stage Demo'}</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             );
@@ -382,7 +386,7 @@ export const CommandCentreModule: React.FC = () => {
 
         {showAllTraps && (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3.5">
-            {GUIDED_STAGES.map((stg, idx) => (
+            {activeGuidedStages.map((stg, idx) => (
               <div
                 key={stg.id}
                 onClick={() => launchStageWithVoice(idx)}

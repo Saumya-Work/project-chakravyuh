@@ -25,10 +25,12 @@ import {
   Crosshair,
 } from 'lucide-react';
 import { useChakravyuh, NarrationLanguage, GeminiVoiceName } from '@/context/ChakravyuhContext';
-import { GUIDED_STAGES } from '@/data/syntheticData';
+import { getGuidedStagesForCase } from '@/data/syntheticData';
 
 export const GuidedPresentationBar: React.FC = () => {
   const {
+    selectedCaseId,
+    startGuidedInvestigation,
     isGuidedActive,
     isPresentationMode,
     guidedStageIndex,
@@ -63,7 +65,8 @@ export const GuidedPresentationBar: React.FC = () => {
 
   if (!isGuidedActive && !isPresentationMode) return null;
 
-  const currentStage = GUIDED_STAGES[guidedStageIndex] || GUIDED_STAGES[0];
+  const activeStages = getGuidedStagesForCase(selectedCaseId);
+  const currentStage = activeStages[guidedStageIndex] || activeStages[0];
   const isHi = narrationLanguage === 'hi';
   const isBilingual = narrationLanguage === 'bilingual';
 
@@ -94,14 +97,41 @@ export const GuidedPresentationBar: React.FC = () => {
         className="bg-gradient-to-r from-[#0B1528] via-[#112240] to-[#0B1528] border-b-2 border-sky-500/60 shadow-2xl px-4 py-3 relative z-30"
       >
         <div className="max-w-[1800px] mx-auto flex flex-col gap-3">
-          {/* Top Row: Stage Indicator + Language Switcher + Audio Voice Controls + Playback Controls */}
+          {/* Top Row: Case Switcher + Stage Indicator + Language Switcher + Audio Voice Controls + Playback Controls */}
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2.5">
+              {/* 3-Case Narrated Demo Switcher */}
+              <div className="flex items-center bg-[#090D16] border border-amber-500/40 rounded-lg p-0.5 gap-1">
+                {[
+                  { id: 'CASE-CKV-2026-0042', label: 'Case 1: 0042 (Kidnapping)' },
+                  { id: 'CASE-CKV-2026-0043', label: 'Case 2: 0043 (₹4.2Cr Gold Heist)' },
+                  { id: 'CASE-CKV-2026-0044', label: 'Case 3: 0044 (Defence Leak)' },
+                ].map((c) => {
+                  const active =
+                    selectedCaseId === c.id ||
+                    (!['CASE-CKV-2026-0042', 'CASE-CKV-2026-0043', 'CASE-CKV-2026-0044'].includes(selectedCaseId) &&
+                      c.id === 'CASE-CKV-2026-0042');
+                  return (
+                    <button
+                      key={c.id}
+                      onClick={() => startGuidedInvestigation(isPresentationMode, isAudioEnabled, narrationLanguage, 0, c.id)}
+                      className={`px-2 py-1 rounded text-[11px] font-mono font-bold transition ${
+                        active
+                          ? 'bg-amber-500 text-slate-950 shadow'
+                          : 'text-amber-200/80 hover:text-white'
+                      }`}
+                    >
+                      {c.label}
+                    </button>
+                  );
+                })}
+              </div>
+
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-sky-500/20 border border-sky-400/50 text-sky-300 text-xs font-mono font-bold tracking-wider uppercase">
                 <Radio className="w-3.5 h-3.5 text-sky-400 animate-pulse" />
                 {isHi
-                  ? `चरण ${currentStage.stageNumber} / ${GUIDED_STAGES.length}`
-                  : `Step ${currentStage.stageNumber} of ${GUIDED_STAGES.length}`}
+                  ? `चरण ${currentStage.stageNumber} / ${activeStages.length}`
+                  : `Step ${currentStage.stageNumber} of ${activeStages.length}`}
               </span>
               <h2 className="text-sm md:text-base font-extrabold text-white tracking-tight">
                 {isHi
@@ -264,7 +294,7 @@ export const GuidedPresentationBar: React.FC = () => {
 
               <button
                 onClick={nextGuidedStage}
-                disabled={guidedStageIndex === GUIDED_STAGES.length - 1}
+                disabled={guidedStageIndex === activeStages.length - 1}
                 title="Next Stage"
                 className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-sky-500/20 border border-sky-500/40 hover:bg-sky-500/30 disabled:opacity-40 text-sky-200 text-xs font-bold transition"
               >
@@ -336,7 +366,7 @@ export const GuidedPresentationBar: React.FC = () => {
 
           {/* 8-Stage Interactive Step Progress Bar */}
           <div className="grid grid-cols-4 sm:grid-cols-8 gap-1.5">
-            {GUIDED_STAGES.map((stg, idx) => {
+            {activeStages.map((stg, idx) => {
               const isCurrent = idx === guidedStageIndex;
               const isCompleted = idx < guidedStageIndex;
               return (
@@ -517,7 +547,7 @@ export const GuidedPresentationBar: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {GUIDED_STAGES.map((stg, idx) => (
+                {activeStages.map((stg, idx) => (
                   <div
                     key={stg.id}
                     onClick={() => goToGuidedStage(idx)}
