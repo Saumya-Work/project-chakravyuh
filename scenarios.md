@@ -126,12 +126,32 @@ flowchart TD
 
 ---
 
-### Trap 1: The "Rehearsal Mistake & Sleep/Wake Shadow Trap" (Catching the Real Identity Behind Burner `DEV-004`)
-* **Criminal’s Blind Spot:** A smart criminal remembers to leave their personal phone at home on the **day of the crime (02 Nov)**—but almost always carried their **real personal phone** during the **reconnaissance dry-run (24 Oct)** or when buying/activating the burner phone!
-* **How Project Chakravyuh Catches Them:**
-  1. **Cross-Date Companion Pairing:** Chakravyuh queries where burner phone `DEV-004` appeared on **24 Oct 2026** (`CASE-CKV-2026-0039` SP Road & Peenya Electronics Hub (Bengaluru–Tumakuru NH-48) dump) and checks which personal phones traveled through the **exact same sector sequence within 90 seconds**. It catches **`DEV-019` (Karan Malhotra’s Personal Phone)**, which moved alongside `DEV-004` on 24 Oct!
-  2. **Sleep/Wake Handshake Anomaly on 02 Nov:** On 02 Nov (crime day), Chakravyuh notices that `DEV-019` (Karan Malhotra’s real phone) suddenly entered **zero-handover static status** at **18:15 IST**—and just **3 minutes later at 18:18 IST**, burner phone `DEV-004` powered on in Indiranagar 100Ft Road!
-  3. **Fake Home Alibi Exposed:** While `DEV-019` streamed video at home to fake activity, its **Timing Advance (TA) and cell-sector azimuth had zero micro-variance** for 3 hours, proving the phone was sitting untouched on a table while its owner was in the field.
+### Trap 1: The "5-Step Signal Shortlisting Funnel & 10-Day History Trap" (How Chakravyuh Identifies `DEV-004` Out of 3,420 Phones and Unmasks Karan Malhotra’s Personal Phone `DEV-019`)
+* **The Missing Link Question:** *When a kidnapping happens on a busy Bengaluru street like Indiranagar 100 Feet Road, thousands of phones are active. How does Project Chakravyuh find the one anonymous burner phone (`DEV-004`) AND figure out that it belongs to Karan Malhotra (`DEV-019`), whose real phone was sitting 6 km away at home?*
+* **How Project Chakravyuh Solves It Step-by-Step:**
+  1. **Step 1 — Crime-Time Tower Dump (All Phone Signals at the Time of Crime):**
+     - When Aarav Sharma’s iPhone (`DEV-001`) abruptly loses signal at **18:48 IST** outside State Central Library, Indiranagar 100Ft Road, Chakravyuh ingests the authorised cell-tower dump across Indiranagar Sectors `BLR-KVR-04A` and `BLR-KVR-04B` for the **18:05–19:25 IST** window.
+     - Total active signals in the wider Indiranagar zone: **3,420 mobile devices**.
+     - **Geofence & Time-Window Filter:** Narrowed down to **30 devices (`DEV-001` to `DEV-030`)** that were physically inside the 450m–650m crime-scene sectors during the abduction window.
+  2. **Step 2 — Case-by-Case Shortlisting & Innocent Citizen Elimination:**
+     - Out of the **30 devices** at the crime scene, Chakravyuh automatically cross-checks 30-day tower habits and exculpatory logs to clear innocent citizens first:
+       - **26 Local Residents, Shop Staff & Commuters Cleared:** Their 30-day signal history shows routine nightly residence or shop employment along Indiranagar 100Ft Road and 12th Main.
+       - **`DEV-007` (Rohan Verma — Resident) Cleared via Alibi:** Overlapped Sector `04A` at `18:32`, but moved **2.8 km West** to Prestige Leela Residences with a verified RFID apartment gate entry at `18:55 IST`.
+       - **`DEV-012` (Sameer Khan — FastDrop Courier) Cleared via Fleet Telemetry:** Shared logistics handset corroborated by 8 scheduled parcel deliveries on scooter `VEH-007`.
+       - **`DEV-001` (Aarav Sharma — Victim):** Signal abruptly cut off at `18:48 IST`.
+     - **Shortlist Result:** Out of 3,420 signals $\rightarrow$ 30 scene phones $\rightarrow$ **ONLY 1 Unattributed Prepaid Burner Phone (`DEV-004`)** arrived 2 minutes before Aarav left the library (`18:28`), shadowed him into Sector `04B` (`18:44`), and fled eastbound through Sony World Signal (`19:03`) and Domlur–Marathahalli Flyover (`19:19`)!
+  3. **Step 3 — Checking 10-Day Signal History of Burner `DEV-004` Across Other Cases:**
+     - Burner phone `DEV-004` was bought using a fake out-of-district KYC and never called Aarav. Traditional policing hits a dead end here.
+     - Project Chakravyuh queries the **10-Day Historical Signal Trail (24 Oct – 02 Nov)** of `DEV-004` across all Bengaluru police station cases and discovers that **`DEV-004` was present at 3 prior crime/rehearsal scenes**:
+       - **24 Oct (`CASE-CKV-2026-0039`):** SP Road & Peenya Electronics Hub (where the Faraday signal-blocking bags were stolen).
+       - **29 Oct (`CASE-CKV-2026-0040`):** Outer Ring Road (Marathahalli–Silk Board–Hosur) escape corridor rehearsal.
+       - **31 Oct (`CASE-CKV-2026-0041`):** Ulsoor–Halasuru signal-drop test.
+  4. **Step 4 — Historical Companion Pairing (How `DEV-004`’s History Unmasks Karan Malhotra’s Personal Phone `DEV-019`):**
+     - Chakravyuh runs a **Historical Co-Location Scan** on `DEV-004`’s past signal history: *"Which personal phone traveled across the exact same cell towers at the exact same minute alongside burner `DEV-004` during the 10 days before the kidnapping?"*
+     - **99.6% Companion Match Found:** On **24 Oct** (SP Road / Peenya theft) and **29 Oct** (Outer Ring Road dry-run)—before the criminal remembered to leave his personal phone at home—**Burner Phone `DEV-004` moved through 14 consecutive cell towers within 90 seconds of `DEV-019`, the personal phone registered to Karan Malhotra!**
+  5. **Step 5 — Exposing Karan Malhotra’s Fake Home Alibi on Crime Night (02 Nov):**
+     - Now that `DEV-004`’s signal history identified **Karan Malhotra (`DEV-019`)**, Chakravyuh inspects `DEV-019` on the evening of **02 Nov**:
+     - At **18:15 IST**, Karan placed `DEV-019` on his apartment table playing an auto-loop video (`0.0m` Timing Advance drift + **BESCOM Smart Meter flat `138W` fridge-only standby load**, proving no human was inside the flat)—and **just 3 minutes later at 18:18 IST**, Burner Phone `DEV-004` powered on and headed to Indiranagar Library!
 
 ---
 

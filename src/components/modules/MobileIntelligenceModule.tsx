@@ -26,7 +26,10 @@ export const MobileIntelligenceModule: React.FC = () => {
     setSelectedLeadId,
     triggerToast,
     logAudit,
+    narrationLanguage,
   } = useChakravyuh();
+
+  const isHi = narrationLanguage === 'hi';
 
   const [filterMode, setFilterMode] = useState<'PrioritySubset' | 'All30'>('PrioritySubset');
   const [highlightConnections, setHighlightConnections] = useState<boolean>(true);
@@ -80,6 +83,136 @@ export const MobileIntelligenceModule: React.FC = () => {
             <span>Proceed to Stage 4: CCTV Discovery</span>
             <ArrowRight className="w-4 h-4" />
           </button>
+        </div>
+      </div>
+
+      {/* 4-STEP SIGNAL SHORTLISTING & HISTORY DISCOVERY FUNNEL (HOW KARAN'S PHONE WAS IDENTIFIED) */}
+      <div className="bg-gradient-to-r from-[#0E1A32] via-[#132342] to-[#0E1A32] border-2 border-sky-500/50 rounded-xl p-5 shadow-xl space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-700/80 pb-3">
+          <div>
+            <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-300 uppercase">
+              <Filter className="w-4 h-4 text-amber-400" />
+              <span>
+                {isHi
+                  ? 'चक्रव्यूह सिग्नल छंटनी और 10-दिन की हिस्ट्री जांच — करण मल्होत्रा का फ़ोन कैसे पकड़ा गया?'
+                  : 'CHAKRAVYUH SIGNAL SHORTLISTING & 10-DAY HISTORY FUNNEL — HOW KARAN MALHOTRA’S PHONE WAS IDENTIFIED'}
+              </span>
+            </div>
+            <p className="text-xs text-slate-300 mt-1">
+              {isHi
+                ? 'नीचे दिए गए 4 चरणों पर क्लिक करके देखें कि कैसे सिस्टम ने 3,420 मोबाइल सिग्नलों में से 1 फर्जी सिम (DEV-004) छाँटा और उसकी पुरानी हिस्ट्री से करण के असली फ़ोन (DEV-019) को बेनकाब किया:'
+                : 'Click any of the 4 steps below to see how Chakravyuh narrowed 3,420 crime-time signals down to 1 burner phone (DEV-004) and used its 10-day signal history to unmask Karan Malhotra’s personal phone (DEV-019):'}
+            </p>
+          </div>
+          <span className="px-2.5 py-1 rounded bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 font-mono text-[11px] font-bold">
+            3,420 Signals → 30 Geofence → 1 Burner (DEV-004) → Karan’s Phone (DEV-019)
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 text-xs">
+          {/* Funnel Step 1 */}
+          <div
+            onClick={() => {
+              setFilterMode('All30');
+              setSelectedDeviceId('DEV-001');
+            }}
+            className="p-3.5 rounded-xl bg-[#090D16]/90 border border-sky-500/40 hover:border-sky-400 cursor-pointer transition space-y-1.5"
+          >
+            <div className="flex items-center justify-between">
+              <span className="px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 font-mono text-[10px] font-bold">
+                {isHi ? 'कदम 1 • क्राइम-टाइम टावर डंप' : 'STEP 1 • CRIME-TIME TOWER DUMP'}
+              </span>
+              <span className="font-mono text-xs font-extrabold text-sky-400">3,420 → 30</span>
+            </div>
+            <div className="font-bold text-white text-xs">
+              {isHi
+                ? 'वारदात के वक्त के सभी सिग्नलों की पहचान (18:05–19:25)'
+                : 'Identify All Phone Signals at Time of Crime'}
+            </div>
+            <p className="text-[11px] text-slate-300 leading-relaxed">
+              {isHi
+                ? 'इंदिरानगर में सक्रिय 3,420 सिग्नलों में से 100 फीट रोड लाइब्रेरी क्राइम-सीन घेरे (Geofence) में मौजूद 30 फ़ोन (DEV-001 से DEV-030) निकाले गए।'
+                : 'Pulled 3,420 active signals in Indiranagar and filtered to the 30 devices (DEV-001 to DEV-030) inside the 100Ft Road Library geofence when Aarav vanished.'}
+            </p>
+          </div>
+
+          {/* Funnel Step 2 */}
+          <div
+            onClick={() => {
+              setFilterMode('PrioritySubset');
+              setSelectedDeviceId('DEV-007');
+            }}
+            className="p-3.5 rounded-xl bg-[#090D16]/90 border border-emerald-500/40 hover:border-emerald-400 cursor-pointer transition space-y-1.5"
+          >
+            <div className="flex items-center justify-between">
+              <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold">
+                {isHi ? 'कदम 2 • केस-बाय-केस छंटनी' : 'STEP 2 • CASE-BY-CASE SHORTLIST'}
+              </span>
+              <span className="font-mono text-xs font-extrabold text-emerald-400">30 → 1 Burner</span>
+            </div>
+            <div className="font-bold text-white text-xs">
+              {isHi
+                ? '28 निर्दोष नागरिकों को हटाकर DEV-004 को छाँटना'
+                : 'Clear 28 Innocents → Isolate Burner DEV-004'}
+            </div>
+            <p className="text-[11px] text-slate-300 leading-relaxed">
+              {isHi
+                ? '26 स्थानीय निवासी, रोहन वर्मा (DEV-007, गेट एंट्री पास) और कूरियर समीर खान (DEV-012) को क्लीन चिट मिली। केवल 1 संदिग्ध फर्जी सिम (DEV-004) बचा!'
+                : 'Cleared 26 local residents, Rohan Verma (DEV-007 via apartment gate RFID), and courier Sameer Khan (DEV-012)—leaving ONLY 1 anonymous burner (DEV-004)!'}
+            </p>
+          </div>
+
+          {/* Funnel Step 3 */}
+          <div
+            onClick={() => {
+              setFilterMode('PrioritySubset');
+              setSelectedDeviceId('DEV-004');
+            }}
+            className="p-3.5 rounded-xl bg-[#090D16]/90 border border-amber-500/50 hover:border-amber-400 cursor-pointer transition space-y-1.5"
+          >
+            <div className="flex items-center justify-between">
+              <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-[10px] font-bold">
+                {isHi ? 'कदम 3 • 10-दिन की सिग्नल हिस्ट्री' : 'STEP 3 • CHECK 10-DAY SIGNAL HISTORY'}
+              </span>
+              <span className="font-mono text-xs font-extrabold text-amber-400">99.6% Match</span>
+            </div>
+            <div className="font-bold text-white text-xs">
+              {isHi
+                ? 'DEV-004 की पुरानी हिस्ट्री ने खोला करण के फ़ोन का राज़'
+                : 'DEV-004 History Unmasks Karan’s Phone (DEV-019)'}
+            </div>
+            <p className="text-[11px] text-slate-300 leading-relaxed">
+              {isHi
+                ? 'फर्जी फ़ोन DEV-004 के पिछले 10 दिनों के सिग्नल जांचे गए: 24 अक्टूबर (एसपी रोड) और 29 अक्टूबर की रिहर्सल में यह लगातार 14 टावरों तक करण मल्होत्रा के असली फ़ोन (DEV-019) के साथ एक ही जेब में चला था!'
+                : 'Checked 10-day tower history of Burner DEV-004: during the 24 Oct SP Road theft & 29 Oct ORR dry-run, DEV-004 traveled across 14 cell towers in the exact same pocket as Karan Malhotra’s phone (DEV-019)!'}
+            </p>
+          </div>
+
+          {/* Funnel Step 4 */}
+          <div
+            onClick={() => {
+              setFilterMode('PrioritySubset');
+              setSelectedDeviceId('DEV-019');
+            }}
+            className="p-3.5 rounded-xl bg-[#090D16]/90 border border-rose-500/50 hover:border-rose-400 cursor-pointer transition space-y-1.5"
+          >
+            <div className="flex items-center justify-between">
+              <span className="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono text-[10px] font-bold">
+                {isHi ? 'कदम 4 • करण के फ़ोन की जांच' : 'STEP 4 • VERIFY KARAN’S PHONE (DEV-019)'}
+              </span>
+              <span className="font-mono text-xs font-extrabold text-rose-400">138W Alibi Trap</span>
+            </div>
+            <div className="font-bold text-white text-xs">
+              {isHi
+                ? 'इसीलिए करण का फ़ोन (DEV-019) चेक हुआ और झूठ पकड़ा गया'
+                : 'Why We Checked DEV-019 & Exposed Fake Alibi'}
+            </div>
+            <p className="text-[11px] text-slate-300 leading-relaxed">
+              {isHi
+                ? 'जब DEV-004 की हिस्ट्री से करण (DEV-019) का नाम सामने आया, तब 2 नवंबर को उसका फ़ोन चेक किया गया: शाम 6:15 पर फ़ोन मेज पर रुका (घर का बिजली मीटर 138W खाली) और 3 मिनट बाद 6:18 पर फर्जी सिम चालू हुआ!'
+                : 'Once DEV-004’s history pointed to Karan’s DEV-019, checking DEV-019 on 02 Nov showed it went motionless on his table at 18:15 (BESCOM meter flat 138W empty home) 3 mins before DEV-004 powered on at 18:18!'}
+            </p>
+          </div>
         </div>
       </div>
 

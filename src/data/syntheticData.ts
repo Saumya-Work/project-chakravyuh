@@ -199,16 +199,17 @@ const BASE_DEVICES: DeviceRecord[] = [
   },
   {
     id: 'DEV-004',
-    label: 'Unattributed Prepaid Handset (East Corridor Lead)',
+    label: 'Shortlisted Crime-Scene Burner Phone (1 of 30 Geofence Signals → Linked via History to DEV-019)',
     category: 'Contextual Field Device',
-    ownerNote: 'Prepaid subscriber (Registered under out-of-district KYC — Nodal Verification Pending)',
+    ownerNote: 'Out-of-district fake-KYC prepaid SIM • Shortlisted from 3,420 sector signals (28 innocent devices cleared) • 10-Day Signal History matched 99.6% with Karan Malhotra’s DEV-019',
     imeiMask: '352190-XX-SYN-0004',
     firstObserved: '18:18',
     lastObserved: '19:22',
     sectorIds: ['BLR-KVR-04A', 'BLR-KVR-04B', 'BLR-27M-02A', 'BLR-ind-09C'],
     observationsCount: 6,
     relevanceStatus: 'Co-located Observation',
-    confidenceNote: 'Observed in 3 consecutive cell sectors overlapping Aarav Sharma’s timeline and East Corridor.',
+    confidenceNote:
+      'SHORTLISTED FROM 3,420 CRIME-TIME SIGNals → 30 GEOFENCE PHONES → 1 ANOMALOUS BURNER: After clearing 26 local residents, Rohan Verma (DEV-007), and courier Sameer Khan (DEV-012), DEV-004 is the only device that shadowed Aarav (18:28–18:44) and fled eastbound. Checking DEV-004’s 10-day tower history across Cases 0039/0040/0041 revealed it traveled across 14 cell towers alongside Karan Malhotra’s personal phone (DEV-019)!',
     limitations:
       'Cell-sector observations cover 450m–800m radii along a busy arterial road. Co-location in cell sectors never proves physical proximity, interaction, or identity of the person holding the device.',
     alternativeExplanation:
@@ -392,9 +393,9 @@ const BASE_DEVICES: DeviceRecord[] = [
   },
   {
     id: 'DEV-019',
-    label: 'Karan Malhotra’s Personal Phone (Fake Home Alibi — Shadow Link to Burner)',
+    label: 'Karan Malhotra’s Personal Phone (Identified via DEV-004’s 10-Day Signal History)',
     category: 'Contextual Field Device',
-    ownerNote: 'Registered to Karan Malhotra — Left at apartment on auto-play video loop; BESCOM Smart Meter & 24 Oct Rehearsal Trap matched',
+    ownerNote: 'HOW IDENTIFIED: 10-day historical signal scan on crime-scene burner DEV-004 revealed DEV-019 (Karan Malhotra) moved in the exact same pocket across 14 towers on 24 Oct & 29 Oct before being left at home on 02 Nov as a fake alibi',
     imeiMask: '356091-XX-SYN-0019',
     firstObserved: '18:00',
     lastObserved: '21:00',
@@ -402,7 +403,7 @@ const BASE_DEVICES: DeviceRecord[] = [
     observationsCount: 6,
     relevanceStatus: 'Co-located Observation',
     confidenceNote:
-      'SOVEREIGN GRID TRAP MATCH: (1) Traveled alongside Burner Phone DEV-004 during 24 Oct SP Road & Peenya Electronics Hub (Bengaluru–Tumakuru NH-48) dry-run; (2) On 02 Nov, went motionless at 18:15 (0.0m Timing Advance drift + BESCOM Smart Meter flat 138W standby draw) exactly 3 minutes before Burner DEV-004 powered on at 18:18.',
+      'WHY WE CHECKED KARAN’S PHONE: (1) Crime-scene tower dump shortlisted burner DEV-004; (2) Checking DEV-004’s 10-day signal history showed a 99.6% co-location match across 14 towers with Karan Malhotra’s personal phone (DEV-019) during the 24 Oct SP Road theft & 29 Oct ORR dry-run; (3) Checking DEV-019 on 02 Nov exposed his fake home alibi (motionless at 18:15 + BESCOM Smart Meter flat 138W empty-home draw, 3 mins before DEV-004 powered on at 18:18).',
     limitations:
       'Requires human officer verification of apartment CCTV and physical subscriber interview.',
     alternativeExplanation:
@@ -2880,66 +2881,66 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
   {
     stageNumber: 3,
     id: 'STAGE-3',
-    title: 'STAGE 3 — CATCHING THE FAKE HOME ALIBI & BURNER PHONE',
-    titleHi: 'चरण 3 — नकली "घर की अलीबी" और फर्जी सिम (Burner Phone) का पर्दाफाश',
-    subtitle: 'How Smart Electricity Meters & Rehearsal Logs Expose Karan Malhotra’s Trick',
-    subtitleHi: 'घर के स्मार्ट बिजली मीटर और पुरानी रिहर्सल से करण मल्होत्रा की चालाकी पकड़ी गई',
+    title: 'STAGE 3 — 3,420 SIGNALS → 30 PHONES → SIGNAL HISTORY UNMASKS KARAN’S PHONE',
+    titleHi: 'चरण 3 — 3,420 सिग्नलों की छंटनी और 10-दिन की हिस्ट्री से करण के फ़ोन की पहचान',
+    subtitle: 'How Chakravyuh Shortlisted 1 Burner Out of 3,420 Signals & Traced Its 10-Day History to Karan Malhotra',
+    subtitleHi: 'कैसे चक्रव्यूह ने 3,420 सिग्नलों में से 1 फर्जी सिम छाँटा और उसकी पुरानी हिस्ट्री से करण मल्होत्रा का असली फ़ोन पकड़ा',
     targetModule: 'mobile-intelligence',
-    durationSeconds: 48,
+    durationSeconds: 52,
     narration:
-      'Leaving your real phone at home playing a video will not save you when Chakravyuh checks your home electricity meter and your past rehearsal trips.',
+      'How did we know to check Karan Malhotra’s phone? By filtering 3,420 crime-time signals down to 30 geofence phones, clearing 28 innocent citizens case-by-case to isolate Burner DEV-004, and checking DEV-004’s 10-day signal history—which revealed it traveled in the same pocket as Karan’s personal phone (DEV-019)!',
     narrationHi:
-      'अपना असली फ़ोन घर पर वीडियो चलाकर छोड़ देने से कोई बच नहीं सकता, जब चक्रव्यूह घर के स्मार्ट बिजली मीटर और पुरानी रिहर्सल की जांच करता है।',
+      'हमें कैसे पता चला कि करण मल्होत्रा का फ़ोन चेक करना है? वारदात के वक्त मिले 3,420 सिग्नलों में से क्राइम-सीन के 30 फ़ोन छाँटे गए, 28 निर्दोष नागरिकों को केस-बाय-केस बाहर कर फर्जी सिम DEV-004 पकड़ा गया, और जब DEV-004 की 10 दिन पुरानी हिस्ट्री जांची गई तो वह करण के असली फ़ोन (DEV-019) के साथ चलता मिला!',
     presenterScript:
-      'The suspect, Karan Malhotra, left his personal phone at home playing an auto-loop video on Wi-Fi so police would think he was at home, and carried a burner phone (DEV-004). Watch how Chakravyuh catches him: (1) His apartment BESCOM Smart Meter shows a flat 138-Watt standby line (fridge only—zero lights or AC used all evening), (2) his home phone stopped moving at 6:15 PM and the burner phone turned on 3 minutes later at 6:18 PM, and (3) on 24 October he accidentally carried both phones together!',
+      'How did Project Chakravyuh identify Karan Malhotra out of thousands of people in Indiranagar? Step 1: We pulled all 3,420 phone signals active at the time of the crime and narrowed them to 30 phones inside the Indiranagar 100Ft Road geofence. Step 2: Case-by-case elimination cleared 26 local residents, cleared Rohan Verma (DEV-007) via his apartment gate log, and cleared delivery courier Sameer Khan (DEV-012)—isolating only ONE suspicious burner phone (DEV-004). Step 3: We checked DEV-004’s 10-day signal history across prior Bengaluru cases (24 Oct SP Road & 29 Oct ORR) and discovered that for 14 cell towers straight, Burner DEV-004 traveled in the exact same pocket as DEV-019—the personal phone of Karan Malhotra! Step 4: Checking Karan’s phone (DEV-019) on crime night exposed his fake home alibi via a flat 138-Watt BESCOM smart electricity meter!',
     presenterScriptHi:
-      'संदिग्ध करण मल्होत्रा ने पुलिस को गुमराह करने के लिए अपना असली फ़ोन घर पर वाई-फाई वीडियो चलाकर मेज पर छोड़ दिया और वारदात में एक फर्जी प्रीपेड फ़ोन (DEV-004) ले गया। देखिए चक्रव्यूह ने उसे कैसे पकड़ा: (1) उसके घर के स्मार्ट बिजली मीटर ने पूरी शाम सिर्फ 138 वॉट (केवल फ्रिज—कोई बल्ब या एसी नहीं) दिखाया, (2) उसका असली फ़ोन शाम 6:15 पर हिलना बंद हुआ और ठीक 3 मिनट बाद 6:18 पर फर्जी फ़ोन चालू हुआ, और (3) 24 अक्टूबर की रिहर्सल में वह गलती से दोनों फ़ोन साथ ले गया था!',
+      'इंदिरानगर के हज़ारों लोगों में से प्रोजेक्ट चक्रव्यूह ने करण मल्होत्रा के फ़ोन की पहचान कैसे की? कदम 1: वारदात के समय सक्रिय सभी 3,420 मोबाइल सिग्नलों में से क्राइम-सीन के 500 मीटर घेरे के 30 फ़ोन निकाले गए। कदम 2: केस-बाय-केस छंटनी में 26 स्थानीय निवासियों, रोहन वर्मा (DEV-007, गेट एंट्री लॉग) और डिलीवरी राइडर समीर खान (DEV-012) को निर्दोष पाकर हटाया गया—जिससे केवल एक संदिग्ध फर्जी फ़ोन (DEV-004) बचा। कदम 3: जब हमने DEV-004 के पिछले 10 दिनों के सिग्नल का इतिहास खंगाला, तो पता चला कि 24 अक्टूबर (एसपी रोड) और 29 अक्टूबर के मामलों में यह फर्जी फ़ोन लगातार 14 टावरों तक करण मल्होत्रा के असली फ़ोन (DEV-019) के साथ एक ही जेब में चला था! कदम 4: इसी सुराग पर जब करण का असली फ़ोन और घर का स्मार्ट बिजली मीटर (सिर्फ 138 वॉट) चेक किया गया, तो उसकी नकली अलीबी का भंडाफोड़ हो गया!',
     voiceScript: [
-      'Stage 3, Catching the Fake Home Alibi and Burner Phone.',
-      'Here the criminal tried a very clever trick.',
-      'Suspect Karan Malhotra left his real phone on his dining table at home playing a long video on Wi-Fi, and carried a secret prepaid phone to the crime scene.',
-      'But Project Chakravyuh caught him in three ways.',
-      'First, his apartment smart electricity meter showed only fridge standby power all evening, proving nobody was inside the house.',
-      'Second, his real phone stopped moving at 6:15 PM and the secret phone switched on just three minutes later.',
-      'And third, while innocent resident Rohan Verma is automatically cleared by his apartment gate log, Chakravyuh finds that Karan carried both phones together during his practice run last week.'
+      'Stage 3, How Project Chakravyuh Identified and Shortlisted the Suspect’s Phone.',
+      'First, we pulled all 3,420 mobile signals active in Indiranagar at the exact time of the crime, and narrowed them down to 30 phones inside the 100 Feet Road crime scene.',
+      'Second, our case by case filter cleared 26 local residents, cleared resident Rohan Verma using his apartment gate pass, and cleared delivery rider Sameer Khan.',
+      'That left only one suspicious prepaid burner phone, Device 004, which shadowed Aarav and fled east.',
+      'Third, how did we find out who held this anonymous burner phone? Project Chakravyuh checked the 10 day signal history of Device 004 across earlier Bengaluru cases.',
+      'During the 24 October S P Road theft and 29 October rehearsal, Burner Device 004 traveled across 14 cell towers in the exact same pocket as Device 019, the personal phone registered to Karan Malhotra.',
+      'Finally, when we checked Karan Malhotra’s personal phone on crime night, we caught his fake home alibi: his phone stopped moving on his table at 6:15 PM with an empty house 138 watt smart electricity meter reading, just three minutes before his burner phone switched on.'
     ],
     voiceScriptHi: [
-      'चरण तीन: नकली घर की अलीबी और फर्जी फ़ोन का पर्दाफाश।',
-      'यहाँ अपराधी ने बहुत होशियारी दिखाने की कोशिश की।',
-      'संदिग्ध करण मल्होत्रा ने अपना असली फ़ोन घर की मेज पर वीडियो चलाकर छोड़ दिया ताकि पुलिस समझे कि वह घर पर था, और अपने साथ एक फर्जी सिम वाला फ़ोन ले गया।',
-      'लेकिन प्रोजेक्ट चक्रव्यूह ने उसकी यह चालाकी तीन तरीकों से पकड़ ली।',
-      'पहला, उसके घर के स्मार्ट बिजली मीटर से पता चला कि पूरी शाम घर में कोई लाइट या पंखा नहीं जला, केवल फ्रिज चल रहा था।',
-      'दूसरा, शाम सवा छह बजे उसका असली फ़ोन मेज पर रखा गया और ठीक तीन मिनट बाद फर्जी फ़ोन चालू हुआ।',
-      'और तीसरा, जहाँ निर्दोष निवासी रोहन वर्मा को गेट रिकॉर्ड से तुरंत क्लीन चिट मिल गई, वहीं चौबीस अक्टूबर की रिहर्सल में करण के दोनों फ़ोन एक साथ पकड़े गए।'
+      'चरण तीन: प्रोजेक्ट चक्रव्यूह ने हज़ारों सिग्नलों में से करण मल्होत्रा के फ़ोन की पहचान कैसे की।',
+      'सबसे पहले, वारदात के वक्त इंदिरानगर में सक्रिय तीन हज़ार चार सौ बीस मोबाइल सिग्नलों में से क्राइम सीन के घेरे में मौजूद तीस फ़ोन छाँटे गए।',
+      'दूसरे कदम में, केस-बाय-केस जांच करके छब्बीस स्थानीय निवासियों, अपार्टमेंट गेट पास से रोहन वर्मा और डिलीवरी राइडर समीर खान को निर्दोष पाकर सूची से बाहर किया गया।',
+      'अब हमारे पास केवल एक संदिग्ध फर्जी प्रीपेड फ़ोन बचा—डिवाइस शून्य-शून्य-चार, जो आरव के पीछे-पीछे गया था।',
+      'तीसरा और सबसे अहम सवाल: इस अज्ञात फर्जी फ़ोन के मालिक का पता कैसे चला? चक्रव्यूह ने डिवाइस शून्य-शून्य-चार के पिछले दस दिनों के सिग्नल का इतिहास खंगाला।',
+      'चौबीस अक्टूबर के एसपी रोड चोरी केस और उनतीस अक्टूबर की रिहर्सल में यह फर्जी फ़ोन लगातार चौदह मोबाइल टावरों तक करण मल्होत्रा के असली फ़ोन, डिवाइस शून्य-एक-नौ के साथ एक ही जेब में चलता पाया गया।',
+      'इसी ऐतिहासिक सुराग से हमने वारदात की रात करण मल्होत्रा का असली फ़ोन चेक किया और स्मार्ट बिजली मीटर के एक सौ अड़तीस वॉट के खाली घर के रिकॉर्ड से उसकी नकली अलीबी पकड़ ली।'
     ],
     voiceScriptHinglish: [
-      'Charan Teen: Nakli Ghar ki Alibi aur Farzi Phone ka Pardafaash.',
-      'Yahaan apraadhi ne bahut hoshiyari dikhaane ki koshish ki.',
-      'Suspect Karan Malhotra ne apna asli phone ghar ki table par video chala kar chhod diya taaki police samjhe ki woh ghar par tha, aur apne saath ek farzi SIM wala phone le gaya.',
-      'Lekin Project Chakravyuh ne uski yeh chaalaaki teen tareeqon se pakad li.',
-      'Pehla, uske ghar ke smart bijli meter se pata chala ki poori shaam ghar mein koi light ya AC nahi chala, sirf fridge chal raha tha.',
-      'Doosra, shaam sawa chhah baje uska asli phone table par rakha gaya aur theek teen minute baad farzi phone chalu hua.',
-      'Aur teesra, chaubees October ki rehearsal mein Karan apna asli phone aur farzi phone dono ek saath le gaya tha.'
+      'Charan Teen: Project Chakravyuh ne hazaaron signalon mein se Karan Malhotra ke phone ki pehchaan kaise ki.',
+      'Sabse pehle, vaardaat ke waqt Indiranagar mein active 3420 mobile signalon mein se crime scene ke ghere mein maujood 30 phone chhaante gaye.',
+      'Doosre kadam mein, case by case jaanch karke 26 local residents, apartment gate pass se Rohan Verma aur delivery rider Sameer Khan ko nirdosh paakar list se baahar kiya gaya.',
+      'Ab hamaare paas keval ek sandigdh farzi prepaid phone bacha, Device 004, jo Aarav ke peeche gaya tha.',
+      'Teesra aur sabse ahem sawaal: is farzi phone ke maalik ka pata kaise chala? Chakravyuh ne Device 004 ke pichhle 10 dinon ke signal ka itihaas khangaala.',
+      '24 October ke SP Road chori case aur 29 October ki rehearsal mein yeh farzi phone lagataar 14 mobile toweron tak Karan Malhotra ke asli phone Device 019 ke saath ek hi jeb mein chalta paaya gaya.',
+      'Isi suraag se humne vaardaat ki raat Karan Malhotra ka asli phone check kiya aur smart bijli meter ke 138 watt record se uski nakli alibi pakad li.'
     ],
     criminalMoveEn:
-      'Left personal phone (DEV-019) at home streaming video to fake an alibi, and carried an unlinked burner phone (DEV-004) with zero calls to the victim.',
+      'Used an unlinked out-of-district burner phone (DEV-004) at the crime scene with zero calls to the victim, while leaving his real phone (DEV-019) at home streaming video.',
     criminalMoveHi:
-      'अपराधी की चाल: अपना असली फ़ोन घर पर वीडियो चलाकर छोड़ दिया ताकि घर पर होने का सबूत बने, और बिना कॉल किए फर्जी सिम (DEV-004) का इस्तेमाल किया।',
+      'अपराधी की चाल: वारदात में बिना किसी कॉल के बाहरी जिले के फर्जी सिम (DEV-004) का इस्तेमाल किया और अपना असली फ़ोन (DEV-019) घर पर वीडियो चलाकर छोड़ दिया।',
     chakravyuhTrapEn:
-      'BESCOM Smart Meter (flat 138W draw) + 0.0m Tower Drift proves nobody was home, while 24 Oct dry-run logs link Burner DEV-004 directly to Karan Malhotra’s phone!',
+      '5-Step Signal Funnel: 3,420 signals → 30 geofence phones → 28 innocents cleared → Burner DEV-004 isolated → 10-Day Signal History of DEV-004 matches Karan’s personal phone (DEV-019) across 14 towers → BESCOM 138W meter exposes fake home alibi!',
     chakravyuhTrapHi:
-      'चक्रव्यूह का जाल: घर के स्मार्ट बिजली मीटर (सिर्फ 138W) ने साबित किया कि घर खाली था, और 24 अक्टूबर के रिकॉर्ड ने फर्जी सिम को करण मल्होत्रा के असली फ़ोन से जोड़ दिया!',
-    systemBanner: 'FAKE HOME ALIBI EXPOSED — BURNER PHONE LINKED TO KARAN MALHOTRA',
-    systemBannerHi: 'नकली अलीबी बेनकाब — फर्जी प्रीपेड फ़ोन का संबंध करण मल्होत्रा से जुड़ा',
+      'चक्रव्यूह का 5-चरणीय जाल: 3,420 सिग्नल → 30 क्राइम-सीन फ़ोन → 28 निर्दोष बाहर → फर्जी सिम DEV-004 चिन्हित → DEV-004 की 10-दिन की हिस्ट्री से करण के असली फ़ोन (DEV-019) का 14 टावरों पर मिलान → स्मार्ट बिजली मीटर (138W) से नकली अलीबी बेनकाब!',
+    systemBanner: '3,420 SIGNALS FILTERED → BURNER DEV-004 HISTORY UNMASKS KARAN MALHOTRA (DEV-019)',
+    systemBannerHi: '3,420 सिग्नलों की छंटनी → फर्जी सिम DEV-004 की 10-दिन की हिस्ट्री से करण मल्होत्रा (DEV-019) बेनकाब',
     highlights: [
-      'Exposes Karan Malhotra’s fake home alibi via BESCOM Smart Meter (flat 138W) & zero phone movement',
-      'Links Burner Phone (DEV-004) to Karan Malhotra via 24 Oct warehouse rehearsal trip',
-      'Automatically clears innocent resident Rohan Verma via 6:55 PM westbound gate entry',
+      'Step 1 & 2: Pulls 3,420 crime-time signals → 30 geofence phones → clears 28 innocents (incl. Rohan Verma & Courier Sameer) to isolate Burner DEV-004',
+      'Step 3 (History Check): 10-day signal history of Burner DEV-004 matches Karan Malhotra’s personal phone (DEV-019) across 14 towers in Cases 0039 & 0040',
+      'Step 4 (Alibi Trap): Checking Karan’s DEV-019 on 02 Nov reveals flat 138W BESCOM smart meter + motionless phone at 6:15 PM (3 mins before DEV-004 woke up)',
     ],
     highlightsHi: [
-      'स्मार्ट बिजली मीटर (138W फ्लैटलाइन) से करण मल्होत्रा के घर पर होने का झूठ पकड़ा गया',
-      '24 अक्टूबर की रिहर्सल से फर्जी सिम (DEV-004) और करण के असली फ़ोन का मिलान',
-      'निर्दोष निवासी रोहन वर्मा को शाम 6:55 के गेट एंट्री लॉग से तुरंत क्लीन चिट',
+      'कदम 1 और 2: वारदात के 3,420 सिग्नल → 30 फ़ोन → 28 निर्दोष नागरिकों को हटाकर संदिग्ध फर्जी फ़ोन (DEV-004) को अलग किया',
+      'कदम 3 (सिग्नल हिस्ट्री): DEV-004 के पिछले 10 दिनों के इतिहास में वह 14 टावरों पर करण मल्होत्रा के असली फ़ोन (DEV-019) के साथ मिला',
+      'कदम 4 (नकली अलीबी): इसी आधार पर करण का फ़ोन (DEV-019) और घर का बिजली मीटर (138W खाली घर) चेक कर झूठ पकड़ा गया',
     ],
   },
   {
