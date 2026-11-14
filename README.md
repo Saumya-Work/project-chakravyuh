@@ -1,4 +1,4 @@
-# PROJECT SENTINEL
+# PROJECT CHAKRAVYUH (प्रोजेक्ट चक्रव्यूह)
 ### AI-Powered Crime Investigation & Digital Evidence Intelligence Platform
 **Tagline:** *Connect Evidence. Discover Relationships. Accelerate Investigations.*
 
@@ -21,7 +21,7 @@ npm install --legacy-peer-deps
 # 2. Start the development server on http://localhost:3050
 npm run dev
 
-# Or on Windows, double-click "run sentinel demo.bat" to start the server
+# Or on Windows, double-click "run chakravyuh demo.bat" to start the server
 # and open the demo page in your browser.
 
 # Or build and run in production mode:

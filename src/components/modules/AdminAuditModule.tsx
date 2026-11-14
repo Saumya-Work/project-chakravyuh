@@ -286,7 +286,7 @@ export const AdminAuditModule: React.FC = () => {
             <span>Recommended Sovereign Production Roadmap & Legal/Technical Safeguards</span>
           </h2>
           <p className="text-xs text-slate-400">
-            Prerequisites required before transitioning Project Sentinel from a technology partnership demonstration to an operational law-enforcement environment.
+            Prerequisites required before transitioning Project Chakravyuh from a technology partnership demonstration to an operational law-enforcement environment.
           </p>
         </div>
 

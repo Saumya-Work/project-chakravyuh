@@ -1,6 +1,6 @@
-# PROJECT SENTINEL — SIMULATED FEATURES VS. FUTURE AUTHORISED INTEGRATIONS & PRODUCTION ROADMAP
+# PROJECT CHAKRAVYUH (प्रोजेक्ट चक्रव्यूह) — SIMULATED FEATURES VS. FUTURE AUTHORISED INTEGRATIONS & PRODUCTION ROADMAP
 
-> **Document Purpose:** Defines the exact boundary between what is simulated in the Project Sentinel v1.0 Demonstration Environment and what is required for a future authorised law-enforcement production deployment.
+> **Document Purpose:** Defines the exact boundary between what is simulated in the Project Chakravyuh v1.0 Demonstration Environment and what is required for a future authorised law-enforcement production deployment.
 
 ---
 

@@ -1,8 +1,8 @@
 {
-  "name": "project-sentinel",
+  "name": "project-chakravyuh",
   "version": "1.0.0",
   "private": true,
-  "description": "PROJECT SENTINEL — AI-Powered Crime Investigation & Digital Evidence Intelligence Platform (Government Partnership Demonstration)",
+  "description": "PROJECT CHAKRAVYUH (प्रोजेक्ट चक्रव्यूह) — AI-Powered Crime Investigation & Digital Evidence Intelligence Platform (Government Partnership Demonstration)",
   "scripts": {
     "dev": "next dev -p 3050",
     "build": "next build",

@@ -1,4 +1,4 @@
-# PROJECT SENTINEL — GOVERNMENT DEMONSTRATION SCRIPT (5–7 MINUTES)
+# PROJECT CHAKRAVYUH (प्रोजेक्ट चक्रव्यूह) — GOVERNMENT DEMONSTRATION SCRIPT (5–7 MINUTES)
 
 **Target Audience:**
 - Director General of Police (DGP) and Senior Police Leadership
@@ -13,7 +13,7 @@
 > *"A person goes missing at 6:30 PM. The complaint is received at 9:15 PM. How can investigators bring together the available evidence and identify what should be examined next?"*
 
 - Point out the persistent banner at the top: **`DEMONSTRATION ENVIRONMENT — SYNTHETIC DATA ONLY`**.
-- Explain that Project Sentinel is built around five core investigative pillars: **CONNECT, DISCOVER, CORRELATE, INTELLIGENCE, and DOCUMENT**—with strict human-in-the-loop governance and zero automated guilt scoring.
+- Explain that Project Chakravyuh is built around five core investigative pillars: **CONNECT, DISCOVER, CORRELATE, INTELLIGENCE, and DOCUMENT**—with strict human-in-the-loop governance and zero automated guilt scoring.
 - Click **`START INVESTIGATION DEMO`** on the Command Centre.
 
 ---
@@ -21,7 +21,7 @@
 ## Stage 1 — Incident Registration (00:45 – 01:25)
 - **Visual Action:** Watch the 6-step registration sequence for **`CASE-SNT-2026-0042`** (Missing Person / Suspected Abduction, Kaveri Enclave Sector-4, Bengaluru Fictional Zone).
 - **Key Point:** The last confirmed sighting (`18:30 IST` at the Community Library walkway) and formal complaint receipt (`21:15 IST`) are immediately anchored on the spatial grid and unified timeline.
-- **Official Narration:** *"An investigation begins with a documented incident. Project Sentinel creates a structured case workspace where all subsequent evidence and investigative observations can be brought together."*
+- **Official Narration:** *"An investigation begins with a documented incident. Project Chakravyuh creates a structured case workspace where all subsequent evidence and investigative observations can be brought together."*
 
 ---
 
@@ -85,5 +85,5 @@
 ## Stage 8 — Unified Investigation Timeline and Report (06:00 – 06:45)
 - **Visual Action:** Filter the Unified Timeline and inspect the 15-section Investigation Report. Click **`PDF Export`** to download the traceable PDF report.
 - **Key Point:** Verified facts, source observations, contradictory records, and unverified AI leads are cleanly separated with full SHA-256 chain-of-custody references.
-- **Official Narration:** *"Project Sentinel consolidates the investigation into a traceable report, helping authorised officers understand what is known, what remains uncertain and what needs to be verified."*
+- **Official Narration:** *"Project Chakravyuh consolidates the investigation into a traceable report, helping authorised officers understand what is known, what remains uncertain and what needs to be verified."*
 

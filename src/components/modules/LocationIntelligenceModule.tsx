@@ -28,7 +28,7 @@ const TacticalLeafletMap = dynamic(
     ssr: false,
     loading: () => (
       <div className="w-full h-[540px] rounded-xl bg-[#090D16] border border-[#22314E] flex items-center justify-center text-xs font-mono text-sky-400">
-        Initialising Project Sentinel Spatial Intelligence Grid (Bengaluru Demo Sector)...
+        Initialising Project Chakravyuh Spatial Intelligence Grid (Bengaluru Demo Sector)...
       </div>
     ),
   }

@@ -105,7 +105,7 @@ export const CasesModule: React.FC = () => {
             Structured Investigation Case Registry
           </h1>
           <p className="text-xs text-slate-400 mt-0.5">
-            An investigation begins with a documented incident. Project Sentinel creates a structured case workspace where all subsequent evidence and investigative observations can be brought together.
+            An investigation begins with a documented incident. Project Chakravyuh creates a structured case workspace where all subsequent evidence and investigative observations can be brought together.
           </p>
         </div>
 

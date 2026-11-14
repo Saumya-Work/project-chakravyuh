@@ -438,7 +438,7 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const setCurrentRole = useCallback(
     (r: UserRole) => {
       setCurrentRoleState(r);
-      triggerToast('Role Switched (Demo Simulation)', `Now viewing Project Sentinel as ${r} (${ROLE_ACTORS[r]})`, 'info');
+      triggerToast('Role Switched (Demo Simulation)', `Now viewing Project Chakravyuh as ${r} (${ROLE_ACTORS[r]})`, 'info');
       const now = new Date().toTimeString().slice(0, 8);
       setAuditLogs((prev) => [
         {
@@ -1029,7 +1029,7 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         module: 'System Administration',
         action: 'DEMO_DATA_RESET',
         targetRef: 'ALL_SYNTHETIC_DATASETS',
-        details: 'Restored Project Sentinel demonstration state to baseline CASE-SNT-2026-0042 scenario.',
+        details: 'Restored Project Chakravyuh demonstration state to baseline CASE-SNT-2026-0042 scenario.',
         ipSimulated: '10.24.18.104 (Demo Intranet)',
       },
       ...INITIAL_AUDIT_LOGS,

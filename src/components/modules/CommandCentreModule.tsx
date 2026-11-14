@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from 'react';
 import {
@@ -155,17 +155,17 @@ export const CommandCentreModule: React.FC = () => {
 
             <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
               {isHi
-                ? '“शाम 6:30 बजे अपहरण होता है। शातिर अपराधी हर सबूत मिटाता है — पर सेंटिनल का सरकारी जाल उसे पकड़ लेता है।”'
-                : '“A person goes missing at 6:30 PM. A smart criminal erases every normal clue — until Project Sentinel’s Sovereign Grid springs 8 traps.”'}
+                ? '“शाम 6:30 बजे अपहरण होता है। शातिर अपराधी हर सबूत मिटाता है — पर चक्रव्यूह का सरकारी जाल उसे पकड़ लेता है।”'
+                : '“A person goes missing at 6:30 PM. A smart criminal erases every normal clue — until Project Chakravyuh’s Sovereign Grid springs 8 traps.”'}
             </h1>
             <p className="text-sm md:text-base text-slate-200 leading-relaxed">
               {isHi ? (
                 <>
-                  बिना किसी तकनीकी शब्दों के <b>सरल हिंदी</b> या <b>English</b> में सुनिए और देखिए कि कैसे अपराधी के फ़ैराडे बैग, घर पर छोड़े नकली अलिबी फोन, बंद CCTV कैमरे और नकली नंबर प्लेट को <b>Project Sentinel</b> स्मार्ट बिजली मीटर, सरकारी बस डैशकैम, टोल FASTag और टायर सेंसर से पकड़ता है।
+                  बिना किसी तकनीकी शब्दों के <b>सरल हिंदी</b> या <b>English</b> में सुनिए और देखिए कि कैसे अपराधी के फ़ैराडे बैग, घर पर छोड़े नकली अलिबी फोन, बंद CCTV कैमरे और नकली नंबर प्लेट को <b>Project Chakravyuh</b> स्मार्ट बिजली मीटर, सरकारी बस डैशकैम, टोल FASTag और टायर सेंसर से पकड़ता है।
                 </>
               ) : (
                 <>
-                  Designed so <b>any non-technical person</b> can follow along in <b>English</b> or <b>Hindi (हिंदी)</b>: watch and listen as <b>Project Sentinel</b> defeats Faraday pouches, fake home phone alibis, camera power cuts, and cloned number plates using Smart Electricity Meters, Bus Dashcams, FASTag gantries, and Tyre Sensors.
+                  Designed so <b>any non-technical person</b> can follow along in <b>English</b> or <b>Hindi (हिंदी)</b>: watch and listen as <b>Project Chakravyuh</b> defeats Faraday pouches, fake home phone alibis, camera power cuts, and cloned number plates using Smart Electricity Meters, Bus Dashcams, FASTag gantries, and Tyre Sensors.
                 </>
               )}
             </p>
@@ -209,13 +209,13 @@ export const CommandCentreModule: React.FC = () => {
               </span>
               <span className="text-slate-400 font-bold">vs.</span>
               <span className="px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-xs font-bold">
-                STEP 2: PROJECT SENTINEL SOVEREIGN GRID
+                STEP 2: PROJECT CHAKRAVYUH (प्रोजेक्ट चक्रव्यूह) SOVEREIGN GRID
               </span>
             </div>
             <h2 className="text-base md:text-lg font-extrabold text-white mt-1">
               {isHi
-                ? 'शातिर अपराधी की 8 चालें बनाम प्रोजेक्ट सेंटिनल के 8 सरकारी जाल (किसी भी कार्ड पर क्लिक करके सुनें)'
-                : '8 Smart Criminal Evasion Moves vs. 8 Project Sentinel Sovereign Government Traps (Click Any Stage to Watch & Listen)'}
+                ? 'शातिर अपराधी की 8 चालें बनाम प्रोजेक्ट चक्रव्यूह के 8 सरकारी जाल (किसी भी कार्ड पर क्लिक करके सुनें)'
+                : '8 Smart Criminal Evasion Moves vs. 8 Project Chakravyuh Sovereign Government Traps (Click Any Stage to Watch & Listen)'}
             </h2>
           </div>
 
@@ -267,7 +267,7 @@ export const CommandCentreModule: React.FC = () => {
                   <div className="p-2 rounded bg-emerald-950/35 border border-emerald-500/30 text-[11px] text-emerald-200 leading-snug">
                     <div className="font-bold text-emerald-400 mb-0.5 flex items-center gap-1">
                       <Crosshair className="w-3 h-3 shrink-0" />
-                      <span>{isHi ? 'सेंटिनल का सरकारी जाल:' : 'Sentinel’s Sovereign Trap:'}</span>
+                      <span>{isHi ? 'चक्रव्यूह का सरकारी जाल:' : 'Chakravyuh’s Sovereign Trap:'}</span>
                     </div>
                     {isHi ? stg.sentinelTrapHi : stg.sentinelTrapEn}
                   </div>
@@ -298,11 +298,11 @@ export const CommandCentreModule: React.FC = () => {
           <p className="text-xs text-slate-300 leading-relaxed">
             {isHi ? (
               <>
-                आरव शर्मा शाम <b>6:30</b> बजे लाइब्रेरी से निकलते हैं। <b>6:48</b> पर उनका फोन (<code className="text-sky-300">DEV-001</code>) फ़ैराडे बैग में डालकर बंद कर दिया जाता है। सेंटिनल देश के पुलिस ग्रिड (CCTNS) से 4 थानों के ट्रायल केस जोड़ता है।
+                आरव शर्मा शाम <b>6:30</b> बजे लाइब्रेरी से निकलते हैं। <b>6:48</b> पर उनका फोन (<code className="text-sky-300">DEV-001</code>) फ़ैराडे बैग में डालकर बंद कर दिया जाता है। चक्रव्यूह देश के पुलिस ग्रिड (CCTNS) से 4 थानों के ट्रायल केस जोड़ता है।
               </>
             ) : (
               <>
-                Aarav Sharma departs Kaveri Enclave Library at <b>18:30</b>. His phone (<code className="text-sky-300">DEV-001</code>) is dropped into a Faraday pouch at <b>18:48</b>. Sentinel links 4 cross-station rehearsal cases via ICJS/CCTNS.
+                Aarav Sharma departs Kaveri Enclave Library at <b>18:30</b>. His phone (<code className="text-sky-300">DEV-001</code>) is dropped into a Faraday pouch at <b>18:48</b>. Chakravyuh links 4 cross-station rehearsal cases via ICJS/CCTNS.
               </>
             )}
           </p>

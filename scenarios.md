@@ -1,6 +1,6 @@
-# Project Sentinel — Red-Team vs. Blue-Team Adversarial Playbook (`scenarios.md`)
+# Project Chakravyuh — Red-Team vs. Blue-Team Adversarial Playbook (`scenarios.md`)
 
-> **Purpose:** This document models how a highly sophisticated offender (*Step 1: "The Smartest Criminal"*) attempts to defeat traditional police investigations across Project Sentinel’s scenarios, followed by the exact counter-intelligence architecture (*Step 2: "The Smartest System — Project Sentinel Traps"*) designed to catch them using multi-source correlation, behavioural anomalies, and non-obvious digital footprints.
+> **Purpose:** This document models how a highly sophisticated offender (*Step 1: "The Smartest Criminal"*) attempts to defeat traditional police investigations across Project Chakravyuh’s scenarios, followed by the exact counter-intelligence architecture (*Step 2: "The Smartest System — Project Chakravyuh Traps"*) designed to catch them using multi-source correlation, behavioural anomalies, and non-obvious digital footprints.
 >
 > *All scenarios, persons, vehicles, and records are 100% synthetic for demonstration and defensive system design.*
 
@@ -95,9 +95,9 @@ flowchart LR
 ---
 ---
 
-## PART 2 (STEP 2): Thinking Like the Smartest System — Project Sentinel’s 8 Counter-Traps
+## PART 2 (STEP 2): Thinking Like the Smartest System — Project Chakravyuh’s 8 Counter-Traps
 
-To defeat a criminal who thinks 8 steps ahead, **Project Sentinel** does not rely on any single piece of evidence in isolation. Instead, Sentinel sets **8 Multi-Signal Counter-Intelligence Traps** where **the criminal’s very act of hiding creates a detectable anomaly**:
+To defeat a criminal who thinks 8 steps ahead, **Project Chakravyuh** does not rely on any single piece of evidence in isolation. Instead, Chakravyuh sets **8 Multi-Signal Counter-Intelligence Traps** where **the criminal’s very act of hiding creates a detectable anomaly**:
 
 ```mermaid
 flowchart TD
@@ -109,7 +109,7 @@ flowchart TD
         C5["Hides 16 Mins in Canal Lane (19:02–19:18)"]
     end
 
-    subgraph Sentinel_Traps["🪤 Project Sentinel Counter-Traps"]
+    subgraph Chakravyuh_Traps["🪤 Project Chakravyuh Counter-Traps"]
         T1["Trap 1: Sleep/Wake Shadowing & Rehearsal Link (24 Oct)"]
         T2["Trap 2: RF-Attenuation vs. Normal Power-Off Signature"]
         T3["Trap 3: Flanking Ring Closure (CAM-001, 003, 005, 009)"]
@@ -128,42 +128,42 @@ flowchart TD
 
 ### Trap 1: The "Rehearsal Mistake & Sleep/Wake Shadow Trap" (Catching the Real Identity Behind Burner `DEV-004`)
 * **Criminal’s Blind Spot:** A smart criminal remembers to leave their personal phone at home on the **day of the crime (02 Nov)**—but almost always carried their **real personal phone** during the **reconnaissance dry-run (24 Oct)** or when buying/activating the burner phone!
-* **How Project Sentinel Catches Them:**
-  1. **Cross-Date Companion Pairing:** Sentinel queries where burner phone `DEV-004` appeared on **24 Oct 2026** (`CASE-SNT-2026-0039` Nandi Electronics Hub dump) and checks which personal phones traveled through the **exact same sector sequence within 90 seconds**. It catches **`DEV-019` (Karan Malhotra’s Personal Phone)**, which moved alongside `DEV-004` on 24 Oct!
-  2. **Sleep/Wake Handshake Anomaly on 02 Nov:** On 02 Nov (crime day), Sentinel notices that `DEV-019` (Karan Malhotra’s real phone) suddenly entered **zero-handover static status** at **18:15 IST**—and just **3 minutes later at 18:18 IST**, burner phone `DEV-004` powered on in Kaveri Enclave!
+* **How Project Chakravyuh Catches Them:**
+  1. **Cross-Date Companion Pairing:** Chakravyuh queries where burner phone `DEV-004` appeared on **24 Oct 2026** (`CASE-SNT-2026-0039` Nandi Electronics Hub dump) and checks which personal phones traveled through the **exact same sector sequence within 90 seconds**. It catches **`DEV-019` (Karan Malhotra’s Personal Phone)**, which moved alongside `DEV-004` on 24 Oct!
+  2. **Sleep/Wake Handshake Anomaly on 02 Nov:** On 02 Nov (crime day), Chakravyuh notices that `DEV-019` (Karan Malhotra’s real phone) suddenly entered **zero-handover static status** at **18:15 IST**—and just **3 minutes later at 18:18 IST**, burner phone `DEV-004` powered on in Kaveri Enclave!
   3. **Fake Home Alibi Exposed:** While `DEV-019` streamed video at home to fake activity, its **Timing Advance (TA) and cell-sector azimuth had zero micro-variance** for 3 hours, proving the phone was sitting untouched on a table while its owner was in the field.
 
 ---
 
 ### Trap 2: The "RF-Shielding Signature & Last-Yard Triangulation Trap" (Defeating the Faraday Drop)
 * **Criminal’s Blind Spot:** Dropping a phone into a Faraday bag does not look like a normal battery death or power-off to the cellular network.
-* **How Project Sentinel Catches Them:**
+* **How Project Chakravyuh Catches Them:**
   1. **Missing `IMSI-Detach` Flag:** When a user switches off a phone normally, the baseband chip sends a final `IMSI-Detach` packet to the tower. When a battery dies, the phone logs low-voltage telemetry warnings beforehand.
-  2. **Abrupt Multi-Band RF Drop:** At **18:48:12 IST**, Aarav Sharma’s iPhone (`DEV-001`) was mid-packet in Sector `BLR-KVR-04B` when signal strength dropped `-40 dBm` in `<200ms` with **no `IMSI-Detach`**. Sentinel flags this as **Consistent with Abrupt RF Shielding / Forced Interruption**, pinpointing **18:48 IST inside Sub-lane B** as the exact intervention timestamp.
+  2. **Abrupt Multi-Band RF Drop:** At **18:48:12 IST**, Aarav Sharma’s iPhone (`DEV-001`) was mid-packet in Sector `BLR-KVR-04B` when signal strength dropped `-40 dBm` in `<200ms` with **no `IMSI-Detach`**. Chakravyuh flags this as **Consistent with Abrupt RF Shielding / Forced Interruption**, pinpointing **18:48 IST inside Sub-lane B** as the exact intervention timestamp.
 
 ---
 
 ### Trap 3: The "Closed-Ring Perimeter Trap" (Defeating the `CAM-008` Blind Spot)
 * **Criminal’s Blind Spot:** Even if the camera right at the pickup spot (`CAM-008`) is offline, a vehicle cannot teleport into or out of Sub-lane B! Every road entering and leaving Sub-lane B forms a closed geometric ring.
-* **How Project Sentinel Catches Them:**
-  1. **Automatic Blind-Spot Compensation:** The moment Sentinel sees `CAM-008` is offline (18:15–19:30), it automatically calculates the ** Entry/Exit Choke-Point Ring** around Sub-lane B:
+* **How Project Chakravyuh Catches Them:**
+  1. **Automatic Blind-Spot Compensation:** The moment Chakravyuh sees `CAM-008` is offline (18:15–19:30), it automatically calculates the ** Entry/Exit Choke-Point Ring** around Sub-lane B:
      - **West Entry:** `CAM-001` (Library Gate) & `CAM-003` (Apex Pharmacy)
      - **North/West Signal:** `CAM-005` (80ft Pedestrian Signal) & `CAM-007` (Lotus Bakery Patio)
      - **East Exit:** `CAM-009` (Emerald Heights Gate-2) & `CAM-014` (27th Main Signal)
      - **South Exclusion:** `CAM-006` (South Bus Bay)
-  2. **Conservation of Vehicles:** Any vehicle that entered Sub-lane B before 18:45 and exited eastbound toward `CAM-014` by 19:02 **must** pass through the flanking ring. By preserving `CAM-005`, `CAM-007`, and `CAM-009` within hours (before their 7-day retention expires), Sentinel traps the vehicle’s entry and exit even without `CAM-008`.
+  2. **Conservation of Vehicles:** Any vehicle that entered Sub-lane B before 18:45 and exited eastbound toward `CAM-014` by 19:02 **must** pass through the flanking ring. By preserving `CAM-005`, `CAM-007`, and `CAM-009` within hours (before their 7-day retention expires), Chakravyuh traps the vehicle’s entry and exit even without `CAM-008`.
 
 ---
 
 ### Trap 4: "Visual Micro-Signature & Non-CCTV Sensor Fusion" (Defeating Cloned Plates & Glare)
 * **Criminal’s Blind Spot:** You can clone a number plate or blind an ANPR camera with high beams, but you cannot easily change the physical geometry of your vehicle or avoid passive roadside sensors.
-* **How Project Sentinel Catches Them:**
-  1. **Visual Micro-Signature Matching:** Instead of relying only on plate text `KA-00-SYN-4??`, Sentinel logs **4 physical micro-features** across `CAM-014` (19:02) and `CAM-019` (19:18):
+* **How Project Chakravyuh Catches Them:**
+  1. **Visual Micro-Signature Matching:** Instead of relying only on plate text `KA-00-SYN-4??`, Chakravyuh logs **4 physical micro-features** across `CAM-014` (19:02) and `CAM-019` (19:18):
      - Aftermarket matte-black roof-rail crossbars
      - Left front fog-lamp bezel scuff/asymmetry
      - Upper-left windshield FASTag + green resident pass sticker placement
      - Dark 35% VLT tint on the rear quarter glass
-  2. **Innocent Prefix Elimination:** Sentinel automatically cross-checks all other `KA-00-SYN-4??` white SUVs in the city:
+  2. **Innocent Prefix Elimination:** Chakravyuh automatically cross-checks all other `KA-00-SYN-4??` white SUVs in the city:
      - `VEH-003` (*Naveen Kumar’s Airport Cab*, `KA-00-SYN-4812`) is **cleared** via `CAM-015` southbound ANPR at 19:08.
      - `VEH-008` (*Col. Vishwanath’s Resident SUV*, `KA-00-SYN-4091`) is **checked** against apartment gate logs.
   3. **Passive FASTag / Fuel / Boom-Barrier Check:** Many commercial plazas, flyover gantries, and fuel forecourts (`CAM-010` Deccan Fuel Station) have passive RFID/FASTag readers that read the windshield tag’s cryptographic ID even when the metal number plate is covered in mud!
@@ -172,43 +172,43 @@ flowchart TD
 
 ### Trap 5: The "16-Minute Isochrone Prism & Secondary Sensor Trap" (Solving the 19:02 → 19:18 Gap)
 * **Criminal’s Blind Spot:** Taking 16 minutes to travel 1.1 km between `CAM-014` (19:02) and `CAM-019` (19:18) instead of 4 minutes doesn't hide the vehicle—it **shrinks the search area** to a tiny 1.1 km corridor during a known 12-minute window!
-* **How Project Sentinel Catches Them:**
-  1. **Time-Space Isochrone Prism:** Sentinel calculates that a vehicle seen at `CAM-014` at 19:02 and `CAM-019` at 19:18 could not have driven more than **800 meters off the main corridor** if it stopped for 10–12 minutes.
+* **How Project Chakravyuh Catches Them:**
+  1. **Time-Space Isochrone Prism:** Chakravyuh calculates that a vehicle seen at `CAM-014` at 19:02 and `CAM-019` at 19:18 could not have driven more than **800 meters off the main corridor** if it stopped for 10–12 minutes.
   2. **Correlating Burner Handset Inside the Stop Window:** At **19:03 IST**, burner phone `DEV-004` handed over into Sector `BLR-27M-02A` (covering the Indira Canal service lane), and remained in that sector until **19:17 IST** before hitting Flyover Sector `09C` at **19:19 IST**—matching the White SUV’s exact 16-minute delay minute-for-minute!
-  3. **Intermediate Camera & Transit Bus Dashcam Trigger:** Sentinel flags `CAM-016` (Indira Canal Bridge) and `CAM-017` (Zenith Tech Park Gate) for immediate retrieval to capture the exact canal service lane pull-off.
+  3. **Intermediate Camera & Transit Bus Dashcam Trigger:** Chakravyuh flags `CAM-016` (Indira Canal Bridge) and `CAM-017` (Zenith Tech Park Gate) for immediate retrieval to capture the exact canal service lane pull-off.
 
 ---
 
 ### Trap 6: "Optical Lighting Reconciliation" (Turning Conflicting Witnesses into Corroboration)
 * **Criminal’s Blind Spot:** The criminal hoped that witness **Suresh Babu** (*"white SUV"*) and witness **Aditi Rao** (*"dark grey car"*) would cancel each other out.
-* **How Project Sentinel Catches Them:**
-  1. **Spatial Sightline Reconstruction:** Sentinel plots both witnesses’ exact standing positions at 18:45 IST on the map.
-  2. **Resolving the Conflict with Hard Video:** Sentinel links `CAM-003` (Apex Pharmacy footage at 18:43), which proves **Dr. Sanjay Kulkarni’s dark grey sedan (`VEH-004`)** parked right in Aditi Rao’s line of sight 2 minutes earlier!
-  3. **Result:** Instead of throwing out both witness statements, Sentinel proves Aditi Rao saw Dr. Kulkarni’s parked car, leaving **Suresh Babu’s sighting of the White SUV at 18:45** completely intact and corroborated!
+* **How Project Chakravyuh Catches Them:**
+  1. **Spatial Sightline Reconstruction:** Chakravyuh plots both witnesses’ exact standing positions at 18:45 IST on the map.
+  2. **Resolving the Conflict with Hard Video:** Chakravyuh links `CAM-003` (Apex Pharmacy footage at 18:43), which proves **Dr. Sanjay Kulkarni’s dark grey sedan (`VEH-004`)** parked right in Aditi Rao’s line of sight 2 minutes earlier!
+  3. **Result:** Instead of throwing out both witness statements, Chakravyuh proves Aditi Rao saw Dr. Kulkarni’s parked car, leaving **Suresh Babu’s sighting of the White SUV at 18:45** completely intact and corroborated!
 
 ---
 
 ### Trap 7: "Wi-Fi Probe, Hotspot & Pre-Incident Recharge Trail" (Catching the Data-Only / VoIP Offender)
 * **Criminal’s Blind Spot:** Even if an offender uses encrypted VoIP over public Wi-Fi or a prepaid burner, both the **device radio** and the **SIM recharge** leave physical-world anchors.
-* **How Project Sentinel Catches Them:**
-  1. **Retail Recharge & CCTV Anchor:** Every prepaid burner SIM (`DEV-004`) must be activated or recharged at a point-of-sale terminal. Sentinel correlates the **timestamp of `DEV-004`’s recharge** with nearby shop CCTV / UPI logs.
-  2. **Public Wi-Fi / Hotspot BSSID Correlation:** In `CASE-SNT-2026-0041` (Horizon FinTech Drop) and along 2nd Cross (`Lotus Bakery`), Sentinel correlates router DHCP/MAC probe timestamps with passing CCTV silhouettes.
+* **How Project Chakravyuh Catches Them:**
+  1. **Retail Recharge & CCTV Anchor:** Every prepaid burner SIM (`DEV-004`) must be activated or recharged at a point-of-sale terminal. Chakravyuh correlates the **timestamp of `DEV-004`’s recharge** with nearby shop CCTV / UPI logs.
+  2. **Public Wi-Fi / Hotspot BSSID Correlation:** In `CASE-SNT-2026-0041` (Horizon FinTech Drop) and along 2nd Cross (`Lotus Bakery`), Chakravyuh correlates router DHCP/MAC probe timestamps with passing CCTV silhouettes.
 
 ---
 
 ### Trap 8: "Cross-Case Modus Operandi & Entity Graph" (Breaking the Jurisdiction Silo)
 * **Criminal’s Blind Spot:** The suspect assumed that `Case 0039` (Mahadevapura Warehouse), `Case 0040` (Outer Link Hit & Run), `Case 0041` (Ulsoor Cyber Drop), and `Case 0042` (Kaveri Enclave Abduction) would never be analyzed together.
-* **How Project Sentinel Catches Them:**
-  1. **Automatic Cross-Case Entity Indexing:** Every time any police station uploads a tower dump, ANPR log, or witness report into Project Sentinel, the **Global Entity Graph** checks for overlapping devices, vehicle prefixes, and Modus Operandi across all open inquiries.
-  2. **The Multi-Case Match:** Sentinel automatically surfaces **`LEAD-006`**, revealing that:
+* **How Project Chakravyuh Catches Them:**
+  1. **Automatic Cross-Case Entity Indexing:** Every time any police station uploads a tower dump, ANPR log, or witness report into Project Chakravyuh, the **Global Entity Graph** checks for overlapping devices, vehicle prefixes, and Modus Operandi across all open inquiries.
+  2. **The Multi-Case Match:** Chakravyuh automatically surfaces **`LEAD-006`**, revealing that:
      - Burner phone **`DEV-004`** and partial plate **`KA-00-SYN-4??`** appeared in **both** the 24 Oct Mahadevapura Warehouse burglary (`CASE-SNT-2026-0039`, where RF Faraday pouches were stolen!) and the 02 Nov Aarav Sharma abduction (`CASE-SNT-2026-0042`)!
      - Companion personal phone **`DEV-019` (Karan Malhotra)** traveled with `DEV-004` during the 24 Oct warehouse incident, giving investigators a **high-priority human verification lead** while still preserving strict human-in-the-loop safeguards.
 
 ---
 
-## Summary Matrix: Criminal Evasion vs. Project Sentinel Trap (Plain Language)
+## Summary Matrix: Criminal Evasion vs. Project Chakravyuh Trap (Plain Language)
 
-| # | Criminal’s Smart Move (Red Team) | Project Sentinel’s Smart Trap (Blue Team) | Evidence Sources Combined |
+| # | Criminal’s Smart Move (Red Team) | Project Chakravyuh’s Smart Trap (Blue Team) | Evidence Sources Combined |
 | :- | :--- | :--- | :--- |
 | **1** | Leaves real phone at home (streaming video) & carries a burner phone (`DEV-004`). | **Sleep/Wake Shadow + Rehearsal Link:** Links burner `DEV-004` to personal phone `DEV-019` (*Karan Malhotra*) from the 24 Oct dry-run, and detects `DEV-019` going motionless 3 mins before `DEV-004` turned on. | Multi-Case Tower Dumps + Timing Advance Variance |
 | **2** | Drops victim *Aarav Sharma’s* phone (`DEV-001`) into a Faraday bag at 18:48. | **RF-Shielding Signature:** Detects abrupt `-40 dBm` signal loss with **no `IMSI-Detach` power-off packet**, pinpointing forced interruption at 18:48 in Sector 04B. | Telecom Baseband Signalling Logs (`EVD-002`) |
@@ -225,11 +225,11 @@ flowchart TD
 
 ## PART 3: Full Sovereign Government Grid — 10 National Infrastructure Traps
 
-When **Project Sentinel** operates with **full authorised Government & Sovereign Infrastructure access** (integrating Telecom Core C-DOT/CMS, NHAI FASTag, Vahan/Sarathi, FIU-UPI/POS, Smart Electricity Grids, Public Transit ADAS Dashcams, and CCTNS/ICJS), even a criminal who defeats street CCTV and mobile CDRs walks straight into **10 unavoidable Sovereign Grid Traps**:
+When **Project Chakravyuh** operates with **full authorised Government & Sovereign Infrastructure access** (integrating Telecom Core C-DOT/CMS, NHAI FASTag, Vahan/Sarathi, FIU-UPI/POS, Smart Electricity Grids, Public Transit ADAS Dashcams, and CCTNS/ICJS), even a criminal who defeats street CCTV and mobile CDRs walks straight into **10 unavoidable Sovereign Grid Traps**:
 
 ```mermaid
 flowchart TB
-    subgraph Sovereign_Grid["🏛️ PROJECT SENTINEL — SOVEREIGN GOVERNMENT FUSION GRID"]
+    subgraph Sovereign_Grid["🏛️ PROJECT CHAKRAVYUH (प्रोजेक्ट चक्रव्यूह) — SOVEREIGN GOVERNMENT FUSION GRID"]
         G1["1. Telecom Core (C-DOT / 5G AoA + TA)"]
         G2["2. NHAI FASTag & Passive UHF RFID Gantries"]
         G3["3. OEM Vehicle eSIM & Wheel TPMS 433MHz Sensors"]
@@ -261,13 +261,13 @@ flowchart TB
 * **What the Criminal Did:** Chose Kaveri East Pickup Lay-by (`Sub-lane B`) at 18:45 because the fixed pole camera (`CAM-008`) was powered down for UPS battery maintenance.
 * **Sovereign Grid Counter-Trap:**
   * Fixed cameras aren't the only cameras owned by the government. **BMTC Smart City Buses** and **PCR Police Patrol Vehicles** are equipped with continuous 4-channel ADAS road-facing cameras and GPS telemetry.
-  * Sentinel queries the **Metro Transit Fleet AVL Grid** and discovers that **BMTC Route-335E (Bus #KA-01-F-8821)** drove right past the mouth of Sub-lane B at **18:44:50 IST**!
+  * Chakravyuh queries the **Metro Transit Fleet AVL Grid** and discovers that **BMTC Route-335E (Bus #KA-01-F-8821)** drove right past the mouth of Sub-lane B at **18:44:50 IST**!
   * The bus’s side-facing transit camera captured the **White Compact SUV idling in the Sub-lane B pickup bay** right inside `CAM-008`’s blind spot!
 
 ### 4. Smart Electricity Meter (AMI) & Broadband ONT Deep-Packet Alibi Test
 * **What the Criminal Did:** Left his personal phone (`DEV-019` — *Karan Malhotra*) at his apartment playing a long video on Wi-Fi so police would think he was home all evening.
 * **Sovereign Grid Counter-Trap:**
-  * Sentinel queries **BESCOM Smart Grid Automated Metering Infrastructure (AMI)** (15-minute load profile) and **ISP Optical Network Terminal (ONT)** session telemetry for Karan Malhotra’s flat:
+  * Chakravyuh queries **BESCOM Smart Grid Automated Metering Infrastructure (AMI)** (15-minute load profile) and **ISP Optical Network Terminal (ONT)** session telemetry for Karan Malhotra’s flat:
     1. **Zero Human Power Signature:** Between `17:45` and `21:10 IST`, apartment electricity consumption was a flatline `138 Watts` (refrigerator compressor + Wi-Fi router only—zero lighting switch events, zero induction/microwave spikes, zero water heater draw).
     2. **Zero Touch/Gyroscope & Static Timing Advance:** Telecom core logs show `DEV-019` had `0.00m` Timing Advance drift and zero screen-unlock/DNS-burst events for 195 minutes—proving the phone was left unattended on a table as a synthetic alibi.
 

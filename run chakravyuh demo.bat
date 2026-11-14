@@ -2,7 +2,7 @@
 setlocal
 cd /d "%~dp0"
 
-echo Project Sentinel Demo
+echo Project Chakravyuh Demo
 echo URL: http://localhost:3050
 echo.
 
@@ -22,7 +22,7 @@ if not errorlevel 1 (
 )
 
 echo Starting the development server in a new window...
-start "Project Sentinel Demo Server" /D "%~dp0" cmd /k "npm run dev"
+start "Project Chakravyuh Demo Server" /D "%~dp0" cmd /k "npm run dev"
 echo Waiting for the page to become available...
 
 powershell -NoProfile -ExecutionPolicy Bypass -Command "$deadline = (Get-Date).AddSeconds(60); do { try { $response = Invoke-WebRequest -Uri 'http://localhost:3050' -UseBasicParsing -TimeoutSec 2; if ($response.StatusCode -eq 200) { exit 0 } } catch {}; Start-Sleep -Seconds 1 } while ((Get-Date) -lt $deadline); exit 1"

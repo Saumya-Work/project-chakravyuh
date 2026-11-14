@@ -10,7 +10,7 @@ import {
 
 export async function GET() {
   return NextResponse.json({
-    platform: 'PROJECT SENTINEL',
+    platform: 'PROJECT CHAKRAVYUH (प्रोजेक्ट चक्रव्यूह)',
     version: '1.0.0',
     environment: 'DEMONSTRATION ENVIRONMENT — SYNTHETIC DATA ONLY',
     primaryCase: INITIAL_CASES[0].id,

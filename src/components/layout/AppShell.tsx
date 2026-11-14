@@ -59,13 +59,13 @@ const NAV_ITEMS: NavItem[] = [
     shortLabel: 'Command',
     icon: LayoutDashboard,
     plainExplanation: 'Executive overview of the Aarav Sharma missing person investigation, 8 Smart Criminal vs. Sovereign Trap scenarios, and one-click Voice-Guided Demo in English & Hindi.',
-    plainExplanationHi: 'आरव शर्मा अपहरण जांच का मुख्य डैशबोर्ड — यहाँ 8 शातिर अपराधी चालें बनाम प्रोजेक्ट सेंटिनल के सरकारी जाल और एक-क्लिक हिंदी/इंग्लिश वॉइस डेमो उपलब्ध है।',
+    plainExplanationHi: 'आरव शर्मा अपहरण जांच का मुख्य डैशबोर्ड — यहाँ 8 शातिर अपराधी चालें बनाम प्रोजेक्ट चक्रव्यूह के सरकारी जाल और एक-क्लिक हिंदी/इंग्लिश वॉइस डेमो उपलब्ध है।',
     voiceCommentary:
-      'Welcome to Project Sentinel. Software architect Aarav Sharma goes missing at 6:30 PM, and his sister Ananya Sharma files a complaint at 9:15 PM. Click Start Voice Guided Demo to watch and listen in English or Hindi as the platform connects mobile, CCTV, electricity meter, bus dashcam, and FASTag evidence.',
+      'Welcome to Project Chakravyuh. Software architect Aarav Sharma goes missing at 6:30 PM, and his sister Ananya Sharma files a complaint at 9:15 PM. Click Start Voice Guided Demo to watch and listen in English or Hindi as the platform connects mobile, CCTV, electricity meter, bus dashcam, and FASTag evidence.',
     voiceCommentaryHi:
-      'प्रोजेक्ट सेंटिनल में आपका स्वागत है। शाम साढ़े छह बजे आरव शर्मा लापता होते हैं और रात सवा नौ बजे उनकी बहन अनन्या शर्मा शिकायत दर्ज कराती हैं। वॉइस डेमो बटन दबाकर हिंदी या इंग्लिश में सुनिए कि कैसे सेंटिनल अपराधी की हर चालाकी को सरकारी ग्रिड से पकड़ता है।',
+      'प्रोजेक्ट चक्रव्यूह में आपका स्वागत है। शाम साढ़े छह बजे आरव शर्मा लापता होते हैं और रात सवा नौ बजे उनकी बहन अनन्या शर्मा शिकायत दर्ज कराती हैं। वॉइस डेमो बटन दबाकर हिंदी या इंग्लिश में सुनिए कि कैसे चक्रव्यूह अपराधी की हर चालाकी को सरकारी ग्रिड से पकड़ता है।',
     voiceCommentaryHinglish:
-      'Project Sentinel mein aapka swagat hai. Shaam saadhe chhah baje Aarav Sharma laapata hote hain aur raat sawa nau baje unki behen Ananya Sharma shikayat darj karati hain. Voice Demo button dabakar Hindi ya English mein suniye ki kaise Sentinel apradhi ki har chaalaki ko sarkari grid se pakadta hai.',
+      'Project Chakravyuh mein aapka swagat hai. Shaam saadhe chhah baje Aarav Sharma laapata hote hain aur raat sawa nau baje unki behen Ananya Sharma shikayat darj karati hain. Voice Demo button dabakar Hindi ya English mein suniye ki kaise Chakravyuh apradhi ki har chaalaki ko sarkari grid se pakadta hai.',
   },
   {
     id: 'cases',
@@ -125,11 +125,11 @@ const NAV_ITEMS: NavItem[] = [
     plainExplanation: 'Stage 4: Discovers 20 corridor cameras and defeats the CAM-008 power-cut blind spot by pulling a passing BMTC Route-335E Bus ADAS dashcam.',
     plainExplanationHi: 'चरण 4: 20 CCTV कैमरे खोजता है और जब अपराधी बंद कैमरे (CAM-008) का फायदा उठाता है, तो वहाँ से गुज़री सरकारी बस (BMTC 335E) के डैशकैम से उसे पकड़ लेता है।',
     voiceCommentary:
-      'Stage 4, Map and C C T V Discovery. The suspect chose the pickup lay-by because camera 008 was offline for battery maintenance. Project Sentinel checks city transit GPS and pulls the front dashcam of a BMTC electric bus that drove right past the lay-by at 6:49 PM.',
+      'Stage 4, Map and C C T V Discovery. The suspect chose the pickup lay-by because camera 008 was offline for battery maintenance. Project Chakravyuh checks city transit GPS and pulls the front dashcam of a BMTC electric bus that drove right past the lay-by at 6:49 PM.',
     voiceCommentaryHi:
-      'चरण चार, नक्शा और बस डैशकैम जाल। अपराधी ने ऐसी जगह चुनी जहाँ सड़क का कैमरा बैटरी रिपेयर के कारण बंद था। लेकिन सेंटिनल ने ठीक उसी वक्त वहाँ से गुज़री सरकारी बस के डैशकैम से सफ़ेद एसयूवी का वीडियो निकाल लिया।',
+      'चरण चार, नक्शा और बस डैशकैम जाल। अपराधी ने ऐसी जगह चुनी जहाँ सड़क का कैमरा बैटरी रिपेयर के कारण बंद था। लेकिन चक्रव्यूह ने ठीक उसी वक्त वहाँ से गुज़री सरकारी बस के डैशकैम से सफ़ेद एसयूवी का वीडियो निकाल लिया।',
     voiceCommentaryHinglish:
-      'Charan chaar, Naksha aur Bus Dashcam Jaal. Apradhi ne aisi jagah chuni jahan sadak ka camera battery repair ke kaaran band tha. Lekin Sentinel ne theek usi waqt wahan se guzri sarkari bus ke dashcam se safed SUV ka video nikaal liya.',
+      'Charan chaar, Naksha aur Bus Dashcam Jaal. Apradhi ne aisi jagah chuni jahan sadak ka camera battery repair ke kaaran band tha. Lekin Chakravyuh ne theek usi waqt wahan se guzri sarkari bus ke dashcam se safed SUV ka video nikaal liya.',
   },
   {
     id: 'cctv-intelligence',
@@ -141,7 +141,7 @@ const NAV_ITEMS: NavItem[] = [
     plainExplanation: 'Stage 5: Reviews video feeds and defeats cloned plates & high-beam glare using NHAI FASTag Ghost-Tag exceptions and 433MHz tyre sensor IDs.',
     plainExplanationHi: 'चरण 5: नकली नंबर प्लेट और तेज़ हेडलाइट की चालाकी को टोल बूथ के बिना-FASTag अलर्ट और टायर प्रेशर सेंसर (TPMS) की रेडियो आईडी से पकड़ता है।',
     voiceCommentary:
-      'Stage 5, Video Footage Review. The criminal used high-beam glare and a cloned number plate. Project Sentinel catches the SUV using the overhead FASTag reader Ghost-Tag exception and the unchangeable 433 megahertz tyre pressure sensor ID inside its wheels.',
+      'Stage 5, Video Footage Review. The criminal used high-beam glare and a cloned number plate. Project Chakravyuh catches the SUV using the overhead FASTag reader Ghost-Tag exception and the unchangeable 433 megahertz tyre pressure sensor ID inside its wheels.',
     voiceCommentaryHi:
       'चरण पाँच, वीडियो और फास्टैग जांच। अपराधी ने नकली नंबर प्लेट लगाई और फास्टैग उखाड़ दिया। लेकिन ऊपर लगे फास्टैग रीडर और पहियों के अंदर लगे टायर सेंसर की रेडियो आईडी ने साबित कर दिया कि दोनों जगह एक ही गाड़ी थी।',
     voiceCommentaryHinglish:
@@ -157,11 +157,11 @@ const NAV_ITEMS: NavItem[] = [
     plainExplanation: 'Stage 6: Reconstructs the 16-minute Canal Lane vehicle swap using acoustic mic sensors and Wi-Fi probes, while clearing Naveen Kumar’s airport cab.',
     plainExplanationHi: 'चरण 6: 16 मिनट के अंधेरे रास्ते के गैप को स्मार्ट-पोल माइक और वाई-फाई सिग्नल से सुलझाता है, और निर्दोष कैब ड्राइवर नवीन कुमार को बाहर करता है।',
     voiceCommentary:
-      'Stage 6, Vehicle Intelligence. Between 7:02 PM and 7:18 PM, the suspect hid in Canal Service Lane for sixteen minutes. Sentinel uses smart-pole acoustic sensors and apartment gate Wi-Fi logs to pinpoint the stop, while clearing Naveen Kumar’s airport taxi.',
+      'Stage 6, Vehicle Intelligence. Between 7:02 PM and 7:18 PM, the suspect hid in Canal Service Lane for sixteen minutes. Chakravyuh uses smart-pole acoustic sensors and apartment gate Wi-Fi logs to pinpoint the stop, while clearing Naveen Kumar’s airport taxi.',
     voiceCommentaryHi:
-      'चरण छह, गाड़ियों का मिलान। अपराधी सोलह मिनट तक बिना कैमरे वाली गली में छुपा रहा। सेंटिनल ने स्मार्ट-पोल के साउंड सेंसर और गेट के वाई-फाई से उस ठिकाने को पकड़ लिया और निर्दोष टैक्सी ड्राइवर नवीन कुमार को क्लीन चिट दी।',
+      'चरण छह, गाड़ियों का मिलान। अपराधी सोलह मिनट तक बिना कैमरे वाली गली में छुपा रहा। चक्रव्यूह ने स्मार्ट-पोल के साउंड सेंसर और गेट के वाई-फाई से उस ठिकाने को पकड़ लिया और निर्दोष टैक्सी ड्राइवर नवीन कुमार को क्लीन चिट दी।',
     voiceCommentaryHinglish:
-      'Charan chhah, Gaadiyon ka Milaan. Apradhi solah minute tak bina camere wali gali mein chhupa raha. Sentinel ne smart pole ke sound sensor aur gate ke Wi-Fi se us thikane ko pakad liya aur nirdosh taxi driver Naveen Kumar ko clean chit di.',
+      'Charan chhah, Gaadiyon ka Milaan. Apradhi solah minute tak bina camere wali gali mein chhupa raha. Chakravyuh ne smart pole ke sound sensor aur gate ke Wi-Fi se us thikane ko pakad liya aur nirdosh taxi driver Naveen Kumar ko clean chit di.',
   },
   {
     id: 'ai-engine',
@@ -490,7 +490,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-bold text-base tracking-wider text-white">
-                  PROJECT SENTINEL
+                  PROJECT CHAKRAVYUH (प्रोजेक्ट चक्रव्यूह)
                 </span>
                 <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30">
                   v1.0 GOV-DEMO

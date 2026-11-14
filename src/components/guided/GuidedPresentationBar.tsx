@@ -408,7 +408,7 @@ export const GuidedPresentationBar: React.FC = () => {
                     : `Key Takeaway: “${currentStage.narration}”`}
                 </p>
 
-                {/* SMART CRIMINAL MOVE vs. PROJECT SENTINEL SOVEREIGN TRAP BANNER */}
+                {/* SMART CRIMINAL MOVE vs. PROJECT CHAKRAVYUH (प्रोजेक्ट चक्रव्यूह) SOVEREIGN TRAP BANNER */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 pt-2">
                   <div className="p-2.5 rounded-lg bg-rose-950/35 border border-rose-500/40 text-xs space-y-1">
                     <div className="flex items-center gap-1.5 font-mono font-bold text-rose-300 uppercase text-[11px]">
@@ -429,8 +429,8 @@ export const GuidedPresentationBar: React.FC = () => {
                       <Crosshair className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                       <span>
                         {isHi
-                          ? '🪤 प्रोजेक्ट सेंटिनल का सरकारी जाल (Sovereign Trap)'
-                          : '🪤 Project Sentinel’s Sovereign Trap'}
+                          ? '🪤 प्रोजेक्ट चक्रव्यूह का सरकारी जाल (Sovereign Trap)'
+                          : '🪤 Project Chakravyuh’s Sovereign Trap'}
                       </span>
                     </div>
                     <p className="text-emerald-100/90 leading-snug">
@@ -520,7 +520,7 @@ export const GuidedPresentationBar: React.FC = () => {
                       <b>🕵️ Criminal:</b> {isHi ? stg.criminalMoveHi : stg.criminalMoveEn}
                     </div>
                     <div className="text-[11px] text-emerald-300 border-l-2 border-emerald-500 pl-2">
-                      <b>🪤 Sentinel Trap:</b> {isHi ? stg.sentinelTrapHi : stg.sentinelTrapEn}
+                      <b>🪤 Chakravyuh Trap:</b> {isHi ? stg.sentinelTrapHi : stg.sentinelTrapEn}
                     </div>
                   </div>
                 ))}

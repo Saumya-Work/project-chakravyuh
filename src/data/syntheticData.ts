@@ -1469,7 +1469,7 @@ export const INITIAL_LEADS: InvestigativeLead[] = [
     priority: 'Priority 2 — High Analytical Value',
     category: 'Witness Discrepancy',
     observationSummary:
-      'Offender staged the 18:45 pickup under amber sodium lamps near a parked car so witnesses would contradict each other. Sentinel reconciles both witnesses: Apex Pharmacy CCTV (CAM-003) proves Dr. Sanjay Kulkarni’s dark grey sedan (VEH-004) parked in jogger Aditi Rao’s sightline at 18:43, validating tea-stall owner Suresh Babu’s sighting of the White SUV at 18:45.',
+      'Offender staged the 18:45 pickup under amber sodium lamps near a parked car so witnesses would contradict each other. Chakravyuh reconciles both witnesses: Apex Pharmacy CCTV (CAM-003) proves Dr. Sanjay Kulkarni’s dark grey sedan (VEH-004) parked in jogger Aditi Rao’s sightline at 18:43, validating tea-stall owner Suresh Babu’s sighting of the White SUV at 18:45.',
     relatedEntities: ['VEH-001', 'VEH-004', 'CAM-003', 'EVD-010'],
     supportingEvidence: [
       'EVD-010: Witness Suresh Babu recorded statement noting a White SUV stopped briefly at Sub-lane B pickup bay around 18:45.',
@@ -1496,7 +1496,7 @@ export const INITIAL_LEADS: InvestigativeLead[] = [
     priority: 'Priority 1 — Immediate Verification',
     category: 'Timeline Anomaly',
     observationSummary:
-      'The offender intentionally stopped for 12 minutes between CAM-014 (19:02) and CAM-019 (19:18) to break time-distance tracking. Sentinel’s Isochrone Prism + 3-Tower Angle-of-Arrival (AoA) triangulation proves Burner Phone DEV-004 paused stationary inside the Old Indira Canal Culvert from 19:04 to 19:16—matching the White SUV’s exact 16-minute delay.',
+      'The offender intentionally stopped for 12 minutes between CAM-014 (19:02) and CAM-019 (19:18) to break time-distance tracking. Chakravyuh’s Isochrone Prism + 3-Tower Angle-of-Arrival (AoA) triangulation proves Burner Phone DEV-004 paused stationary inside the Old Indira Canal Culvert from 19:04 to 19:16—matching the White SUV’s exact 16-minute delay.',
     relatedEntities: ['DEV-004', 'VEH-001', 'VEH-002', 'CAM-014', 'CAM-019'],
     supportingEvidence: [
       '3-Tower AoA Triangulation (EVD-003): Burner DEV-004 remained stationary within a 40m radius at Indira Canal Service Culvert from 19:04 to 19:16.',
@@ -1523,7 +1523,7 @@ export const INITIAL_LEADS: InvestigativeLead[] = [
     priority: 'Priority 1 — Immediate Verification',
     category: 'Coverage Gap',
     observationSummary:
-      'Offender exploited Smart Pole 08 (CAM-008) being offline for scheduled UPS battery maintenance (18:15–19:30). Sentinel defeated the blind spot by querying the Metro Transit AVL Grid, discovering that BMTC Smart Bus #KA-01-F-8821 (Route 335E) drove past Sub-lane B at 18:44:50 IST with its side-facing ADAS dashcam recording the White SUV idling in the pickup bay!',
+      'Offender exploited Smart Pole 08 (CAM-008) being offline for scheduled UPS battery maintenance (18:15–19:30). Chakravyuh defeated the blind spot by querying the Metro Transit AVL Grid, discovering that BMTC Smart Bus #KA-01-F-8821 (Route 335E) drove past Sub-lane B at 18:44:50 IST with its side-facing ADAS dashcam recording the White SUV idling in the pickup bay!',
     relatedEntities: ['CAM-008', 'CAM-005', 'CAM-009', 'VEH-001'],
     supportingEvidence: [
       'BMTC Transit AVL + ADAS Dashcam Log: Bus #KA-01-F-8821 passed Sub-lane B mouth at 18:44:50 IST; side camera captures White Compact SUV with matte roof rails.',
@@ -1550,7 +1550,7 @@ export const INITIAL_LEADS: InvestigativeLead[] = [
     priority: 'Priority 1 — Immediate Verification',
     category: 'Cross-Case Pattern',
     observationSummary:
-      'Offender split preparation across 4 police jurisdictions hoping stations would not share data. Sentinel’s ICJS/CCTNS Cross-Case Graph links: (1) Case 0039 (24 Oct Nandi Electronics burglary where RF Faraday pouches were stolen — Burner DEV-004 + Karan Malhotra’s DEV-019 both present); (2) Case 0040 (29 Oct Outer Link corridor escape timing trial); (3) Case 0041 (31 Oct encrypted Wi-Fi VoIP drop test); and (4) Case 0042 (02 Nov Aarav Sharma abduction).',
+      'Offender split preparation across 4 police jurisdictions hoping stations would not share data. Chakravyuh’s ICJS/CCTNS Cross-Case Graph links: (1) Case 0039 (24 Oct Nandi Electronics burglary where RF Faraday pouches were stolen — Burner DEV-004 + Karan Malhotra’s DEV-019 both present); (2) Case 0040 (29 Oct Outer Link corridor escape timing trial); (3) Case 0041 (31 Oct encrypted Wi-Fi VoIP drop test); and (4) Case 0042 (02 Nov Aarav Sharma abduction).',
     relatedEntities: ['CASE-SNT-2026-0042', 'CASE-SNT-2026-0039', 'DEV-004', 'DEV-019', 'VEH-001'],
     supportingEvidence: [
       'Case 0039 Inventory + Tower Dump (24 Oct): 4 RF Faraday signal-blocking pouches stolen from Nandi Electronics Hub; Burner DEV-004 and Karan Malhotra’s phone DEV-019 moved together in Sector 09C.',
@@ -1922,11 +1922,11 @@ export const INITIAL_TIMELINE_EVENTS: TimelineEvent[] = [
     timeMinutes: 1300,
     date: '02 Nov 2026',
     title: 'Multi-Source Evidence Ingestion & CCTV Preservation Dispatched',
-    description: 'Authorised telecom tower records (EVD-002, EVD-003) and priority CCTV preservation requests (REQ-CCTV-2026-101 to 105) ingested into Project Sentinel.',
+    description: 'Authorised telecom tower records (EVD-002, EVD-003) and priority CCTV preservation requests (REQ-CCTV-2026-101 to 105) ingested into Project Chakravyuh.',
     sourceType: 'Evidence Ingestion',
     categoryType: 'Fact (Verified)',
     entityIds: ['CASE-SNT-2026-0042', 'CAM-001', 'CAM-014', 'CAM-019'],
-    locationName: 'Project Sentinel Evidence Vault',
+    locationName: 'Project Chakravyuh Evidence Vault',
     evidenceRef: 'EVD-002',
     provenance: 'System Ingestion Audit Log',
     authorisationRef: 'AUTH-BLR-SYN-2026-8841',
@@ -1985,7 +1985,7 @@ export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
       {
         id: 'COC-001-2',
         timestamp: '02 Nov 2026, 21:20 IST',
-        action: 'Ingested into Sentinel Immutable Vault',
+        action: 'Ingested into Chakravyuh Immutable Vault',
         actor: 'Dr. Priya Krishnan',
         role: 'Forensic Officer',
         hashVerified: true,
@@ -2034,7 +2034,7 @@ export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
         id: 'COC-002-2',
         timestamp: '02 Nov 2026, 21:35 IST',
         action: 'Working Copy Normalised for Timeline',
-        actor: 'Sentinel Ingestion Engine',
+        actor: 'Chakravyuh Ingestion Engine',
         role: 'System Administrator',
         hashVerified: true,
         notes: 'Original CSV preserved untouched; derived working copy created.',
@@ -2304,8 +2304,8 @@ export const INITIAL_EVIDENCE: DigitalEvidenceItem[] = [
     caseId: 'CASE-SNT-2026-0042',
     title: 'AI Scenario Engine Correlation Snapshot (Unverified Leads Output)',
     evidenceType: 'Forensic Field Extraction (.UFED-SYN)',
-    source: 'Project Sentinel Deterministic Correlation Engine',
-    originalFilename: 'Sentinel_Lead_Correlation_Snapshot_v1.json',
+    source: 'Project Chakravyuh Deterministic Correlation Engine',
+    originalFilename: 'Chakravyuh_Lead_Correlation_Snapshot_v1.json',
     fileSize: '512 KB',
     collectionDateTime: '02 Nov 2026, 22:15 IST',
     uploadDateTime: '02 Nov 2026, 22:15 IST',
@@ -2731,7 +2731,7 @@ export const INITIAL_AUDIT_LOGS: AuditLogEntry[] = [
     action: 'CANDIDATE_LEADS_GENERATED',
     targetRef: 'LEAD-001 to LEAD-006',
     details: 'Generated 6 candidate investigative leads with explicit limitations and alternative explanations. Marked Unverified.',
-    ipSimulated: '10.24.0.10 (Sentinel Core)',
+    ipSimulated: '10.24.0.10 (Chakravyuh Core)',
   },
 ];
 
@@ -2767,38 +2767,38 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     id: 'STAGE-1',
     title: 'STAGE 1 — INCIDENT REGISTRATION & MULTI-CASE LINK',
     titleHi: 'चरण 1 — घटना का पंजीकरण और पुराने मामलों से जुड़ाव',
-    subtitle: 'Simple Story Start: When Aarav Goes Missing, Sentinel Connects 4 Cases Across the City',
+    subtitle: 'Simple Story Start: When Aarav Goes Missing, Chakravyuh Connects 4 Cases Across the City',
     subtitleHi: 'सरल शुरुआत: आरव शर्मा के लापता होते ही सिस्टम शहर के 4 अलग-अलग मामलों को जोड़ता है',
     targetModule: 'cases',
     durationSeconds: 38,
     narration:
-      'Every investigation starts with one clear report. Project Sentinel immediately checks if similar tricks were used in other police station areas.',
+      'Every investigation starts with one clear report. Project Chakravyuh immediately checks if similar tricks were used in other police station areas.',
     narrationHi:
-      'हर जांच एक स्पष्ट रिपोर्ट से शुरू होती है। प्रोजेक्ट सेंटिनल तुरंत देखता है कि क्या यही तरीका शहर के किसी दूसरे थाने के केस में भी इस्तेमाल हुआ है।',
+      'हर जांच एक स्पष्ट रिपोर्ट से शुरू होती है। प्रोजेक्ट चक्रव्यूह तुरंत देखता है कि क्या यही तरीका शहर के किसी दूसरे थाने के केस में भी इस्तेमाल हुआ है।',
     presenterScript:
-      'At 6:30 PM, software architect Aarav Sharma leaves the Kaveri Enclave library. By 9:15 PM, he has not come home and his phone is dead, so his sister Ananya Sharma files a complaint. Watch how Inspector Vikram Rao registers the case—and how Sentinel immediately checks 3 other cases across the city where the criminal practiced his plan.',
+      'At 6:30 PM, software architect Aarav Sharma leaves the Kaveri Enclave library. By 9:15 PM, he has not come home and his phone is dead, so his sister Ananya Sharma files a complaint. Watch how Inspector Vikram Rao registers the case—and how Chakravyuh immediately checks 3 other cases across the city where the criminal practiced his plan.',
     presenterScriptHi:
-      'शाम 6:30 बजे आरव शर्मा कावेरी एन्क्लेव लाइब्रेरी से निकलते हैं। रात 9:15 बजे तक घर न लौटने और फ़ोन बंद मिलने पर उनकी बहन अनन्या शर्मा शिकायत दर्ज कराती हैं। इंस्पेक्टर विक्रम राव जैसे ही केस दर्ज करते हैं, प्रोजेक्ट सेंटिनल शहर के 3 अन्य मामलों से भी इसके तार जोड़ना शुरू कर देता है।',
+      'शाम 6:30 बजे आरव शर्मा कावेरी एन्क्लेव लाइब्रेरी से निकलते हैं। रात 9:15 बजे तक घर न लौटने और फ़ोन बंद मिलने पर उनकी बहन अनन्या शर्मा शिकायत दर्ज कराती हैं। इंस्पेक्टर विक्रम राव जैसे ही केस दर्ज करते हैं, प्रोजेक्ट चक्रव्यूह शहर के 3 अन्य मामलों से भी इसके तार जोड़ना शुरू कर देता है।',
     voiceScript: [
       'Stage 1, Incident Registration.',
       'Let us understand this case in simple words.',
       'At 6:30 PM, Aarav Sharma leaves his neighborhood library, and by 6:48 PM his phone suddenly goes dead.',
       'A smart criminal thinks police stations never share data, so he stole signal blocking bags in one area last week and tested his escape road in another area.',
-      'The moment Inspector Vikram Rao registers Aarav’s case, Project Sentinel connects all four police station cases on one screen.'
+      'The moment Inspector Vikram Rao registers Aarav’s case, Project Chakravyuh connects all four police station cases on one screen.'
     ],
     voiceScriptHi: [
       'चरण एक: घटना का पंजीकरण।',
       'आइए इस पूरे मामले को बिल्कुल आसान शब्दों में समझते हैं।',
       'शाम साढ़े छह बजे आरव शर्मा लाइब्रेरी से निकलते हैं, और छह बजकर अड़तालीस मिनट पर उनका फ़ोन अचानक बंद हो जाता है।',
       'शातिर अपराधी सोचता है कि अलग-अलग पुलिस थाने आपस में डेटा साझा नहीं करते, इसलिए उसने एक हफ़्ते पहले दूसरे इलाके से सिग्नल रोकने वाला बैग चुराया था।',
-      'लेकिन जैसे ही इंस्पेक्टर विक्रम राव यह केस दर्ज करते हैं, प्रोजेक्ट सेंटिनल चारों थानों के रिकॉर्ड को एक साथ जोड़ देता है।'
+      'लेकिन जैसे ही इंस्पेक्टर विक्रम राव यह केस दर्ज करते हैं, प्रोजेक्ट चक्रव्यूह चारों थानों के रिकॉर्ड को एक साथ जोड़ देता है।'
     ],
     voiceScriptHinglish: [
       'Charan Ek: Ghatna ka Panjeekaran.',
       'Aaiye is poore maamle ko bilkul aasaan shabdon mein samajhte hain.',
       'Shaam saadhe chhah baje Aarav Sharma library se nikalte hain, aur chhah bajkar adtaalis minute par unka phone achanak band ho jaata hai.',
       'Shaatir apraadhi sochta hai ki alag alag police thaane aapas mein data share nahi karte, isliye usne ek hafte pehle doosre ilaake se signal rokne wala bag churaya tha.',
-      'Lekin jaise hi Inspector Vikram Rao yeh case darj karte hain, Project Sentinel chaaron thaanon ke record ko ek saath jod deta hai.'
+      'Lekin jaise hi Inspector Vikram Rao yeh case darj karte hain, Project Chakravyuh chaaron thaanon ke record ko ek saath jod deta hai.'
     ],
     criminalMoveEn:
       'Split preparation across 4 police stations: stole Faraday bags in Mahadevapura (24 Oct), tested escape route on Outer Link (29 Oct), tested Wi-Fi call drop in Ulsoor (31 Oct), and kidnapped Aarav in Kaveri Enclave (02 Nov).',
@@ -2807,7 +2807,7 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     sentinelTrapEn:
       'Sovereign ICJS / CCTNS National Graph automatically connects all 4 police stations the instant Case 0042 is registered.',
     sentinelTrapHi:
-      'सेंटिनल का जाल: सरकारी नेशनल ग्रिड (ICJS/CCTNS) केस दर्ज होते ही चारों थानों के सुरागों को अपने-आप एक साथ जोड़ देता है।',
+      'चक्रव्यूह का जाल: सरकारी नेशनल ग्रिड (ICJS/CCTNS) केस दर्ज होते ही चारों थानों के सुरागों को अपने-आप एक साथ जोड़ देता है।',
     systemBanner: 'Incident Registered — Aarav Sharma Workspace & 4-Station Sovereign Grid Active',
     systemBannerHi: 'केस पंजीकृत — आरव शर्मा जांच वर्कस्पेस और 4-थाना सरकारी ग्रिड सक्रिय',
     highlights: [
@@ -2835,25 +2835,25 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     narrationHi:
       'कोई अपराधी एक सबूत छिपा सकता है, लेकिन मोबाइल टावर, घर का बिजली मीटर, हाईवे फास्टैग और सरकारी बस के कैमरे—इन सबको एक साथ धोखा नहीं दे सकता।',
     presenterScript:
-      'With full government access, Project Sentinel pulls together telecom records, CCTV videos, BESCOM smart electricity meter logs, NHAI FASTag scans, UPI recharge timings, and city bus dashcams. Forensic Lead Dr. Priya Krishnan locks every original file with a digital seal so nothing can be tampered with.',
+      'With full government access, Project Chakravyuh pulls together telecom records, CCTV videos, BESCOM smart electricity meter logs, NHAI FASTag scans, UPI recharge timings, and city bus dashcams. Forensic Lead Dr. Priya Krishnan locks every original file with a digital seal so nothing can be tampered with.',
     presenterScriptHi:
-      'पूर्ण सरकारी एक्सेस के साथ, प्रोजेक्ट सेंटिनल मोबाइल टावर, सीसीटीवी वीडियो, घर के स्मार्ट बिजली मीटर, हाईवे फास्टैग, यूपीआई रिचार्ज और सरकारी बसों के डैशकैम को एक साथ जोड़ता है। डॉ. प्रिया कृष्णन हर असली फाइल को डिजिटल लॉक (SHA-256) से सील करती हैं ताकि सबूत कोर्ट में पक्के रहें।',
+      'पूर्ण सरकारी एक्सेस के साथ, प्रोजेक्ट चक्रव्यूह मोबाइल टावर, सीसीटीवी वीडियो, घर के स्मार्ट बिजली मीटर, हाईवे फास्टैग, यूपीआई रिचार्ज और सरकारी बसों के डैशकैम को एक साथ जोड़ता है। डॉ. प्रिया कृष्णन हर असली फाइल को डिजिटल लॉक (SHA-256) से सील करती हैं ताकि सबूत कोर्ट में पक्के रहें।',
     voiceScript: [
       'Stage 2, Multi Source Evidence Ingestion.',
       'A smart criminal can hide from one system, but he cannot hide from every government system at once.',
-      'Project Sentinel brings together phone tower logs, street cameras, home smart electricity meters, highway Fast Tag sensors, and public bus dashcams.',
+      'Project Chakravyuh brings together phone tower logs, street cameras, home smart electricity meters, highway Fast Tag sensors, and public bus dashcams.',
       'Forensic specialist Doctor Priya Krishnan locks every original file with a digital fingerprint so the evidence is hundred percent tamper proof for court.'
     ],
     voiceScriptHi: [
       'चरण दो: सभी सरकारी सबूतों का एकीकरण।',
       'एक चालाक अपराधी किसी एक सिस्टम से बच सकता है, लेकिन वह सभी सरकारी सिस्टम को एक साथ धोखा नहीं दे सकता।',
-      'प्रोजेक्ट सेंटिनल मोबाइल टावर, सड़क के कैमरे, घर के स्मार्ट बिजली मीटर, हाईवे फास्टैग और सरकारी बसों के कैमरों को एक जगह इकट्ठा करता है।',
+      'प्रोजेक्ट चक्रव्यूह मोबाइल टावर, सड़क के कैमरे, घर के स्मार्ट बिजली मीटर, हाईवे फास्टैग और सरकारी बसों के कैमरों को एक जगह इकट्ठा करता है।',
       'फॉरेंसिक विशेषज्ञ डॉक्टर प्रिया कृष्णन हर फाइल को डिजिटल सील से लॉक करती हैं ताकि कोर्ट में सबूतों के साथ कोई छेड़छाड़ न हो सके।'
     ],
     voiceScriptHinglish: [
       'Charan Do: Sabhi Sarkari Sabooton ka Ekikaran.',
       'Ek chaalaak apraadhi kisi ek system se bach sakta hai, lekin woh sabhi sarkari system ko ek saath dhokha nahi de sakta.',
-      'Project Sentinel mobile tower, sadak ke camere, ghar ke smart bijli meter, highway Fast Tag aur sarkari buson ke cameron ko ek jagah ikattha karta hai.',
+      'Project Chakravyuh mobile tower, sadak ke camere, ghar ke smart bijli meter, highway Fast Tag aur sarkari buson ke cameron ko ek jagah ikattha karta hai.',
       'Forensic expert Doctor Priya Krishnan har file ko digital seal se lock karti hain taaki court mein saboot pakke rahein.'
     ],
     criminalMoveEn:
@@ -2863,7 +2863,7 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     sentinelTrapEn:
       'Telecom Baseband Trap detects an instant -40 dBm signal drop with zero "Good-Bye" power-off packet—proving the phone was forced into a signal-blocking bag at 6:48 PM.',
     sentinelTrapHi:
-      'सेंटिनल का जाल: जब फ़ोन सामान्य रूप से बंद होता है तो टावर को अंतिम संदेश भेजता है। आरव का सिग्नल 6:48 पर बिना संदेश के अचानक कटा—जिससे साबित हो गया कि फ़ोन को सिग्नल-ब्लॉकिंग बैग में डाला गया।',
+      'चक्रव्यूह का जाल: जब फ़ोन सामान्य रूप से बंद होता है तो टावर को अंतिम संदेश भेजता है। आरव का सिग्नल 6:48 पर बिना संदेश के अचानक कटा—जिससे साबित हो गया कि फ़ोन को सिग्नल-ब्लॉकिंग बैग में डाला गया।',
     systemBanner: 'Sovereign Grid Ingestion Complete — 12 Evidence Packages Sealed with SHA-256',
     systemBannerHi: 'सरकारी ग्रिड डेटा एकीकरण पूर्ण — 12 सबूत पैकेज डिजिटल सील (SHA-256) के साथ सुरक्षित',
     highlights: [
@@ -2887,27 +2887,27 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     targetModule: 'mobile-intelligence',
     durationSeconds: 48,
     narration:
-      'Leaving your real phone at home playing a video will not save you when Sentinel checks your home electricity meter and your past rehearsal trips.',
+      'Leaving your real phone at home playing a video will not save you when Chakravyuh checks your home electricity meter and your past rehearsal trips.',
     narrationHi:
-      'अपना असली फ़ोन घर पर वीडियो चलाकर छोड़ देने से कोई बच नहीं सकता, जब सेंटिनल घर के स्मार्ट बिजली मीटर और पुरानी रिहर्सल की जांच करता है।',
+      'अपना असली फ़ोन घर पर वीडियो चलाकर छोड़ देने से कोई बच नहीं सकता, जब चक्रव्यूह घर के स्मार्ट बिजली मीटर और पुरानी रिहर्सल की जांच करता है।',
     presenterScript:
-      'The suspect, Karan Malhotra, left his personal phone at home playing an auto-loop video on Wi-Fi so police would think he was at home, and carried a burner phone (DEV-004). Watch how Sentinel catches him: (1) His apartment BESCOM Smart Meter shows a flat 138-Watt standby line (fridge only—zero lights or AC used all evening), (2) his home phone stopped moving at 6:15 PM and the burner phone turned on 3 minutes later at 6:18 PM, and (3) on 24 October he accidentally carried both phones together!',
+      'The suspect, Karan Malhotra, left his personal phone at home playing an auto-loop video on Wi-Fi so police would think he was at home, and carried a burner phone (DEV-004). Watch how Chakravyuh catches him: (1) His apartment BESCOM Smart Meter shows a flat 138-Watt standby line (fridge only—zero lights or AC used all evening), (2) his home phone stopped moving at 6:15 PM and the burner phone turned on 3 minutes later at 6:18 PM, and (3) on 24 October he accidentally carried both phones together!',
     presenterScriptHi:
-      'संदिग्ध करण मल्होत्रा ने पुलिस को गुमराह करने के लिए अपना असली फ़ोन घर पर वाई-फाई वीडियो चलाकर मेज पर छोड़ दिया और वारदात में एक फर्जी प्रीपेड फ़ोन (DEV-004) ले गया। देखिए सेंटिनल ने उसे कैसे पकड़ा: (1) उसके घर के स्मार्ट बिजली मीटर ने पूरी शाम सिर्फ 138 वॉट (केवल फ्रिज—कोई बल्ब या एसी नहीं) दिखाया, (2) उसका असली फ़ोन शाम 6:15 पर हिलना बंद हुआ और ठीक 3 मिनट बाद 6:18 पर फर्जी फ़ोन चालू हुआ, और (3) 24 अक्टूबर की रिहर्सल में वह गलती से दोनों फ़ोन साथ ले गया था!',
+      'संदिग्ध करण मल्होत्रा ने पुलिस को गुमराह करने के लिए अपना असली फ़ोन घर पर वाई-फाई वीडियो चलाकर मेज पर छोड़ दिया और वारदात में एक फर्जी प्रीपेड फ़ोन (DEV-004) ले गया। देखिए चक्रव्यूह ने उसे कैसे पकड़ा: (1) उसके घर के स्मार्ट बिजली मीटर ने पूरी शाम सिर्फ 138 वॉट (केवल फ्रिज—कोई बल्ब या एसी नहीं) दिखाया, (2) उसका असली फ़ोन शाम 6:15 पर हिलना बंद हुआ और ठीक 3 मिनट बाद 6:18 पर फर्जी फ़ोन चालू हुआ, और (3) 24 अक्टूबर की रिहर्सल में वह गलती से दोनों फ़ोन साथ ले गया था!',
     voiceScript: [
       'Stage 3, Catching the Fake Home Alibi and Burner Phone.',
       'Here the criminal tried a very clever trick.',
       'Suspect Karan Malhotra left his real phone on his dining table at home playing a long video on Wi-Fi, and carried a secret prepaid phone to the crime scene.',
-      'But Project Sentinel caught him in three ways.',
+      'But Project Chakravyuh caught him in three ways.',
       'First, his apartment smart electricity meter showed only fridge standby power all evening, proving nobody was inside the house.',
       'Second, his real phone stopped moving at 6:15 PM and the secret phone switched on just three minutes later.',
-      'And third, while innocent resident Rohan Verma is automatically cleared by his apartment gate log, Sentinel finds that Karan carried both phones together during his practice run last week.'
+      'And third, while innocent resident Rohan Verma is automatically cleared by his apartment gate log, Chakravyuh finds that Karan carried both phones together during his practice run last week.'
     ],
     voiceScriptHi: [
       'चरण तीन: नकली घर की अलीबी और फर्जी फ़ोन का पर्दाफाश।',
       'यहाँ अपराधी ने बहुत होशियारी दिखाने की कोशिश की।',
       'संदिग्ध करण मल्होत्रा ने अपना असली फ़ोन घर की मेज पर वीडियो चलाकर छोड़ दिया ताकि पुलिस समझे कि वह घर पर था, और अपने साथ एक फर्जी सिम वाला फ़ोन ले गया।',
-      'लेकिन प्रोजेक्ट सेंटिनल ने उसकी यह चालाकी तीन तरीकों से पकड़ ली।',
+      'लेकिन प्रोजेक्ट चक्रव्यूह ने उसकी यह चालाकी तीन तरीकों से पकड़ ली।',
       'पहला, उसके घर के स्मार्ट बिजली मीटर से पता चला कि पूरी शाम घर में कोई लाइट या पंखा नहीं जला, केवल फ्रिज चल रहा था।',
       'दूसरा, शाम सवा छह बजे उसका असली फ़ोन मेज पर रखा गया और ठीक तीन मिनट बाद फर्जी फ़ोन चालू हुआ।',
       'और तीसरा, जहाँ निर्दोष निवासी रोहन वर्मा को गेट रिकॉर्ड से तुरंत क्लीन चिट मिल गई, वहीं चौबीस अक्टूबर की रिहर्सल में करण के दोनों फ़ोन एक साथ पकड़े गए।'
@@ -2916,7 +2916,7 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
       'Charan Teen: Nakli Ghar ki Alibi aur Farzi Phone ka Pardafaash.',
       'Yahaan apraadhi ne bahut hoshiyari dikhaane ki koshish ki.',
       'Suspect Karan Malhotra ne apna asli phone ghar ki table par video chala kar chhod diya taaki police samjhe ki woh ghar par tha, aur apne saath ek farzi SIM wala phone le gaya.',
-      'Lekin Project Sentinel ne uski yeh chaalaaki teen tareeqon se pakad li.',
+      'Lekin Project Chakravyuh ne uski yeh chaalaaki teen tareeqon se pakad li.',
       'Pehla, uske ghar ke smart bijli meter se pata chala ki poori shaam ghar mein koi light ya AC nahi chala, sirf fridge chal raha tha.',
       'Doosra, shaam sawa chhah baje uska asli phone table par rakha gaya aur theek teen minute baad farzi phone chalu hua.',
       'Aur teesra, chaubees October ki rehearsal mein Karan apna asli phone aur farzi phone dono ek saath le gaya tha.'
@@ -2928,7 +2928,7 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     sentinelTrapEn:
       'BESCOM Smart Meter (flat 138W draw) + 0.0m Tower Drift proves nobody was home, while 24 Oct dry-run logs link Burner DEV-004 directly to Karan Malhotra’s phone!',
     sentinelTrapHi:
-      'सेंटिनल का जाल: घर के स्मार्ट बिजली मीटर (सिर्फ 138W) ने साबित किया कि घर खाली था, और 24 अक्टूबर के रिकॉर्ड ने फर्जी सिम को करण मल्होत्रा के असली फ़ोन से जोड़ दिया!',
+      'चक्रव्यूह का जाल: घर के स्मार्ट बिजली मीटर (सिर्फ 138W) ने साबित किया कि घर खाली था, और 24 अक्टूबर के रिकॉर्ड ने फर्जी सिम को करण मल्होत्रा के असली फ़ोन से जोड़ दिया!',
     systemBanner: 'FAKE HOME ALIBI EXPOSED — BURNER PHONE LINKED TO KARAN MALHOTRA',
     systemBannerHi: 'नकली अलीबी बेनकाब — फर्जी प्रीपेड फ़ोन का संबंध करण मल्होत्रा से जुड़ा',
     highlights: [
@@ -2947,41 +2947,41 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     id: 'STAGE-4',
     title: 'STAGE 4 — DEFEATING THE CCTV BLIND SPOT WITH CITY BUS CAMERAS',
     titleHi: 'चरण 4 — सरकारी बस के डैशकैम और घेराबंदी से सीसीटीवी ब्लाइंड-स्पॉट की हार',
-    subtitle: 'The Criminal Chose a Dead Camera Pole—Sentinel Caught Him on a Passing BMTC Bus Camera',
-    subtitleHi: 'अपराधी ने बंद कैमरे वाली गली चुनी—सेंटिनल ने वहां से गुजरती सरकारी बस के कैमरे से उसे पकड़ लिया',
+    subtitle: 'The Criminal Chose a Dead Camera Pole—Chakravyuh Caught Him on a Passing BMTC Bus Camera',
+    subtitleHi: 'अपराधी ने बंद कैमरे वाली गली चुनी—चक्रव्यूह ने वहां से गुजरती सरकारी बस के कैमरे से उसे पकड़ लिया',
     targetModule: 'location-intelligence',
     durationSeconds: 48,
     narration:
-      'Even when a street camera is turned off for battery repair, Project Sentinel surrounds the area with flanking cameras and passing city bus dashcams.',
+      'Even when a street camera is turned off for battery repair, Project Chakravyuh surrounds the area with flanking cameras and passing city bus dashcams.',
     narrationHi:
-      'अगर गली का फिक्स कैमरा बैटरी रिपेयर के कारण बंद भी हो, तो प्रोजेक्ट सेंटिनल आस-पास के कैमरों और वहां से गुजरती सरकारी बसों के कैमरों से अपराधी को घेर लेता है।',
+      'अगर गली का फिक्स कैमरा बैटरी रिपेयर के कारण बंद भी हो, तो प्रोजेक्ट चक्रव्यूह आस-पास के कैमरों और वहां से गुजरती सरकारी बसों के कैमरों से अपराधी को घेर लेता है।',
     presenterScript:
-      'The criminal scouted Sub-lane B beforehand and saw a municipal notice that Camera 008 would be offline from 6:15 PM to 7:30 PM for battery repair. He staged the kidnapping right in that blind spot at 6:45 PM. Watch how Sentinel traps him: (1) It locks all surrounding entry/exit cameras so no car can escape unseen, and (2) it checks city bus GPS logs and finds that BMTC Bus 335E drove past that exact lane at 6:44:50 PM—filming the White SUV waiting in the blind spot!',
+      'The criminal scouted Sub-lane B beforehand and saw a municipal notice that Camera 008 would be offline from 6:15 PM to 7:30 PM for battery repair. He staged the kidnapping right in that blind spot at 6:45 PM. Watch how Chakravyuh traps him: (1) It locks all surrounding entry/exit cameras so no car can escape unseen, and (2) it checks city bus GPS logs and finds that BMTC Bus 335E drove past that exact lane at 6:44:50 PM—filming the White SUV waiting in the blind spot!',
     presenterScriptHi:
-      'अपराधी ने पहले से रेकी कर ली थी कि सब-लेन B का कैमरा (CAM-008) शाम 6:15 से 7:30 तक बैटरी मरम्मत के लिए बंद रहेगा। उसने ठीक 6:45 बजे उसी अंधे कोने में वारदात की। देखिए सेंटिनल का जाल: (1) सिस्टम ने गली के चारों तरफ के एंट्री-एग्जिट कैमरे लॉक कर दिए, और (2) सरकारी बस जीपीएस ग्रिड से पता लगाया कि BMTC बस नंबर 335E ठीक 6:44:50 पर वहां से गुजरी थी—जिसके साइड कैमरे में सफेद एसयूवी साफ रिकॉर्ड हो गई!',
+      'अपराधी ने पहले से रेकी कर ली थी कि सब-लेन B का कैमरा (CAM-008) शाम 6:15 से 7:30 तक बैटरी मरम्मत के लिए बंद रहेगा। उसने ठीक 6:45 बजे उसी अंधे कोने में वारदात की। देखिए चक्रव्यूह का जाल: (1) सिस्टम ने गली के चारों तरफ के एंट्री-एग्जिट कैमरे लॉक कर दिए, और (2) सरकारी बस जीपीएस ग्रिड से पता लगाया कि BMTC बस नंबर 335E ठीक 6:44:50 पर वहां से गुजरी थी—जिसके साइड कैमरे में सफेद एसयूवी साफ रिकॉर्ड हो गई!',
     voiceScript: [
       'Stage 4, Defeating the Camera Blind Spot.',
       'The criminal thought he was very smart because he saw a notice that the pickup lane camera would be switched off for battery repair between 6:15 PM and 7:30 PM.',
       'So he picked up Aarav right inside that camera blind spot at 6:45 PM.',
-      'How did Project Sentinel beat him?',
-      'First, Sentinel created a closed ring using all surrounding street and apartment gate cameras so no car could enter or leave unseen.',
-      'Second, Sentinel checked government city bus GPS records and discovered that a smart city bus drove right past that lane at 6:44 PM, and the bus’s side camera recorded the white S U V waiting inside the blind spot!'
+      'How did Project Chakravyuh beat him?',
+      'First, Chakravyuh created a closed ring using all surrounding street and apartment gate cameras so no car could enter or leave unseen.',
+      'Second, Chakravyuh checked government city bus GPS records and discovered that a smart city bus drove right past that lane at 6:44 PM, and the bus’s side camera recorded the white S U V waiting inside the blind spot!'
     ],
     voiceScriptHi: [
       'चरण चार: सीसीटीवी ब्लाइंड स्पॉट के जाल को तोड़ना।',
       'अपराधी ने सोचा था कि वह बहुत होशियार है क्योंकि उसने देख लिया था कि पिकअप गली का सरकारी कैमरा बैटरी रिपेयर के कारण बंद है।',
       'इसलिए उसने शाम पौने सात बजे ठीक उसी बंद कैमरे के नीचे वारदात को अंजाम दिया।',
-      'लेकिन प्रोजेक्ट सेंटिनल ने उसे कैसे पकड़ा?',
-      'पहला, सेंटिनल ने उस गली के चारों ओर लगे सभी चौराहों और अपार्टमेंट के कैमरों से घेराबंदी कर ली ताकि कोई गाड़ी बिना दिखे बाहर न निकल सके।',
-      'दूसरा, सेंटिनल ने सरकारी बसों का जीपीएस चेक किया और पाया कि ठीक उसी वक्त एक सिटी बस वहां से गुजरी थी, जिसके साइड कैमरे में वह सफेद एसयूवी साफ रिकॉर्ड हो गई!'
+      'लेकिन प्रोजेक्ट चक्रव्यूह ने उसे कैसे पकड़ा?',
+      'पहला, चक्रव्यूह ने उस गली के चारों ओर लगे सभी चौराहों और अपार्टमेंट के कैमरों से घेराबंदी कर ली ताकि कोई गाड़ी बिना दिखे बाहर न निकल सके।',
+      'दूसरा, चक्रव्यूह ने सरकारी बसों का जीपीएस चेक किया और पाया कि ठीक उसी वक्त एक सिटी बस वहां से गुजरी थी, जिसके साइड कैमरे में वह सफेद एसयूवी साफ रिकॉर्ड हो गई!'
     ],
     voiceScriptHinglish: [
       'Charan Chaar: CCTV Blind Spot ke jaal ko todna.',
       'Apraadhi ne socha tha ki woh bahut hoshiyaar hai kyunki usne dekh liya tha ki pickup gali ka sarkari camera battery repair ke kaaran band hai.',
       'Isliye usne shaam paune saat baje theek usi band camere ke neeche vaardaat ki.',
-      'Lekin Project Sentinel ne use kaise pakda?',
-      'Pehla, Sentinel ne us gali ke chaaron aur lage sabhi chauraahon aur apartment ke cameron se gherabandi kar li.',
-      'Doosra, Sentinel ne sarkari buson ka GPS check kiya aur paaya ki theek usi waqt ek city bus wahaan se guzri thi, jiske side camere mein woh safed SUV saaf record ho gayi!'
+      'Lekin Project Chakravyuh ne use kaise pakda?',
+      'Pehla, Chakravyuh ne us gali ke chaaron aur lage sabhi chauraahon aur apartment ke cameron se gherabandi kar li.',
+      'Doosra, Chakravyuh ne sarkari buson ka GPS check kiya aur paaya ki theek usi waqt ek city bus wahaan se guzri thi, jiske side camere mein woh safed SUV saaf record ho gayi!'
     ],
     criminalMoveEn:
       'Exploited scheduled UPS battery outage on Camera 008 (6:15–7:30 PM) to stage the pickup in a camera blind spot at 6:45 PM.',
@@ -2990,7 +2990,7 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     sentinelTrapEn:
       'Queries Government Transit Bus Grid: BMTC Bus #335E drove past Sub-lane B at 6:44:50 PM and its ADAS side-camera filmed the White SUV inside the blind spot!',
     sentinelTrapHi:
-      'सेंटिनल का जाल: सरकारी बस ग्रिड की जांच से पता चला कि BMTC बस 335E ठीक 6:44:50 पर वहां से गुजरी और बस के साइड कैमरे ने ब्लाइंड-स्पॉट में खड़ी सफेद SUV को रिकॉर्ड कर लिया!',
+      'चक्रव्यूह का जाल: सरकारी बस ग्रिड की जांच से पता चला कि BMTC बस 335E ठीक 6:44:50 पर वहां से गुजरी और बस के साइड कैमरे ने ब्लाइंड-स्पॉट में खड़ी सफेद SUV को रिकॉर्ड कर लिया!',
     systemBanner: 'BLIND SPOT DEFEATED — BMTC BUS #335E DASHCAM + 20 FLANKING CAMERAS LOCKED',
     systemBannerHi: 'ब्लाइंड-स्पॉट विफल — सरकारी बस #335E डैशकैम और 20 घेराबंदी कैमरों से पहचान',
     highlights: [
@@ -3018,13 +3018,13 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     narrationHi:
       'अपराधी नंबर प्लेट पर कीचड़ लगा सकता है या कैमरे पर तेज लाइट मार सकता है, लेकिन अपनी गाड़ी के पहियों के वायरलेस सेंसर और फास्टैग एंटीना से नहीं बच सकता।',
     presenterScript:
-      'To defeat number-plate cameras, the criminal splashed mud over his plate at 27th Main Signal (7:02 PM) and used bright high-beam glare on the East Link Flyover ramp (7:18 PM), plus peeled off his FASTag sticker. Watch how Sentinel catches him: (1) Smart poles read the car’s wireless Tyre Pressure Sensors (TPMS-HEX-88A4) at both signals, proving it is the exact same SUV, and (2) out of 412 cars on the flyover, his car was the ONLY one to trigger a "Ghost FASTag Alert"!',
+      'To defeat number-plate cameras, the criminal splashed mud over his plate at 27th Main Signal (7:02 PM) and used bright high-beam glare on the East Link Flyover ramp (7:18 PM), plus peeled off his FASTag sticker. Watch how Chakravyuh catches him: (1) Smart poles read the car’s wireless Tyre Pressure Sensors (TPMS-HEX-88A4) at both signals, proving it is the exact same SUV, and (2) out of 412 cars on the flyover, his car was the ONLY one to trigger a "Ghost FASTag Alert"!',
     presenterScriptHi:
-      'कैमरों से बचने के लिए अपराधी ने नंबर प्लेट पर कीचड़ लगा दिया, फ्लाईओवर कैमरे पर पीछे से तेज हेडलाइट की चमक मारी और विंडशील्ड से फास्टैग स्टीकर भी उखाड़ दिया। देखिए सेंटिनल ने उसे कैसे पकड़ा: (1) दोनों चौराहों के स्मार्ट पोल ने गाड़ी के पहियों में लगे वायरलेस टायर सेंसर (TPMS-HEX-88A4) का सिग्नल पकड़ लिया, और (2) फ्लाईओवर से गुजरी 412 गाड़ियों में से केवल इसी गाड़ी ने "बिना फास्टैग अलर्ट" (Ghost Tag Exception) ट्रिगर किया!',
+      'कैमरों से बचने के लिए अपराधी ने नंबर प्लेट पर कीचड़ लगा दिया, फ्लाईओवर कैमरे पर पीछे से तेज हेडलाइट की चमक मारी और विंडशील्ड से फास्टैग स्टीकर भी उखाड़ दिया। देखिए चक्रव्यूह ने उसे कैसे पकड़ा: (1) दोनों चौराहों के स्मार्ट पोल ने गाड़ी के पहियों में लगे वायरलेस टायर सेंसर (TPMS-HEX-88A4) का सिग्नल पकड़ लिया, और (2) फ्लाईओवर से गुजरी 412 गाड़ियों में से केवल इसी गाड़ी ने "बिना फास्टैग अलर्ट" (Ghost Tag Exception) ट्रिगर किया!',
     voiceScript: [
       'Stage 5, Beating Muddy Number Plates and Headlight Glare.',
       'To fool automatic number plate cameras, the criminal splashed mud on his plate at the 7:02 PM signal, shone bright headlights into the 7:18 PM flyover camera, and even peeled off his Fast Tag sticker.',
-      'How did Project Sentinel catch the vehicle anyway?',
+      'How did Project Chakravyuh catch the vehicle anyway?',
       'First, modern cars have wireless tyre pressure sensors inside all four wheels.',
       'Smart poles at both junctions read the exact same four wheel sensor codes, proving hundred percent that the 7:02 PM and 7:18 PM white S U Vs are the same car.',
       'Second, out of four hundred twelve cars on the flyover, his car was the only one with a missing Fast Tag chip, instantly flagging it on the highway grid!'
@@ -3032,7 +3032,7 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     voiceScriptHi: [
       'चरण पांच: कीचड़ लगी नंबर प्लेट और हेडलाइट की चमक को मात देना।',
       'नंबर प्लेट पढ़ने वाले कैमरों से बचने के लिए अपराधी ने अपनी प्लेट पर कीचड़ लगा दिया, फ्लाईओवर कैमरे पर तेज लाइट मारी और कार से फास्टैग स्टीकर भी हटा दिया।',
-      'फिर प्रोजेक्ट सेंटिनल ने उस गाड़ी को कैसे पकड़ा?',
+      'फिर प्रोजेक्ट चक्रव्यूह ने उस गाड़ी को कैसे पकड़ा?',
       'पहला, आजकल की गाड़ियों के चारों पहियों में हवा बताने वाले वायरलेस सेंसर लगे होते हैं।',
       'दोनों चौराहों के स्मार्ट खंभों ने पहियों का एक ही कोड पढ़ा, जिससे सौ प्रतिशत साबित हो गया कि सात बजकर दो मिनट और सात बजकर अठारह मिनट वाली सफेद एसयूवी एक ही गाड़ी है।',
       'दूसरा, फ्लाईओवर की चार सौ बारह गाड़ियों में से सिर्फ इसी गाड़ी में फास्टैग चिप नहीं मिली, जिससे इसकी चालाकी ही इसका सबसे बड़ा सबूत बन गई!'
@@ -3040,7 +3040,7 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     voiceScriptHinglish: [
       'Charan Paanch: Keechad lagi number plate aur headlight ki chamak ko maat dena.',
       'Number plate padhne wale cameron se bachne ke liye apraadhi ne apni plate par keechad laga diya, flyover camere par tez light maari aur car se Fast Tag sticker bhi hata diya.',
-      'Phir Project Sentinel ne us gaadi ko kaise pakda?',
+      'Phir Project Chakravyuh ne us gaadi ko kaise pakda?',
       'Pehla, aajkal ki gaadiyon ke chaaron pahiyon mein wireless tyre sensor lage hote hain.',
       'Dono chauraahon ke smart poles ne pahiyon ka ek hi code padha, jisse sau pratishat saabit ho gaya ki dono safed SUV ek hi gaadi hain.',
       'Doosra, flyover ki chaar sau baarah gaadiyon mein se sirf isi gaadi mein Fast Tag chip nahi mili, jisse iski chaalaaki hi iska sabse bada saboot ban gayi!'
@@ -3052,7 +3052,7 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     sentinelTrapEn:
       'Smart Poles capture the SUV’s 433MHz wireless wheel sensors (TPMS-HEX-88A4) at both junctions, and the Flyover gantry flags the ONLY car with a missing FASTag ("Ghost Tag Alert")!',
     sentinelTrapHi:
-      'सेंटिनल का जाल: स्मार्ट खंभों ने गाड़ी के पहियों के वायरलेस सेंसर (TPMS) को दोनों चौराहों पर पकड़ लिया और फ्लाईओवर एंटीना ने बिना फास्टैग वाली इकलौती गाड़ी को तुरंत फ्लैग कर दिया!',
+      'चक्रव्यूह का जाल: स्मार्ट खंभों ने गाड़ी के पहियों के वायरलेस सेंसर (TPMS) को दोनों चौराहों पर पकड़ लिया और फ्लाईओवर एंटीना ने बिना फास्टैग वाली इकलौती गाड़ी को तुरंत फ्लैग कर दिया!',
     systemBanner: 'CHAMELEON SUV MATCHED — WHEEL TPMS SENSORS & GHOST-FASTAG ALERT VERIFIED',
     systemBannerHi: 'सफेद एसयूवी की पहचान पक्की — टायर सेंसर (TPMS) और घोस्ट-फास्टैग अलर्ट से मिलान',
     highlights: [
@@ -3080,28 +3080,28 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     narrationHi:
       'जब अपराधी ट्रैकिंग तोड़ने के लिए 12 मिनट तक नहर वाली गली में छिपा रहा, तो उसका फर्जी फ़ोन भी ठीक उसी पुलिया के पास रुका रहा—जिससे उसके छिपने की जगह पकड़ी गई।',
     presenterScript:
-      'The distance between 27th Main (7:02 PM) and East Link Flyover (7:18 PM) is just 1.1 km—normally a 4-minute drive. The criminal hid for 12 minutes in the Indira Canal culvert so he could claim the two camera sightings were different cars. Sentinel traps him by showing that Burner Phone DEV-004 also paused stationary at that exact canal culvert from 7:04 PM to 7:16 PM! At the same time, Sentinel clears Naveen Kumar’s airport cab and Dr. Sanjay Kulkarni’s parked clinic car.',
+      'The distance between 27th Main (7:02 PM) and East Link Flyover (7:18 PM) is just 1.1 km—normally a 4-minute drive. The criminal hid for 12 minutes in the Indira Canal culvert so he could claim the two camera sightings were different cars. Chakravyuh traps him by showing that Burner Phone DEV-004 also paused stationary at that exact canal culvert from 7:04 PM to 7:16 PM! At the same time, Chakravyuh clears Naveen Kumar’s airport cab and Dr. Sanjay Kulkarni’s parked clinic car.',
     presenterScriptHi:
-      '27वें मेन (7:02 PM) से ईस्ट लिंक फ्लाईओवर (7:18 PM) की दूरी सिर्फ 1.1 किमी है—जो महज 4 मिनट का रास्ता है। अपराधी 12 मिनट तक इंदिरा नहर की पुलिया के पास छिपा रहा ताकि वह कह सके कि दोनों कैमरों में दिखी गाड़ियां अलग-अलग हैं। सेंटिनल ने तीन टावरों के सिग्नल से साबित कर दिया कि फर्जी फ़ोन (DEV-004) भी शाम 7:04 से 7:16 तक ठीक उसी नहर की पुलिया पर रुका हुआ था! साथ ही कैब ड्राइवर नवीन कुमार और डॉ. संजय कुलकर्णी की गाड़ी को निर्दोष साबित किया।',
+      '27वें मेन (7:02 PM) से ईस्ट लिंक फ्लाईओवर (7:18 PM) की दूरी सिर्फ 1.1 किमी है—जो महज 4 मिनट का रास्ता है। अपराधी 12 मिनट तक इंदिरा नहर की पुलिया के पास छिपा रहा ताकि वह कह सके कि दोनों कैमरों में दिखी गाड़ियां अलग-अलग हैं। चक्रव्यूह ने तीन टावरों के सिग्नल से साबित कर दिया कि फर्जी फ़ोन (DEV-004) भी शाम 7:04 से 7:16 तक ठीक उसी नहर की पुलिया पर रुका हुआ था! साथ ही कैब ड्राइवर नवीन कुमार और डॉ. संजय कुलकर्णी की गाड़ी को निर्दोष साबित किया।',
     voiceScript: [
       'Stage 6, Solving the Sixteen Minute Hidden Stop and Protecting Innocent Drivers.',
       'Normally it takes only four minutes to drive from 27th Main to the flyover, but the white S U V took sixteen minutes.',
       'The criminal pulled into a dark canal lane for twelve minutes so he could argue in court that the two camera sightings were two different cars.',
-      'Project Sentinel caught this trick by triangulating three cell towers, proving that the secret burner phone also stopped dead inside that exact canal lane from 7:04 PM to 7:16 PM.',
-      'At the same time, Sentinel protects innocent citizens by proving that Naveen Kumar’s white airport cab turned south, and Doctor Sanjay Kulkarni’s grey car stayed parked at his clinic.'
+      'Project Chakravyuh caught this trick by triangulating three cell towers, proving that the secret burner phone also stopped dead inside that exact canal lane from 7:04 PM to 7:16 PM.',
+      'At the same time, Chakravyuh protects innocent citizens by proving that Naveen Kumar’s white airport cab turned south, and Doctor Sanjay Kulkarni’s grey car stayed parked at his clinic.'
     ],
     voiceScriptHi: [
       'चरण छह: सोलह मिनट के गुप्त ठहराव का राज़ और निर्दोष लोगों की सुरक्षा।',
       'सत्ताईसवें मेन से फ्लाईओवर तक जाने में सामान्य तौर पर सिर्फ चार मिनट लगते हैं, लेकिन इस सफेद एसयूवी को सोलह मिनट लगे।',
       'अपराधी बारह मिनट के लिए नहर की सुनसान गली में रुक गया था ताकि वह कोर्ट में कह सके कि दोनों कैमरों में दिखी गाड़ियां अलग-अलग हैं।',
-      'प्रोजेक्ट सेंटिनल ने तीन मोबाइल टावरों की मदद से साबित कर दिया कि अपराधी का फर्जी फ़ोन भी सात बजकर चार मिनट से सात बजकर सोलह मिनट तक ठीक उसी नहर की पुलिया पर रुका हुआ था।',
+      'प्रोजेक्ट चक्रव्यूह ने तीन मोबाइल टावरों की मदद से साबित कर दिया कि अपराधी का फर्जी फ़ोन भी सात बजकर चार मिनट से सात बजकर सोलह मिनट तक ठीक उसी नहर की पुलिया पर रुका हुआ था।',
       'साथ ही सिस्टम ने कैब ड्राइवर नवीन कुमार और डॉक्टर संजय कुलकर्णी की खड़ी गाड़ी को निर्दोष साबित करके आम नागरिकों को परेशान होने से बचाया।'
     ],
     voiceScriptHinglish: [
       'Charan Chhah: Solah minute ke gupt thehraav ka raaz aur nirdosh logon ki suraksha.',
       '27th Main se flyover tak jaane mein aam taur par sirf chaar minute lagte hain, lekin is safed SUV ko solah minute lage.',
       'Apraadhi baarah minute ke liye nahar ki sunsaan gali mein ruk gaya tha taaki woh keh sake ki dono cameron mein dikhi gaadiyan alag alag hain.',
-      'Project Sentinel ne teen mobile toweron ki madad se saabit kar diya ki apraadhi ka farzi phone bhi theek usi nahar ki puliya par baarah minute tak ruka hua tha.',
+      'Project Chakravyuh ne teen mobile toweron ki madad se saabit kar diya ki apraadhi ka farzi phone bhi theek usi nahar ki puliya par baarah minute tak ruka hua tha.',
       'Saath hi system ne cab driver Naveen Kumar aur Doctor Sanjay Kulkarni ki gaadi ko nirdosh saabit kiya.'
     ],
     criminalMoveEn:
@@ -3111,7 +3111,7 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     sentinelTrapEn:
       '3-Tower Signal Triangulation proves Burner Phone DEV-004 paused stationary at the exact Indira Canal Culvert from 7:04 to 7:16 PM!',
     sentinelTrapHi:
-      'सेंटिनल का जाल: 3 टावरों के ट्रायंगुलेशन ने पकड़ लिया कि फर्जी फ़ोन (DEV-004) भी शाम 7:04 से 7:16 तक ठीक उसी इंदिरा नहर की पुलिया पर रुका था!',
+      'चक्रव्यूह का जाल: 3 टावरों के ट्रायंगुलेशन ने पकड़ लिया कि फर्जी फ़ोन (DEV-004) भी शाम 7:04 से 7:16 तक ठीक उसी इंदिरा नहर की पुलिया पर रुका था!',
     systemBanner: '16-MIN CANAL STOP PINPOINTED — INNOCENT CAB & CLINIC CAR CLEARED',
     systemBannerHi: '16 मिनट के नहर स्टॉप की सटीक पहचान — निर्दोष कैब और क्लिनिक कार को क्लीन चिट',
     highlights: [
@@ -3135,28 +3135,28 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     targetModule: 'ai-engine',
     durationSeconds: 50,
     narration:
-      'Project Sentinel’s AI never declares anyone guilty on its own. It shows every clue, every limitation, and every innocent possibility for officers to verify.',
+      'Project Chakravyuh’s AI never declares anyone guilty on its own. It shows every clue, every limitation, and every innocent possibility for officers to verify.',
     narrationHi:
-      'प्रोजेक्ट सेंटिनल का एआई खुद किसी को दोषी घोषित नहीं करता। यह हर सबूत, उसकी सीमा और निर्दोष होने की संभावना को अधिकारी के सामने रखता है।',
+      'प्रोजेक्ट चक्रव्यूह का एआई खुद किसी को दोषी घोषित नहीं करता। यह हर सबूत, उसकी सीमा और निर्दोष होने की संभावना को अधिकारी के सामने रखता है।',
     presenterScript:
       'Here in the AI Investigation Engine, all 6 Sovereign Traps are presented clearly for Inspector Vikram Rao and Senior Officer ACP Meera Nair. Notice that there is no "guilt percentage" or automatic arrest trigger. Every lead shows supporting evidence, contradictory evidence, innocent explanations, and the exact field verification step required.',
     presenterScriptHi:
-      'एआई इन्वेस्टिगेशन इंजन में इंस्पेक्टर विक्रम राव और वरिष्ठ अधिकारी एसीपी मीरा नायर के सामने सभी 6 मुख्य सुराग और "सेंटिनल ट्रैप" स्पष्ट रूप से रखे जाते हैं। यहाँ कोई मशीनी "दोषी प्रतिशत" नहीं है—हर सुराग के साथ पक्ष के सबूत, विपक्ष के सबूत और अगली जमीनी जांच के कदम दिए गए हैं।',
+      'एआई इन्वेस्टिगेशन इंजन में इंस्पेक्टर विक्रम राव और वरिष्ठ अधिकारी एसीपी मीरा नायर के सामने सभी 6 मुख्य सुराग और "चक्रव्यूह ट्रैप" स्पष्ट रूप से रखे जाते हैं। यहाँ कोई मशीनी "दोषी प्रतिशत" नहीं है—हर सुराग के साथ पक्ष के सबूत, विपक्ष के सबूत और अगली जमीनी जांच के कदम दिए गए हैं।',
     voiceScript: [
       'Stage 7, Explainable A I Leads and Human Officer Control.',
-      'Project Sentinel brings all six counter traps together into clear investigative leads for Inspector Vikram Rao and A C P Meera Nair.',
+      'Project Chakravyuh brings all six counter traps together into clear investigative leads for Inspector Vikram Rao and A C P Meera Nair.',
       'Very importantly, this system never labels anyone guilty automatically.',
       'For every single lead, it shows the supporting evidence, any contradictory evidence, possible innocent explanations, and what the police officer should verify next on the ground.'
     ],
     voiceScriptHi: [
       'चरण सात: पारदर्शी एआई सुराग और पुलिस अधिकारी का नियंत्रण।',
-      'प्रोजेक्ट सेंटिनल अब सभी छह जालों और सबूतों को जोड़कर इंस्पेक्टर विक्रम राव और एसीपी मीरा नायर के सामने छह स्पष्ट सुराग रखता है।',
+      'प्रोजेक्ट चक्रव्यूह अब सभी छह जालों और सबूतों को जोड़कर इंस्पेक्टर विक्रम राव और एसीपी मीरा नायर के सामने छह स्पष्ट सुराग रखता है।',
       'सबसे खास बात यह है कि यह कंप्यूटर सिस्टम कभी खुद किसी को अपराधी घोषित नहीं करता।',
       'हर सुराग के साथ यह समर्थन करने वाले सबूत, विपरीत तथ्य और अगली जमीनी जांच के कदम दिखाता है ताकि अंतिम फैसला हमेशा पुलिस अधिकारी का ही रहे।'
     ],
     voiceScriptHinglish: [
       'Charan Saat: Paardarshi A I Suraag aur Police Adhikari ka Niyantran.',
-      'Project Sentinel ab sabhi chhah jaalon aur sabooton ko jodkar Inspector Vikram Rao aur A C P Meera Nair ke saamne chhah spasht suraag rakhta hai.',
+      'Project Chakravyuh ab sabhi chhah jaalon aur sabooton ko jodkar Inspector Vikram Rao aur A C P Meera Nair ke saamne chhah spasht suraag rakhta hai.',
       'Sabse khaas baat yeh hai ki yeh computer system kabhi khud kisi ko apraadhi ghoshit nahi karta.',
       'Har suraag ke saath yeh paksh ke saboot, vipreet tathya aur agli zameeni jaanch ke kadam dikhaata hai taaki antim faisla hamesha police adhikari ka hi rahe.'
     ],
@@ -3167,7 +3167,7 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     sentinelTrapEn:
       'Deterministic Correlation Engine fuses all 8 layers in seconds into 6 explainable, court-auditable leads with strict human-in-the-loop sign-off.',
     sentinelTrapHi:
-      'सेंटिनल का जाल: कोरिलेशन इंजन सेकंडों में सभी 8 सरकारी परतों को जोड़कर 6 पारदर्शी सुराग तैयार करता है, जिन पर अधिकारी अपनी मुहर लगाते हैं।',
+      'चक्रव्यूह का जाल: कोरिलेशन इंजन सेकंडों में सभी 8 सरकारी परतों को जोड़कर 6 पारदर्शी सुराग तैयार करता है, जिन पर अधिकारी अपनी मुहर लगाते हैं।',
     systemBanner: '6 Sovereign-Grid Leads Ready — Human Officer Review & Sign-Off Active',
     systemBannerHi: '6 सरकारी-ग्रिड सुराग तैयार — पुलिस अधिकारी की समीक्षा और मंजूरी सक्रिय',
     highlights: [
@@ -3176,7 +3176,7 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
       'Officers can approve, add notes, or reject any lead with an audit trail',
     ],
     highlightsHi: [
-      'सभी 6 सेंटिनल ट्रैप और सबूतों का सरल भाषा में पूरा विवरण',
+      'सभी 6 चक्रव्यूह ट्रैप और सबूतों का सरल भाषा में पूरा विवरण',
       'कोई स्वचालित दोषी स्कोरिंग नहीं—नागरिक अधिकारों और कानूनी मानकों की पूरी सुरक्षा',
       'अधिकारी हर सुराग को मंजूर, नोट या अस्वीकार कर सकते हैं (पूरे ऑडिट लॉग के साथ)',
     ],
@@ -3195,24 +3195,24 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     narrationHi:
       'शाम 6:30 बजे से लेकर हर मिनट का घटनाक्रम एक साफ रिपोर्ट में तैयार है, जिसे कोई भी वरिष्ठ अधिकारी या न्यायाधीश तुरंत सत्यापित कर सकता है।',
     presenterScript:
-      'Finally, Project Sentinel compiles the entire Aarav Sharma investigation—from the 6:30 PM library exit and 6:48 PM Faraday bag drop, to the BMTC bus dashcam, wheel sensor match, BESCOM smart meter check, and 4-station link—into a 15-section traceable report ready for instant PDF export.',
+      'Finally, Project Chakravyuh compiles the entire Aarav Sharma investigation—from the 6:30 PM library exit and 6:48 PM Faraday bag drop, to the BMTC bus dashcam, wheel sensor match, BESCOM smart meter check, and 4-station link—into a 15-section traceable report ready for instant PDF export.',
     presenterScriptHi:
-      'अंत में, प्रोजेक्ट सेंटिनल आरव शर्मा केस की पूरी कहानी—शाम 6:30 बजे लाइब्रेरी से निकलने और 6:48 के सिग्नल-ब्लॉकिंग बैग से लेकर बस डैशकैम, टायर सेंसर, स्मार्ट बिजली मीटर और चारों थानों के लिंक तक—को 15-भागों की एक कोर्ट-रेडी रिपोर्ट में बदल देता है जिसे तुरंत PDF में डाउनलोड किया जा सकता है।',
+      'अंत में, प्रोजेक्ट चक्रव्यूह आरव शर्मा केस की पूरी कहानी—शाम 6:30 बजे लाइब्रेरी से निकलने और 6:48 के सिग्नल-ब्लॉकिंग बैग से लेकर बस डैशकैम, टायर सेंसर, स्मार्ट बिजली मीटर और चारों थानों के लिंक तक—को 15-भागों की एक कोर्ट-रेडी रिपोर्ट में बदल देता है जिसे तुरंत PDF में डाउनलोड किया जा सकता है।',
     voiceScript: [
       'Stage 8, Unified Timeline and Court Ready Report.',
-      'In the final step, Project Sentinel puts the entire story together from 6:30 PM to 10:15 PM in a clear chronological timeline.',
+      'In the final step, Project Chakravyuh puts the entire story together from 6:30 PM to 10:15 PM in a clear chronological timeline.',
       'Confirmed facts, camera observations, cleared innocent citizens, and the six sovereign traps are neatly organized into a fifteen section report.',
       'With one click, Inspector Vikram Rao and A C P Meera Nair can export or print the complete court ready P D F dossier.'
     ],
     voiceScriptHi: [
       'चरण आठ: संपूर्ण टाइमलाइन और कोर्ट-रेडी जांच रिपोर्ट।',
-      'अंतिम चरण में प्रोजेक्ट सेंटिनल शाम साढ़े छह बजे से रात सवा दस बजे तक की पूरी कहानी को समय के अनुसार एक साफ टाइमलाइन में पिरो देता है।',
+      'अंतिम चरण में प्रोजेक्ट चक्रव्यूह शाम साढ़े छह बजे से रात सवा दस बजे तक की पूरी कहानी को समय के अनुसार एक साफ टाइमलाइन में पिरो देता है।',
       'पक्के तथ्य, कैमरों के फुटेज, निर्दोष साबित हुए नागरिक और पकड़ में आए सभी छह जाल पंद्रह भागों की एक व्यवस्थित रिपोर्ट में तैयार हो जाते हैं।',
       'एक क्लिक से इंस्पेक्टर विक्रम राव और एसीपी मीरा नायर इस पूरी पीडीएफ रिपोर्ट को डाउनलोड या प्रिंट कर सकते हैं।'
     ],
     voiceScriptHinglish: [
       'Charan Aath: Sampoorna Timeline aur Court Ready Jaanch Report.',
-      'Antim charan mein Project Sentinel shaam saadhe chhah baje se raat sawa das baje tak ki poori kahaani ko ek saaf timeline mein piro deta hai.',
+      'Antim charan mein Project Chakravyuh shaam saadhe chhah baje se raat sawa das baje tak ki poori kahaani ko ek saaf timeline mein piro deta hai.',
       'Pakke tathya, cameron ke footage, nirdosh saabit hue naagrik aur pakad mein aaye sabhi chhah jaal pandrah bhaagon ki ek report mein taiyaar ho jaate hain.',
       'Ek click se Inspector Vikram Rao aur A C P Meera Nair is poori P D F report ko download ya print kar sakte hain.'
     ],
@@ -3221,9 +3221,9 @@ export const GUIDED_STAGES: GuidedStageDefinition[] = [
     criminalMoveHi:
       'अपराधी की चाल: सोचा था कि पुलिस को कड़ियां जोड़ने में कई दिन लग जाएंगे और तब तक सीसीटीवी फुटेज मिट जाएंगे।',
     sentinelTrapEn:
-      'Within 60 minutes of the 9:15 PM complaint, Sentinel preserves all cameras, links all 4 stations, and generates a court-traceable SHA-256 dossier.',
+      'Within 60 minutes of the 9:15 PM complaint, Chakravyuh preserves all cameras, links all 4 stations, and generates a court-traceable SHA-256 dossier.',
     sentinelTrapHi:
-      'सेंटिनल का जाल: रात 9:15 पर शिकायत मिलने के महज 60 मिनट के भीतर सभी कैमरे सुरक्षित कर लिए गए, चारों थाने जुड़ गए और डिजिटल-सील युक्त रिपोर्ट तैयार हो गई!',
+      'चक्रव्यूह का जाल: रात 9:15 पर शिकायत मिलने के महज 60 मिनट के भीतर सभी कैमरे सुरक्षित कर लिए गए, चारों थाने जुड़ गए और डिजिटल-सील युक्त रिपोर्ट तैयार हो गई!',
     systemBanner: 'Court-Ready 15-Section Dossier Complete — English & Hindi Walkthrough Verified',
     systemBannerHi: '15-भागों की कोर्ट-रेडी रिपोर्ट तैयार — हिंदी और अंग्रेजी विवरण उपलब्ध',
     highlights: [
