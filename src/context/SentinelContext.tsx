@@ -35,6 +35,8 @@ import {
   GUIDED_STAGES,
 } from '@/data/syntheticData';
 
+export type NarrationLanguage = 'en' | 'hi' | 'bilingual';
+
 interface ToastNotification {
   id: string;
   title: string;
@@ -50,14 +52,16 @@ interface SentinelContextType {
   // Executive Focus / Simplified Mode to prevent clutter
   isExecutiveFocusMode: boolean;
   setIsExecutiveFocusMode: (v: boolean) => void;
-  // Audio Commentary Engine
+  // Audio Commentary Engine & Language (English / Hindi / Bilingual)
+  narrationLanguage: NarrationLanguage;
+  setNarrationLanguage: (lang: NarrationLanguage) => void;
   isAudioEnabled: boolean;
   setIsAudioEnabled: (v: boolean) => void;
   isSpeaking: boolean;
   speechRate: number;
   setSpeechRate: (r: number) => void;
   currentSpokenSentence: string;
-  speakStageCommentary: (stageIdx?: number) => void;
+  speakStageCommentary: (stageIdx?: number, langOverride?: NarrationLanguage) => void;
   stopSpeaking: () => void;
   // Data & Actions
   cases: CaseRecord[];
@@ -110,7 +114,7 @@ interface SentinelContextType {
   guidedStageIndex: number;
   isGuidedPlaying: boolean;
   guidedProgress: number;
-  startGuidedInvestigation: (withPresentationMode?: boolean, withAudio?: boolean) => void;
+  startGuidedInvestigation: (withPresentationMode?: boolean, withAudio?: boolean, lang?: NarrationLanguage) => void;
   pauseGuided: () => void;
   resumeGuided: () => void;
   nextGuidedStage: () => void;
@@ -141,7 +145,8 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [currentRole, setCurrentRoleState] = useState<UserRole>('Investigator');
   const [isExecutiveFocusMode, setIsExecutiveFocusMode] = useState<boolean>(true);
 
-  // Audio Commentary State
+  // Audio Commentary State & Language ('en' | 'hi' | 'bilingual')
+  const [narrationLanguage, setNarrationLanguageState] = useState<NarrationLanguage>('en');
   const [isAudioEnabled, setIsAudioEnabledState] = useState<boolean>(true);
   const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
   const [speechRate, setSpeechRate] = useState<number>(1.0);
@@ -190,20 +195,104 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   const speakStageCommentary = useCallback(
-    (stageIdx?: number) => {
+    (stageIdx?: number, langOverride?: NarrationLanguage) => {
       const idx = stageIdx !== undefined ? stageIdx : guidedStageIndex;
+      const activeLang = langOverride || narrationLanguage;
       const stage = GUIDED_STAGES[idx] || GUIDED_STAGES[0];
-      const sentences =
+
+      const enSentences =
         stage.voiceScript && stage.voiceScript.length > 0
           ? stage.voiceScript
           : [stage.presenterScript, stage.narration];
-
-      setCurrentSpokenSentence(sentences[0] || stage.presenterScript);
+      const hiDevanagariSentences =
+        stage.voiceScriptHi && stage.voiceScriptHi.length > 0
+          ? stage.voiceScriptHi
+          : [stage.presenterScriptHi, stage.narrationHi];
+      const hiPhoneticSentences =
+        stage.voiceScriptHinglish && stage.voiceScriptHinglish.length > 0
+          ? stage.voiceScriptHinglish
+          : hiDevanagariSentences;
 
       if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+        setCurrentSpokenSentence(
+          activeLang === 'hi' ? hiDevanagariSentences[0] : enSentences[0]
+        );
         speechCompletedForStageRef.current = true;
         return;
       }
+
+      const voices = window.speechSynthesis.getVoices();
+      const hindiNativeVoice =
+        voices.find(
+          (v) =>
+            (v.lang.toLowerCase().startsWith('hi') ||
+              v.name.toLowerCase().includes('hindi') ||
+              v.name.toLowerCase().includes('swara') ||
+              v.name.toLowerCase().includes('madhur')) &&
+            v.name.toLowerCase().includes('natural')
+        ) ||
+        voices.find(
+          (v) =>
+            v.lang.toLowerCase().startsWith('hi') ||
+            v.name.toLowerCase().includes('hindi') ||
+            v.name.toLowerCase().includes('swara') ||
+            v.name.toLowerCase().includes('madhur')
+        );
+
+      const englishIndianVoice =
+        voices.find((v) => (v.lang.includes('en-IN') || v.name.includes('India')) && v.name.includes('Natural')) ||
+        voices.find((v) => v.lang.includes('en-IN') || v.name.includes('India')) ||
+        voices.find((v) => v.lang.includes('en-GB') && v.name.includes('Natural')) ||
+        voices.find((v) => v.lang.startsWith('en'));
+
+      // Build queue of { spokenText, displaySubtitle, isHindi }
+      type UtteranceItem = {
+        spokenText: string;
+        displaySubtitle: string;
+        isHindi: boolean;
+      };
+
+      const queue: UtteranceItem[] = [];
+      if (activeLang === 'en') {
+        enSentences.forEach((s) => {
+          queue.push({ spokenText: s, displaySubtitle: s, isHindi: false });
+        });
+      } else if (activeLang === 'hi') {
+        hiDevanagariSentences.forEach((hiSub, i) => {
+          // If native Hindi TTS voice exists, speak Devanagari; otherwise speak natural Hinglish phonetics with Indian English voice while showing Hindi subtitle
+          const spoken = hindiNativeVoice
+            ? hiSub
+            : hiPhoneticSentences[i] || hiSub;
+          queue.push({ spokenText: spoken, displaySubtitle: hiSub, isHindi: true });
+        });
+      } else {
+        // Bilingual: alternate English sentence then Hindi sentence
+        const maxLen = Math.max(enSentences.length, hiDevanagariSentences.length);
+        for (let i = 0; i < maxLen; i++) {
+          if (enSentences[i]) {
+            queue.push({
+              spokenText: enSentences[i],
+              displaySubtitle: `🇬🇧 ${enSentences[i]}`,
+              isHindi: false,
+            });
+          }
+          if (hiDevanagariSentences[i]) {
+            const spokenHi = hindiNativeVoice
+              ? hiDevanagariSentences[i]
+              : hiPhoneticSentences[i] || hiDevanagariSentences[i];
+            queue.push({
+              spokenText: spokenHi,
+              displaySubtitle: `🇮🇳 ${hiDevanagariSentences[i]}`,
+              isHindi: true,
+            });
+          }
+        }
+      }
+
+      setCurrentSpokenSentence(
+        queue[0]?.displaySubtitle ||
+          (activeLang === 'hi' ? stage.presenterScriptHi : stage.presenterScript)
+      );
 
       // Increment session ID so any previous cancelled utterance callbacks are ignored
       speechSessionIdRef.current += 1;
@@ -212,69 +301,67 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
       window.speechSynthesis.cancel();
 
-      const voices = window.speechSynthesis.getVoices();
-      const preferredVoice =
-        voices.find((v) => (v.lang.includes('en-IN') || v.name.includes('India')) && v.name.includes('Natural')) ||
-        voices.find((v) => v.lang.includes('en-IN') || v.name.includes('India')) ||
-        voices.find((v) => v.lang.includes('en-GB') && v.name.includes('Natural')) ||
-        voices.find((v) => v.lang.startsWith('en'));
-
       const speakSentenceAt = (sIndex: number) => {
         if (speechSessionIdRef.current !== currentSessionId) return;
 
-        if (sIndex >= sentences.length) {
+        if (sIndex >= queue.length) {
           isSpeakingRef.current = false;
           speechCompletedForStageRef.current = true;
           setIsSpeaking(false);
           return;
         }
 
-        const text = sentences[sIndex];
-        setCurrentSpokenSentence(text);
+        const item = queue[sIndex];
+        setCurrentSpokenSentence(item.displaySubtitle);
 
-        const utterance = new SpeechSynthesisUtterance(text);
+        const utterance = new SpeechSynthesisUtterance(item.spokenText);
         utterance.rate = speechRate;
         utterance.pitch = 1.0;
-        if (preferredVoice) {
-          utterance.voice = preferredVoice;
+
+        if (item.isHindi && hindiNativeVoice) {
+          utterance.voice = hindiNativeVoice;
+          utterance.lang = 'hi-IN';
+        } else if (englishIndianVoice) {
+          utterance.voice = englishIndianVoice;
+          utterance.lang = englishIndianVoice.lang || 'en-IN';
         }
 
         utterance.onstart = () => {
           if (speechSessionIdRef.current !== currentSessionId) return;
           isSpeakingRef.current = true;
           setIsSpeaking(true);
-          // Sync progress bar smoothly with sentence progress
-          const basePct = Math.round((sIndex / sentences.length) * 85);
+          const basePct = Math.round((sIndex / queue.length) * 85);
           setGuidedProgress((prev) => Math.max(prev, basePct));
         };
 
         utterance.onend = () => {
           if (speechSessionIdRef.current !== currentSessionId) return;
-          const completedPct = Math.round(((sIndex + 1) / sentences.length) * 90);
+          const completedPct = Math.round(((sIndex + 1) / queue.length) * 90);
           setGuidedProgress((prev) => Math.max(prev, completedPct));
           speakSentenceAt(sIndex + 1);
         };
 
         utterance.onerror = () => {
           if (speechSessionIdRef.current !== currentSessionId) return;
-          // Advance to next sentence so a transient browser glitch never hangs the tour
           speakSentenceAt(sIndex + 1);
         };
 
-        // Store in ref so Chromium garbage collection never drops an active utterance
         utteranceRef.current = utterance;
         window.speechSynthesis.speak(utterance);
       };
 
-      // Small 60ms delay after cancel() prevents Chromium from dropping the first sentence
       setTimeout(() => {
         if (speechSessionIdRef.current === currentSessionId) {
           speakSentenceAt(0);
         }
       }, 60);
     },
-    [guidedStageIndex, speechRate]
+    [guidedStageIndex, narrationLanguage, speechRate]
   );
+
+  const setNarrationLanguage = useCallback((lang: NarrationLanguage) => {
+    setNarrationLanguageState(lang);
+  }, []);
 
   // Keep-alive for Chromium speechSynthesis so it never pauses mid-sentence
   useEffect(() => {
@@ -415,8 +502,11 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, [isGuidedActive, isGuidedPlaying, guidedStageIndex, isAudioEnabled]);
 
   const startGuidedInvestigation = useCallback(
-    (withPresentationMode = false, withAudio = true) => {
+    (withPresentationMode = false, withAudio = true, lang?: NarrationLanguage) => {
       speechCompletedForStageRef.current = false;
+      if (lang) {
+        setNarrationLanguageState(lang);
+      }
       setGuidedStageIndex(0);
       setGuidedProgress(0);
       setIsGuidedActive(true);
@@ -427,10 +517,22 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setIsPresentationMode(true);
       }
       setActiveModuleState(GUIDED_STAGES[0].targetModule as ModuleId);
-      logAudit('Guided Presentation', 'GUIDED_DEMO_STARTED', 'CASE-SNT-2026-0042', 'Launched 8-stage Voice-Guided Investigation Walkthrough.');
-      triggerToast('Voice-Guided Investigation Active', 'Continuous audio commentary and Executive Focus Mode enabled.', 'info');
+      const activeLang = lang || narrationLanguage;
+      logAudit(
+        'Guided Presentation',
+        'GUIDED_DEMO_STARTED',
+        'CASE-SNT-2026-0042',
+        `Launched 8-stage Voice-Guided Investigation Walkthrough (${activeLang === 'hi' ? 'Hindi' : activeLang === 'bilingual' ? 'Bilingual' : 'English'}).`
+      );
+      triggerToast(
+        activeLang === 'hi' ? 'हिंदी वॉइस-गाइडेड डेमो शुरू' : 'Voice-Guided Investigation Active',
+        activeLang === 'hi'
+          ? 'सरल हिंदी और इंग्लिश ऑडियो कमेंट्री चालू है।'
+          : 'Continuous audio commentary and Executive Focus Mode enabled.',
+        'info'
+      );
     },
-    [logAudit, triggerToast]
+    [logAudit, narrationLanguage, triggerToast]
   );
 
   const pauseGuided = useCallback(() => {
@@ -944,6 +1046,8 @@ export const SentinelProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setCurrentRole,
         isExecutiveFocusMode,
         setIsExecutiveFocusMode,
+        narrationLanguage,
+        setNarrationLanguage,
         isAudioEnabled,
         setIsAudioEnabled,
         isSpeaking,

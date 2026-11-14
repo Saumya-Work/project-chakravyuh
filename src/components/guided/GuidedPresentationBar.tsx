@@ -20,8 +20,11 @@ import {
   Volume2,
   VolumeX,
   Eye,
+  Languages,
+  ShieldAlert,
+  Crosshair,
 } from 'lucide-react';
-import { useSentinel } from '@/context/SentinelContext';
+import { useSentinel, NarrationLanguage } from '@/context/SentinelContext';
 import { GUIDED_STAGES } from '@/data/syntheticData';
 
 export const GuidedPresentationBar: React.FC = () => {
@@ -40,6 +43,8 @@ export const GuidedPresentationBar: React.FC = () => {
     skipGuidedAnimation,
     stopGuidedInvestigation,
     togglePresentationMode,
+    narrationLanguage,
+    setNarrationLanguage,
     isAudioEnabled,
     setIsAudioEnabled,
     isSpeaking,
@@ -56,6 +61,15 @@ export const GuidedPresentationBar: React.FC = () => {
   if (!isGuidedActive && !isPresentationMode) return null;
 
   const currentStage = GUIDED_STAGES[guidedStageIndex] || GUIDED_STAGES[0];
+  const isHi = narrationLanguage === 'hi';
+  const isBilingual = narrationLanguage === 'bilingual';
+
+  const handleLanguageChange = (lang: NarrationLanguage) => {
+    setNarrationLanguage(lang);
+    if (isAudioEnabled) {
+      speakStageCommentary(guidedStageIndex, lang);
+    }
+  };
 
   const handleFullScreen = () => {
     if (typeof document !== 'undefined') {
@@ -77,23 +91,69 @@ export const GuidedPresentationBar: React.FC = () => {
         className="bg-gradient-to-r from-[#0B1528] via-[#112240] to-[#0B1528] border-b-2 border-sky-500/60 shadow-2xl px-4 py-3 relative z-30"
       >
         <div className="max-w-[1800px] mx-auto flex flex-col gap-3">
-          {/* Top Row: Stage Indicator + Audio Voice Controls + Playback Controls */}
+          {/* Top Row: Stage Indicator + Language Switcher + Audio Voice Controls + Playback Controls */}
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-sky-500/20 border border-sky-400/50 text-sky-300 text-xs font-mono font-bold tracking-wider uppercase">
                 <Radio className="w-3.5 h-3.5 text-sky-400 animate-pulse" />
-                Step {currentStage.stageNumber} of {GUIDED_STAGES.length}
+                {isHi
+                  ? `चरण ${currentStage.stageNumber} / ${GUIDED_STAGES.length}`
+                  : `Step ${currentStage.stageNumber} of ${GUIDED_STAGES.length}`}
               </span>
               <h2 className="text-sm md:text-base font-extrabold text-white tracking-tight">
-                {currentStage.title}
+                {isHi
+                  ? currentStage.titleHi
+                  : isBilingual
+                  ? `${currentStage.title} • ${currentStage.titleHi}`
+                  : currentStage.title}
               </h2>
               <span className="hidden xl:inline-block text-xs text-teal-300 font-medium border-l border-slate-700 pl-3">
-                {currentStage.subtitle}
+                {isHi ? currentStage.subtitleHi : currentStage.subtitle}
               </span>
             </div>
 
-            {/* Playback + Voice Audio Commentary Controls */}
+            {/* Playback + Language + Voice Audio Commentary Controls */}
             <div className="flex flex-wrap items-center gap-1.5 bg-[#090D16]/95 border border-slate-700/90 rounded-xl p-1.5">
+              {/* LANGUAGE SWITCHER: ENGLISH | हिंदी | BILINGUAL */}
+              <div className="flex items-center bg-slate-900 border border-sky-500/40 rounded-lg p-0.5 gap-0.5">
+                <Languages className="w-3.5 h-3.5 text-sky-400 ml-1.5 mr-0.5 shrink-0" />
+                <button
+                  onClick={() => handleLanguageChange('en')}
+                  className={`px-2 py-1 rounded text-[11px] font-bold transition ${
+                    narrationLanguage === 'en'
+                      ? 'bg-sky-500 text-slate-950 shadow'
+                      : 'text-slate-300 hover:text-white'
+                  }`}
+                  title="English Narration & Voice"
+                >
+                  🇬🇧 English
+                </button>
+                <button
+                  onClick={() => handleLanguageChange('hi')}
+                  className={`px-2 py-1 rounded text-[11px] font-bold transition ${
+                    narrationLanguage === 'hi'
+                      ? 'bg-amber-500 text-slate-950 shadow'
+                      : 'text-amber-300 hover:text-white'
+                  }`}
+                  title="सरल हिंदी आवाज़ और विवरण (Simple Hindi Voice & Text)"
+                >
+                  🇮🇳 हिंदी (Hindi)
+                </button>
+                <button
+                  onClick={() => handleLanguageChange('bilingual')}
+                  className={`px-2 py-1 rounded text-[11px] font-bold transition ${
+                    narrationLanguage === 'bilingual'
+                      ? 'bg-teal-500 text-slate-950 shadow'
+                      : 'text-teal-300 hover:text-white'
+                  }`}
+                  title="Speak & Display Both English and Hindi"
+                >
+                  🇮🇳+🇬🇧 Both
+                </button>
+              </div>
+
+              <div className="h-4 w-px bg-slate-700 mx-0.5" />
+
               {/* VOICE COMMENTARY TOGGLE + ANIMATED WAVEFORM */}
               <button
                 onClick={() => setIsAudioEnabled(!isAudioEnabled)}
@@ -107,7 +167,7 @@ export const GuidedPresentationBar: React.FC = () => {
                 {isAudioEnabled ? (
                   <>
                     <Volume2 className="w-4 h-4" />
-                    <span>Voice Audio: ON</span>
+                    <span>{isHi ? 'आवाज़: चालू' : 'Voice: ON'}</span>
                     {isSpeaking && (
                       <span className="flex items-end gap-0.5 h-3 ml-1">
                         <span className="w-0.5 h-3 bg-slate-950 animate-bounce" />
@@ -119,7 +179,7 @@ export const GuidedPresentationBar: React.FC = () => {
                 ) : (
                   <>
                     <VolumeX className="w-4 h-4 text-rose-400" />
-                    <span>Voice Muted</span>
+                    <span>{isHi ? 'आवाज़ बंद' : 'Voice Muted'}</span>
                   </>
                 )}
               </button>
@@ -132,7 +192,7 @@ export const GuidedPresentationBar: React.FC = () => {
                 title="Replay Voice Commentary for This Stage"
                 className="px-2.5 py-1.5 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-sky-300 text-xs font-medium transition"
               >
-                🔊 Replay Voice
+                {isHi ? '🔊 फिर से सुनें' : '🔊 Replay Voice'}
               </button>
 
               {/* Speed Selector */}
@@ -267,11 +327,15 @@ export const GuidedPresentationBar: React.FC = () => {
                   }`}
                 >
                   <div className="flex items-center justify-between text-[10px] font-mono mb-0.5">
-                    <span className="font-bold">STEP {stg.stageNumber}</span>
+                    <span className="font-bold">
+                      {isHi ? `चरण ${stg.stageNumber}` : `STEP ${stg.stageNumber}`}
+                    </span>
                     {isCompleted && <CheckCircle2 className="w-3 h-3 text-emerald-400" />}
                   </div>
                   <div className="text-[11px] font-semibold truncate">
-                    {stg.title.replace(/^STAGE \d+ — /, '')}
+                    {isHi
+                      ? stg.titleHi.replace(/^चरण \d+ — /, '')
+                      : stg.title.replace(/^STAGE \d+ — /, '')}
                   </div>
                   {isCurrent && (
                     <div className="w-full h-1.5 bg-slate-800 rounded-full mt-1.5 overflow-hidden">
@@ -298,13 +362,19 @@ export const GuidedPresentationBar: React.FC = () => {
               >
                 <Volume2 className="w-5 h-5" />
               </div>
-              <div className="space-y-1.5">
+              <div className="space-y-2 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-xs font-mono uppercase tracking-wider text-sky-400 font-bold">
-                    {isSpeaking ? '🔊 LIVE AUDIO COMMENTARY PLAYING' : 'STAGE COMMENTARY & EXPLANATION'}
+                    {isSpeaking
+                      ? isHi
+                        ? '🔊 लाइव ऑडियो कमेंट्री चल रही है'
+                        : '🔊 LIVE AUDIO COMMENTARY PLAYING'
+                      : isHi
+                      ? 'चरण का सरल विवरण (हिंदी / English)'
+                      : 'STAGE COMMENTARY & EXPLANATION'}
                   </span>
                   <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold">
-                    {currentStage.systemBanner}
+                    {isHi ? currentStage.systemBannerHi : currentStage.systemBanner}
                   </span>
                 </div>
 
@@ -315,25 +385,73 @@ export const GuidedPresentationBar: React.FC = () => {
                   </div>
                 )}
 
-                {/* Clear Spoken Story Explanation */}
-                <p className="text-sm md:text-base text-white leading-relaxed font-medium">
-                  {currentStage.presenterScript}
-                </p>
+                {/* Clear Spoken Story Explanation (English, Hindi, or Both) */}
+                {isBilingual ? (
+                  <div className="space-y-1.5">
+                    <p className="text-sm text-white leading-relaxed font-medium">
+                      🇬🇧 {currentStage.presenterScript}
+                    </p>
+                    <p className="text-sm text-amber-200 leading-relaxed font-medium">
+                      🇮🇳 {currentStage.presenterScriptHi}
+                    </p>
+                  </div>
+                ) : (
+                  <p className="text-sm md:text-base text-white leading-relaxed font-medium">
+                    {isHi ? currentStage.presenterScriptHi : currentStage.presenterScript}
+                  </p>
+                )}
 
                 {/* Key Takeaway Quote */}
-                <p className="text-xs md:text-sm text-teal-300 font-semibold italic pt-1">
-                  Key Takeaway: “{currentStage.narration}”
+                <p className="text-xs md:text-sm text-teal-300 font-semibold italic pt-0.5">
+                  {isHi
+                    ? `मुख्य निष्कर्ष: “${currentStage.narrationHi}”`
+                    : `Key Takeaway: “${currentStage.narration}”`}
                 </p>
+
+                {/* SMART CRIMINAL MOVE vs. PROJECT SENTINEL SOVEREIGN TRAP BANNER */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 pt-2">
+                  <div className="p-2.5 rounded-lg bg-rose-950/35 border border-rose-500/40 text-xs space-y-1">
+                    <div className="flex items-center gap-1.5 font-mono font-bold text-rose-300 uppercase text-[11px]">
+                      <ShieldAlert className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                      <span>
+                        {isHi
+                          ? '🕵️ शातिर अपराधी की चाल (Criminal’s Move)'
+                          : '🕵️ Smart Criminal’s Evasion Move'}
+                      </span>
+                    </div>
+                    <p className="text-rose-100/90 leading-snug">
+                      {isHi ? currentStage.criminalMoveHi : currentStage.criminalMoveEn}
+                    </p>
+                  </div>
+
+                  <div className="p-2.5 rounded-lg bg-emerald-950/35 border border-emerald-500/40 text-xs space-y-1">
+                    <div className="flex items-center gap-1.5 font-mono font-bold text-emerald-300 uppercase text-[11px]">
+                      <Crosshair className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span>
+                        {isHi
+                          ? '🪤 प्रोजेक्ट सेंटिनल का सरकारी जाल (Sovereign Trap)'
+                          : '🪤 Project Sentinel’s Sovereign Trap'}
+                      </span>
+                    </div>
+                    <p className="text-emerald-100/90 leading-snug">
+                      {isHi ? currentStage.sentinelTrapHi : currentStage.sentinelTrapEn}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-slate-800 pt-3 lg:pt-0 lg:pl-4 flex flex-col justify-center">
               <div className="text-[11px] font-mono uppercase tracking-wider text-amber-300 font-bold mb-1.5 flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>What to Notice on This Screen:</span>
+                <span>
+                  {isHi
+                    ? 'इस स्क्रीन पर क्या ध्यान दें (मुख्य बिंदु):'
+                    : 'What to Notice on This Screen:'}
+                </span>
               </div>
               <ul className="space-y-1.5">
-                {currentStage.highlights.map((h, i) => (
+                {(isHi ? currentStage.highlightsHi : currentStage.highlights).map((h, i) => (
                   <li key={i} className="text-xs text-slate-200 flex items-start gap-1.5 leading-snug">
                     <ChevronRight className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
                     <span>{h}</span>
@@ -345,24 +463,24 @@ export const GuidedPresentationBar: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* Complete 5-7 Minute Government Presentation Script Drawer */}
+      {/* Complete Bilingual Government Presentation Script Drawer */}
       <AnimatePresence>
         {showScriptDrawer && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="bg-[#0B1220] border-b border-sky-500/40 px-6 py-4 shadow-2xl relative z-30 max-h-[65vh] overflow-y-auto"
+            className="bg-[#0B1220] border-b border-sky-500/40 px-6 py-4 shadow-2xl relative z-30 max-h-[70vh] overflow-y-auto"
           >
             <div className="max-w-6xl mx-auto">
               <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
                 <div>
                   <h3 className="text-base font-bold text-white flex items-center gap-2">
                     <BookOpen className="w-4 h-4 text-sky-400" />
-                    GOVERNMENT PARTNERSHIP DEMONSTRATION SCRIPT (5–7 MINUTE VOICEOVER)
+                    BILINGUAL DEMONSTRATION SCRIPT — ENGLISH & सरल हिंदी (CRIMINAL MOVE vs. SOVEREIGN TRAP)
                   </h3>
                   <p className="text-xs text-slate-400 mt-0.5">
-                    Click any stage below to jump directly to that screen and play its voice commentary aloud.
+                    Click any stage below to jump directly to that screen and play its voice commentary aloud in English or Hindi.
                   </p>
                 </div>
                 <button
@@ -378,21 +496,31 @@ export const GuidedPresentationBar: React.FC = () => {
                   <div
                     key={stg.id}
                     onClick={() => goToGuidedStage(idx)}
-                    className={`p-3 rounded-lg border cursor-pointer transition ${
+                    className={`p-3 rounded-lg border cursor-pointer transition space-y-1.5 ${
                       idx === guidedStageIndex
                         ? 'bg-sky-950/50 border-sky-400'
                         : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
                     }`}
                   >
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold text-sky-300">{stg.title}</span>
-                      <span className="text-[11px] font-mono text-emerald-400">🔊 Click to Speak</span>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-sky-300">
+                        {isHi ? stg.titleHi : stg.title}
+                      </span>
+                      <span className="text-[11px] font-mono text-emerald-400">
+                        🔊 {isHi ? 'सुनने के लिए क्लिक करें' : 'Click to Speak'}
+                      </span>
                     </div>
-                    <p className="text-xs text-slate-300 leading-relaxed mb-2">
-                      {stg.presenterScript}
+                    <p className="text-xs text-slate-200 leading-relaxed">
+                      🇬🇧 {stg.presenterScript}
                     </p>
-                    <div className="text-[11px] text-teal-300 italic border-l-2 border-teal-500 pl-2">
-                      Narration: “{stg.narration}”
+                    <p className="text-xs text-amber-200/90 leading-relaxed">
+                      🇮🇳 {stg.presenterScriptHi}
+                    </p>
+                    <div className="text-[11px] text-rose-300 border-l-2 border-rose-500 pl-2">
+                      <b>🕵️ Criminal:</b> {isHi ? stg.criminalMoveHi : stg.criminalMoveEn}
+                    </div>
+                    <div className="text-[11px] text-emerald-300 border-l-2 border-emerald-500 pl-2">
+                      <b>🪤 Sentinel Trap:</b> {isHi ? stg.sentinelTrapHi : stg.sentinelTrapEn}
                     </div>
                   </div>
                 ))}

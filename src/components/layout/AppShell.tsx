@@ -31,6 +31,7 @@ import {
   Volume2,
   VolumeX,
   Eye,
+  Languages,
 } from 'lucide-react';
 import { useSentinel } from '@/context/SentinelContext';
 import { ModuleId, UserRole } from '@/types/sentinel';
@@ -39,138 +40,220 @@ import { GuidedPresentationBar } from '@/components/guided/GuidedPresentationBar
 interface NavItem {
   id: ModuleId;
   label: string;
+  labelHi: string;
   shortLabel: string;
   icon: React.ComponentType<{ className?: string }>;
   badge?: string;
   plainExplanation: string;
+  plainExplanationHi: string;
   voiceCommentary: string;
+  voiceCommentaryHi: string;
+  voiceCommentaryHinglish: string;
 }
 
 const NAV_ITEMS: NavItem[] = [
   {
     id: 'command-centre',
     label: 'Command Centre',
+    labelHi: 'कमांड सेंटर (मुख्य डैशबोर्ड)',
     shortLabel: 'Command',
     icon: LayoutDashboard,
-    plainExplanation: 'Executive overview of the Aarav Sharma missing person investigation and one-click Voice-Guided Demo launch.',
+    plainExplanation: 'Executive overview of the Aarav Sharma missing person investigation, 8 Smart Criminal vs. Sovereign Trap scenarios, and one-click Voice-Guided Demo in English & Hindi.',
+    plainExplanationHi: 'आरव शर्मा अपहरण जांच का मुख्य डैशबोर्ड — यहाँ 8 शातिर अपराधी चालें बनाम प्रोजेक्ट सेंटिनल के सरकारी जाल और एक-क्लिक हिंदी/इंग्लिश वॉइस डेमो उपलब्ध है।',
     voiceCommentary:
-      'Welcome to Project Sentinel. Software architect Aarav Sharma goes missing at 6:30 PM, and his sister Ananya Sharma files a complaint at 9:15 PM. Click Start Voice Guided Demo to watch and listen as the platform connects mobile, CCTV, and vehicle evidence into a traceable report.',
+      'Welcome to Project Sentinel. Software architect Aarav Sharma goes missing at 6:30 PM, and his sister Ananya Sharma files a complaint at 9:15 PM. Click Start Voice Guided Demo to watch and listen in English or Hindi as the platform connects mobile, CCTV, electricity meter, bus dashcam, and FASTag evidence.',
+    voiceCommentaryHi:
+      'प्रोजेक्ट सेंटिनल में आपका स्वागत है। शाम साढ़े छह बजे आरव शर्मा लापता होते हैं और रात सवा नौ बजे उनकी बहन अनन्या शर्मा शिकायत दर्ज कराती हैं। वॉइस डेमो बटन दबाकर हिंदी या इंग्लिश में सुनिए कि कैसे सेंटिनल अपराधी की हर चालाकी को सरकारी ग्रिड से पकड़ता है।',
+    voiceCommentaryHinglish:
+      'Project Sentinel mein aapka swagat hai. Shaam saadhe chhah baje Aarav Sharma laapata hote hain aur raat sawa nau baje unki behen Ananya Sharma shikayat darj karati hain. Voice Demo button dabakar Hindi ya English mein suniye ki kaise Sentinel apradhi ki har chaalaki ko sarkari grid se pakadta hai.',
   },
   {
     id: 'cases',
     label: '1. Incident Registration',
+    labelHi: '1. शिकायत पंजीकरण (FIR)',
     shortLabel: 'Cases',
     icon: FolderKanban,
     badge: 'Stage 1',
-    plainExplanation: 'Stage 1: Registers the missing person complaint for Aarav Sharma (last seen 18:30 at Kaveri Enclave) and anchors it on the map.',
+    plainExplanation: 'Stage 1: Registers the complaint for Aarav Sharma and uses ICJS/CCTNS national grid to link 4 cross-station rehearsal cases.',
+    plainExplanationHi: 'चरण 1: आरव शर्मा की गुमशुदगी दर्ज करता है और राष्ट्रीय पुलिस ग्रिड (CCTNS) से 4 अलग-अलग थानों के केसों को आपस में जोड़ता है।',
     voiceCommentary:
-      'Stage 1, Incident Registration. Here Inspector Vikram Rao registers the missing person case for Aarav Sharma, who was last seen leaving the Kaveri Enclave library at 6:30 PM. The platform creates a structured workspace and plots the incident location.',
+      'Stage 1, Incident Registration. Here Inspector Vikram Rao registers the missing person case for Aarav Sharma and links four cross-jurisdiction police stations through the national crime grid.',
+    voiceCommentaryHi:
+      'चरण एक, शिकायत पंजीकरण। यहाँ इंस्पेक्टर विक्रम राव आरव शर्मा का केस दर्ज करते हैं और नेशनल पुलिस ग्रिड के ज़रिए चार अलग-अलग थानों के सबूतों को एक साथ जोड़ते हैं।',
+    voiceCommentaryHinglish:
+      'Charan ek, Shikayat Panjikaran. Yahan Inspector Vikram Rao Aarav Sharma ka case darj karte hain aur National Police Grid ke zariye chaar alag alag thaano ke sabooton ko ek saath jodte hain.',
   },
   {
     id: 'workspace',
     label: '2. Evidence Ingestion',
+    labelHi: '2. सभी सरकारी सबूतों का एकीकरण',
     shortLabel: 'Ingestion',
     icon: Layers,
     badge: 'Stage 2',
-    plainExplanation: 'Stage 2: Brings together 7 different evidence streams (telecom, CCTV, vehicles, witnesses Suresh Babu & Aditi Rao) into one timeline.',
+    plainExplanation: 'Stage 2: Connects 7 sovereign data streams (telecom, CCTV, smart electricity meter, ATM/POS recharge logs, witnesses) with SHA-256 locks.',
+    plainExplanationHi: 'चरण 2: 7 सरकारी स्रोतों (मोबाइल टावर, CCTV, स्मार्ट बिजली मीटर, ATM कैश रिचार्ज, गवाह) को SHA-256 डिजिटल लॉक के साथ जोड़ता है।',
     voiceCommentary:
-      'Stage 2, Multi Source Evidence Ingestion. Authorized telecom records, CCTV videos, vehicle logs, and witness statements from Suresh Babu and Aditi Rao flow into the central engine, where Forensic Lead Doctor Priya Krishnan verifies their cryptographic hashes.',
+      'Stage 2, Multi Source Evidence Ingestion. Authorized telecom records, smart electricity meter logs, ATM cash recharge records, and witness statements flow into the central engine with SHA-256 cryptographic hashes.',
+    voiceCommentaryHi:
+      'चरण दो, सबूतों का एकीकरण। यहाँ मोबाइल टावर, स्मार्ट बिजली मीटर, एटीएम कैश रिचार्ज और गवाहों के बयान डिजिटल लॉक के साथ एक ही टाइमलाइन पर जुड़ते हैं।',
+    voiceCommentaryHinglish:
+      'Charan do, Sabooton ka Ekikaran. Yahan mobile tower, smart bijli meter, ATM cash recharge aur gawahon ke bayaan digital lock ke saath ek hi timeline par judte hain.',
   },
   {
     id: 'mobile-intelligence',
     label: '3. Mobile Intelligence',
+    labelHi: '3. मोबाइल और स्मार्ट मीटर जांच',
     shortLabel: 'Mobile',
     icon: Smartphone,
     badge: 'Stage 3',
-    plainExplanation: 'Stage 3: Compares 30 citizen mobile phones in approximate cell sectors—flagging an unattributed prepaid phone while clearing resident Rohan Verma.',
+    plainExplanation: 'Stage 3: Exposes the Faraday bag drop at 18:48, busts Karan Malhotra’s fake home phone alibi via smart meter logs, and clears innocent commuter Rohan Verma.',
+    plainExplanationHi: 'चरण 3: 6:48 पर फ़ैराडे बैग साज़िश पकड़ता है, स्मार्ट बिजली मीटर से करण मल्होत्रा का झूठा घर वाला बहाना बेनकाब करता है और निर्दोष रोहन वर्मा को क्लीन चिट देता है।',
     voiceCommentary:
-      'Stage 3, Mobile Intelligence. Aarav Sharma’s iPhone loses signal at 6:48 PM. An unattributed prepaid phone appears in four overlapping cell sectors moving east, while resident Rohan Verma’s phone is cleared because his apartment gate log proves he went west.',
+      'Stage 3, Mobile Intelligence. Aarav Sharma’s iPhone is placed in a signal-blocking Faraday bag at 6:48 PM. Suspect Karan Malhotra leaves his personal phone at home as a fake alibi, but his smart electricity meter flatlines at 138 watts, proving his apartment was empty.',
+    voiceCommentaryHi:
+      'चरण तीन, मोबाइल और स्मार्ट मीटर जांच। अपराधी ने अपना असली फ़ोन घर पर छोड़ दिया ताकि लगे वह घर पर सो रहा है, लेकिन स्मार्ट बिजली मीटर ने दिखा दिया कि घर खाली था। वहीं निर्दोष नागरिक रोहन वर्मा को तुरंत क्लीन चिट मिल जाती है।',
+    voiceCommentaryHinglish:
+      'Charan teen, Mobile aur Smart Meter Jaanch. Apradhi ne apna asli phone ghar par chhod diya taaki lage woh ghar par so raha hai, lekin smart bijli meter ne dikha diya ki ghar khaali tha. Wahin nirdosh naagrik Rohan Verma ko turant clean chit mil jaati hai.',
   },
   {
     id: 'location-intelligence',
     label: '4. Map & CCTV Discovery',
+    labelHi: '4. नक्शा, CCTV और बस डैशकैम',
     shortLabel: 'Map / GIS',
     icon: MapPin,
     badge: 'Stage 4',
-    plainExplanation: 'Stage 4: Interactive map of 20 nearby CCTV cameras, showing coverage cones, the Pickup Lay-by camera outage, and timeline playback.',
+    plainExplanation: 'Stage 4: Discovers 20 corridor cameras and defeats the CAM-008 power-cut blind spot by pulling a passing BMTC Route-335E Bus ADAS dashcam.',
+    plainExplanationHi: 'चरण 4: 20 CCTV कैमरे खोजता है और जब अपराधी बंद कैमरे (CAM-008) का फायदा उठाता है, तो वहाँ से गुज़री सरकारी बस (BMTC 335E) के डैशकैम से उसे पकड़ लेता है।',
     voiceCommentary:
-      'Stage 4, C C T V Camera Discovery. Instead of searching streets manually, Inspector Vikram Rao uses the map to discover twenty cameras along the eastbound corridor, identifies a scheduled battery outage at the pickup lay-by camera, and sends preservation requests.',
+      'Stage 4, Map and C C T V Discovery. The suspect chose the pickup lay-by because camera 008 was offline for battery maintenance. Project Sentinel checks city transit GPS and pulls the front dashcam of a BMTC electric bus that drove right past the lay-by at 6:49 PM.',
+    voiceCommentaryHi:
+      'चरण चार, नक्शा और बस डैशकैम जाल। अपराधी ने ऐसी जगह चुनी जहाँ सड़क का कैमरा बैटरी रिपेयर के कारण बंद था। लेकिन सेंटिनल ने ठीक उसी वक्त वहाँ से गुज़री सरकारी बस के डैशकैम से सफ़ेद एसयूवी का वीडियो निकाल लिया।',
+    voiceCommentaryHinglish:
+      'Charan chaar, Naksha aur Bus Dashcam Jaal. Apradhi ne aisi jagah chuni jahan sadak ka camera battery repair ke kaaran band tha. Lekin Sentinel ne theek usi waqt wahan se guzri sarkari bus ke dashcam se safed SUV ka video nikaal liya.',
   },
   {
     id: 'cctv-intelligence',
     label: '5. Video Footage Review',
+    labelHi: '5. वीडियो जांच और FASTag मिलान',
     shortLabel: 'Video Review',
     icon: Cctv,
     badge: 'Stage 5',
-    plainExplanation: 'Stage 5: Inspects received video feeds—logging a white compact SUV at 27th Main Signal (19:02) and East Link Flyover (19:18).',
+    plainExplanation: 'Stage 5: Reviews video feeds and defeats cloned plates & high-beam glare using NHAI FASTag Ghost-Tag exceptions and 433MHz tyre sensor IDs.',
+    plainExplanationHi: 'चरण 5: नकली नंबर प्लेट और तेज़ हेडलाइट की चालाकी को टोल बूथ के बिना-FASTag अलर्ट और टायर प्रेशर सेंसर (TPMS) की रेडियो आईडी से पकड़ता है।',
     voiceCommentary:
-      'Stage 5, C C T V Footage Review. Reviewing the received video containers, the 27th Main Signal camera shows a white compact S U V moving east at 7:02 PM, and the East Link Flyover camera shows a visually similar white S U V on the ramp at 7:18 PM.',
+      'Stage 5, Video Footage Review. The criminal used high-beam glare and a cloned number plate. Project Sentinel catches the SUV using the overhead FASTag reader Ghost-Tag exception and the unchangeable 433 megahertz tyre pressure sensor ID inside its wheels.',
+    voiceCommentaryHi:
+      'चरण पाँच, वीडियो और फास्टैग जांच। अपराधी ने नकली नंबर प्लेट लगाई और फास्टैग उखाड़ दिया। लेकिन ऊपर लगे फास्टैग रीडर और पहियों के अंदर लगे टायर सेंसर की रेडियो आईडी ने साबित कर दिया कि दोनों जगह एक ही गाड़ी थी।',
+    voiceCommentaryHinglish:
+      'Charan paanch, Video aur FASTag Jaanch. Apradhi ne nakli number plate lagayi aur FASTag ukhaad diya. Lekin upar lage FASTag reader aur pahiyon ke andar lage tyre sensor ki radio ID ne saabit kar diya ki dono jagah ek hi gaadi thi.',
   },
   {
     id: 'vehicle-intelligence',
     label: '6. Vehicle Intelligence',
+    labelHi: '6. गाड़ियों का मिलान (16-मिनट गैप)',
     shortLabel: 'Vehicles',
     icon: Car,
     badge: 'Stage 6',
-    plainExplanation: 'Stage 6: Compares 8 corridor vehicles side-by-side without inventing movement across the 16-minute gap, and rules out Naveen Kumar’s cab.',
+    plainExplanation: 'Stage 6: Reconstructs the 16-minute Canal Lane vehicle swap using acoustic mic sensors and Wi-Fi probes, while clearing Naveen Kumar’s airport cab.',
+    plainExplanationHi: 'चरण 6: 16 मिनट के अंधेरे रास्ते के गैप को स्मार्ट-पोल माइक और वाई-फाई सिग्नल से सुलझाता है, और निर्दोष कैब ड्राइवर नवीन कुमार को बाहर करता है।',
     voiceCommentary:
-      'Stage 6, Vehicle Intelligence. We compare the 7:02 PM and 7:18 PM white S U V sightings while highlighting the sixteen minute gap that needs verification. Meanwhile, Naveen Kumar’s airport cab is ruled out because the southern camera proves it turned toward Hosur Road.',
+      'Stage 6, Vehicle Intelligence. Between 7:02 PM and 7:18 PM, the suspect hid in Canal Service Lane for sixteen minutes. Sentinel uses smart-pole acoustic sensors and apartment gate Wi-Fi logs to pinpoint the stop, while clearing Naveen Kumar’s airport taxi.',
+    voiceCommentaryHi:
+      'चरण छह, गाड़ियों का मिलान। अपराधी सोलह मिनट तक बिना कैमरे वाली गली में छुपा रहा। सेंटिनल ने स्मार्ट-पोल के साउंड सेंसर और गेट के वाई-फाई से उस ठिकाने को पकड़ लिया और निर्दोष टैक्सी ड्राइवर नवीन कुमार को क्लीन चिट दी।',
+    voiceCommentaryHinglish:
+      'Charan chhah, Gaadiyon ka Milaan. Apradhi solah minute tak bina camere wali gali mein chhupa raha. Sentinel ne smart pole ke sound sensor aur gate ke Wi-Fi se us thikane ko pakad liya aur nirdosh taxi driver Naveen Kumar ko clean chit di.',
   },
   {
     id: 'ai-engine',
     label: '7. AI Leads Review',
+    labelHi: '7. AI सुराग और मानवीय फैसला',
     shortLabel: 'AI Leads',
     icon: BrainCircuit,
     badge: 'Stage 7',
-    plainExplanation: 'Stage 7: Shortlists 6 explainable leads for Inspector Vikram Rao & ACP Meera Nair with supporting and contradictory evidence. Zero guilt scores.',
+    plainExplanation: 'Stage 7: Presents 6 explainable leads with all 8 Sovereign Traps, supporting evidence, and contradictory evidence. Zero automated guilt scores.',
+    plainExplanationHi: 'चरण 7: इंसानी पुलिस अधिकारी के फैसले के लिए 6 स्पष्ट सुराग (पक्ष और विपक्ष के सबूतों के साथ) दिखाता है। AI कभी खुद किसी को दोषी घोषित नहीं करता।',
     voiceCommentary:
-      'Stage 7, A I Investigation Engine. The A I never assigns a guilt score. Instead, it organizes six leads for Inspector Vikram Rao and A C P Meera Nair, showing supporting evidence alongside contradictory evidence and innocent explanations.',
+      'Stage 7, A I Investigation Engine. The A I never assigns a guilt score. Instead, it presents six transparent leads combining all eight sovereign government traps alongside contradictory evidence for Inspector Vikram Rao and A C P Meera Nair.',
+    voiceCommentaryHi:
+      'चरण सात, एआई सुराग और पुलिस निर्णय। यह सिस्टम कभी खुद किसी को अपराधी घोषित नहीं करता। यह आठों सरकारी जालों के सबूत और बचाव के तथ्य इंस्पेक्टर विक्रम राव और एसीपी मीरा नायर के सामने रखता है।',
+    voiceCommentaryHinglish:
+      'Charan saat, AI Suraag aur Police Nirnay. Yeh system kabhi khud kisi ko apradhi ghoshit nahi karta. Yeh aathon sarkari jaalon ke saboot aur bachaav ke tathya Inspector Vikram Rao aur ACP Meera Nair ke saamne rakhta hai.',
   },
   {
     id: 'reports',
     label: '8. Timeline & PDF Report',
+    labelHi: '8. पूरी टाइमलाइन और कोर्ट PDF रिपोर्ट',
     shortLabel: 'Reports',
     icon: FileText,
     badge: 'Stage 8',
-    plainExplanation: 'Stage 8: Unified chronological timeline and 15-section Investigation Report for the Aarav Sharma case with one-click PDF export.',
+    plainExplanation: 'Stage 8: Unified chronological timeline and 15-section court-ready Investigation Report with one-click PDF export.',
+    plainExplanationHi: 'चरण 8: शाम 6:30 से रात 10:18 तक की पूरी घटना की टाइमलाइन और कोर्ट में पेश करने योग्य 15-भागों की PDF रिपोर्ट।',
     voiceCommentary:
-      'Stage 8, Unified Timeline and Investigation Report. All verified facts, observations, and unverified leads for the Aarav Sharma investigation are consolidated into a traceable fifteen section dossier ready for P D F export.',
+      'Stage 8, Unified Timeline and Investigation Report. All verified facts, sovereign traps, and exculpatory records for the Aarav Sharma investigation are compiled into a fifteen-section report ready for P D F export.',
+    voiceCommentaryHi:
+      'चरण आठ, पूरी टाइमलाइन और पीडीएफ रिपोर्ट। शाम साढ़े छह बजे से रात सवा दस बजे तक का हर सबूत पंद्रह भागों की कोर्ट रिपोर्ट में तैयार हो जाता है जिसे एक क्लिक में डाउनलोड किया जा सकता है।',
+    voiceCommentaryHinglish:
+      'Charan aath, Poori Timeline aur PDF Report. Shaam saadhe chhah baje se raat sawa das baje tak ka har saboot pandrah bhaagon ki court report mein taiyaar ho jaata hai jise ek click mein download kiya ja sakta hai.',
   },
   {
     id: 'relationship-explorer',
     label: 'Relationship Graph',
+    labelHi: 'संबंध ग्राफ (Relationship Graph)',
     shortLabel: 'Graph',
     icon: Share2,
     plainExplanation: 'Visual link diagram separating Verified Relationships (Green), AI Suggestions (Amber), and Rejected Links (Red).',
+    plainExplanationHi: 'आरव शर्मा, संदिग्ध फोन, कैमरे, गवाह और गाड़ियों के बीच संबंध दिखाने वाला ग्राफ (हरे = पक्के सबूत, पीले = जांच अधीन, लाल = खारिज)।',
     voiceCommentary:
-      'Relationship Explorer. This interactive graph shows how Aarav Sharma, corridor phones, cameras, witnesses, and vehicles connect—clearly separating verified facts from unverified leads and contradicted hypotheses.',
+      'Relationship Explorer. This interactive graph shows how Aarav Sharma, corridor phones, cameras, witnesses, and vehicles connect—clearly separating verified facts from unverified leads.',
+    voiceCommentaryHi:
+      'रिलेशनशिप ग्राफ। यह चित्र दिखाता है कि आरव शर्मा, संदिग्ध फ़ोन, कैमरे और गाड़ियाँ आपस में कैसे जुड़े हैं, और किन निर्दोष लोगों को जांच से बाहर किया गया है।',
+    voiceCommentaryHinglish:
+      'Relationship Graph. Yeh chitra dikhata hai ki Aarav Sharma, sandigdh phone, camere aur gaadiyan aapas mein kaise jude hain, aur kin nirdosh logon ko jaanch se baahar kiya gaya hai.',
   },
   {
     id: 'digital-evidence',
     label: 'Digital Evidence Vault',
+    labelHi: 'डिजिटल सबूत तिजोरी (SHA-256 Vault)',
     shortLabel: 'Vault',
     icon: FileLock2,
     plainExplanation: 'Cryptographic SHA-256 evidence repository preserving original files untouched and logging every chain-of-custody event.',
+    plainExplanationHi: 'क्राइम सीन और सरकारी सर्वर से आए हर वीडियो और फाइल को SHA-256 डिजिटल लॉक के साथ सुरक्षित रखने वाली तिजोरी।',
     voiceCommentary:
       'Digital Evidence Vault. Every uploaded file is hashed in the browser. Original files are locked in an immutable vault by Doctor Priya Krishnan while investigators work on derived copies.',
+    voiceCommentaryHi:
+      'डिजिटल सबूत तिजोरी। यहाँ डॉ. प्रिया कृष्णन हर वीडियो और रिकॉर्ड को SHA-256 डिजिटल लॉक से सील करती हैं ताकि कोर्ट में साबित हो सके कि सबूत से कोई छेड़छाड़ नहीं हुई।',
+    voiceCommentaryHinglish:
+      'Digital Saboot Tijori. Yahan Doctor Priya Krishnan har video aur record ko SHA-256 digital lock se seal karti hain taaki court mein saabit ho sake ki saboot se koi chhed-chhaad nahi hui.',
   },
   {
     id: 'collaboration',
     label: 'Agency Collaboration',
+    labelHi: 'अधिकारियों का समन्वय (Collaboration)',
     shortLabel: 'Agency',
     icon: Users,
     plainExplanation: 'Role-based approval queue between Inspector Vikram Rao, ACP Meera Nair, Dr. Priya Krishnan, and Arjun Hegde.',
+    plainExplanationHi: 'इंस्पेक्टर विक्रम राव, एसीपी मीरा नायर, फॉरेंसिक प्रमुख डॉ. प्रिया कृष्णन और सिस्टम एडमिन अर्जुन हेगड़े के बीच अनुमति और समन्वय।',
     voiceCommentary:
-      'Agency Collaboration. Switch between Inspector Vikram Rao, A C P Meera Nair, Doctor Priya Krishnan, and System Administrator Arjun Hegde to test supervisory approvals and forensic verification tasks.',
+      'Agency Collaboration. Switch between Inspector Vikram Rao, A C P Meera Nair, Doctor Priya Krishnan, and System Administrator Arjun Hegde to test supervisory approvals.',
+    voiceCommentaryHi:
+      'अधिकारियों का समन्वय। यहाँ पुलिस इंस्पेक्टर, एसीपी और फॉरेंसिक अधिकारी एक-दूसरे को जांच के कार्य और मंजूरी भेजते हैं।',
+    voiceCommentaryHinglish:
+      'Adhikariyon ka Samanvay. Yahan Police Inspector, ACP aur Forensic Adhikari ek doosre ko jaanch ke kaarya aur manzoori bhejte hain.',
   },
   {
     id: 'admin-audit',
     label: 'Audit & Roadmap',
+    labelHi: 'ऑडिट लॉग और सरकारी सुरक्षा',
     shortLabel: 'Audit Log',
     icon: ShieldCheck,
     plainExplanation: 'Live tamper-evident session audit log, Simulated vs. Production matrix, and Sovereign Deployment Roadmap.',
+    plainExplanationHi: 'सिस्टम में किए गए हर क्लिक का अटूट रिकॉर्ड (Audit Log) ताकि किसी भी नागरिक की निजता का दुरुपयोग न हो सके।',
     voiceCommentary:
       'Administration and Audit. Every click and review decision in this demo is logged in real time, alongside the architectural roadmap for sovereign government deployment.',
+    voiceCommentaryHi:
+      'ऑडिट लॉग और सुरक्षा। इस सिस्टम में अधिकारी जो भी सर्च या क्लिक करता है उसका पूरा समय और कारण अपने आप दर्ज होता है।',
+    voiceCommentaryHinglish:
+      'Audit Log aur Suraksha. Is system mein adhikari jo bhi search ya click karta hai uska poora samay aur kaaran apne aap darj hota hai.',
   },
 ];
 
@@ -196,6 +279,8 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     setCurrentRole,
     isExecutiveFocusMode,
     setIsExecutiveFocusMode,
+    narrationLanguage,
+    setNarrationLanguage,
     isAudioEnabled,
     setIsAudioEnabled,
     isSpeaking,
@@ -227,12 +312,39 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
   const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   const currentNavMeta = NAV_ITEMS.find((n) => n.id === activeModule) || NAV_ITEMS[0];
+  const isHi = narrationLanguage === 'hi';
 
-  const speakCurrentPageGuide = () => {
+  const speakCurrentPageGuide = (langOverride?: 'en' | 'hi') => {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(currentNavMeta.voiceCommentary);
+    const useHindi = (langOverride || narrationLanguage) === 'hi';
+    const voices = window.speechSynthesis.getVoices();
+    const hindiVoice = voices.find(
+      (v) =>
+        v.lang.toLowerCase().startsWith('hi') ||
+        v.name.toLowerCase().includes('hindi') ||
+        v.name.toLowerCase().includes('swara') ||
+        v.name.toLowerCase().includes('madhur')
+    );
+    const englishVoice =
+      voices.find((v) => v.lang.includes('en-IN') || v.name.includes('India')) ||
+      voices.find((v) => v.lang.startsWith('en'));
+
+    const textToSpeak = useHindi
+      ? hindiVoice
+        ? currentNavMeta.voiceCommentaryHi
+        : currentNavMeta.voiceCommentaryHinglish
+      : currentNavMeta.voiceCommentary;
+
+    const u = new SpeechSynthesisUtterance(textToSpeak);
     u.rate = 1.0;
+    if (useHindi && hindiVoice) {
+      u.voice = hindiVoice;
+      u.lang = 'hi-IN';
+    } else if (englishVoice) {
+      u.voice = englishVoice;
+      u.lang = englishVoice.lang || 'en-IN';
+    }
     window.speechSynthesis.speak(u);
   };
 
@@ -449,14 +561,56 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
           )}
         </div>
 
-        {/* Right: Voice-Guided Demo Button, Simplified View Toggle, Role Selector, Reset */}
+        {/* Right: Language Switcher, Voice-Guided Demo Buttons (EN / HI), Simplified View Toggle, Role Selector, Reset */}
         <div className="flex items-center gap-2 flex-wrap">
+          {/* Top-Bar Language Switcher */}
+          <div className="flex items-center bg-[#090D16] border border-sky-500/40 rounded-lg p-0.5 gap-0.5">
+            <Languages className="w-3.5 h-3.5 text-sky-400 ml-1.5 mr-0.5 shrink-0" />
+            <button
+              onClick={() => setNarrationLanguage('en')}
+              className={`px-2 py-1 rounded text-[11px] font-bold transition ${
+                narrationLanguage === 'en'
+                  ? 'bg-sky-500 text-slate-950'
+                  : 'text-slate-300 hover:text-white'
+              }`}
+              title="Switch Demo & Voice to English"
+            >
+              🇬🇧 EN
+            </button>
+            <button
+              onClick={() => setNarrationLanguage('hi')}
+              className={`px-2 py-1 rounded text-[11px] font-bold transition ${
+                narrationLanguage === 'hi'
+                  ? 'bg-amber-500 text-slate-950'
+                  : 'text-amber-300 hover:text-white'
+              }`}
+              title="डेमो और आवाज़ को सरल हिंदी में बदलें (Switch to Hindi)"
+            >
+              🇮🇳 हिंदी
+            </button>
+            <button
+              onClick={() => setNarrationLanguage('bilingual')}
+              className={`px-2 py-1 rounded text-[11px] font-bold transition ${
+                narrationLanguage === 'bilingual'
+                  ? 'bg-teal-500 text-slate-950'
+                  : 'text-teal-300 hover:text-white'
+              }`}
+              title="Bilingual Mode (English + हिंदी)"
+            >
+              Both
+            </button>
+          </div>
+
           <button
-            onClick={() => startGuidedInvestigation(false, true)}
+            onClick={() => startGuidedInvestigation(false, true, narrationLanguage)}
             className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-gradient-to-r from-sky-500 to-teal-500 hover:from-sky-400 hover:to-teal-400 text-slate-950 font-extrabold text-xs shadow-lg shadow-sky-500/15 transition"
           >
             <Volume2 className="w-4 h-4" />
-            <span>START VOICE-GUIDED DEMO</span>
+            <span>
+              {isHi
+                ? '🇮🇳 हिंदी में वॉइस डेमो शुरू करें'
+                : 'START VOICE-GUIDED DEMO'}
+            </span>
           </button>
 
           {/* Simplified / Executive View Toggle */}
@@ -471,7 +625,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
           >
             <Eye className="w-3.5 h-3.5" />
             <span className="hidden xl:inline">
-              {isExecutiveFocusMode ? 'Simplified View' : 'Full View'}
+              {isExecutiveFocusMode ? (isHi ? 'सरल व्यू' : 'Simplified View') : isHi ? 'पूर्ण व्यू' : 'Full View'}
             </span>
           </button>
 
@@ -549,9 +703,9 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                     }}
                     className="p-2 rounded bg-rose-500/10 border border-rose-500/30 cursor-pointer hover:bg-rose-500/15"
                   >
-                    <div className="font-semibold text-rose-300">CAM-008 Coverage Gap Identified</div>
+                    <div className="font-semibold text-rose-300">CAM-008 Coverage Gap — Bus Dashcam Trap Ready</div>
                     <div className="text-[11px] text-slate-300 mt-0.5">
-                      Smart Pole 08 offline 18:15–19:30 due to UPS feeder maintenance.
+                      Smart Pole 08 offline 18:15–19:30; BMTC Route-335E Bus ADAS dashcam recovered at 18:49.
                     </div>
                   </div>
                 </div>
@@ -574,31 +728,38 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
       {/* GUIDED PRESENTATION OVERLAY BAR (Visible when Guided Tour or Presentation Mode is active) */}
       <GuidedPresentationBar />
 
-      {/* PERSISTENT PLAIN-ENGLISH SCREEN GUIDE & AUDIO EXPLAINER (When browsing outside Guided Tour) */}
+      {/* PERSISTENT PLAIN-LANGUAGE SCREEN GUIDE & AUDIO EXPLAINER (When browsing outside Guided Tour) */}
       {!isGuidedActive && !isPresentationMode && (
         <div className="bg-[#0B1424] border-b border-sky-500/30 px-4 py-2 flex flex-wrap items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-2.5">
             <span className="px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 font-mono font-bold text-[11px]">
-              SCREEN GUIDE
+              {isHi ? 'स्क्रीन गाइड (सरल विवरण)' : 'SCREEN GUIDE'}
             </span>
             <span className="text-slate-200 font-medium">
-              {currentNavMeta.plainExplanation}
+              {isHi ? currentNavMeta.plainExplanationHi : currentNavMeta.plainExplanation}
             </span>
           </div>
           <div className="flex items-center gap-2">
             <button
-              onClick={speakCurrentPageGuide}
-              className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/50 text-sky-200 font-semibold text-xs transition"
+              onClick={() => speakCurrentPageGuide('en')}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/50 text-sky-200 font-semibold text-xs transition"
             >
               <Volume2 className="w-3.5 h-3.5 text-sky-400" />
-              <span>🔊 Listen to Screen Explanation</span>
+              <span>🔊 Listen (English)</span>
+            </button>
+            <button
+              onClick={() => speakCurrentPageGuide('hi')}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/50 text-amber-200 font-semibold text-xs transition"
+            >
+              <Volume2 className="w-3.5 h-3.5 text-amber-400" />
+              <span>🔊 हिंदी में सुनें</span>
             </button>
             <button
               onClick={stopSpeaking}
               className="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white text-[11px]"
               title="Stop Voice"
             >
-              Stop Audio
+              Stop
             </button>
           </div>
         </div>
@@ -617,7 +778,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
               <div className="flex items-center justify-between px-2 py-1.5">
                 {!sidebarCollapsed && (
                   <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
-                    8-Stage Flow & Tools
+                    {isHi ? '8-चरण जांच प्रवाह (हिंदी / EN)' : '8-Stage Flow & Tools'}
                   </span>
                 )}
                 <button
@@ -640,7 +801,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                   <button
                     key={item.id}
                     onClick={() => setActiveModule(item.id)}
-                    title={item.label}
+                    title={isHi ? item.labelHi : item.label}
                     className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium transition ${
                       isActive
                         ? 'bg-gradient-to-r from-sky-500/20 to-teal-500/10 text-sky-300 border border-sky-500/40 shadow-sm'
@@ -653,7 +814,9 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
                           isActive ? 'text-sky-400' : 'text-slate-400'
                         }`}
                       />
-                      {!sidebarCollapsed && <span className="truncate">{item.label}</span>}
+                      {!sidebarCollapsed && (
+                        <span className="truncate">{isHi ? item.labelHi : item.label}</span>
+                      )}
                     </div>
                     {!sidebarCollapsed && item.badge && (
                       <span

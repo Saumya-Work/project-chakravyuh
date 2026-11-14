@@ -34,8 +34,12 @@ import {
   ChevronDown,
   ChevronUp,
   Sparkles,
+  ShieldAlert,
+  Crosshair,
+  Languages,
 } from 'lucide-react';
 import { useSentinel } from '@/context/SentinelContext';
+import { GUIDED_STAGES } from '@/data/syntheticData';
 
 const CRIME_CATEGORY_DATA = [
   { category: 'Missing / Abduction', count: 4, fill: '#0EA5E9' },
@@ -73,11 +77,16 @@ export const CommandCentreModule: React.FC = () => {
     evidenceItems,
     setActiveModule,
     startGuidedInvestigation,
+    goToGuidedStage,
+    narrationLanguage,
+    setNarrationLanguage,
     isExecutiveFocusMode,
     setIsExecutiveFocusMode,
   } = useSentinel();
 
   const [showDetailedCharts, setShowDetailedCharts] = useState(false);
+  const [showAllTraps, setShowAllTraps] = useState(true);
+  const isHi = narrationLanguage === 'hi';
 
   const receivedCamerasCount = cameras.filter((c) => c.footageStatus === 'Footage received').length;
   const pendingLeadsCount = leads.filter((l) => l.reviewStatus === 'Awaiting Investigator Review').length;
@@ -115,42 +124,158 @@ export const CommandCentreModule: React.FC = () => {
 
   const displayAllAnalytics = !isExecutiveFocusMode || showDetailedCharts;
 
+  const launchStageWithVoice = (stageIdx: number, lang?: 'en' | 'hi') => {
+    const chosenLang = lang || (narrationLanguage === 'hi' ? 'hi' : 'en');
+    startGuidedInvestigation(false, true, chosenLang);
+    setTimeout(() => {
+      goToGuidedStage(stageIdx);
+    }, 50);
+  };
+
   return (
     <div className="space-y-6">
-      {/* HERO EXECUTIVE COMMAND HEADER WITH VOICE COMMENTARY LAUNCHER */}
+      {/* HERO EXECUTIVE COMMAND HEADER WITH BILINGUAL (ENGLISH & हिंदी) VOICE COMMENTARY LAUNCHER */}
       <div className="bg-gradient-to-r from-[#111C30] via-[#14223B] to-[#0F1829] border-2 border-sky-500/40 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div className="relative z-10 flex flex-col xl:flex-row xl:items-center justify-between gap-6">
           <div className="space-y-2.5 max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/15 border border-sky-400/30 text-sky-300 text-xs font-mono">
-              <Volume2 className="w-3.5 h-3.5 text-sky-400" />
-              <span>INTERACTIVE VOICE-GUIDED DEMONSTRATION READY</span>
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/15 border border-sky-400/30 text-sky-300 text-xs font-mono">
+                <Volume2 className="w-3.5 h-3.5 text-sky-400" />
+                <span>
+                  {isHi
+                    ? 'सरल हिंदी और इंग्लिश वॉइस डेमो तैयार है'
+                    : 'INTERACTIVE VOICE-GUIDED DEMO READY (ENGLISH & हिंदी)'}
+                </span>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-mono">
+                <Crosshair className="w-3.5 h-3.5 text-emerald-400" />
+                <span>8 SOVEREIGN GOVERNMENT TRAPS ACTIVE</span>
+              </div>
             </div>
+
             <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
-              “A person goes missing at 6:30 PM. The complaint arrives at 9:15 PM.”
+              {isHi
+                ? '“शाम 6:30 बजे अपहरण होता है। शातिर अपराधी हर सबूत मिटाता है — पर सेंटिनल का सरकारी जाल उसे पकड़ लेता है।”'
+                : '“A person goes missing at 6:30 PM. A smart criminal erases every normal clue — until Project Sentinel’s Sovereign Grid springs 8 traps.”'}
             </h1>
             <p className="text-sm md:text-base text-slate-200 leading-relaxed">
-              Watch and listen as <b>Project Sentinel</b> guides you step-by-step through how investigators connect mobile records, discover 20 nearby CCTV cameras, compare vehicles, filter out innocent commuters, and generate a traceable report.
+              {isHi ? (
+                <>
+                  बिना किसी तकनीकी शब्दों के <b>सरल हिंदी</b> या <b>English</b> में सुनिए और देखिए कि कैसे अपराधी के फ़ैराडे बैग, घर पर छोड़े नकली अलिबी फोन, बंद CCTV कैमरे और नकली नंबर प्लेट को <b>Project Sentinel</b> स्मार्ट बिजली मीटर, सरकारी बस डैशकैम, टोल FASTag और टायर सेंसर से पकड़ता है।
+                </>
+              ) : (
+                <>
+                  Designed so <b>any non-technical person</b> can follow along in <b>English</b> or <b>Hindi (हिंदी)</b>: watch and listen as <b>Project Sentinel</b> defeats Faraday pouches, fake home phone alibis, camera power cuts, and cloned number plates using Smart Electricity Meters, Bus Dashcams, FASTag gantries, and Tyre Sensors.
+                </>
+              )}
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+          <div className="flex flex-col sm:flex-row xl:flex-col items-stretch gap-2.5 shrink-0">
             <button
-              onClick={() => startGuidedInvestigation(false, true)}
-              className="flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-gradient-to-r from-sky-500 to-teal-500 hover:from-sky-400 hover:to-teal-400 text-slate-950 font-extrabold text-sm shadow-xl shadow-sky-500/25 transition transform hover:-translate-y-0.5"
+              onClick={() => startGuidedInvestigation(false, true, 'en')}
+              className="flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-teal-500 hover:from-sky-400 hover:to-teal-400 text-slate-950 font-extrabold text-xs md:text-sm shadow-xl shadow-sky-500/25 transition transform hover:-translate-y-0.5"
             >
               <Volume2 className="w-5 h-5" />
-              <span>START INVESTIGATION DEMO (WITH AUDIO)</span>
+              <span>🇬🇧 START VOICE DEMO (IN ENGLISH)</span>
             </button>
 
             <button
-              onClick={() => setActiveModule('workspace')}
-              className="flex items-center justify-center gap-2 px-5 py-4 rounded-xl bg-[#090D16] hover:bg-[#141D2F] text-sky-300 border border-sky-500/40 font-semibold text-sm transition"
+              onClick={() => startGuidedInvestigation(false, true, 'hi')}
+              className="flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-extrabold text-xs md:text-sm shadow-xl shadow-amber-500/20 transition transform hover:-translate-y-0.5"
             >
-              <Compass className="w-4 h-4" />
-              <span>Explore Case Manually</span>
+              <Volume2 className="w-5 h-5" />
+              <span>🇮🇳 हिंदी में वॉइस डेमो सुनें (HINDI AUDIO)</span>
+            </button>
+
+            <button
+              onClick={() => startGuidedInvestigation(false, true, 'bilingual')}
+              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#090D16] hover:bg-[#141D2F] text-teal-300 border border-teal-500/40 font-bold text-xs transition"
+            >
+              <Languages className="w-4 h-4" />
+              <span>🇮🇳+🇬🇧 Play Bilingual Demo (English + हिंदी)</span>
             </button>
           </div>
         </div>
+      </div>
+
+      {/* SMART CRIMINAL vs. SOVEREIGN SENTINEL — 8-STAGE INTERACTIVE CAT-AND-MOUSE MATRIX */}
+      <div className="bg-[#111A2E] border-2 border-emerald-500/35 rounded-2xl p-5 space-y-4 shadow-xl">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="px-2.5 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono text-xs font-bold">
+                STEP 1: SMARTEST CRIMINAL
+              </span>
+              <span className="text-slate-400 font-bold">vs.</span>
+              <span className="px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-xs font-bold">
+                STEP 2: PROJECT SENTINEL SOVEREIGN GRID
+              </span>
+            </div>
+            <h2 className="text-base md:text-lg font-extrabold text-white mt-1">
+              {isHi
+                ? 'शातिर अपराधी की 8 चालें बनाम प्रोजेक्ट सेंटिनल के 8 सरकारी जाल (किसी भी कार्ड पर क्लिक करके सुनें)'
+                : '8 Smart Criminal Evasion Moves vs. 8 Project Sentinel Sovereign Government Traps (Click Any Stage to Watch & Listen)'}
+            </h2>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setNarrationLanguage(isHi ? 'en' : 'hi')}
+              className="px-3 py-1.5 rounded-lg bg-slate-900 border border-sky-500/40 text-xs font-bold text-sky-300 hover:text-white transition"
+            >
+              {isHi ? '🇬🇧 Switch Cards to English' : '🇮🇳 कार्ड्स को हिंदी में देखें'}
+            </button>
+            <button
+              onClick={() => setShowAllTraps((s) => !s)}
+              className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-slate-300 hover:text-white transition"
+            >
+              {showAllTraps ? (isHi ? 'छोटा करें' : 'Collapse') : isHi ? 'सभी 8 जाल देखें' : 'Show All 8 Traps'}
+            </button>
+          </div>
+        </div>
+
+        {showAllTraps && (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3.5">
+            {GUIDED_STAGES.map((stg, idx) => (
+              <div
+                key={stg.id}
+                onClick={() => launchStageWithVoice(idx)}
+                className="bg-[#090E1A] border border-slate-800 hover:border-sky-400 rounded-xl p-3.5 cursor-pointer transition flex flex-col justify-between gap-2.5 group shadow-md"
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 font-mono text-[11px] font-bold">
+                      {isHi ? `चरण ${stg.stageNumber}` : `STAGE ${stg.stageNumber}`}
+                    </span>
+                    <span className="text-[11px] font-mono text-emerald-400 group-hover:underline">
+                      🔊 {isHi ? 'हिंदी में सुनें →' : 'Play Voice →'}
+                    </span>
+                  </div>
+                  <div className="text-xs font-bold text-white leading-snug">
+                    {isHi ? stg.titleHi.replace(/^चरण \d+ — /, '') : stg.title.replace(/^STAGE \d+ — /, '')}
+                  </div>
+
+                  <div className="p-2 rounded bg-rose-950/35 border border-rose-500/30 text-[11px] text-rose-200 leading-snug">
+                    <div className="font-bold text-rose-400 mb-0.5 flex items-center gap-1">
+                      <ShieldAlert className="w-3 h-3 shrink-0" />
+                      <span>{isHi ? 'अपराधी की चाल:' : 'Criminal’s Move:'}</span>
+                    </div>
+                    {isHi ? stg.criminalMoveHi : stg.criminalMoveEn}
+                  </div>
+
+                  <div className="p-2 rounded bg-emerald-950/35 border border-emerald-500/30 text-[11px] text-emerald-200 leading-snug">
+                    <div className="font-bold text-emerald-400 mb-0.5 flex items-center gap-1">
+                      <Crosshair className="w-3 h-3 shrink-0" />
+                      <span>{isHi ? 'सेंटिनल का सरकारी जाल:' : 'Sentinel’s Sovereign Trap:'}</span>
+                    </div>
+                    {isHi ? stg.sentinelTrapHi : stg.sentinelTrapEn}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* CLEAN 3-STEP EXECUTIVE STORY SUMMARY (Eliminates Confusion) */}
@@ -161,18 +286,28 @@ export const CommandCentreModule: React.FC = () => {
         >
           <div className="flex items-center justify-between">
             <span className="px-2.5 py-0.5 rounded bg-sky-500/20 text-sky-300 font-mono text-xs font-bold">
-              STEP 1 • THE INCIDENT
+              {isHi ? 'भाग 1 • वारदात और 4-थाने लिंक' : 'STEP 1 • THE INCIDENT & 4-STATION LINK'}
             </span>
             <span className="font-mono text-xs text-slate-400">18:30 – 21:15 IST</span>
           </div>
           <h3 className="text-base font-bold text-white">
-            CASE-SNT-2026-0042: Missing Person (Aarav Sharma)
+            {isHi
+              ? 'CASE-SNT-2026-0042: आरव शर्मा अपहरण केस'
+              : 'CASE-SNT-2026-0042: Missing Person (Aarav Sharma)'}
           </h3>
           <p className="text-xs text-slate-300 leading-relaxed">
-            Aarav Sharma departs Kaveri Enclave Library at <b>18:30</b>. Their phone (<code className="text-sky-300">DEV-001</code>) loses signal at <b>18:48</b>. Family files a complaint at <b>21:15</b>.
+            {isHi ? (
+              <>
+                आरव शर्मा शाम <b>6:30</b> बजे लाइब्रेरी से निकलते हैं। <b>6:48</b> पर उनका फोन (<code className="text-sky-300">DEV-001</code>) फ़ैराडे बैग में डालकर बंद कर दिया जाता है। सेंटिनल देश के पुलिस ग्रिड (CCTNS) से 4 थानों के ट्रायल केस जोड़ता है।
+              </>
+            ) : (
+              <>
+                Aarav Sharma departs Kaveri Enclave Library at <b>18:30</b>. His phone (<code className="text-sky-300">DEV-001</code>) is dropped into a Faraday pouch at <b>18:48</b>. Sentinel links 4 cross-station rehearsal cases via ICJS/CCTNS.
+              </>
+            )}
           </p>
           <div className="pt-1 text-xs font-semibold text-sky-400 flex items-center gap-1">
-            <span>Open Stage 1: Incident Registration →</span>
+            <span>{isHi ? 'चरण 1 खोलें: केस रजिस्टर →' : 'Open Stage 1: Incident Registration →'}</span>
           </div>
         </div>
 
@@ -182,18 +317,28 @@ export const CommandCentreModule: React.FC = () => {
         >
           <div className="flex items-center justify-between">
             <span className="px-2.5 py-0.5 rounded bg-teal-500/20 text-teal-300 font-mono text-xs font-bold">
-              STEP 2 • MULTI-SOURCE EVIDENCE
+              {isHi ? 'भाग 2 • स्मार्ट मीटर, बस डैशकैम और FASTag' : 'STEP 2 • SMART METER, BUS DASHCAM & FASTAG'}
             </span>
-            <span className="font-mono text-xs text-slate-400">30 Phones • 20 Cameras</span>
+            <span className="font-mono text-xs text-slate-400">31 Phones • 20 Cameras</span>
           </div>
           <h3 className="text-base font-bold text-white">
-            Correlating Phones, CCTV & Vehicles
+            {isHi
+              ? 'झूठा अलिबी और बंद कैमरे की साज़िश बेनकाब'
+              : 'Defeating Fake Alibis, Blind Spots & Cloned Plates'}
           </h3>
           <p className="text-xs text-slate-300 leading-relaxed">
-            Discovers <b>20 corridor cameras</b>, extracts a white SUV sighting at <b>19:02</b> (<code className="text-teal-300">CAM-014</code>) and <b>19:18</b> (<code className="text-teal-300">CAM-019</code>), and clears innocent commuters using exculpatory gate logs.
+            {isHi ? (
+              <>
+                स्मार्ट बिजली मीटर से करण मल्होत्रा का झूठा अलिबी पकड़ता है, बंद कैमरे (<code className="text-teal-300">CAM-008</code>) की जगह <b>BMTC बस डैशकैम</b> निकालता है, और टायर सेंसर से सफ़ेद SUV पकड़ता है।
+              </>
+            ) : (
+              <>
+                Busts Karan Malhotra’s fake home alibi via <b>138W Smart Meter flatline</b>, fills the <code className="text-teal-300">CAM-008</code> outage using a <b>BMTC Bus Dashcam</b>, and matches the white SUV via <b>FASTag & 433MHz TPMS</b>.
+              </>
+            )}
           </p>
           <div className="pt-1 text-xs font-semibold text-teal-400 flex items-center gap-1">
-            <span>Open Interactive Map & CCTV Discovery →</span>
+            <span>{isHi ? 'नक्शा और CCTV जांच खोलें →' : 'Open Interactive Map & CCTV Discovery →'}</span>
           </div>
         </div>
 
@@ -203,18 +348,28 @@ export const CommandCentreModule: React.FC = () => {
         >
           <div className="flex items-center justify-between">
             <span className="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-xs font-bold">
-              STEP 3 • EXPLAINABLE AI & REPORT
+              {isHi ? 'भाग 3 • AI सुराग और कोर्ट रिपोर्ट' : 'STEP 3 • EXPLAINABLE AI & COURT REPORT'}
             </span>
             <span className="font-mono text-xs text-slate-400">6 Candidate Leads</span>
           </div>
           <h3 className="text-base font-bold text-white">
-            Human-in-the-Loop Lead Verification
+            {isHi
+              ? 'निर्दोष नागरिकों की सुरक्षा और 15-भाग PDF रिपोर्ट'
+              : 'Human-in-the-Loop Lead Verification & PDF Export'}
           </h3>
           <p className="text-xs text-slate-300 leading-relaxed">
-            Generates <b>6 candidate leads</b> with supporting evidence, contradictory evidence, and innocent explanations—never assigning a guilt score—and exports a <b>15-section PDF report</b>.
+            {isHi ? (
+              <>
+                निर्दोष नागरिक रोहन वर्मा और कैब ड्राइवर नवीन कुमार को पक्के सबूतों से तुरंत क्लीन चिट देता है और <b>15-भागों की कोर्ट PDF रिपोर्ट</b> तैयार करता है।
+              </>
+            ) : (
+              <>
+                Automatically clears innocent commuter Rohan Verma and cab driver Naveen Kumar using exculpatory gate and camera logs, and exports a <b>15-section court-ready PDF report</b>.
+              </>
+            )}
           </p>
           <div className="pt-1 text-xs font-semibold text-amber-400 flex items-center gap-1">
-            <span>Review 6 Candidate Leads →</span>
+            <span>{isHi ? '6 AI सुरागों की समीक्षा करें →' : 'Review 6 Candidate Leads →'}</span>
           </div>
         </div>
       </div>

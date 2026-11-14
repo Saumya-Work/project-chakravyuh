@@ -390,6 +390,60 @@ const BASE_DEVICES: DeviceRecord[] = [
       },
     ],
   },
+  {
+    id: 'DEV-019',
+    label: 'Karan Malhotra’s Personal Phone (Fake Home Alibi — Shadow Link to Burner)',
+    category: 'Contextual Field Device',
+    ownerNote: 'Registered to Karan Malhotra — Left at apartment on auto-play video loop; BESCOM Smart Meter & 24 Oct Rehearsal Trap matched',
+    imeiMask: '356091-XX-SYN-0019',
+    firstObserved: '18:00',
+    lastObserved: '21:00',
+    sectorIds: ['BLR-KVR-04A', 'BLR-IND-09C'],
+    observationsCount: 6,
+    relevanceStatus: 'Co-located Observation',
+    confidenceNote:
+      'SOVEREIGN GRID TRAP MATCH: (1) Traveled alongside Burner Phone DEV-004 during 24 Oct Nandi Electronics Hub dry-run; (2) On 02 Nov, went motionless at 18:15 (0.0m Timing Advance drift + BESCOM Smart Meter flat 138W standby draw) exactly 3 minutes before Burner DEV-004 powered on at 18:18.',
+    limitations:
+      'Requires human officer verification of apartment CCTV and physical subscriber interview.',
+    alternativeExplanation:
+      'Subscriber may have been sleeping at home with phone on a table; requires independent corroboration beyond telemetry.',
+    observations: [
+      {
+        obsId: 'OBS-DEV019-1',
+        deviceId: 'DEV-019',
+        timestamp: '18:15',
+        timeMinutes: 1095,
+        cellSectorId: 'BLR-KVR-04A',
+        cellSectorName: 'Home Sector Static Anchor (Zero Timing-Advance Drift)',
+        approxCoordinates: [12.9740, 77.6380],
+        sectorRadiusMeters: 450,
+        azimuthDeg: 60,
+        eventType: 'Packet Data Session',
+        sourceRecordRef: 'EVD-003 & BESCOM-AMI-SmartMeter-Log',
+        authorisationRef: 'AUTH-BLR-SYN-2026-8841',
+        signalQuality: 'High (Urban Micro-cell)',
+        isRelevantWindow: true,
+        notes: 'TRAP TRIGGER: Phone placed on table streaming loop at 18:15 (0.0m TA drift, BESCOM flat 138W power); Burner DEV-004 powers on 3 mins later at 18:18.',
+      },
+      {
+        obsId: 'OBS-DEV019-2',
+        deviceId: 'DEV-019',
+        timestamp: '19:19',
+        timeMinutes: 1159,
+        cellSectorId: 'BLR-IND-09C',
+        cellSectorName: 'East Link Flyover / Mahadevapura Sector 09C (24 Oct Rehearsal Match)',
+        approxCoordinates: [12.9752, 77.6618],
+        sectorRadiusMeters: 800,
+        azimuthDeg: 75,
+        eventType: 'Periodic Network Registration',
+        sourceRecordRef: 'CASE-0039 Cross-Case Archive (24 Oct 2026)',
+        authorisationRef: 'AUTH-BLR-SYN-2026-8841',
+        signalQuality: 'Medium (Macro Sector)',
+        isRelevantWindow: true,
+        notes: 'CROSS-CASE TRAP: On 24 Oct (when Faraday bags were stolen from Nandi Electronics), Karan Malhotra carried this personal phone alongside Burner DEV-004.',
+      },
+    ],
+  },
 ];
 
 const BACKGROUND_CITIZEN_NAMES: string[] = [
@@ -1343,179 +1397,176 @@ export const INITIAL_VEHICLES: VehicleRecord[] = [
   },
 ];
 
-// 6 AI Investigative Leads (LEAD-001 through LEAD-006)
+// 6 AI Investigative Leads (LEAD-001 through LEAD-006) — Enriched with Sovereign Government Grid Traps
 export const INITIAL_LEADS: InvestigativeLead[] = [
   {
     id: 'LEAD-001',
-    title: 'Repeated device association near a documented incident location.',
+    title: 'TRAP 1 & 2: Burner Phone (DEV-004) Linked to Karan Malhotra’s Fake Home Alibi (DEV-019) & Faraday Drop',
     caseId: 'CASE-SNT-2026-0042',
     priority: 'Priority 1 — Immediate Verification',
     category: 'Device Correlation',
     observationSummary:
-      'An unattributed prepaid handset (DEV-004) appears in multiple authorised cell-sector records (Kaveri West 04A at 18:28, Kaveri East 04B at 18:44, 27th Main 02A at 19:03, and East Link Flyover 09C at 19:19) overlapping Aarav Sharma’s last known sector and eastward corridor observations.',
-    relatedEntities: ['DEV-004', 'DEV-001', 'CASE-SNT-2026-0042'],
+      'Sovereign Telecom + BESCOM Smart-Grid Fusion: Burner handset DEV-004 moved across all 4 eastbound corridor sectors (18:28 to 19:19) while Aarav Sharma’s iPhone suffered an abrupt -40 dBm RF Faraday drop at 18:48 (zero IMSI-detach). Cross-checking 24 Oct dry-run records links Burner DEV-004 to Karan Malhotra’s personal phone (DEV-019), which was left at home on a static video loop at 18:15 (BESCOM Smart Meter flat 138W standby draw, 0.0m Timing Advance drift) just 3 minutes before Burner DEV-004 powered on.',
+    relatedEntities: ['DEV-004', 'DEV-019', 'DEV-001', 'CASE-SNT-2026-0042'],
     supportingEvidence: [
-      'EVD-002 & EVD-003: Authorised cell-sector observations in Sector 04A (18:28) and Sector 04B (18:44) within 2 minutes of Aarav Sharma’s phone handover.',
-      'EVD-003: Subsequent eastward sector handovers into 27th Main (19:03) and East Link Flyover (19:19) matching corridor progression.',
+      'EVD-002 (C-DOT Baseband Log): Aarav Sharma’s iPhone lost -40 dBm in <200ms at 18:48 with zero IMSI-Detach packet—signature of an RF Faraday pouch.',
+      'EVD-003 (Sleep/Wake Shadow): Karan Malhotra’s personal phone (DEV-019) went motionless at 18:15; Burner DEV-004 powered on 3 minutes later at 18:18.',
+      'BESCOM Smart Meter AMI + ISP ONT Log: Karan Malhotra’s flat drew a flatline 138W (fridge + router only, zero human switch activity) from 17:45 to 21:10.',
+      'FIU / NPCI UPI Recharge Trail: Burner DEV-004 was recharged at a Mahadevapura kiosk on 23 Oct at 20:14 where ATM CCTV captured a White Compact SUV.',
     ],
     contradictoryEvidence: [
-      'No direct voice call or SMS exchange exists between the unattributed prepaid handset and Aarav Sharma’s iPhone in the authorised CDR dataset.',
-      'Sector BLR-KVR-04B spans a 650m radius covering a high-density arterial commuter road.',
+      'No direct voice call or SMS exchange exists between Burner DEV-004 and Aarav Sharma’s iPhone in the operator CDR dataset.',
+      'Karan Malhotra’s personal phone (DEV-019) remained connected to his home Wi-Fi router throughout the evening.',
     ],
     alternativeExplanations: [
-      'Common public location along a major evening commuter corridor.',
-      'Shared commercial/delivery device or ride-share driver traversing the same arterial route.',
-      'Unrelated legitimate commuter activity delayed in the same traffic wave.',
-      'Imprecise cell-sector coverage overlap across adjacent micro/macro towers.',
+      'Subscriber of DEV-019 may have been resting at home without turning on room lights or appliances.',
+      'Co-location in macro cell sectors requires physical verification before attributing possession.',
     ],
     limitations:
-      'Cell-sector location is approximate (450m–800m radius) and does not establish physical proximity, interaction, wrongdoing, or the identity of the person in possession of the device.',
-    evidenceReferences: ['EVD-002', 'EVD-003'],
+      'Telemetry and smart-meter anomalies are investigative indicators only; they do not replace physical interrogation or prove who held the burner device.',
+    evidenceReferences: ['EVD-002', 'EVD-003', 'EVD-012'],
     recommendedVerification:
-      'Verify subscriber KYC provenance through authorised nodal officer and cross-check whether the prepaid handset belongs to a registered commercial transport or delivery operator.',
+      'Dispatch Inspector Vikram Rao to interview Karan Malhotra, inspect his residence building stairwell CCTV, and execute nodal warrant for the 23 Oct ATM recharge camera.',
     reviewStatus: 'Awaiting Investigator Review',
     investigatorNotes: [
-      'Initial automated correlation flagged 4 devices in Sectors 04A/04B; 2 eliminated via resident/courier logs (Rohan Verma & courier Sameer Khan). Unattributed prepaid handset requires subscriber verification.',
+      'Sovereign Grid Trap caught the classic "leave personal phone at home on YouTube loop" trick via zero Timing-Advance drift and flatline 138W BESCOM smart-meter load.',
     ],
   },
   {
     id: 'LEAD-002',
-    title: 'Potentially related vehicle observations across two cameras.',
+    title: 'TRAP 4: White SUV Matched via 433MHz Tyre Sensors (TPMS) & FASTag Ghost-Tag Exception',
     caseId: 'CASE-SNT-2026-0042',
     priority: 'Priority 1 — Immediate Verification',
     category: 'Vehicle Corridor',
     observationSummary:
-      'An unidentified white compact SUV was observed moving east at 27th Main Signal (CAM-014) at 19:02, and a visually similar white compact SUV was observed ascending the East Link Flyover ramp (CAM-019) at 19:18.',
+      'Although the offender splashed mud on the plate at 27th Main (CAM-014, 19:02) and used high-beam glare on East Link Flyover (CAM-019, 19:18), Sovereign Smart-Pole RF receivers captured the identical 4-wheel Tyre Pressure Sensor ID (TPMS-HEX-88A4-C109) at both junctions, and the Flyover NHAI FASTag gantry flagged a GHOST_RFID_EXCEPTION (1 of 412 vehicles with FASTag deliberately peeled off).',
     relatedEntities: ['VEH-001', 'VEH-002', 'CAM-014', 'CAM-019'],
     supportingEvidence: [
-      'EVD-006 (27th Main Signal): 19:02 eastbound observation with roof rails, dark rear quarter glass, and partial plate KA-00-SYN-4??.',
-      'EVD-007 (East Link Flyover): 19:18 eastbound ramp observation sharing roof-rail and pillar silhouette.',
-      'EVD-009 (HSR South Link): Rules out Naveen Kumar’s commercial airport cab (KA-00-SYN-4812), which turned south at 19:04.',
+      'EVD-006 & EVD-007 (Visual Micro-Signature): Identical matte-black roof-rail crossbars, left fog-lamp scuff, and 35% rear quarter tint at 19:02 and 19:18.',
+      'Smart-Pole 433MHz TPMS Log: Wheel sensor quartet TPMS-HEX-88A4-C109 recorded passing CAM-014 at 19:02:11 and CAM-019 at 19:18:19.',
+      'NHAI FASTag Gantry Log: 411 of 412 vehicles on East Link Flyover had valid RFID handshakes; VEH-002 triggered the sole Ghost-RFID Exception.',
+      'EVD-009 (Vahan + Fleet GPS): Rules out Naveen Kumar’s airport cab (KA-00-SYN-4812), which turned south toward Hosur Road at 19:04.',
     ],
     contradictoryEvidence: [
-      'Transit time between 27th Main Signal (19:02) and East Link Flyover (19:18) is 16 minutes for a 1.1 km segment (average evening transit is 4–6 minutes).',
-      'Rear registration plate on East Link Flyover camera is obscured by headlamp glare, preventing direct alphanumeric confirmation.',
+      'Transit time between 27th Main Signal (19:02) and East Link Flyover (19:18) is 16 minutes for a 1.1 km segment (normal flow is 4–6 minutes).',
+      'Optical number plate remains partially obscured on both cameras.',
     ],
     alternativeExplanations: [
-      'The 19:02 and 19:18 sightings may be two completely unrelated white compact SUVs, a very common vehicle class in Bengaluru.',
-      'If the same vehicle, the 16-minute interval may reflect a legitimate commercial/residential stop along the intermediate canal road.',
+      'The 16-minute delay indicates the vehicle pulled into an intermediate service lane between 19:03 and 19:17.',
     ],
     limitations:
-      'Visual similarity in night-time CCTV footage never proves two sightings are the same vehicle. Do not interpolate movement between cameras without intermediate footage.',
+      'RF sensor logs and visual micro-signatures must be corroborated with physical vehicle inspection.',
     evidenceReferences: ['EVD-006', 'EVD-007', 'EVD-009'],
     recommendedVerification:
-      'Expedite pending footage retrieval from intermediate cameras at Indira Canal Bridge and Zenith Tech Park Gate to verify whether the white SUV stopped or turned off-corridor.',
+      'Cross-reference Vahan registry for white compact SUVs registered in East Division whose FASTag was deactivated or unlinked in the past 14 days.',
     reviewStatus: 'Awaiting Investigator Review',
     investigatorNotes: [],
   },
   {
     id: 'LEAD-003',
-    title: 'Witness statement requiring clarification.',
+    title: 'TRAP 6: Witness Color Conflict Resolved via Clinic CCTV & Sightline Geometry',
     caseId: 'CASE-SNT-2026-0042',
     priority: 'Priority 2 — High Analytical Value',
     category: 'Witness Discrepancy',
     observationSummary:
-      'Witness Suresh Babu (Tea Stall Owner near 80ft Road) reported seeing an individual boarding a white SUV-like vehicle around 18:45, whereas Witness Aditi Rao (Evening Jogger) recalled a "dark grey vehicle" near the same sub-lane at approximately 18:45.',
+      'Offender staged the 18:45 pickup under amber sodium lamps near a parked car so witnesses would contradict each other. Sentinel reconciles both witnesses: Apex Pharmacy CCTV (CAM-003) proves Dr. Sanjay Kulkarni’s dark grey sedan (VEH-004) parked in jogger Aditi Rao’s sightline at 18:43, validating tea-stall owner Suresh Babu’s sighting of the White SUV at 18:45.',
     relatedEntities: ['VEH-001', 'VEH-004', 'CAM-003', 'EVD-010'],
     supportingEvidence: [
-      'EVD-010: Witness Suresh Babu’s recorded statement noting a white SUV stopped briefly near Sub-lane B pickup bay around 18:45.',
-      'EVD-005 (Apex Pharmacy CCTV): Confirms Dr. Sanjay Kulkarni’s dark grey sedan parked nearby at 18:43, explaining Aditi Rao’s visual recollection.',
+      'EVD-010: Witness Suresh Babu recorded statement noting a White SUV stopped briefly at Sub-lane B pickup bay around 18:45.',
+      'EVD-005 (CAM-003): Confirms Dr. Sanjay Kulkarni’s dark grey sedan parked at 18:43, accounting for Aditi Rao’s grey-car recollection.',
     ],
     contradictoryEvidence: [
-      'Suresh Babu and Aditi Rao differ on vehicle colour and exact stopping point along the 80m stretch of Sub-lane B.',
-      'Amber sodium-vapour street lighting in Sub-lane B distorts vehicle colour perception at dusk.',
+      'Initial verbal statements differed on vehicle colour (white vs. dark grey) under dusk sodium lighting.',
     ],
     alternativeExplanations: [
-      'Aditi Rao likely observed Dr. Sanjay Kulkarni’s stationary clinic vehicle rather than the vehicle described by Suresh Babu.',
-      'The person boarding the white SUV observed by Suresh Babu could have been an unrelated ride-share passenger.',
+      'Aditi Rao observed Dr. Kulkarni’s stationary clinic vehicle while Suresh Babu observed the departing White SUV.',
     ],
     limitations:
-      'Eyewitness time and colour estimates under dusk lighting are subject to recall error and require independent corroboration.',
+      'Eyewitness time and colour estimates under dusk lighting require video corroboration.',
     evidenceReferences: ['EVD-005', 'EVD-010', 'EVD-011'],
     recommendedVerification:
-      'Conduct structured follow-up clarification with Suresh Babu and Aditi Rao using site lighting diagrams, and review pending footage from 80ft Road Pedestrian Signal and Lotus Bakery Patio.',
+      'Record supplementary clarification statement from Aditi Rao confirming position of the parked clinic sedan.',
     reviewStatus: 'Awaiting Investigator Review',
     investigatorNotes: [],
   },
   {
     id: 'LEAD-004',
-    title: 'Timeline inconsistency requiring investigation.',
+    title: 'TRAP 5: 16-Minute Shadow Stop Pinpointed to Canal Culvert via 3-Tower AoA & Burner Pause',
     caseId: 'CASE-SNT-2026-0042',
-    priority: 'Priority 2 — High Analytical Value',
+    priority: 'Priority 1 — Immediate Verification',
     category: 'Timeline Anomaly',
     observationSummary:
-      'Two timeline intervals require reconciliation: (1) A 12-minute gap between Aarav Sharma passing Apex Pharmacy (18:36) and handset signal loss in Sector 04B (18:48) over a 220m walk; and (2) a 16-minute interval between 27th Main Signal (19:02) and East Link Flyover (19:18).',
-    relatedEntities: ['DEV-001', 'CAM-003', 'CAM-014', 'CAM-019'],
+      'The offender intentionally stopped for 12 minutes between CAM-014 (19:02) and CAM-019 (19:18) to break time-distance tracking. Sentinel’s Isochrone Prism + 3-Tower Angle-of-Arrival (AoA) triangulation proves Burner Phone DEV-004 paused stationary inside the Old Indira Canal Culvert from 19:04 to 19:16—matching the White SUV’s exact 16-minute delay.',
+    relatedEntities: ['DEV-004', 'VEH-001', 'VEH-002', 'CAM-014', 'CAM-019'],
     supportingEvidence: [
-      'EVD-005: Apex Pharmacy camera logs pedestrian matching Aarav Sharma at 18:36 only 220m west of 80ft Link Road (normally a 3-minute walk).',
-      'EVD-002: Aarav Sharma’s iPhone remains active until 18:48 in Sector 04B before abrupt signal loss.',
+      '3-Tower AoA Triangulation (EVD-003): Burner DEV-004 remained stationary within a 40m radius at Indira Canal Service Culvert from 19:04 to 19:16.',
+      'EVD-006 & EVD-007: White SUV entered corridor at 19:02 and exited onto Flyover ramp at 19:18 (exact 16-minute window).',
     ],
     contradictoryEvidence: [
-      'No intermediate CCTV between Apex Pharmacy and 80ft Road has yet confirmed whether Aarav Sharma stopped voluntarily at a shop or cafe.',
+      'Direct municipal camera CAM-016 (Indira Canal Bridge) footage is still pending custodian upload.',
     ],
     alternativeExplanations: [
-      'Aarav Sharma may have paused voluntarily at Lotus Bakery Patio or waited for an acquaintance before 18:48.',
-      'The 19:02 and 19:18 vehicle sightings may represent two unrelated vehicles rather than a delayed single journey.',
+      'Vehicle may have paused due to mechanical check or traffic bottleneck near the canal bridge.',
     ],
     limitations:
-      'Timeline gaps indicate missing observations, not proof of concealed movement.',
-    evidenceReferences: ['EVD-002', 'EVD-005', 'EVD-006', 'EVD-007'],
+      'Requires physical crime-scene inspection of the Indira Canal Culvert and CAM-016 video review.',
+    evidenceReferences: ['EVD-002', 'EVD-003', 'EVD-006', 'EVD-007'],
     recommendedVerification:
-      'Obtain and review Lotus Bakery Patio camera (18:35–18:55) to determine whether Aarav Sharma stopped voluntarily along 2nd Cross.',
+      'Send forensic field team (Dr. Priya Krishnan) to inspect Indira Canal Culvert for tyre tread impressions or discarded items, and expedite CAM-016 video.',
     reviewStatus: 'Awaiting Investigator Review',
     investigatorNotes: [],
   },
   {
     id: 'LEAD-005',
-    title: 'Location with an important CCTV evidence gap.',
+    title: 'TRAP 3: CAM-008 Blind Spot Defeated via BMTC Bus #335E Roving Dashcam & Flanking Ring',
     caseId: 'CASE-SNT-2026-0042',
     priority: 'Priority 1 — Immediate Verification',
     category: 'Coverage Gap',
     observationSummary:
-      'Primary municipal camera at 80ft Link Junction Sub-lane North (CAM-008) covering the Kaveri East Pickup Lay-by was offline from 18:15 to 19:30 due to scheduled UPS feeder maintenance, and nearby Post Office Lane kiosk camera had its 24-hour loop overwritten.',
-    relatedEntities: ['CAM-008', 'CAM-011', 'CAM-005', 'CAM-009'],
+      'Offender exploited Smart Pole 08 (CAM-008) being offline for scheduled UPS battery maintenance (18:15–19:30). Sentinel defeated the blind spot by querying the Metro Transit AVL Grid, discovering that BMTC Smart Bus #KA-01-F-8821 (Route 335E) drove past Sub-lane B at 18:44:50 IST with its side-facing ADAS dashcam recording the White SUV idling in the pickup bay!',
+    relatedEntities: ['CAM-008', 'CAM-005', 'CAM-009', 'VEH-001'],
     supportingEvidence: [
-      'Smart Pole 08 Custodian Log: Confirmed NVR power-down between 18:15 and 19:30 IST on 02 Nov 2026.',
-      'EVD-002 & EVD-010: Both Aarav Sharma’s final phone registration (18:48) and Suresh Babu’s witness observation (18:45) fall directly inside the blind window.',
+      'BMTC Transit AVL + ADAS Dashcam Log: Bus #KA-01-F-8821 passed Sub-lane B mouth at 18:44:50 IST; side camera captures White Compact SUV with matte roof rails.',
+      'Closed-Ring Perimeter Cameras (CAM-001, CAM-003, CAM-005, CAM-009): Bound all entry and exit lanes around the CAM-008 blind zone.',
     ],
     contradictoryEvidence: [
-      'Grid maintenance work order for Smart Pole 08 was scheduled 5 days prior (28 Oct 2026), contradicting any hypothesis of deliberate camera tampering.',
+      'Fixed pole camera CAM-008 itself has zero recording during the 18:15–19:30 maintenance window.',
     ],
     alternativeExplanations: [
-      'Routine municipal power/UPS maintenance coincided with the incident window.',
+      'Scheduled municipal UPS maintenance was publicized on civic work-order boards 5 days prior.',
     ],
     limitations:
-      'Absence of video from the Sub-lane B pole means events at the pickup lay-by cannot be visually verified from that pole; secondary angles must be used.',
+      'Bus dashcam is a moving wide-angle lens (25 km/h pass); captures vehicle silhouette and roof rails clearly but not full rear plate.',
     evidenceReferences: ['EVD-002', 'EVD-010'],
     recommendedVerification:
-      'Prioritise collection from flanking cameras at 80ft Pedestrian Signal and Emerald Heights Gate-2 to reconstruct entry/exit from Sub-lane B.',
+      'Ingest raw ADAS dashcam container from BMTC Depot-4 and combine with flanking cameras CAM-005 and CAM-009.',
     reviewStatus: 'Awaiting Investigator Review',
     investigatorNotes: [],
   },
   {
     id: 'LEAD-006',
-    title: 'Potentially related observations across separate cases.',
+    title: 'TRAP 8: Cross-Jurisdiction Graph Links All 4 Cases (Faraday Theft, Route Trial, VoIP & Abduction)',
     caseId: 'CASE-SNT-2026-0042',
-    priority: 'Priority 3 — Routine Clarification',
+    priority: 'Priority 1 — Immediate Verification',
     category: 'Cross-Case Pattern',
     observationSummary:
-      'Cross-case index check indicates that the unattributed prepaid handset and a partial white SUV ANPR record (KA-00-SYN-4??) also appeared in the perimeter tower/ANPR dump of the Nandi Electronics Hub inquiry (24 Oct 2026, Mahadevapura Layout, 3.8 km east).',
-    relatedEntities: ['CASE-SNT-2026-0042', 'CASE-SNT-2026-0039', 'DEV-004', 'VEH-001'],
+      'Offender split preparation across 4 police jurisdictions hoping stations would not share data. Sentinel’s ICJS/CCTNS Cross-Case Graph links: (1) Case 0039 (24 Oct Nandi Electronics burglary where RF Faraday pouches were stolen — Burner DEV-004 + Karan Malhotra’s DEV-019 both present); (2) Case 0040 (29 Oct Outer Link corridor escape timing trial); (3) Case 0041 (31 Oct encrypted Wi-Fi VoIP drop test); and (4) Case 0042 (02 Nov Aarav Sharma abduction).',
+    relatedEntities: ['CASE-SNT-2026-0042', 'CASE-SNT-2026-0039', 'DEV-004', 'DEV-019', 'VEH-001'],
     supportingEvidence: [
-      'EVD-003 & Nandi Electronics Hub Archive: The prepaid handset registered in East Link Flyover Sector 09C on both 24 Oct 2026 (21:55) and 02 Nov 2026 (19:19).',
+      'Case 0039 Inventory + Tower Dump (24 Oct): 4 RF Faraday signal-blocking pouches stolen from Nandi Electronics Hub; Burner DEV-004 and Karan Malhotra’s phone DEV-019 moved together in Sector 09C.',
+      'Case 0040 & 0041 Logs (29 & 31 Oct): Same OUI Wi-Fi probe prefix and corridor timing pattern recorded.',
     ],
     contradictoryEvidence: [
-      'The Nandi Electronics Hub inquiry is a commercial warehouse intrusion with no known personal connection to Aarav Sharma.',
-      'Mahadevapura and East Link Flyover sit along the same primary commuter highway used by tens of thousands of daily motorists.',
+      'Each of the 4 incidents was originally registered under a different crime category across separate stations.',
     ],
     alternativeExplanations: [
-      'The holder of the prepaid handset may simply live or work near Mahadevapura Industrial Layout and commute daily via Kaveri Enclave / East Link Road.',
+      'Requires human supervisory verification to confirm whether all 4 incidents involve the same individual or an equipment fence.',
     ],
     limitations:
-      'Cross-case appearance in broad geographical dumps frequently reflects local residency or routine work routes rather than linked criminal activity.',
+      'Cross-case graph correlations are analytical leads requiring joint multi-station verification under ACP Meera Nair.',
     evidenceReferences: ['EVD-003', 'EVD-012'],
     recommendedVerification:
-      'Coordinate with Sub-Inspector Nikhil Gowda (assigned to the Nandi Electronics Hub case) to check whether the prepaid handset holder was already cleared as a local shift worker in that inquiry.',
+      'Convene joint task-force briefing with Sub-Inspector Nikhil Gowda (Case 0039) and Inspector Kavita Reddy (Case 0041) under ACP Meera Nair.',
     reviewStatus: 'Awaiting Investigator Review',
     investigatorNotes: [],
   },
@@ -2688,207 +2739,502 @@ export interface GuidedStageDefinition {
   stageNumber: number;
   id: string;
   title: string;
+  titleHi: string;
   subtitle: string;
+  subtitleHi: string;
   targetModule: string;
   durationSeconds: number;
   narration: string;
+  narrationHi: string;
   presenterScript: string;
+  presenterScriptHi: string;
   voiceScript: string[];
+  voiceScriptHi: string[];
+  voiceScriptHinglish: string[];
+  criminalMoveEn: string;
+  criminalMoveHi: string;
+  sentinelTrapEn: string;
+  sentinelTrapHi: string;
   systemBanner: string;
+  systemBannerHi: string;
   highlights: string[];
+  highlightsHi: string[];
 }
 
 export const GUIDED_STAGES: GuidedStageDefinition[] = [
   {
     stageNumber: 1,
     id: 'STAGE-1',
-    title: 'STAGE 1 — INCIDENT REGISTRATION',
-    subtitle: 'Structured Case Creation & Baseline Chronology',
+    title: 'STAGE 1 — INCIDENT REGISTRATION & MULTI-CASE LINK',
+    titleHi: 'चरण 1 — घटना का पंजीकरण और पुराने मामलों से जुड़ाव',
+    subtitle: 'Simple Story Start: When Aarav Goes Missing, Sentinel Connects 4 Cases Across the City',
+    subtitleHi: 'सरल शुरुआत: आरव शर्मा के लापता होते ही सिस्टम शहर के 4 अलग-अलग मामलों को जोड़ता है',
     targetModule: 'cases',
     durationSeconds: 38,
     narration:
-      'An investigation begins with a documented incident. Project Sentinel creates a structured case workspace where all subsequent evidence and investigative observations can be brought together.',
+      'Every investigation starts with one clear report. Project Sentinel immediately checks if similar tricks were used in other police station areas.',
+    narrationHi:
+      'हर जांच एक स्पष्ट रिपोर्ट से शुरू होती है। प्रोजेक्ट सेंटिनल तुरंत देखता है कि क्या यही तरीका शहर के किसी दूसरे थाने के केस में भी इस्तेमाल हुआ है।',
     presenterScript:
-      'Aarav Sharma goes missing at 6:30 PM after leaving the Kaveri Enclave library, and his sister Ananya Sharma files a complaint at 9:15 PM. Watch as Inspector Vikram Rao registers the case, anchoring the 6:30 PM last confirmed sighting onto the spatial map and unified timeline.',
+      'At 6:30 PM, software architect Aarav Sharma leaves the Kaveri Enclave library. By 9:15 PM, he has not come home and his phone is dead, so his sister Ananya Sharma files a complaint. Watch how Inspector Vikram Rao registers the case—and how Sentinel immediately checks 3 other cases across the city where the criminal practiced his plan.',
+    presenterScriptHi:
+      'शाम 6:30 बजे आरव शर्मा कावेरी एन्क्लेव लाइब्रेरी से निकलते हैं। रात 9:15 बजे तक घर न लौटने और फ़ोन बंद मिलने पर उनकी बहन अनन्या शर्मा शिकायत दर्ज कराती हैं। इंस्पेक्टर विक्रम राव जैसे ही केस दर्ज करते हैं, प्रोजेक्ट सेंटिनल शहर के 3 अन्य मामलों से भी इसके तार जोड़ना शुरू कर देता है।',
     voiceScript: [
       'Stage 1, Incident Registration.',
-      'Software architect Aarav Sharma is last seen leaving the Kaveri Enclave Community Library at 6:30 PM.',
-      'When he fails to return home and his phone stops responding, his sister Ananya Sharma files a missing person complaint at 9:15 PM.',
-      'Inspector Vikram Rao registers the case in Project Sentinel, creating a structured workspace that plots the incident location and anchors the baseline timeline.'
+      'Let us understand this case in simple words.',
+      'At 6:30 PM, Aarav Sharma leaves his neighborhood library, and by 6:48 PM his phone suddenly goes dead.',
+      'A smart criminal thinks police stations never share data, so he stole signal blocking bags in one area last week and tested his escape road in another area.',
+      'The moment Inspector Vikram Rao registers Aarav’s case, Project Sentinel connects all four police station cases on one screen.'
     ],
-    systemBanner: 'Incident registered — Aarav Sharma Missing Person Workspace Active',
+    voiceScriptHi: [
+      'चरण एक: घटना का पंजीकरण।',
+      'आइए इस पूरे मामले को बिल्कुल आसान शब्दों में समझते हैं।',
+      'शाम साढ़े छह बजे आरव शर्मा लाइब्रेरी से निकलते हैं, और छह बजकर अड़तालीस मिनट पर उनका फ़ोन अचानक बंद हो जाता है।',
+      'शातिर अपराधी सोचता है कि अलग-अलग पुलिस थाने आपस में डेटा साझा नहीं करते, इसलिए उसने एक हफ़्ते पहले दूसरे इलाके से सिग्नल रोकने वाला बैग चुराया था।',
+      'लेकिन जैसे ही इंस्पेक्टर विक्रम राव यह केस दर्ज करते हैं, प्रोजेक्ट सेंटिनल चारों थानों के रिकॉर्ड को एक साथ जोड़ देता है।'
+    ],
+    voiceScriptHinglish: [
+      'Charan Ek: Ghatna ka Panjeekaran.',
+      'Aaiye is poore maamle ko bilkul aasaan shabdon mein samajhte hain.',
+      'Shaam saadhe chhah baje Aarav Sharma library se nikalte hain, aur chhah bajkar adtaalis minute par unka phone achanak band ho jaata hai.',
+      'Shaatir apraadhi sochta hai ki alag alag police thaane aapas mein data share nahi karte, isliye usne ek hafte pehle doosre ilaake se signal rokne wala bag churaya tha.',
+      'Lekin jaise hi Inspector Vikram Rao yeh case darj karte hain, Project Sentinel chaaron thaanon ke record ko ek saath jod deta hai.'
+    ],
+    criminalMoveEn:
+      'Split preparation across 4 police stations: stole Faraday bags in Mahadevapura (24 Oct), tested escape route on Outer Link (29 Oct), tested Wi-Fi call drop in Ulsoor (31 Oct), and kidnapped Aarav in Kaveri Enclave (02 Nov).',
+    criminalMoveHi:
+      'अपराधी की चाल: पुलिस को चकमा देने के लिए 4 अलग-अलग थानों के इलाकों में तैयारी की—24 अक्टूबर को सिग्नल-ब्लॉकिंग बैग चुराया, 29 को रास्ता परखा, और 2 नवंबर को अपहरण किया।',
+    sentinelTrapEn:
+      'Sovereign ICJS / CCTNS National Graph automatically connects all 4 police stations the instant Case 0042 is registered.',
+    sentinelTrapHi:
+      'सेंटिनल का जाल: सरकारी नेशनल ग्रिड (ICJS/CCTNS) केस दर्ज होते ही चारों थानों के सुरागों को अपने-आप एक साथ जोड़ देता है।',
+    systemBanner: 'Incident Registered — Aarav Sharma Workspace & 4-Station Sovereign Grid Active',
+    systemBannerHi: 'केस पंजीकृत — आरव शर्मा जांच वर्कस्पेस और 4-थाना सरकारी ग्रिड सक्रिय',
     highlights: [
-      'Missing Person case registered for Aarav Sharma by Inspector Vikram Rao',
-      'Last confirmed sighting (18:30) and complaint receipt (21:15) anchored on timeline',
-      'Kaveri Enclave Sector-4 incident coordinates plotted on spatial intelligence grid',
+      'Aarav Sharma Missing Case registered by Inspector Vikram Rao',
+      'Automatically links 3 rehearsal cases across neighbouring police stations',
+      'Plots 6:30 PM last sighting & 9:15 PM family complaint on the master map',
+    ],
+    highlightsHi: [
+      'इंस्पेक्टर विक्रम राव द्वारा आरव शर्मा गुमशुदगी केस का पंजीकरण',
+      'आस-पास के थानों के 3 पुराने रिहर्सल मामलों से तुरंत जुड़ाव',
+      'शाम 6:30 की आखिरी लोकेशन और रात 9:15 की शिकायत नक्शे पर दर्ज',
     ],
   },
   {
     stageNumber: 2,
     id: 'STAGE-2',
-    title: 'STAGE 2 — MULTI-SOURCE EVIDENCE INGESTION',
-    subtitle: 'Provenance Tracking, Validation & Timeline Normalisation',
+    title: 'STAGE 2 — SOVEREIGN MULTI-SOURCE EVIDENCE FUSION',
+    titleHi: 'चरण 2 — सभी सरकारी स्रोतों और सबूतों का एकीकरण',
+    subtitle: 'Combining Phones, CCTV, Electricity Meters, FASTag & Bus Dashcams in One Place',
+    subtitleHi: 'मोबाइल, सीसीटीवी, बिजली मीटर, फास्टैग और बस कैमरों के सबूत एक ही टाइमलाइन पर',
     targetModule: 'workspace',
     durationSeconds: 42,
     narration:
-      'Evidence from different sources is organised into a common structure, helping investigators examine events together rather than independently.',
+      'A criminal can fake one clue, but nobody can fake telecom towers, home electricity meters, highway FASTag, and city bus cameras all at the same time.',
+    narrationHi:
+      'कोई अपराधी एक सबूत छिपा सकता है, लेकिन मोबाइल टावर, घर का बिजली मीटर, हाईवे फास्टैग और सरकारी बस के कैमरे—इन सबको एक साथ धोखा नहीं दे सकता।',
     presenterScript:
-      'As authorised records arrive—telecom tower dumps, CCTV containers, ANPR logs, and witness statements from Suresh Babu and Aditi Rao—Project Sentinel validates provenance, computes SHA-256 integrity hashes, and normalises timestamps into a single chronological structure.',
+      'With full government access, Project Sentinel pulls together telecom records, CCTV videos, BESCOM smart electricity meter logs, NHAI FASTag scans, UPI recharge timings, and city bus dashcams. Forensic Lead Dr. Priya Krishnan locks every original file with a digital seal so nothing can be tampered with.',
+    presenterScriptHi:
+      'पूर्ण सरकारी एक्सेस के साथ, प्रोजेक्ट सेंटिनल मोबाइल टावर, सीसीटीवी वीडियो, घर के स्मार्ट बिजली मीटर, हाईवे फास्टैग, यूपीआई रिचार्ज और सरकारी बसों के डैशकैम को एक साथ जोड़ता है। डॉ. प्रिया कृष्णन हर असली फाइल को डिजिटल लॉक (SHA-256) से सील करती हैं ताकि सबूत कोर्ट में पक्के रहें।',
     voiceScript: [
       'Stage 2, Multi Source Evidence Ingestion.',
-      'Evidence from different sources now flows into a common investigative structure.',
-      'As authorised telecom records, CCTV video containers, licence plate logs, and witness statements from Suresh Babu and Aditi Rao arrive, forensic lead Doctor Priya Krishnan seals each original file with a cryptographic hash.',
-      'Project Sentinel keeps working copies separate from immutable originals and aligns every timestamp on a single chronological timeline.'
+      'A smart criminal can hide from one system, but he cannot hide from every government system at once.',
+      'Project Sentinel brings together phone tower logs, street cameras, home smart electricity meters, highway Fast Tag sensors, and public bus dashcams.',
+      'Forensic specialist Doctor Priya Krishnan locks every original file with a digital fingerprint so the evidence is hundred percent tamper proof for court.'
     ],
-    systemBanner: 'Multi-Source Ingestion Complete — 12 Evidence Packages Hashed & Normalised',
+    voiceScriptHi: [
+      'चरण दो: सभी सरकारी सबूतों का एकीकरण।',
+      'एक चालाक अपराधी किसी एक सिस्टम से बच सकता है, लेकिन वह सभी सरकारी सिस्टम को एक साथ धोखा नहीं दे सकता।',
+      'प्रोजेक्ट सेंटिनल मोबाइल टावर, सड़क के कैमरे, घर के स्मार्ट बिजली मीटर, हाईवे फास्टैग और सरकारी बसों के कैमरों को एक जगह इकट्ठा करता है।',
+      'फॉरेंसिक विशेषज्ञ डॉक्टर प्रिया कृष्णन हर फाइल को डिजिटल सील से लॉक करती हैं ताकि कोर्ट में सबूतों के साथ कोई छेड़छाड़ न हो सके।'
+    ],
+    voiceScriptHinglish: [
+      'Charan Do: Sabhi Sarkari Sabooton ka Ekikaran.',
+      'Ek chaalaak apraadhi kisi ek system se bach sakta hai, lekin woh sabhi sarkari system ko ek saath dhokha nahi de sakta.',
+      'Project Sentinel mobile tower, sadak ke camere, ghar ke smart bijli meter, highway Fast Tag aur sarkari buson ke cameron ko ek jagah ikattha karta hai.',
+      'Forensic expert Doctor Priya Krishnan har file ko digital seal se lock karti hain taaki court mein saboot pakke rahein.'
+    ],
+    criminalMoveEn:
+      'Dropped Aarav’s phone into a signal-blocking Faraday bag at 6:48 PM so police would think the phone battery simply died.',
+    criminalMoveHi:
+      'अपराधी की चाल: शाम 6:48 बजे आरव का फ़ोन सिग्नल-ब्लॉकिंग (Faraday) बैग में डाल दिया ताकि पुलिस को लगे कि फ़ोन की बैटरी खत्म हो गई है।',
+    sentinelTrapEn:
+      'Telecom Baseband Trap detects an instant -40 dBm signal drop with zero "Good-Bye" power-off packet—proving the phone was forced into a signal-blocking bag at 6:48 PM.',
+    sentinelTrapHi:
+      'सेंटिनल का जाल: जब फ़ोन सामान्य रूप से बंद होता है तो टावर को अंतिम संदेश भेजता है। आरव का सिग्नल 6:48 पर बिना संदेश के अचानक कटा—जिससे साबित हो गया कि फ़ोन को सिग्नल-ब्लॉकिंग बैग में डाला गया।',
+    systemBanner: 'Sovereign Grid Ingestion Complete — 12 Evidence Packages Sealed with SHA-256',
+    systemBannerHi: 'सरकारी ग्रिड डेटा एकीकरण पूर्ण — 12 सबूत पैकेज डिजिटल सील (SHA-256) के साथ सुरक्षित',
     highlights: [
-      '7 Authorised Data Streams flowing into Central Evidence Ingestion Engine',
-      'Every record retains source, timestamp, provenance and authorisation reference',
-      'Original evidence files sealed with SHA-256 by Dr. Priya Krishnan; working copies generated',
+      'Combines Telecom, CCTV, BESCOM Smart Meter, FASTag & Bus Dashcam streams',
+      'Detects Faraday Bag signature on Aarav’s phone at 6:48 PM (no power-off packet)',
+      'Every original file sealed with SHA-256 by Dr. Priya Krishnan',
+    ],
+    highlightsHi: [
+      'टेलीकॉम, सीसीटीवी, स्मार्ट बिजली मीटर, फास्टैग और बस डैशकैम डेटा का संगम',
+      'शाम 6:48 पर आरव के फ़ोन को सिग्नल-ब्लॉकिंग बैग में डाले जाने की पहचान',
+      'डॉ. प्रिया कृष्णन द्वारा हर मूल सबूत की डिजिटल सीलिंग',
     ],
   },
   {
     stageNumber: 3,
     id: 'STAGE-3',
-    title: 'STAGE 3 — MOBILE INTELLIGENCE AND DEVICE CORRELATION',
-    subtitle: 'Approximate Cell-Sector Analysis & Exculpatory Filtering',
+    title: 'STAGE 3 — CATCHING THE FAKE HOME ALIBI & BURNER PHONE',
+    titleHi: 'चरण 3 — नकली "घर की अलीबी" और फर्जी सिम (Burner Phone) का पर्दाफाश',
+    subtitle: 'How Smart Electricity Meters & Rehearsal Logs Expose Karan Malhotra’s Trick',
+    subtitleHi: 'घर के स्मार्ट बिजली मीटर और पुरानी रिहर्सल से करण मल्होत्रा की चालाकी पकड़ी गई',
     targetModule: 'mobile-intelligence',
     durationSeconds: 48,
     narration:
-      'The system helps investigators identify patterns and associations in authorised records. These are investigative leads that require independent verification.',
+      'Leaving your real phone at home playing a video will not save you when Sentinel checks your home electricity meter and your past rehearsal trips.',
+    narrationHi:
+      'अपना असली फ़ोन घर पर वीडियो चलाकर छोड़ देने से कोई बच नहीं सकता, जब सेंटिनल घर के स्मार्ट बिजली मीटर और पुरानी रिहर्सल की जांच करता है।',
     presenterScript:
-      'Among 30 citizen phones in the corridor dump, most belong to routine residents like Deepak Murthy or Sneha Kulkarni. Aarav Sharma’s iPhone loses signal at 6:48 PM in Sector 04B. An unattributed prepaid handset overlaps across four consecutive sectors as an investigative lead, while resident Rohan Verma’s phone is automatically cleared by a westbound apartment gate log.',
+      'The suspect, Karan Malhotra, left his personal phone at home playing an auto-loop video on Wi-Fi so police would think he was at home, and carried a burner phone (DEV-004). Watch how Sentinel catches him: (1) His apartment BESCOM Smart Meter shows a flat 138-Watt standby line (fridge only—zero lights or AC used all evening), (2) his home phone stopped moving at 6:15 PM and the burner phone turned on 3 minutes later at 6:18 PM, and (3) on 24 October he accidentally carried both phones together!',
+    presenterScriptHi:
+      'संदिग्ध करण मल्होत्रा ने पुलिस को गुमराह करने के लिए अपना असली फ़ोन घर पर वाई-फाई वीडियो चलाकर मेज पर छोड़ दिया और वारदात में एक फर्जी प्रीपेड फ़ोन (DEV-004) ले गया। देखिए सेंटिनल ने उसे कैसे पकड़ा: (1) उसके घर के स्मार्ट बिजली मीटर ने पूरी शाम सिर्फ 138 वॉट (केवल फ्रिज—कोई बल्ब या एसी नहीं) दिखाया, (2) उसका असली फ़ोन शाम 6:15 पर हिलना बंद हुआ और ठीक 3 मिनट बाद 6:18 पर फर्जी फ़ोन चालू हुआ, और (3) 24 अक्टूबर की रिहर्सल में वह गलती से दोनों फ़ोन साथ ले गया था!',
     voiceScript: [
-      'Stage 3, Mobile Intelligence and Device Correlation.',
-      'Among thirty mobile phones recorded in the corridor tower dump, most belong to local residents and evening commuters.',
-      'Notice that Aarav Sharma’s iPhone loses network connection at 6:48 PM near the 80 Feet Road junction.',
-      'An unattributed prepaid phone appears across four consecutive cell sectors along the eastern corridor and is flagged as a lead for verification.',
-      'Just as importantly, resident Rohan Verma’s phone is automatically cleared because his apartment gate log proves he drove west toward Palm Grove Enclave at 6:55 PM.'
+      'Stage 3, Catching the Fake Home Alibi and Burner Phone.',
+      'Here the criminal tried a very clever trick.',
+      'Suspect Karan Malhotra left his real phone on his dining table at home playing a long video on Wi-Fi, and carried a secret prepaid phone to the crime scene.',
+      'But Project Sentinel caught him in three ways.',
+      'First, his apartment smart electricity meter showed only fridge standby power all evening, proving nobody was inside the house.',
+      'Second, his real phone stopped moving at 6:15 PM and the secret phone switched on just three minutes later.',
+      'And third, while innocent resident Rohan Verma is automatically cleared by his apartment gate log, Sentinel finds that Karan carried both phones together during his practice run last week.'
     ],
-    systemBanner: 'POTENTIAL INVESTIGATIVE ASSOCIATIONS IDENTIFIED',
+    voiceScriptHi: [
+      'चरण तीन: नकली घर की अलीबी और फर्जी फ़ोन का पर्दाफाश।',
+      'यहाँ अपराधी ने बहुत होशियारी दिखाने की कोशिश की।',
+      'संदिग्ध करण मल्होत्रा ने अपना असली फ़ोन घर की मेज पर वीडियो चलाकर छोड़ दिया ताकि पुलिस समझे कि वह घर पर था, और अपने साथ एक फर्जी सिम वाला फ़ोन ले गया।',
+      'लेकिन प्रोजेक्ट सेंटिनल ने उसकी यह चालाकी तीन तरीकों से पकड़ ली।',
+      'पहला, उसके घर के स्मार्ट बिजली मीटर से पता चला कि पूरी शाम घर में कोई लाइट या पंखा नहीं जला, केवल फ्रिज चल रहा था।',
+      'दूसरा, शाम सवा छह बजे उसका असली फ़ोन मेज पर रखा गया और ठीक तीन मिनट बाद फर्जी फ़ोन चालू हुआ।',
+      'और तीसरा, जहाँ निर्दोष निवासी रोहन वर्मा को गेट रिकॉर्ड से तुरंत क्लीन चिट मिल गई, वहीं चौबीस अक्टूबर की रिहर्सल में करण के दोनों फ़ोन एक साथ पकड़े गए।'
+    ],
+    voiceScriptHinglish: [
+      'Charan Teen: Nakli Ghar ki Alibi aur Farzi Phone ka Pardafaash.',
+      'Yahaan apraadhi ne bahut hoshiyari dikhaane ki koshish ki.',
+      'Suspect Karan Malhotra ne apna asli phone ghar ki table par video chala kar chhod diya taaki police samjhe ki woh ghar par tha, aur apne saath ek farzi SIM wala phone le gaya.',
+      'Lekin Project Sentinel ne uski yeh chaalaaki teen tareeqon se pakad li.',
+      'Pehla, uske ghar ke smart bijli meter se pata chala ki poori shaam ghar mein koi light ya AC nahi chala, sirf fridge chal raha tha.',
+      'Doosra, shaam sawa chhah baje uska asli phone table par rakha gaya aur theek teen minute baad farzi phone chalu hua.',
+      'Aur teesra, chaubees October ki rehearsal mein Karan apna asli phone aur farzi phone dono ek saath le gaya tha.'
+    ],
+    criminalMoveEn:
+      'Left personal phone (DEV-019) at home streaming video to fake an alibi, and carried an unlinked burner phone (DEV-004) with zero calls to the victim.',
+    criminalMoveHi:
+      'अपराधी की चाल: अपना असली फ़ोन घर पर वीडियो चलाकर छोड़ दिया ताकि घर पर होने का सबूत बने, और बिना कॉल किए फर्जी सिम (DEV-004) का इस्तेमाल किया।',
+    sentinelTrapEn:
+      'BESCOM Smart Meter (flat 138W draw) + 0.0m Tower Drift proves nobody was home, while 24 Oct dry-run logs link Burner DEV-004 directly to Karan Malhotra’s phone!',
+    sentinelTrapHi:
+      'सेंटिनल का जाल: घर के स्मार्ट बिजली मीटर (सिर्फ 138W) ने साबित किया कि घर खाली था, और 24 अक्टूबर के रिकॉर्ड ने फर्जी सिम को करण मल्होत्रा के असली फ़ोन से जोड़ दिया!',
+    systemBanner: 'FAKE HOME ALIBI EXPOSED — BURNER PHONE LINKED TO KARAN MALHOTRA',
+    systemBannerHi: 'नकली अलीबी बेनकाब — फर्जी प्रीपेड फ़ोन का संबंध करण मल्होत्रा से जुड़ा',
     highlights: [
-      'Cell-sector footprints displayed as approximate 450m–800m coverage areas (never exact GPS)',
-      'Unattributed prepaid handset identified across 4 sectors with explicit alternative explanations',
-      'Rohan Verma’s phone automatically cleared via 18:55 westbound apartment gate log',
+      'Exposes Karan Malhotra’s fake home alibi via BESCOM Smart Meter (flat 138W) & zero phone movement',
+      'Links Burner Phone (DEV-004) to Karan Malhotra via 24 Oct warehouse rehearsal trip',
+      'Automatically clears innocent resident Rohan Verma via 6:55 PM westbound gate entry',
+    ],
+    highlightsHi: [
+      'स्मार्ट बिजली मीटर (138W फ्लैटलाइन) से करण मल्होत्रा के घर पर होने का झूठ पकड़ा गया',
+      '24 अक्टूबर की रिहर्सल से फर्जी सिम (DEV-004) और करण के असली फ़ोन का मिलान',
+      'निर्दोष निवासी रोहन वर्मा को शाम 6:55 के गेट एंट्री लॉग से तुरंत क्लीन चिट',
     ],
   },
   {
     stageNumber: 4,
     id: 'STAGE-4',
-    title: 'STAGE 4 — CCTV CAMERA DISCOVERY',
-    subtitle: 'Spatial Registry Search, Coverage Cones & Preservation Requests',
+    title: 'STAGE 4 — DEFEATING THE CCTV BLIND SPOT WITH CITY BUS CAMERAS',
+    titleHi: 'चरण 4 — सरकारी बस के डैशकैम और घेराबंदी से सीसीटीवी ब्लाइंड-स्पॉट की हार',
+    subtitle: 'The Criminal Chose a Dead Camera Pole—Sentinel Caught Him on a Passing BMTC Bus Camera',
+    subtitleHi: 'अपराधी ने बंद कैमरे वाली गली चुनी—सेंटिनल ने वहां से गुजरती सरकारी बस के कैमरे से उसे पकड़ लिया',
     targetModule: 'location-intelligence',
     durationSeconds: 48,
     narration:
-      'Instead of manually identifying camera locations, investigators can use the camera registry and incident geography to identify cameras that may contain relevant footage.',
+      'Even when a street camera is turned off for battery repair, Project Sentinel surrounds the area with flanking cameras and passing city bus dashcams.',
+    narrationHi:
+      'अगर गली का फिक्स कैमरा बैटरी रिपेयर के कारण बंद भी हो, तो प्रोजेक्ट सेंटिनल आस-पास के कैमरों और वहां से गुजरती सरकारी बसों के कैमरों से अपराधी को घेर लेता है।',
     presenterScript:
-      'Inspector Vikram Rao selects the Kaveri Enclave incident point, sets the 6:15 PM to 7:45 PM window, and runs a geographic corridor search. 20 municipal, commercial, and residential cameras appear with directional field-of-view cones, retention windows, and one-click preservation request generation.',
+      'The criminal scouted Sub-lane B beforehand and saw a municipal notice that Camera 008 would be offline from 6:15 PM to 7:30 PM for battery repair. He staged the kidnapping right in that blind spot at 6:45 PM. Watch how Sentinel traps him: (1) It locks all surrounding entry/exit cameras so no car can escape unseen, and (2) it checks city bus GPS logs and finds that BMTC Bus 335E drove past that exact lane at 6:44:50 PM—filming the White SUV waiting in the blind spot!',
+    presenterScriptHi:
+      'अपराधी ने पहले से रेकी कर ली थी कि सब-लेन B का कैमरा (CAM-008) शाम 6:15 से 7:30 तक बैटरी मरम्मत के लिए बंद रहेगा। उसने ठीक 6:45 बजे उसी अंधे कोने में वारदात की। देखिए सेंटिनल का जाल: (1) सिस्टम ने गली के चारों तरफ के एंट्री-एग्जिट कैमरे लॉक कर दिए, और (2) सरकारी बस जीपीएस ग्रिड से पता लगाया कि BMTC बस नंबर 335E ठीक 6:44:50 पर वहां से गुजरी थी—जिसके साइड कैमरे में सफेद एसयूवी साफ रिकॉर्ड हो गई!',
     voiceScript: [
-      'Stage 4, C C T V Camera Discovery.',
-      'Instead of manually hunting for cameras street by street, Inspector Vikram Rao searches the spatial camera registry along the eastern road corridor.',
-      'Twenty municipal, commercial, and residential cameras appear on the map with their viewing angles and retention periods.',
-      'The platform immediately highlights that the pickup lay-by camera was offline for scheduled battery maintenance, and generates urgent preservation requests for the flanking cameras before their footage is overwritten.'
+      'Stage 4, Defeating the Camera Blind Spot.',
+      'The criminal thought he was very smart because he saw a notice that the pickup lane camera would be switched off for battery repair between 6:15 PM and 7:30 PM.',
+      'So he picked up Aarav right inside that camera blind spot at 6:45 PM.',
+      'How did Project Sentinel beat him?',
+      'First, Sentinel created a closed ring using all surrounding street and apartment gate cameras so no car could enter or leave unseen.',
+      'Second, Sentinel checked government city bus GPS records and discovered that a smart city bus drove right past that lane at 6:44 PM, and the bus’s side camera recorded the white S U V waiting inside the blind spot!'
     ],
-    systemBanner: '20 Corridor Cameras Discovered — Priority Preservation Requests Generated',
+    voiceScriptHi: [
+      'चरण चार: सीसीटीवी ब्लाइंड स्पॉट के जाल को तोड़ना।',
+      'अपराधी ने सोचा था कि वह बहुत होशियार है क्योंकि उसने देख लिया था कि पिकअप गली का सरकारी कैमरा बैटरी रिपेयर के कारण बंद है।',
+      'इसलिए उसने शाम पौने सात बजे ठीक उसी बंद कैमरे के नीचे वारदात को अंजाम दिया।',
+      'लेकिन प्रोजेक्ट सेंटिनल ने उसे कैसे पकड़ा?',
+      'पहला, सेंटिनल ने उस गली के चारों ओर लगे सभी चौराहों और अपार्टमेंट के कैमरों से घेराबंदी कर ली ताकि कोई गाड़ी बिना दिखे बाहर न निकल सके।',
+      'दूसरा, सेंटिनल ने सरकारी बसों का जीपीएस चेक किया और पाया कि ठीक उसी वक्त एक सिटी बस वहां से गुजरी थी, जिसके साइड कैमरे में वह सफेद एसयूवी साफ रिकॉर्ड हो गई!'
+    ],
+    voiceScriptHinglish: [
+      'Charan Chaar: CCTV Blind Spot ke jaal ko todna.',
+      'Apraadhi ne socha tha ki woh bahut hoshiyaar hai kyunki usne dekh liya tha ki pickup gali ka sarkari camera battery repair ke kaaran band hai.',
+      'Isliye usne shaam paune saat baje theek usi band camere ke neeche vaardaat ki.',
+      'Lekin Project Sentinel ne use kaise pakda?',
+      'Pehla, Sentinel ne us gali ke chaaron aur lage sabhi chauraahon aur apartment ke cameron se gherabandi kar li.',
+      'Doosra, Sentinel ne sarkari buson ka GPS check kiya aur paaya ki theek usi waqt ek city bus wahaan se guzri thi, jiske side camere mein woh safed SUV saaf record ho gayi!'
+    ],
+    criminalMoveEn:
+      'Exploited scheduled UPS battery outage on Camera 008 (6:15–7:30 PM) to stage the pickup in a camera blind spot at 6:45 PM.',
+    criminalMoveHi:
+      'अपराधी की चाल: कैमरा 008 की बैटरी मरम्मत (6:15–7:30 PM) का फायदा उठाकर ठीक 6:45 बजे कैमरे के ब्लाइंड-स्पॉट में अपहरण किया।',
+    sentinelTrapEn:
+      'Queries Government Transit Bus Grid: BMTC Bus #335E drove past Sub-lane B at 6:44:50 PM and its ADAS side-camera filmed the White SUV inside the blind spot!',
+    sentinelTrapHi:
+      'सेंटिनल का जाल: सरकारी बस ग्रिड की जांच से पता चला कि BMTC बस 335E ठीक 6:44:50 पर वहां से गुजरी और बस के साइड कैमरे ने ब्लाइंड-स्पॉट में खड़ी सफेद SUV को रिकॉर्ड कर लिया!',
+    systemBanner: 'BLIND SPOT DEFEATED — BMTC BUS #335E DASHCAM + 20 FLANKING CAMERAS LOCKED',
+    systemBannerHi: 'ब्लाइंड-स्पॉट विफल — सरकारी बस #335E डैशकैम और 20 घेराबंदी कैमरों से पहचान',
     highlights: [
-      'Interactive geographic radius and corridor boundary search across 20 cameras',
-      'Identifies critical coverage gap at Pickup Lay-by camera (UPS maintenance 18:15–19:30)',
-      'Generates formal CCTV Footage Requests with preservation deadlines',
+      'Surrounds offline Camera 008 with a closed ring of 20 flanking corridor cameras',
+      'Captures the blind spot using passing BMTC City Bus #335E ADAS side-camera at 6:44:50 PM',
+      'Dispatches instant preservation orders before short 7-day shop cameras overwrite',
+    ],
+    highlightsHi: [
+      'बंद कैमरे (CAM-008) के चारों ओर 20 कैमरों का सुरक्षा घेरा',
+      'शाम 6:44:50 पर वहां से गुजरती BMTC बस #335E के साइड-कैमरे से ब्लाइंड-स्पॉट की रिकॉर्डिंग',
+      'दुकानों के फुटेज डिलीट होने से पहले तुरंत सरकारी संरक्षण आदेश जारी',
     ],
   },
   {
     stageNumber: 5,
     id: 'STAGE-5',
-    title: 'STAGE 5 — CCTV FOOTAGE REVIEW AND ANALYSIS',
-    subtitle: 'Integrity-Verified Video Inspection & Observation Extraction',
+    title: 'STAGE 5 — BEATING MUDDY PLATES & HEADLIGHT GLARE',
+    titleHi: 'चरण 5 — कीचड़ लगे नंबर प्लेट और हेडलाइट की चमक के बावजूद गाड़ी की पहचान',
+    subtitle: 'How Wheel Sensors, FASTag Gantries & Roof-Rail Marks Catch the Chameleon SUV',
+    subtitleHi: 'टायर सेंसर (TPMS), फास्टैग एंटीना और गाड़ी के निशानों से सफेद एसयूवी की पक्की पहचान',
     targetModule: 'cctv-intelligence',
     durationSeconds: 45,
     narration:
-      'Once footage is obtained through authorised channels, the platform helps investigators review, document and connect relevant observations while preserving the original footage.',
+      'A criminal can splash mud on a number plate or shine headlights at a camera, but he cannot hide his car’s wireless tyre sensors or FASTag gantry alert.',
+    narrationHi:
+      'अपराधी नंबर प्लेट पर कीचड़ लगा सकता है या कैमरे पर तेज लाइट मार सकता है, लेकिन अपनी गाड़ी के पहियों के वायरलेस सेंसर और फास्टैग एंटीना से नहीं बच सकता।',
     presenterScript:
-      'Inside the video review workspace, original video files remain locked while Inspector Vikram Rao logs observations. At 7:02 PM at 27th Main Signal, a white compact SUV is observed moving east. At 7:18 PM at East Link Flyover, a visually similar white SUV ascends the ramp. At 7:25 PM on the South Bus Corridor, no relevant activity is found.',
+      'To defeat number-plate cameras, the criminal splashed mud over his plate at 27th Main Signal (7:02 PM) and used bright high-beam glare on the East Link Flyover ramp (7:18 PM), plus peeled off his FASTag sticker. Watch how Sentinel catches him: (1) Smart poles read the car’s wireless Tyre Pressure Sensors (TPMS-HEX-88A4) at both signals, proving it is the exact same SUV, and (2) out of 412 cars on the flyover, his car was the ONLY one to trigger a "Ghost FASTag Alert"!',
+    presenterScriptHi:
+      'कैमरों से बचने के लिए अपराधी ने नंबर प्लेट पर कीचड़ लगा दिया, फ्लाईओवर कैमरे पर पीछे से तेज हेडलाइट की चमक मारी और विंडशील्ड से फास्टैग स्टीकर भी उखाड़ दिया। देखिए सेंटिनल ने उसे कैसे पकड़ा: (1) दोनों चौराहों के स्मार्ट पोल ने गाड़ी के पहियों में लगे वायरलेस टायर सेंसर (TPMS-HEX-88A4) का सिग्नल पकड़ लिया, और (2) फ्लाईओवर से गुजरी 412 गाड़ियों में से केवल इसी गाड़ी ने "बिना फास्टैग अलर्ट" (Ghost Tag Exception) ट्रिगर किया!',
     voiceScript: [
-      'Stage 5, C C T V Footage Review and Analysis.',
-      'Once video footage arrives from camera custodians, investigators inspect key time segments while the original files remain cryptographically locked.',
-      'At 7:02 PM at the 27th Main junction, a white compact S U V is observed moving east with a partially visible registration plate.',
-      'Sixteen minutes later, at 7:18 PM, a visually similar white S U V is seen ascending the East Link Flyover ramp, while the southern bus corridor camera confirms no relevant activity.'
+      'Stage 5, Beating Muddy Number Plates and Headlight Glare.',
+      'To fool automatic number plate cameras, the criminal splashed mud on his plate at the 7:02 PM signal, shone bright headlights into the 7:18 PM flyover camera, and even peeled off his Fast Tag sticker.',
+      'How did Project Sentinel catch the vehicle anyway?',
+      'First, modern cars have wireless tyre pressure sensors inside all four wheels.',
+      'Smart poles at both junctions read the exact same four wheel sensor codes, proving hundred percent that the 7:02 PM and 7:18 PM white S U Vs are the same car.',
+      'Second, out of four hundred twelve cars on the flyover, his car was the only one with a missing Fast Tag chip, instantly flagging it on the highway grid!'
     ],
-    systemBanner: 'POTENTIALLY RELATED VEHICLE OBSERVATIONS — MANUAL VERIFICATION REQUIRED.',
+    voiceScriptHi: [
+      'चरण पांच: कीचड़ लगी नंबर प्लेट और हेडलाइट की चमक को मात देना।',
+      'नंबर प्लेट पढ़ने वाले कैमरों से बचने के लिए अपराधी ने अपनी प्लेट पर कीचड़ लगा दिया, फ्लाईओवर कैमरे पर तेज लाइट मारी और कार से फास्टैग स्टीकर भी हटा दिया।',
+      'फिर प्रोजेक्ट सेंटिनल ने उस गाड़ी को कैसे पकड़ा?',
+      'पहला, आजकल की गाड़ियों के चारों पहियों में हवा बताने वाले वायरलेस सेंसर लगे होते हैं।',
+      'दोनों चौराहों के स्मार्ट खंभों ने पहियों का एक ही कोड पढ़ा, जिससे सौ प्रतिशत साबित हो गया कि सात बजकर दो मिनट और सात बजकर अठारह मिनट वाली सफेद एसयूवी एक ही गाड़ी है।',
+      'दूसरा, फ्लाईओवर की चार सौ बारह गाड़ियों में से सिर्फ इसी गाड़ी में फास्टैग चिप नहीं मिली, जिससे इसकी चालाकी ही इसका सबसे बड़ा सबूत बन गई!'
+    ],
+    voiceScriptHinglish: [
+      'Charan Paanch: Keechad lagi number plate aur headlight ki chamak ko maat dena.',
+      'Number plate padhne wale cameron se bachne ke liye apraadhi ne apni plate par keechad laga diya, flyover camere par tez light maari aur car se Fast Tag sticker bhi hata diya.',
+      'Phir Project Sentinel ne us gaadi ko kaise pakda?',
+      'Pehla, aajkal ki gaadiyon ke chaaron pahiyon mein wireless tyre sensor lage hote hain.',
+      'Dono chauraahon ke smart poles ne pahiyon ka ek hi code padha, jisse sau pratishat saabit ho gaya ki dono safed SUV ek hi gaadi hain.',
+      'Doosra, flyover ki chaar sau baarah gaadiyon mein se sirf isi gaadi mein Fast Tag chip nahi mili, jisse iski chaalaaki hi iska sabse bada saboot ban gayi!'
+    ],
+    criminalMoveEn:
+      'Used mud on the rear plate, high-beam glare on the flyover camera, and peeled off the windshield FASTag sticker so ANPR could not read the vehicle.',
+    criminalMoveHi:
+      'अपराधी की चाल: नंबर प्लेट पर कीचड़ लगाया, कैमरे पर तेज हेडलाइट की चमक मारी और फास्टैग स्टीकर उखाड़ दिया ताकि गाड़ी पहचान में न आए।',
+    sentinelTrapEn:
+      'Smart Poles capture the SUV’s 433MHz wireless wheel sensors (TPMS-HEX-88A4) at both junctions, and the Flyover gantry flags the ONLY car with a missing FASTag ("Ghost Tag Alert")!',
+    sentinelTrapHi:
+      'सेंटिनल का जाल: स्मार्ट खंभों ने गाड़ी के पहियों के वायरलेस सेंसर (TPMS) को दोनों चौराहों पर पकड़ लिया और फ्लाईओवर एंटीना ने बिना फास्टैग वाली इकलौती गाड़ी को तुरंत फ्लैग कर दिया!',
+    systemBanner: 'CHAMELEON SUV MATCHED — WHEEL TPMS SENSORS & GHOST-FASTAG ALERT VERIFIED',
+    systemBannerHi: 'सफेद एसयूवी की पहचान पक्की — टायर सेंसर (TPMS) और घोस्ट-फास्टैग अलर्ट से मिलान',
     highlights: [
-      '27th Main Signal (19:02): Unidentified White Compact SUV moving east',
-      'East Link Flyover (19:18): Visually similar White SUV ascending highway ramp',
-      'South Bus Bay (19:25): Documented negative observation bounding the southern corridor',
+      'Matches wireless wheel sensors (TPMS-HEX-88A4) at 7:02 PM (27th Main) and 7:18 PM (Flyover)',
+      'Flags the sole "Ghost FASTag Exception" (1 of 412 vehicles with peeled-off tag)',
+      'Matches physical roof-rail crossbars and left fog-lamp scuff across cameras',
+    ],
+    highlightsHi: [
+      'शाम 7:02 और 7:18 दोनों जगह गाड़ी के पहियों के वायरलेस सेंसर (TPMS) का 100% मिलान',
+      'फ्लाईओवर की 412 गाड़ियों में से बिना फास्टैग वाली इकलौती संदिग्ध गाड़ी की पहचान',
+      'छत की काले रंग की रेलिंग और बाएं फॉग-लैंप के निशान का दोनों कैमरों में मिलान',
     ],
   },
   {
     stageNumber: 6,
     id: 'STAGE-6',
-    title: 'STAGE 6 — VEHICLE INTELLIGENCE',
-    subtitle: 'Multi-Camera Sighting Comparison & Exclusion Verification',
+    title: 'STAGE 6 — SOLVING THE 16-MINUTE HIDDEN CANAL STOP & CLEARING INNOCENTS',
+    titleHi: 'चरण 6 — 16 मिनट के गुप्त ठहराव का राज़ और निर्दोष लोगों को तुरंत राहत',
+    subtitle: 'Why a 4-Minute Drive Took 16 Minutes—And How Innocent Drivers Are Protected',
+    subtitleHi: '4 मिनट के रास्ते में 16 मिनट क्यों लगे—और निर्दोष ड्राइवरों को सिस्टम ने कैसे बचाया',
     targetModule: 'vehicle-intelligence',
     durationSeconds: 42,
     narration:
-      'Vehicle observations from different evidence sources can be brought together for comparison and manual verification.',
+      'When the criminal hid for 12 minutes in a side lane to break tracking, his burner phone paused in that exact canal lane—proving where he stopped.',
+    narrationHi:
+      'जब अपराधी ट्रैकिंग तोड़ने के लिए 12 मिनट तक नहर वाली गली में छिपा रहा, तो उसका फर्जी फ़ोन भी ठीक उसी पुलिया के पास रुका रहा—जिससे उसके छिपने की जगह पकड़ी गई।',
     presenterScript:
-      'Project Sentinel compares all 8 corridor vehicles side by side. It links the 7:02 PM and 7:18 PM white SUV sightings for manual verification without inventing path lines between them, while proving that Naveen Kumar’s airport cab turned south and Doctor Sanjay Kulkarni’s grey sedan stayed parked at Apex Clinic.',
+      'The distance between 27th Main (7:02 PM) and East Link Flyover (7:18 PM) is just 1.1 km—normally a 4-minute drive. The criminal hid for 12 minutes in the Indira Canal culvert so he could claim the two camera sightings were different cars. Sentinel traps him by showing that Burner Phone DEV-004 also paused stationary at that exact canal culvert from 7:04 PM to 7:16 PM! At the same time, Sentinel clears Naveen Kumar’s airport cab and Dr. Sanjay Kulkarni’s parked clinic car.',
+    presenterScriptHi:
+      '27वें मेन (7:02 PM) से ईस्ट लिंक फ्लाईओवर (7:18 PM) की दूरी सिर्फ 1.1 किमी है—जो महज 4 मिनट का रास्ता है। अपराधी 12 मिनट तक इंदिरा नहर की पुलिया के पास छिपा रहा ताकि वह कह सके कि दोनों कैमरों में दिखी गाड़ियां अलग-अलग हैं। सेंटिनल ने तीन टावरों के सिग्नल से साबित कर दिया कि फर्जी फ़ोन (DEV-004) भी शाम 7:04 से 7:16 तक ठीक उसी नहर की पुलिया पर रुका हुआ था! साथ ही कैब ड्राइवर नवीन कुमार और डॉ. संजय कुलकर्णी की गाड़ी को निर्दोष साबित किया।',
     voiceScript: [
-      'Stage 6, Vehicle Intelligence.',
-      'Vehicle observations from across the corridor are brought together for structured comparison.',
-      'Project Sentinel compares the 7:02 PM and 7:18 PM white S U V sightings side by side, explicitly noting that the sixteen minute travel time over one point one kilometres requires intermediate camera verification.',
-      'At the same time, it rules out innocent motorists, proving that Naveen Kumar’s white airport cab turned south toward Hosur Road, and that Doctor Sanjay Kulkarni’s dark grey sedan remained parked outside Apex Clinic.'
+      'Stage 6, Solving the Sixteen Minute Hidden Stop and Protecting Innocent Drivers.',
+      'Normally it takes only four minutes to drive from 27th Main to the flyover, but the white S U V took sixteen minutes.',
+      'The criminal pulled into a dark canal lane for twelve minutes so he could argue in court that the two camera sightings were two different cars.',
+      'Project Sentinel caught this trick by triangulating three cell towers, proving that the secret burner phone also stopped dead inside that exact canal lane from 7:04 PM to 7:16 PM.',
+      'At the same time, Sentinel protects innocent citizens by proving that Naveen Kumar’s white airport cab turned south, and Doctor Sanjay Kulkarni’s grey car stayed parked at his clinic.'
     ],
-    systemBanner: 'Vehicle Sightings Correlated — Naveen Kumar’s Cab & Dr. Kulkarni’s Sedan Excluded',
+    voiceScriptHi: [
+      'चरण छह: सोलह मिनट के गुप्त ठहराव का राज़ और निर्दोष लोगों की सुरक्षा।',
+      'सत्ताईसवें मेन से फ्लाईओवर तक जाने में सामान्य तौर पर सिर्फ चार मिनट लगते हैं, लेकिन इस सफेद एसयूवी को सोलह मिनट लगे।',
+      'अपराधी बारह मिनट के लिए नहर की सुनसान गली में रुक गया था ताकि वह कोर्ट में कह सके कि दोनों कैमरों में दिखी गाड़ियां अलग-अलग हैं।',
+      'प्रोजेक्ट सेंटिनल ने तीन मोबाइल टावरों की मदद से साबित कर दिया कि अपराधी का फर्जी फ़ोन भी सात बजकर चार मिनट से सात बजकर सोलह मिनट तक ठीक उसी नहर की पुलिया पर रुका हुआ था।',
+      'साथ ही सिस्टम ने कैब ड्राइवर नवीन कुमार और डॉक्टर संजय कुलकर्णी की खड़ी गाड़ी को निर्दोष साबित करके आम नागरिकों को परेशान होने से बचाया।'
+    ],
+    voiceScriptHinglish: [
+      'Charan Chhah: Solah minute ke gupt thehraav ka raaz aur nirdosh logon ki suraksha.',
+      '27th Main se flyover tak jaane mein aam taur par sirf chaar minute lagte hain, lekin is safed SUV ko solah minute lage.',
+      'Apraadhi baarah minute ke liye nahar ki sunsaan gali mein ruk gaya tha taaki woh keh sake ki dono cameron mein dikhi gaadiyan alag alag hain.',
+      'Project Sentinel ne teen mobile toweron ki madad se saabit kar diya ki apraadhi ka farzi phone bhi theek usi nahar ki puliya par baarah minute tak ruka hua tha.',
+      'Saath hi system ne cab driver Naveen Kumar aur Doctor Sanjay Kulkarni ki gaadi ko nirdosh saabit kiya.'
+    ],
+    criminalMoveEn:
+      'Stopped for 12 minutes in an unmonitored canal culvert so a 4-minute drive took 16 minutes (7:02–7:18 PM), hoping to break time-distance tracking.',
+    criminalMoveHi:
+      'अपराधी की चाल: 4 मिनट के रास्ते में 12 मिनट नहर की गली में छिपकर 16 मिनट लगाए (7:02–7:18 PM), ताकि समय के अंतर से पुलिस भ्रमित हो जाए।',
+    sentinelTrapEn:
+      '3-Tower Signal Triangulation proves Burner Phone DEV-004 paused stationary at the exact Indira Canal Culvert from 7:04 to 7:16 PM!',
+    sentinelTrapHi:
+      'सेंटिनल का जाल: 3 टावरों के ट्रायंगुलेशन ने पकड़ लिया कि फर्जी फ़ोन (DEV-004) भी शाम 7:04 से 7:16 तक ठीक उसी इंदिरा नहर की पुलिया पर रुका था!',
+    systemBanner: '16-MIN CANAL STOP PINPOINTED — INNOCENT CAB & CLINIC CAR CLEARED',
+    systemBannerHi: '16 मिनट के नहर स्टॉप की सटीक पहचान — निर्दोष कैब और क्लिनिक कार को क्लीन चिट',
     highlights: [
-      'Side-by-side comparison of 19:02 (27th Main) and 19:18 (East Link Flyover) White SUVs',
-      'Explicitly highlights the 16-minute transit anomaly over 1.1 km',
-      'Excludes Naveen Kumar’s airport cab and Dr. Sanjay Kulkarni’s parked clinic sedan',
+      'Pinpoints the 12-minute hidden stop at Indira Canal Culvert (7:04–7:16 PM)',
+      'Reconciles witness Aditi Rao’s "grey car" sighting using Dr. Kulkarni’s parked clinic car',
+      'Clears Naveen Kumar’s white airport shuttle via southbound highway ANPR',
+    ],
+    highlightsHi: [
+      'इंदिरा नहर पुलिया पर 12 मिनट के गुप्त ठहराव (7:04–7:16 PM) का भंडाफोड़',
+      'डॉ. कुलकर्णी की खड़ी ग्रे कार से चश्मदीद अदिति राव के बयान का समाधान',
+      'कैब ड्राइवर नवीन कुमार की सफेद टैक्सी को साउथ-बाउंड कैमरे से क्लीन चिट',
     ],
   },
   {
     stageNumber: 7,
     id: 'STAGE-7',
-    title: 'STAGE 7 — AI INVESTIGATION ENGINE AND LEAD SHORTLISTING',
-    subtitle: 'Explainable Leads, Contradictory Evidence & Alternative Explanations',
+    title: 'STAGE 7 — EXPLAINABLE AI LEADS & HUMAN OFFICER CONTROL',
+    titleHi: 'चरण 7 — पारदर्शी एआई (AI) सुराग और पुलिस अधिकारी का अंतिम निर्णय',
+    subtitle: 'AI Connects Every Clue & Counter-Trap—But Human Officers Always Make the Call',
+    subtitleHi: 'एआई (AI) सारे सबूत और जाल जोड़ता है—लेकिन अंतिम फैसला हमेशा पुलिस अधिकारी का होता है',
     targetModule: 'ai-engine',
     durationSeconds: 50,
     narration:
-      'The AI engine does not determine guilt. It helps investigators identify evidence relationships, prioritise verification and examine alternative explanations.',
+      'Project Sentinel’s AI never declares anyone guilty on its own. It shows every clue, every limitation, and every innocent possibility for officers to verify.',
+    narrationHi:
+      'प्रोजेक्ट सेंटिनल का एआई खुद किसी को दोषी घोषित नहीं करता। यह हर सबूत, उसकी सीमा और निर्दोष होने की संभावना को अधिकारी के सामने रखता है।',
     presenterScript:
-      'Watch how the AI Investigation Engine synthesizes observations into six candidate leads for Inspector Vikram Rao and ACP Meera Nair—never generating a guilt score or suspect probability. Every lead presents supporting evidence, contradictory evidence, plausible innocent explanations, and recommended human verification steps.',
+      'Here in the AI Investigation Engine, all 6 Sovereign Traps are presented clearly for Inspector Vikram Rao and Senior Officer ACP Meera Nair. Notice that there is no "guilt percentage" or automatic arrest trigger. Every lead shows supporting evidence, contradictory evidence, innocent explanations, and the exact field verification step required.',
+    presenterScriptHi:
+      'एआई इन्वेस्टिगेशन इंजन में इंस्पेक्टर विक्रम राव और वरिष्ठ अधिकारी एसीपी मीरा नायर के सामने सभी 6 मुख्य सुराग और "सेंटिनल ट्रैप" स्पष्ट रूप से रखे जाते हैं। यहाँ कोई मशीनी "दोषी प्रतिशत" नहीं है—हर सुराग के साथ पक्ष के सबूत, विपक्ष के सबूत और अगली जमीनी जांच के कदम दिए गए हैं।',
     voiceScript: [
-      'Stage 7, A I Investigation Engine and Lead Shortlisting.',
-      'The A I engine in Project Sentinel never predicts guilt or assigns suspect scores.',
-      'Instead, it synthesizes multi-source observations into six structured investigative leads for Inspector Vikram Rao and A C P Meera Nair.',
-      'Every single lead displays supporting evidence alongside contradictory evidence, plausible innocent explanations, and concrete next steps for human verification.'
+      'Stage 7, Explainable A I Leads and Human Officer Control.',
+      'Project Sentinel brings all six counter traps together into clear investigative leads for Inspector Vikram Rao and A C P Meera Nair.',
+      'Very importantly, this system never labels anyone guilty automatically.',
+      'For every single lead, it shows the supporting evidence, any contradictory evidence, possible innocent explanations, and what the police officer should verify next on the ground.'
     ],
-    systemBanner: '6 Candidate Investigative Leads Generated — Awaiting Human Officer Review',
+    voiceScriptHi: [
+      'चरण सात: पारदर्शी एआई सुराग और पुलिस अधिकारी का नियंत्रण।',
+      'प्रोजेक्ट सेंटिनल अब सभी छह जालों और सबूतों को जोड़कर इंस्पेक्टर विक्रम राव और एसीपी मीरा नायर के सामने छह स्पष्ट सुराग रखता है।',
+      'सबसे खास बात यह है कि यह कंप्यूटर सिस्टम कभी खुद किसी को अपराधी घोषित नहीं करता।',
+      'हर सुराग के साथ यह समर्थन करने वाले सबूत, विपरीत तथ्य और अगली जमीनी जांच के कदम दिखाता है ताकि अंतिम फैसला हमेशा पुलिस अधिकारी का ही रहे।'
+    ],
+    voiceScriptHinglish: [
+      'Charan Saat: Paardarshi A I Suraag aur Police Adhikari ka Niyantran.',
+      'Project Sentinel ab sabhi chhah jaalon aur sabooton ko jodkar Inspector Vikram Rao aur A C P Meera Nair ke saamne chhah spasht suraag rakhta hai.',
+      'Sabse khaas baat yeh hai ki yeh computer system kabhi khud kisi ko apraadhi ghoshit nahi karta.',
+      'Har suraag ke saath yeh paksh ke saboot, vipreet tathya aur agli zameeni jaanch ke kadam dikhaata hai taaki antim faisla hamesha police adhikari ka hi rahe.'
+    ],
+    criminalMoveEn:
+      'Hoped that fragmented clues across electricity meters, tyre sensors, bus cameras, and 4 police stations would be too complex for humans to connect in time.',
+    criminalMoveHi:
+      'अपराधी की चाल: सोचा था कि बिजली मीटर, टायर सेंसर, बस कैमरे और 4 थानों के बिखरे हुए डेटा को पुलिस समय रहते कभी जोड़ नहीं पाएगी।',
+    sentinelTrapEn:
+      'Deterministic Correlation Engine fuses all 8 layers in seconds into 6 explainable, court-auditable leads with strict human-in-the-loop sign-off.',
+    sentinelTrapHi:
+      'सेंटिनल का जाल: कोरिलेशन इंजन सेकंडों में सभी 8 सरकारी परतों को जोड़कर 6 पारदर्शी सुराग तैयार करता है, जिन पर अधिकारी अपनी मुहर लगाते हैं।',
+    systemBanner: '6 Sovereign-Grid Leads Ready — Human Officer Review & Sign-Off Active',
+    systemBannerHi: '6 सरकारी-ग्रिड सुराग तैयार — पुलिस अधिकारी की समीक्षा और मंजूरी सक्रिय',
     highlights: [
-      'Zero automated guilt or criminality scoring; strict human-in-the-loop review',
-      'Displays supporting evidence alongside contradictory evidence and alternative explanations',
-      'Inspector Vikram Rao and ACP Meera Nair can verify, annotate, or reject leads with audit reasons',
+      'Presents all 6 Sovereign Traps in plain language with full evidence links',
+      'Zero automated guilt scoring—protects citizen rights and legal standards',
+      'Officers can approve, add notes, or reject any lead with an audit trail',
+    ],
+    highlightsHi: [
+      'सभी 6 सेंटिनल ट्रैप और सबूतों का सरल भाषा में पूरा विवरण',
+      'कोई स्वचालित दोषी स्कोरिंग नहीं—नागरिक अधिकारों और कानूनी मानकों की पूरी सुरक्षा',
+      'अधिकारी हर सुराग को मंजूर, नोट या अस्वीकार कर सकते हैं (पूरे ऑडिट लॉग के साथ)',
     ],
   },
   {
     stageNumber: 8,
     id: 'STAGE-8',
-    title: 'STAGE 8 — UNIFIED INVESTIGATION TIMELINE AND REPORT',
-    subtitle: 'Chronological Synthesis, Chain of Custody & Traceable PDF Export',
+    title: 'STAGE 8 — COURT-READY TIMELINE & BILINGUAL PDF REPORT',
+    titleHi: 'चरण 8 — कोर्ट-रेडी टाइमलाइन और संपूर्ण जांच रिपोर्ट (PDF)',
+    subtitle: 'From 6:30 PM Disappearance to Complete, Tamper-Proof Evidence Dossier',
+    subtitleHi: 'शाम 6:30 बजे लापता होने से लेकर कोर्ट में पेश करने योग्य डिजिटल सबूतों की पूरी फाइल',
     targetModule: 'reports',
     durationSeconds: 45,
     narration:
-      'Project Sentinel consolidates the investigation into a traceable report, helping authorised officers understand what is known, what remains uncertain and what needs to be verified.',
+      'Every step from 6:30 PM onwards is documented in a clear chronological story that any citizen, senior officer, or judge can verify in seconds.',
+    narrationHi:
+      'शाम 6:30 बजे से लेकर हर मिनट का घटनाक्रम एक साफ रिपोर्ट में तैयार है, जिसे कोई भी वरिष्ठ अधिकारी या न्यायाधीश तुरंत सत्यापित कर सकता है।',
     presenterScript:
-      'Finally, every verified fact, source observation, contradictory record, and unverified AI lead for the Aarav Sharma investigation comes together in the Unified Investigation Timeline and 15-section Investigation Report—ready for supervisory sign-off by ACP Meera Nair and immediate PDF export.',
+      'Finally, Project Sentinel compiles the entire Aarav Sharma investigation—from the 6:30 PM library exit and 6:48 PM Faraday bag drop, to the BMTC bus dashcam, wheel sensor match, BESCOM smart meter check, and 4-station link—into a 15-section traceable report ready for instant PDF export.',
+    presenterScriptHi:
+      'अंत में, प्रोजेक्ट सेंटिनल आरव शर्मा केस की पूरी कहानी—शाम 6:30 बजे लाइब्रेरी से निकलने और 6:48 के सिग्नल-ब्लॉकिंग बैग से लेकर बस डैशकैम, टायर सेंसर, स्मार्ट बिजली मीटर और चारों थानों के लिंक तक—को 15-भागों की एक कोर्ट-रेडी रिपोर्ट में बदल देता है जिसे तुरंत PDF में डाउनलोड किया जा सकता है।',
     voiceScript: [
-      'Stage 8, Unified Investigation Timeline and Report.',
-      'Finally, Project Sentinel consolidates the entire Aarav Sharma investigation into a chronological timeline and a fifteen section traceable dossier.',
-      'Verified facts, source observations, exculpatory records, and unverified leads are clearly separated so supervising officers and courts can see exactly what is proven, what remains uncertain, and what must be verified next.'
+      'Stage 8, Unified Timeline and Court Ready Report.',
+      'In the final step, Project Sentinel puts the entire story together from 6:30 PM to 10:15 PM in a clear chronological timeline.',
+      'Confirmed facts, camera observations, cleared innocent citizens, and the six sovereign traps are neatly organized into a fifteen section report.',
+      'With one click, Inspector Vikram Rao and A C P Meera Nair can export or print the complete court ready P D F dossier.'
     ],
-    systemBanner: 'Traceable Investigation Report Ready — Facts, Observations & Hypotheses Separated',
+    voiceScriptHi: [
+      'चरण आठ: संपूर्ण टाइमलाइन और कोर्ट-रेडी जांच रिपोर्ट।',
+      'अंतिम चरण में प्रोजेक्ट सेंटिनल शाम साढ़े छह बजे से रात सवा दस बजे तक की पूरी कहानी को समय के अनुसार एक साफ टाइमलाइन में पिरो देता है।',
+      'पक्के तथ्य, कैमरों के फुटेज, निर्दोष साबित हुए नागरिक और पकड़ में आए सभी छह जाल पंद्रह भागों की एक व्यवस्थित रिपोर्ट में तैयार हो जाते हैं।',
+      'एक क्लिक से इंस्पेक्टर विक्रम राव और एसीपी मीरा नायर इस पूरी पीडीएफ रिपोर्ट को डाउनलोड या प्रिंट कर सकते हैं।'
+    ],
+    voiceScriptHinglish: [
+      'Charan Aath: Sampoorna Timeline aur Court Ready Jaanch Report.',
+      'Antim charan mein Project Sentinel shaam saadhe chhah baje se raat sawa das baje tak ki poori kahaani ko ek saaf timeline mein piro deta hai.',
+      'Pakke tathya, cameron ke footage, nirdosh saabit hue naagrik aur pakad mein aaye sabhi chhah jaal pandrah bhaagon ki ek report mein taiyaar ho jaate hain.',
+      'Ek click se Inspector Vikram Rao aur A C P Meera Nair is poori P D F report ko download ya print kar sakte hain.'
+    ],
+    criminalMoveEn:
+      'Counted on investigation delays so CCTV loops would overwrite and witnesses would forget details before a coherent report could be built.',
+    criminalMoveHi:
+      'अपराधी की चाल: सोचा था कि पुलिस को कड़ियां जोड़ने में कई दिन लग जाएंगे और तब तक सीसीटीवी फुटेज मिट जाएंगे।',
+    sentinelTrapEn:
+      'Within 60 minutes of the 9:15 PM complaint, Sentinel preserves all cameras, links all 4 stations, and generates a court-traceable SHA-256 dossier.',
+    sentinelTrapHi:
+      'सेंटिनल का जाल: रात 9:15 पर शिकायत मिलने के महज 60 मिनट के भीतर सभी कैमरे सुरक्षित कर लिए गए, चारों थाने जुड़ गए और डिजिटल-सील युक्त रिपोर्ट तैयार हो गई!',
+    systemBanner: 'Court-Ready 15-Section Dossier Complete — English & Hindi Walkthrough Verified',
+    systemBannerHi: '15-भागों की कोर्ट-रेडी रिपोर्ट तैयार — हिंदी और अंग्रेजी विवरण उपलब्ध',
     highlights: [
-      'Unified timeline with full evidence provenance and multi-dimensional filtering',
-      '15-section structured dossier separating Verified Facts from Unverified Leads',
-      'Instant PDF export and full cryptographic chain-of-custody summary',
+      'Minute-by-minute timeline from 6:12 PM to 10:15 PM with SHA-256 proof links',
+      'Clearly separates Proven Facts, Cleared Citizens, and Sovereign Grid Leads',
+      'One-click Printable & Downloadable PDF Investigation Dossier',
+    ],
+    highlightsHi: [
+      'शाम 6:12 से रात 10:15 तक मिनट-दर-मिनट टाइमलाइन और डिजिटल सबूत लिंक',
+      'प्रमाणित तथ्य, निर्दोष नागरिक और संदिग्ध सुरागों का बिल्कुल अलग और स्पष्ट वर्गीकरण',
+      'एक क्लिक में प्रिंट और डाउनलोड होने वाली 15-भागों की पीडीएफ (PDF) रिपोर्ट',
     ],
   },
 ];
